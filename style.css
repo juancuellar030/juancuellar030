@@ -31,22 +31,20 @@ body {
     display: flex;
     justify-content: center; /* Center content-wrapper horizontally */
     align-items: center; /* Center content-wrapper vertically */
-    /* No background properties here anymore */
-    min-height: 100vh; /* Ensure body covers full height, even if content is short */
-    /* overflow: hidden; -- Already on html,body, but can be added here if needed for specific cases */
+    /* Removed min-height as content-wrapper will manage height now */
 }
 
 /* --- Content Wrapper for Scrollable Area --- */
 .content-wrapper {
     display: flex; /* Use flexbox for content-wrapper as well to center the test-container */
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    justify-content: center; /* Center content vertically within wrapper if there's extra space */
+    align-items: center; /* Center test-container horizontally within wrapper */
     width: 100%; /* Allow content-wrapper to take full width */
-    height: 100%; /* Allow content-wrapper to take full height */
+    height: 100vh; /* Make content-wrapper take full viewport height */
     overflow-y: auto; /* This will be the ONLY scrollable element */
     -webkit-overflow-scrolling: touch;
-    padding: 20px 0; /* Add padding to push content away from viewport edges if necessary */
+    /* Removed padding as the margin on test-container should provide adequate spacing */
     box-sizing: border-box; /* Include padding in the element's total width and height */
 }
 
@@ -60,6 +58,11 @@ body {
     padding: 2rem;
     margin: 20px; /* Provides spacing from the edges of content-wrapper */
     flex-shrink: 0; /* Prevent it from shrinking more than content needs */
+    
+    /* Remove max-height here. Let overflow-y on .content-wrapper handle the scrolling.
+       The margin will create space at top/bottom, and if content is too tall,
+       the content-wrapper will scroll. */
+    /* max-height: calc(100vh - 40px); */
 }
 
 /* --- Rest of your CSS remains the same --- */
