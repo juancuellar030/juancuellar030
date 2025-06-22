@@ -1,68 +1,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 /* --- HTML & Body Base Styles --- */
-html, body {
-    width: 100vw; /* Ensure it covers the *entire* viewport width */
-    height: 100vh; /* Ensure it covers the *entire* viewport height */
-    margin: 0; /* Remove any default margin */
-    padding: 0; /* Remove any default padding */
-    overflow: hidden; /* Crucial to prevent scrollbars on html/body itself */
-    position: relative; /* Needed for body to act as positioning context for its children if needed */
+html {
+    height: 100%; /* Ensure html takes full height */
+    overflow: hidden; /* Prevent scrollbars on html */
 }
 
-/* --- Full-screen Background Layer --- */
-.background-layer {
-    position: fixed; /* Fixed to the viewport */
-    top: 0;
-    left: 0;
-    width: 100%; /* Cover the full width */
-    height: 100%; /* Cover the full height */
-    background-image: url('images/moversbackground.svg'); /* Your SVG filename */
-    background-size: cover; /* This works reliably for fixed elements */
-    background-repeat: no-repeat;
-    background-position: center;
-    z-index: -1; /* Place it behind all other content */
-}
-
-/* --- Body (now just for flex layout of content-wrapper) --- */
 body {
     font-family: 'Poppins', sans-serif;
     color: #333;
-    display: flex;
-    justify-content: center; /* Center content-wrapper horizontally */
-    align-items: center; /* Center content-wrapper vertically */
-    /* Removed min-height as content-wrapper will manage height now */
+    margin: 0;
+    padding: 0;
+
+    /* Background image properties directly on body - more reliable with fixed attachment */
+    background-image: url('images/moversbackground.svg'); /* Your SVG filename */
+    background-size: cover;        /* Scales the image to cover the entire viewport */
+    background-repeat: no-repeat;  /* Prevents the image from repeating */
+    background-position: center; /* Centers the single image */
+    background-attachment: fixed;  /* Makes background fixed while content scrolls */
+    background-color: #f0f0f0; /* Fallback color if image fails to load or for transparent areas */
+
+    /* Grid layout for the body to manage content and background */
+    display: grid;
+    /* Define one row and one column for content, ensuring it's centered */
+    grid-template-columns: 1fr; /* One flexible column */
+    grid-template-rows: 1fr; /* One flexible row */
+    align-items: center; /* Center content vertically in the grid area */
+    justify-items: center; /* Center content horizontally in the grid area */
+
+    /* Ensure body takes full viewport height and allows its content to scroll */
+    min-height: 100vh; /* Minimum height is viewport height */
+    overflow-y: auto; /* Allow scrolling on the body if content overflows */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
 }
 
-/* --- Content Wrapper for Scrollable Area --- */
-.content-wrapper {
-    display: flex; /* Use flexbox for content-wrapper as well to center the test-container */
-    flex-direction: column;
-    justify-content: center; /* Center content vertically within wrapper if there's extra space */
-    align-items: center; /* Center test-container horizontally within wrapper */
-    width: 100%; /* Allow content-wrapper to take full width */
-    height: 100vh; /* Make content-wrapper take full viewport height */
-    overflow-y: auto; /* This will be the ONLY scrollable element */
-    -webkit-overflow-scrolling: touch;
-    /* Removed padding as the margin on test-container should provide adequate spacing */
-    box-sizing: border-box; /* Include padding in the element's total width and height */
+/* --- .background-layer is no longer needed with background on body --- */
+/* Remove this block if it exists:
+.background-layer {
+    display: none;
 }
+*/
+
+/* --- .content-wrapper is no longer needed. .test-container will be the direct child. --- */
+/* Remove this block if it exists:
+.content-wrapper {
+    display: none;
+}
+*/
 
 /* --- COMBINED .test-container STYLES (main content box) --- */
 .test-container {
     max-width: 800px;
-    width: 100%;
+    width: calc(100% - 40px); /* Adjust width to account for 20px margin on each side */
     background-color: #ffffff; /* Opaque white background */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
-    margin: 20px; /* Provides spacing from the edges of content-wrapper */
-    flex-shrink: 0; /* Prevent it from shrinking more than content needs */
+    margin: 20px; /* Provides consistent spacing from body edges */
+    z-index: 1; /* Ensure it's above the fixed background */
     
-    /* Remove max-height here. Let overflow-y on .content-wrapper handle the scrolling.
-       The margin will create space at top/bottom, and if content is too tall,
-       the content-wrapper will scroll. */
-    /* max-height: calc(100vh - 40px); */
+    /* Ensure content-container respects grid alignment and allows its internal content to push height */
+    /* No overflow-y here, as body handles it. */
+    /* No max-height here. */
 }
 
 /* --- Rest of your CSS remains the same --- */
