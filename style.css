@@ -2,17 +2,37 @@
 
 /* --- HTML & Body Base Styles --- */
 html, body {
-    width: 100vw; /* Use 100vw to ensure it covers the *entire* viewport width */
-    height: 100vh; /* Use 100vh to ensure it covers the *entire* viewport height */
+    width: 100vw; /* Ensure it covers the *entire* viewport width */
+    height: 100vh; /* Ensure it covers the *entire* viewport height */
     margin: 0; /* Remove any default margin */
     padding: 0; /* Remove any default padding */
-    overflow: hidden; /* This prevents scrollbars on the html/body itself */
+    overflow: hidden; /* Crucial to prevent scrollbars on html/body itself */
+    position: relative; /* Needed for the ::before pseudo-element to position correctly */
 }
 
-/* --- COMBINED BODY STYLES (with flexbox for content centering and background) --- */
+/* --- Full-screen Background Pseudo-element --- */
+body::before {
+    content: ''; /* Required for pseudo-elements */
+    position: fixed; /* Keep it fixed in the viewport */
+    top: 0;
+    left: 0;
+    width: 100%; /* Cover full width of the body/viewport */
+    height: 100%; /* Cover full height of the body/viewport */
+    background-image: url('images/moversbackground.svg'); /* Your SVG filename */
+    background-size: cover; /* This will now work correctly without interference */
+    background-repeat: no-repeat;
+    background-position: center;
+    z-index: -1; /* Place it behind all other content */
+    /* Optional: If the SVG itself has transparency or you want a subtle effect, you can add: */
+    /* opacity: 0.9; */ 
+}
+
+
+/* --- COMBINED BODY STYLES (now only for content layout) --- */
 body {
     font-family: 'Poppins', sans-serif;
     color: #333;
+    /* Removed padding from body entirely as the test-container handles spacing */
 
     /* Re-add flexbox for centering content within the body */
     display: flex;
@@ -20,14 +40,7 @@ body {
     justify-content: center; /* Center content vertically */
     align-items: center; /* Center content horizontally */
     
-    /* Background image properties for a SINGLE, COVERING image */
-    background-image: url('images/moversbackground.svg'); /* Your SVG filename */
-    /* *** CHANGE THIS LINE *** */
-    background-size: 100% 100%; /* Force background to stretch to exactly 100% width and 100% height of its container */
-    /* ********************** */
-    background-repeat: no-repeat;  /* Prevents the image from repeating */
-    background-position: center; /* Centers the single image */
-    background-attachment: fixed;  /* Makes background fixed while content scrolls */
+    /* No background properties here anymore */
 
     /* min-height ensures body takes full viewport height, even if content is short */
     min-height: 100vh; 
@@ -50,6 +63,8 @@ body {
     
     /* Limit max-height to prevent it from exceeding viewport, considering its margin */
     max-height: calc(100vh - 40px); /* 40px is 20px top margin + 20px bottom margin */
+    position: relative; /* Ensure it stacks above the background */
+    z-index: 1; /* Ensure it's above the background */
 }
 
 /* --- Rest of your CSS remains the same --- */
