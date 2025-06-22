@@ -2,15 +2,22 @@
 
 /* --- HTML & Body Base Styles --- */
 html {
-    height: 100%; /* Ensure html takes full height */
-    overflow: hidden; /* Prevent scrollbars on html */
+    height: 100%; /* Ensures html takes full height of the viewport */
+    /* No overflow: hidden here anymore, to allow body to scroll */
 }
 
 body {
     font-family: 'Poppins', sans-serif;
     color: #333;
     margin: 0;
-    padding: 0;
+    padding: 0; /* Remove any padding from body to prevent white bars */
+    
+    /* Ensure body takes up at least the full viewport height */
+    min-height: 100vh;
+    
+    /* Allow body to scroll if its content overflows */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
 
     /* Background image properties directly on body - more reliable with fixed attachment */
     background-image: url('images/moversbackground.svg'); /* Your SVG filename */
@@ -18,50 +25,21 @@ body {
     background-repeat: no-repeat;  /* Prevents the image from repeating */
     background-position: center; /* Centers the single image */
     background-attachment: fixed;  /* Makes background fixed while content scrolls */
-    background-color: #f0f0f0; /* Fallback color if image fails to load or for transparent areas */
-
-    /* Grid layout for the body to manage content and background */
-    display: grid;
-    /* Define one row and one column for content, ensuring it's centered */
-    grid-template-columns: 1fr; /* One flexible column */
-    grid-template-rows: 1fr; /* One flexible row */
-    align-items: center; /* Center content vertically in the grid area */
-    justify-items: center; /* Center content horizontally in the grid area */
-
-    /* Ensure body takes full viewport height and allows its content to scroll */
-    min-height: 100vh; /* Minimum height is viewport height */
-    overflow-y: auto; /* Allow scrolling on the body if content overflows */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+    background-color: #f0f0f0; /* Fallback color for transparent areas */
 }
-
-/* --- .background-layer is no longer needed with background on body --- */
-/* Remove this block if it exists:
-.background-layer {
-    display: none;
-}
-*/
-
-/* --- .content-wrapper is no longer needed. .test-container will be the direct child. --- */
-/* Remove this block if it exists:
-.content-wrapper {
-    display: none;
-}
-*/
 
 /* --- COMBINED .test-container STYLES (main content box) --- */
 .test-container {
     max-width: 800px;
-    width: calc(100% - 40px); /* Adjust width to account for 20px margin on each side */
+    width: calc(100% - 40px); /* Account for left/right margins */
     background-color: #ffffff; /* Opaque white background */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
-    margin: 20px; /* Provides consistent spacing from body edges */
+    margin: 20px auto; /* This centers the block horizontally and provides vertical margin */
     z-index: 1; /* Ensure it's above the fixed background */
     
-    /* Ensure content-container respects grid alignment and allows its internal content to push height */
-    /* No overflow-y here, as body handles it. */
-    /* No max-height here. */
+    /* No explicit height or overflow here. Let its content define its height. */
 }
 
 /* --- Rest of your CSS remains the same --- */
