@@ -2,7 +2,8 @@
 
 /* --- HTML & Body Base Styles --- */
 html {
-    width: 100%; /* Ensures html takes full height of the viewport */
+    width: 100%; /* Ensures html takes full width */
+    height: 100%; /* Ensures html takes full height of the viewport */
     /* No overflow: hidden here anymore, to allow body to scroll */
 }
 
@@ -13,21 +14,25 @@ body {
     padding: 0; /* Remove any padding from body to prevent white bars */
     
     /* Ensure body takes up at least the full viewport height */
-    min-width: 100vh;
+    min-height: 100vh; 
+    /* Ensure body takes up the full viewport width */
+    width: 100vw; 
     
     /* Allow body to scroll if its content overflows */
     overflow-y: auto;
+    /* Hide horizontal overflow to prevent unintended scrollbars from width calculations */
+    overflow-x: hidden; 
     -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
 
-    /* Background image properties directly on body - more reliable with fixed attachment */
+    /* Background image properties directly on body - most reliable with fixed attachment */
     background-image: url('images/moversbackground.svg'); /* Your SVG filename */
     background-size: cover;        /* Scales the image to cover the entire viewport */
     background-repeat: no-repeat;  /* Prevents the image from repeating */
     background-position: center; /* Centers the single image */
-    background-attachment: fixed;  /* Makes background fixed while content scrolls */
+    background-attachment: scroll;  /* Makes background fixed while content scrolls */
     background-color: #f0f0f0; /* Fallback color for transparent areas */
     
-    /* NEW: Use flexbox on body to center content vertically/horizontally */
+    /* Use flexbox on body to center content vertically/horizontally */
     display: flex;
     flex-direction: column; /* Stack children vertically */
     align-items: center; /* Center horizontally */
@@ -37,17 +42,18 @@ body {
 /* --- COMBINED .test-container STYLES (main content box) --- */
 .test-container {
     max-width: 800px;
-    width: calc(100% - 40px); /* Account for left/right margins */
+    /* Adjust width to account for 20px margin on each side, preventing horizontal overflow */
+    width: calc(100% - 40px); 
     background-color: #ffffff; /* Opaque white background */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
-    margin: 20px auto; /* This centers the block horizontally and provides vertical margin */
+    /* Centers horizontally and provides consistent vertical margin from viewport edges */
+    margin: 20px auto; 
     z-index: 1; /* Ensure it's above the fixed background */
     
-    /* No explicit height or overflow here. Let its content define its height. */
-    /* Add flex-shrink to prevent it from shrinking below its content size */
-    flex-shrink: 0; 
+    /* Let its content define its height. Flexbox handles vertical positioning. */
+    flex-shrink: 0; /* Prevent it from shrinking below its content size */
 }
 
 /* --- Rest of your CSS remains the same --- */
