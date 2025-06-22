@@ -13,7 +13,7 @@ body {
     background-image: url('images/moversbackground.svg'); /* Your SVG filename */
     background-size: cover;        /* Scales the image to cover the entire viewport */
     background-repeat: no-repeat;  /* Prevents the image from repeating */
-    background-position: center center; /* Centers the single image */
+    background-position: center; /* Centers the single image */
     background-attachment: fixed;  /* Makes background fixed while content scrolls (optional) */
 
     /* Ensure the body takes up at least the full height of the viewport */
@@ -26,7 +26,7 @@ body {
     max-width: 800px;
     width: 100%;
     /* Semi-transparent white overlay to ensure text readability over the background image */
-    background-color: rgba(255, 255, 255, 0.85);
+    background-color: #ffffff; /* This is pure opaque white */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
