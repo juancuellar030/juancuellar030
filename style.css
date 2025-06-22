@@ -1,44 +1,56 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-/* --- Ensure HTML and BODY take up full viewport --- */
+/* --- HTML & Body Base Styles --- */
 html, body {
-    width: 100%; /* Use 100% for full width of parent (html) */
-    height: 100%; /* Use 100% for full height of parent (html) */
-    margin: 0; /* Remove any default margin */
-    padding: 0; /* Remove any default padding */
-    overflow: hidden; /* Hide any overflow from content, crucial for full background */
+    /* Keep width/height 100% and margin/padding 0 for full coverage */
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    /* REMOVE overflow: hidden; from here */
+    /* overflow: hidden; */
 }
 
-/* --- COMBINED BODY STYLES (for full background image) --- */
+/* --- COMBINED BODY STYLES (with flexbox for content centering and background) --- */
 body {
     font-family: 'Poppins', sans-serif;
     color: #333;
-    /* Removed padding from body here as it might push content, affecting background placement.
-       We'll ensure the .test-container has its own padding. */
+    padding: 20px; /* Keep padding for space around the main container */
 
+    /* Re-add flexbox for centering content within the body */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    justify-content: center; /* Center content vertically */
+    align-items: center; /* Center content horizontally */
+    
     /* Background image properties for a SINGLE, COVERING image */
     background-image: url('images/moversbackground.svg'); /* Your SVG filename */
     background-size: cover;        /* Scales the image to cover the entire viewport */
     background-repeat: no-repeat;  /* Prevents the image from repeating */
     background-position: center; /* Centers the single image */
-    background-attachment: fixed;  /* Makes background fixed while content scrolls (optional) */
+    background-attachment: fixed;  /* Makes background fixed while content scrolls */
 
-    /* min-height and height/width are handled by html,body {height:100%; width:100%} now,
-       but min-height can be kept for robustness if body content expands */
-    min-height: 100vh; /* Good to keep this as well */
+    /* min-height ensures body takes full viewport height, even if content is short */
+    min-height: 100vh;
+    /* Remove height: 100vh; as min-height and flexbox will handle it better */
 }
 
-/* --- COMBINED .test-container STYLES (for the content box with opaque white background) --- */
+/* --- COMBINED .test-container STYLES (main content box) --- */
 .test-container {
     max-width: 800px;
     width: 100%;
-    /* Opaque white background */
-    background-color: #ffffff;
+    background-color: #ffffff; /* Opaque white background */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 2rem; /* Ensure padding is on the container, not the body */
-    margin: 20px auto; /* This correctly centers the container */
-    /* If the container needs to scroll internally, you might add overflow-y: auto; here */
+    padding: 2rem;
+    margin: 20px auto; /* Centers the container horizontally and provides vertical margin */
+    
+    /* Allow the container to grow and provide its own scrollbar if content overflows */
+    flex-grow: 1; /* Allows this item to take up available space in the flex container (body) */
+    overflow-y: auto; /* Adds a vertical scrollbar if content inside this container overflows */
+    -webkit-overflow-scrolling: touch; /* Improves scrolling on iOS devices */
+    max-height: calc(100vh - 40px); /* Limit height to viewport height minus the body padding,
+                                       this prevents it from stretching too much */
 }
 
 /* --- Rest of your CSS remains the same --- */
