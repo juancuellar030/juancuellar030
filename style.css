@@ -4,10 +4,6 @@
 body {
     font-family: 'Poppins', sans-serif;
     color: #333;
-    /* REMOVE THESE LINES TO ALLOW BACKGROUND TO COVER FULLY */
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
     padding: 20px; /* This padding ensures some space around your main container */
 
     /* Background image properties for a SINGLE, COVERING image */
