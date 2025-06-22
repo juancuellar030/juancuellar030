@@ -7,43 +7,47 @@ html, body {
     margin: 0; /* Remove any default margin */
     padding: 0; /* Remove any default padding */
     overflow: hidden; /* Crucial to prevent scrollbars on html/body itself */
-    position: relative; /* Needed for the ::before pseudo-element to position correctly */
+    position: relative; /* Needed for body to act as positioning context for its children if needed */
 }
 
-/* --- Full-screen Background Pseudo-element --- */
-body::before {
-    content: ''; /* Required for pseudo-elements */
-    position: fixed; /* Keep it fixed in the viewport */
+/* --- Full-screen Background Layer --- */
+.background-layer {
+    position: fixed; /* Fixed to the viewport */
     top: 0;
     left: 0;
-    width: 100%; /* Cover full width of the body/viewport */
-    height: 100%; /* Cover full height of the body/viewport */
+    width: 100%; /* Cover the full width */
+    height: 100%; /* Cover the full height */
     background-image: url('images/moversbackground.svg'); /* Your SVG filename */
-    background-size: cover; /* This will now work correctly without interference */
+    background-size: cover; /* This works reliably for fixed elements */
     background-repeat: no-repeat;
     background-position: center;
     z-index: -1; /* Place it behind all other content */
-    /* Optional: If the SVG itself has transparency or you want a subtle effect, you can add: */
-    /* opacity: 0.9; */ 
 }
 
-
-/* --- COMBINED BODY STYLES (now only for content layout) --- */
+/* --- Body (now just for flex layout of content-wrapper) --- */
 body {
     font-family: 'Poppins', sans-serif;
     color: #333;
-    /* Removed padding from body entirely as the test-container handles spacing */
-
-    /* Re-add flexbox for centering content within the body */
     display: flex;
-    flex-direction: column; /* Stack children vertically */
-    justify-content: center; /* Center content vertically */
-    align-items: center; /* Center content horizontally */
-    
+    justify-content: center; /* Center content-wrapper horizontally */
+    align-items: center; /* Center content-wrapper vertically */
     /* No background properties here anymore */
+    min-height: 100vh; /* Ensure body covers full height, even if content is short */
+    /* overflow: hidden; -- Already on html,body, but can be added here if needed for specific cases */
+}
 
-    /* min-height ensures body takes full viewport height, even if content is short */
-    min-height: 100vh; 
+/* --- Content Wrapper for Scrollable Area --- */
+.content-wrapper {
+    display: flex; /* Use flexbox for content-wrapper as well to center the test-container */
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%; /* Allow content-wrapper to take full width */
+    height: 100%; /* Allow content-wrapper to take full height */
+    overflow-y: auto; /* This will be the ONLY scrollable element */
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 0; /* Add padding to push content away from viewport edges if necessary */
+    box-sizing: border-box; /* Include padding in the element's total width and height */
 }
 
 /* --- COMBINED .test-container STYLES (main content box) --- */
@@ -54,17 +58,8 @@ body {
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
-    margin: 20px; /* Use a fixed margin to ensure consistent spacing */
-    
-    /* Allow the container to grow and provide its own scrollbar if content overflows */
-    flex-grow: 1; /* Allows this item to take up available space in the flex container (body) */
-    overflow-y: auto; /* Adds a vertical scrollbar if content inside this container overflows */
-    -webkit-overflow-scrolling: touch; /* Improves scrolling on iOS devices */
-    
-    /* Limit max-height to prevent it from exceeding viewport, considering its margin */
-    max-height: calc(100vh - 40px); /* 40px is 20px top margin + 20px bottom margin */
-    position: relative; /* Ensure it stacks above the background */
-    z-index: 1; /* Ensure it's above the background */
+    margin: 20px; /* Provides spacing from the edges of content-wrapper */
+    flex-shrink: 0; /* Prevent it from shrinking more than content needs */
 }
 
 /* --- Rest of your CSS remains the same --- */
