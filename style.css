@@ -1,10 +1,20 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
+/* --- Ensure HTML and BODY take up full viewport --- */
+html, body {
+    width: 100%; /* Use 100% for full width of parent (html) */
+    height: 100%; /* Use 100% for full height of parent (html) */
+    margin: 0; /* Remove any default margin */
+    padding: 0; /* Remove any default padding */
+    overflow: hidden; /* Hide any overflow from content, crucial for full background */
+}
+
 /* --- COMBINED BODY STYLES (for full background image) --- */
 body {
     font-family: 'Poppins', sans-serif;
     color: #333;
-    padding: 20px; /* This padding ensures some space around your main container */
+    /* Removed padding from body here as it might push content, affecting background placement.
+       We'll ensure the .test-container has its own padding. */
 
     /* Background image properties for a SINGLE, COVERING image */
     background-image: url('images/moversbackground.svg'); /* Your SVG filename */
@@ -13,12 +23,9 @@ body {
     background-position: center; /* Centers the single image */
     background-attachment: fixed;  /* Makes background fixed while content scrolls (optional) */
 
-    /* Ensure the body takes up at least the full height and width of the viewport */
-    min-height: 100vh;
-    height: 100vh; /* Ensure body takes exactly 100% of viewport height */
-    width: 100vw;  /* Ensure body takes exactly 100% of viewport width */
-    margin: 0; /* Remove default browser margin */
-    overflow: hidden; /* Hide any potential scrollbars if content overflows */
+    /* min-height and height/width are handled by html,body {height:100%; width:100%} now,
+       but min-height can be kept for robustness if body content expands */
+    min-height: 100vh; /* Good to keep this as well */
 }
 
 /* --- COMBINED .test-container STYLES (for the content box with opaque white background) --- */
@@ -29,8 +36,9 @@ body {
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
+    padding: 2rem; /* Ensure padding is on the container, not the body */
     margin: 20px auto; /* This correctly centers the container */
+    /* If the container needs to scroll internally, you might add overflow-y: auto; here */
 }
 
 /* --- Rest of your CSS remains the same --- */
