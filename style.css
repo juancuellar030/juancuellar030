@@ -4,9 +4,10 @@
 body {
     font-family: 'Poppins', sans-serif;
     color: #333;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    /* REMOVE THESE LINES TO ALLOW BACKGROUND TO COVER FULLY */
+    /* display: flex; */
+    /* justify-content: center; */
+    /* align-items: center; */
     padding: 20px; /* This padding ensures some space around your main container */
 
     /* Background image properties for a SINGLE, COVERING image */
@@ -21,19 +22,19 @@ body {
     margin: 0; /* Remove default browser margin */
 }
 
-/* --- COMBINED .test-container STYLES (for the content box with transparent overlay) --- */
+/* --- COMBINED .test-container STYLES (for the content box with opaque white background) --- */
 .test-container {
     max-width: 800px;
     width: 100%;
-    /* Semi-transparent white overlay to ensure text readability over the background image */
-    background-color: #ffffff; /* This is pure opaque white */
+    /* Opaque white background */
+    background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
-    margin: 20px auto; /* Centers the container horizontally and provides vertical margin */
+    margin: 20px auto; /* This correctly centers the container */
 }
 
-/* --- Header Styles --- */
+/* --- Rest of your CSS remains the same --- */
 header {
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
@@ -51,10 +52,8 @@ header p {
     color: #555;
 }
 
-/* --- Audio Player Container Styles (if any specific styling is needed) --- */
 .audio-player-container {
-    /* Add any specific styles for your audio player container here */
-    margin-bottom: 1rem; /* Example: add some space below the player */
+    margin-bottom: 1rem;
 }
 
 .question-block {
