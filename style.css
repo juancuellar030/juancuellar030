@@ -13,9 +13,12 @@ body {
     background-position: center; /* Centers the single image */
     background-attachment: fixed;  /* Makes background fixed while content scrolls (optional) */
 
-    /* Ensure the body takes up at least the full height of the viewport */
+    /* Ensure the body takes up at least the full height and width of the viewport */
     min-height: 100vh;
+    height: 100vh; /* Ensure body takes exactly 100% of viewport height */
+    width: 100vw;  /* Ensure body takes exactly 100% of viewport width */
     margin: 0; /* Remove default browser margin */
+    overflow: hidden; /* Hide any potential scrollbars if content overflows */
 }
 
 /* --- COMBINED .test-container STYLES (for the content box with opaque white background) --- */
