@@ -13,8 +13,6 @@ html, body {
 body {
     font-family: 'Poppins', sans-serif;
     color: #333;
-    /* REMOVE padding from body - it was causing the white bars and interfering with 100vw/vh */
-    /* padding: 20px; */
 
     /* Re-add flexbox for centering content within the body */
     display: flex;
@@ -24,14 +22,15 @@ body {
     
     /* Background image properties for a SINGLE, COVERING image */
     background-image: url('images/moversbackground.svg'); /* Your SVG filename */
-    background-size: cover;        /* Scales the image to cover the entire viewport */
+    /* *** CHANGE THIS LINE *** */
+    background-size: 100% 100%; /* Force background to stretch to exactly 100% width and 100% height of its container */
+    /* ********************** */
     background-repeat: no-repeat;  /* Prevents the image from repeating */
     background-position: center; /* Centers the single image */
     background-attachment: fixed;  /* Makes background fixed while content scrolls */
 
     /* min-height ensures body takes full viewport height, even if content is short */
     min-height: 100vh; 
-    /* Remove height: 100vh; as min-height and flexbox will handle it better */
 }
 
 /* --- COMBINED .test-container STYLES (main content box) --- */
@@ -42,7 +41,7 @@ body {
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
-    margin: 20px; /* Use a fixed margin instead of auto to ensure consistent spacing */
+    margin: 20px; /* Use a fixed margin to ensure consistent spacing */
     
     /* Allow the container to grow and provide its own scrollbar if content overflows */
     flex-grow: 1; /* Allows this item to take up available space in the flex container (body) */
