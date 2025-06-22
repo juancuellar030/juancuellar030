@@ -29,7 +29,6 @@ body {
     background-size: cover;        /* Scales the image to cover the entire viewport */
     background-repeat: no-repeat;  /* Prevents the image from repeating */
     background-position: center; /* Centers the single image */
-    background-attachment: scroll;  /* Makes background fixed while content scrolls */
     background-color: #f0f0f0; /* Fallback color for transparent areas */
     
     /* Use flexbox on body to center content vertically/horizontally */
