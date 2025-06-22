@@ -1,84 +1,84 @@
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online English Test</title>
+    <title>Movers Listening Test</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="background-layer"></div>
 
-    <div class="test-container">
-        <header>
-            <h1>Listen and tick (✔) the box. There is one example.</h1>
-            <div class="audio-player-container">
-                <audio controls>
-                    <source src="audio/movers4test3audio4.mp3" type="audio/mpeg">
-                    Your browser does not support the audio element.
-                </audio>
-            </div>
-        </header>
+    <div class="content-wrapper">
+        <div class="test-container">
+            <header>
+                <h1>Listen and tick (✔) the box. There is one example.</h1>
+                <div class="audio-player-container">
+                    <audio controls>
+                        <source src="audio/movers4_test3_audio4.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                    </div>
+            </header>
 
-        <div class="question-block" id="q0">
-            <p class="question-text"><strong>Example:</strong> Which is Julia's favourite day of the week?</p>
-            <div class="options-grid">
-                <div class="option-card selected" data-answer="A">
-                    <img src="images/calendar_sun.png" alt="A calendar with Sunday circled.">
-                    <label>A ✔</label>
-                </div>
-                <div class="option-card" data-answer="B">
-                    <img src="images/calendar_mon.png" alt="A calendar with Monday circled.">
-                    <label>B</label>
-                </div>
-                <div class="option-card" data-answer="C">
-                    <img src="images/calendar_tue.png" alt="A calendar with Tuesday circled.">
-                    <label>C</label>
-                </div>
-            </div>
-        </div>
-
-        <div class="question-block" id="q1">
-            <p class="question-text"><strong>1.</strong> Where are Daisy's black shoes?</p>
-            <div class="options-grid">
-                <div class="option-card" data-answer="A">
-                    <img src="images/shoes_drawer.png" alt="Black shoes on a white nightstand.">
-                    <label>A</label>
-                </div>
-                <div class="option-card" data-answer="B">
-                    <img src="images/shoes_stairs.png" alt="Black shoes at the bottom of a staircase.">
-                    <label>B</label>
-                </div>
-                <div class="option-card" data-answer="C">
-                    <img src="images/shoes_kitchen.png" alt="Black shoes on a kitchen floor.">
-                    <label>C</label>
+            <div class="question-block">
+                <p class="question-text">Example: Which is Julia's favourite day of the week?</p>
+                <div class="options-grid">
+                    <div class="option-card selected" data-question="example" data-answer="A">
+                        <img src="images/calendar_sunday.jpg" alt="Calendar with Sunday circled">
+                        <label>A calendar with Sunday circled.</label>
+                    </div>
+                    <div class="option-card" data-question="example" data-answer="B">
+                        <img src="images/calendar_monday.jpg" alt="Calendar with Monday circled">
+                        <label>A calendar with Monday circled.</label>
+                    </div>
+                    <div class="option-card" data-question="example" data-answer="C">
+                        <img src="images/calendar_tuesday.jpg" alt="Calendar with Tuesday circled">
+                        <label>A calendar with Tuesday circled.</label>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <div class="question-block" id="q2">
-            <p class="question-text"><strong>2.</strong> What was the weather like in the mountains?</p>
-            <div class="options-grid">
-                <div class="option-card" data-answer="A">
-                    <img src="images/weather_sunny.png" alt="Sunny day over mountains.">
-                    <label>A</label>
-                </div>
-                <div class="option-card" data-answer="B">
-                    <img src="images/weather_snowy.png" alt="Snowy, cold day over mountains.">
-                    <label>B</label>
-                </div>
-                <div class="option-card" data-answer="C">
-                    <img src="https://i.imgur.com/Pl7H5B1.png" alt="A bright sun behind mountains.">
-                    <label>C</label>
+            <div class="question-block">
+                <p class="question-text">1. Where are Daisy's black shoes?</p>
+                <div class="options-grid">
+                    <div class="option-card" data-question="q1" data-answer="A">
+                        <img src="images/shoes_nightstand.jpg" alt="Black shoes on a white nightstand">
+                        <label>Black shoes on a white nightstand.</label>
+                    </div>
+                    <div class="option-card" data-question="q1" data-answer="B">
+                        <img src="images/shoes_staircase.jpg" alt="Black shoes at the bottom of a staircase">
+                        <label>Black shoes at the bottom of a staircase.</label>
+                    </div>
+                    <div class="option-card" data-question="q1" data-answer="C">
+                        <img src="images/shoes_kitchen.jpg" alt="Black shoes on a kitchen floor.">
+                        <label>Black shoes on a kitchen floor.</label>
+                    </div>
                 </div>
             </div>
+
+            <div class="question-block">
+                <p class="question-text">2. What was the weather like in the mountains?</p>
+                <div class="options-grid">
+                    <div class="option-card" data-question="q2" data-answer="A">
+                        <img src="images/sunny_mountains.jpg" alt="Sunny day over mountains">
+                        <label>Sunny day over mountains.</label>
+                    </div>
+                    <div class="option-card" data-question="q2" data-answer="B">
+                        <img src="images/snowy_mountains.jpg" alt="Snowy, cold day over mountains">
+                        <label>Snowy, cold day over mountains.</label>
+                    </div>
+                    <div class="option-card" data-question="q2" data-answer="C">
+                        <img src="images/clear_mountains.jpg" alt="Clear mountains">
+                        <label>Clear mountains</label>
+                    </div>
+                </div>
+            </div>
+            <div class="submission-area">
+                <button id="check-answers-btn">Check Answers</button>
+                <div id="results-display"></div>
+            </div>
         </div>
-
-        <div class="submission-area">
-            <button id="check-answers-btn">Check Answers</button>
-            <div id="results-display"></div>
-        </div>
-
-    </div>
-
-    <script src="script.js"></script>
+    </div> <script src="script.js"></script>
 </body>
 </html>
