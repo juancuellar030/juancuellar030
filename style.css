@@ -1,35 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-/* --- HTML Base Styles with Background --- */
+/* --- HTML Styles with Background --- */
 html {
-    width: 100%;
     height: 100%;
-    background-image: url('images/moversbackground.svg'); /* Your SVG filename */
-    background-size: cover;        /* Scales the image to cover the entire viewport */
-    background-repeat: no-repeat;  /* Prevents the image from repeating */
-    background-position: center;   /* Centers the single image */
-    background-attachment: fixed;  /* Makes background fixed while content scrolls */
-    background-color: #f0f0f0;     /* Fallback color for transparent areas */
+    background-image: url('images/moversbackground.svg'); /* Update path if needed */
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #f0f0f0;
+
+    /* Optional: Debug outline */
+    outline: 2px solid red;
 }
 
-/* --- Body Styles (no background here now) --- */
+/* --- Body Styles --- */
 body {
     font-family: 'Poppins', sans-serif;
-    color: #333;
     margin: 0;
     padding: 0;
-
-    min-height: 100vh; 
-    width: 100vw; 
-
-    overflow-y: auto;
+    min-height: 100%;
+    width: 100%;
     overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    /* Optional: Debug outline */
+    outline: 2px solid blue;
 }
 
 /* --- Main Container --- */
@@ -42,10 +37,12 @@ body {
     padding: 2rem;
     margin: 20px auto;
     z-index: 1;
-    flex-shrink: 0;
+
+    /* Optional: Debug outline */
+    outline: 2px solid green;
 }
 
-/* --- Header Styles --- */
+/* --- Header --- */
 header {
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
@@ -63,12 +60,10 @@ header p {
     color: #555;
 }
 
-/* --- Audio Player --- */
 .audio-player-container {
     margin-bottom: 1rem;
 }
 
-/* --- Questions --- */
 .question-block {
     margin-bottom: 2.5rem;
 }
@@ -85,7 +80,6 @@ header p {
     gap: 1.5rem;
 }
 
-/* --- Option Cards --- */
 .option-card {
     border: 2px solid #ccc;
     border-radius: 8px;
@@ -119,7 +113,6 @@ header p {
     cursor: pointer;
 }
 
-/* --- Feedback States --- */
 .option-card.correct {
     border-color: #4caf50;
     background-color: #e8f5e9;
@@ -158,7 +151,6 @@ header p {
     line-height: 24px;
 }
 
-/* --- Submission Button and Results --- */
 .submission-area {
     text-align: center;
     margin-top: 2rem;
@@ -204,4 +196,3 @@ header p {
 #results-display.incorrect {
     color: #c62828;
 }
-
