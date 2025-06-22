@@ -13,7 +13,7 @@ body {
     padding: 0; /* Remove any padding from body to prevent white bars */
     
     /* Ensure body takes up at least the full viewport height */
-    min-height: 100vh;
+    min-height: auto;
     
     /* Allow body to scroll if its content overflows */
     overflow-y: auto;
