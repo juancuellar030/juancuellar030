@@ -2,7 +2,7 @@
 
 /* --- HTML & Body Base Styles --- */
 html {
-    height: 100%; /* Ensures html takes full height of the viewport */
+    width: 100%; /* Ensures html takes full height of the viewport */
     /* No overflow: hidden here anymore, to allow body to scroll */
 }
 
