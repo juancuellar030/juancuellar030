@@ -13,7 +13,7 @@ body {
     padding: 0; /* Remove any padding from body to prevent white bars */
     
     /* Ensure body takes up at least the full viewport height */
-    min-height: 100%;
+    min-height: 100vh;
     
     /* Allow body to scroll if its content overflows */
     overflow-y: auto;
@@ -26,6 +26,12 @@ body {
     background-position: center; /* Centers the single image */
     background-attachment: fixed;  /* Makes background fixed while content scrolls */
     background-color: #f0f0f0; /* Fallback color for transparent areas */
+    
+    /* NEW: Use flexbox on body to center content vertically/horizontally */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically if content doesn't fill height */
 }
 
 /* --- COMBINED .test-container STYLES (main content box) --- */
@@ -40,6 +46,8 @@ body {
     z-index: 1; /* Ensure it's above the fixed background */
     
     /* No explicit height or overflow here. Let its content define its height. */
+    /* Add flex-shrink to prevent it from shrinking below its content size */
+    flex-shrink: 0; 
 }
 
 /* --- Rest of your CSS remains the same --- */
