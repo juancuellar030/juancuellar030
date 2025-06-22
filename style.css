@@ -3,41 +3,36 @@
 /* --- COMBINED BODY STYLES --- */
 body {
     font-family: 'Poppins', sans-serif;
-    color: #333; /* From your second body block */
+    color: #333;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 20px; /* From your second body block */
+    padding: 20px;
 
-    /* Background image properties (from your first body block) */
-    background-image: url('images/moversbackground.svg'); /* <-- Your SVG filename */
-    background-repeat: repeat;
-    background-size: 100px 100px; /* Adjust size if needed */
+    /* Background image properties for a SINGLE, COVERING image */
+    background-image: url('images/moversbackground.svg'); /* Your SVG filename */
+    background-size: cover; /* This is the key: scales to cover the entire viewport */
+    background-repeat: no-repeat; /* This is the key: prevents repetition */
+    background-position: center center; /* Centers the image */
+    background-attachment: fixed; /* Optional: makes background fixed while content scrolls */
 
     /* Ensure the body takes up at least the full height of the viewport */
-    min-height: 100vh; /* Combine and keep this one */
-    margin: 0; /* Combine and keep this one */
-    /* Remove the old background-color: #d8f5ff; as it will be replaced by the image */
+    min-height: 100vh;
+    margin: 0;
 }
 
 /* --- COMBINED .test-container STYLES --- */
 .test-container {
-    max-width: 800px; /* From both, keep this */
-    width: 100%; /* From second */
-
-    /* Semi-transparent background-color (from your first .test-container block) */
-    background-color: rgba(255, 255, 255, 0.85); /* KEEP THIS for the overlay effect */
-
-    /* Use values from the second .test-container block as they are typically more detailed/final */
+    max-width: 800px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.85); /* Semi-transparent white overlay */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 2rem; /* Using 2rem as it's more standard and specific than 20px from first block */
-    margin: 20px auto; /* From first block, ensures centering */
-
-    /* Other existing styles for your container */
+    padding: 2rem;
+    margin: 20px auto;
 }
 
-/* --- Header Styles --- */
+/* --- Remaining styles (header, question-block, option-card, etc.) --- */
 header {
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
