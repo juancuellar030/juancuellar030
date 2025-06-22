@@ -1,58 +1,43 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-body {
-    /* Set the background image to your SVG pattern */
-    background-image: url('images/moversbackground.svg'); /* <-- IMPORTANT: Replace with your actual SVG filename */
-
-    /* Allow the pattern to repeat */
-    background-repeat: repeat; /* This is the default, but good to be explicit */
-
-    /* Set the size of each pattern tile (adjust as needed) */
-    background-size: 100px 100px; /* Example: Each tile is 100x100 pixels. Adjust for your pattern. */
-    /* Or you can use a percentage, e.g., background-size: 20%; */
-
-    /* No need for background-position: center center; if it's repeating */
-    /* No need for background-attachment: fixed; unless you want parallax on a repeating pattern */
-
-    /* Ensure the body takes up at least the full height of the viewport */
-    min-height: 100vh;
-    margin: 0;
-    padding: 0;
-
-    /* Remove any previous solid background color */
-    /* background-color: initial; */
-}
-
-/* Optional but Recommended for Readability: Add a semi-transparent overlay to your content container */
-.test-container {
-    background-color: rgba(255, 255, 255, 0.85); /* White with 85% opacity (adjust as needed) */
-    padding: 20px;
-    border-radius: 10px;
-    max-width: 800px;
-    margin: 20px auto;
-    /* Other styling for your container */
-}
-
+/* --- COMBINED BODY STYLES --- */
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #d8f5ff;
-    color: #333;
+    color: #333; /* From your second body block */
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
-    padding: 20px;
+    padding: 20px; /* From your second body block */
+
+    /* Background image properties (from your first body block) */
+    background-image: url('images/moversbackground.svg'); /* <-- Your SVG filename */
+    background-repeat: repeat;
+    background-size: 100px 100px; /* Adjust size if needed */
+
+    /* Ensure the body takes up at least the full height of the viewport */
+    min-height: 100vh; /* Combine and keep this one */
+    margin: 0; /* Combine and keep this one */
+    /* Remove the old background-color: #d8f5ff; as it will be replaced by the image */
 }
 
+/* --- COMBINED .test-container STYLES --- */
 .test-container {
-    max-width: 800px;
-    width: 100%;
-    background-color: #ffffff;
+    max-width: 800px; /* From both, keep this */
+    width: 100%; /* From second */
+
+    /* Semi-transparent background-color (from your first .test-container block) */
+    background-color: rgba(255, 255, 255, 0.85); /* KEEP THIS for the overlay effect */
+
+    /* Use values from the second .test-container block as they are typically more detailed/final */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
+    padding: 2rem; /* Using 2rem as it's more standard and specific than 20px from first block */
+    margin: 20px auto; /* From first block, ensures centering */
+
+    /* Other existing styles for your container */
 }
 
+/* --- Header Styles --- */
 header {
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
@@ -155,9 +140,7 @@ header p {
     background-color: #f44336;
     text-align: center;
     line-height: 24px;
-
 }
-
 
 .submission-area {
     text-align: center;
@@ -186,7 +169,6 @@ header p {
     background-color: #9fa8da;
     cursor: not-allowed;
 }
-
 
 #results-display {
     margin-top: 1.5rem;
