@@ -1,61 +1,51 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-/* --- HTML & Body Base Styles --- */
+/* --- HTML Base Styles with Background --- */
 html {
-    width: 100%; /* Ensures html takes full width */
-    height: 100%; /* Ensures html takes full height of the viewport */
-    /* No overflow: hidden here anymore, to allow body to scroll */
+    width: 100%;
+    height: 100%;
+    background-image: url('images/moversbackground.svg'); /* Your SVG filename */
+    background-size: cover;        /* Scales the image to cover the entire viewport */
+    background-repeat: no-repeat;  /* Prevents the image from repeating */
+    background-position: center;   /* Centers the single image */
+    background-attachment: fixed;  /* Makes background fixed while content scrolls */
+    background-color: #f0f0f0;     /* Fallback color for transparent areas */
 }
 
+/* --- Body Styles (no background here now) --- */
 body {
     font-family: 'Poppins', sans-serif;
     color: #333;
     margin: 0;
-    padding: 0; /* Remove any padding from body to prevent white bars */
-    
-    /* Ensure body takes up at least the full viewport height */
-    min-height: 100vh; 
-    /* Ensure body takes up the full viewport width */
-    width: 100vw; 
-    
-    /* Allow body to scroll if its content overflows */
-    overflow-y: auto;
-    /* Hide horizontal overflow to prevent unintended scrollbars from width calculations */
-    overflow-x: hidden; 
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+    padding: 0;
 
-    /* Background image properties directly on body - most reliable with fixed attachment */
-    background-image: url('images/moversbackground.svg'); /* Your SVG filename */
-    background-size: cover;        /* Scales the image to cover the entire viewport */
-    background-repeat: no-repeat;  /* Prevents the image from repeating */
-    background-position: center; /* Centers the single image */
-    background-color: #f0f0f0; /* Fallback color for transparent areas */
-    
-    /* Use flexbox on body to center content vertically/horizontally */
+    min-height: 100vh; 
+    width: 100vw; 
+
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+
     display: flex;
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center horizontally */
-    justify-content: center; /* Center vertically if content doesn't fill height */
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
-/* --- COMBINED .test-container STYLES (main content box) --- */
+/* --- Main Container --- */
 .test-container {
     max-width: 800px;
-    /* Adjust width to account for 20px margin on each side, preventing horizontal overflow */
-    width: calc(100% - 40px); 
-    background-color: #ffffff; /* Opaque white background */
+    width: calc(100% - 40px);
+    background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
-    /* Centers horizontally and provides consistent vertical margin from viewport edges */
-    margin: 20px auto; 
-    z-index: 1; /* Ensure it's above the fixed background */
-    
-    /* Let its content define its height. Flexbox handles vertical positioning. */
-    flex-shrink: 0; /* Prevent it from shrinking below its content size */
+    margin: 20px auto;
+    z-index: 1;
+    flex-shrink: 0;
 }
 
-/* --- Rest of your CSS remains the same --- */
+/* --- Header Styles --- */
 header {
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
@@ -73,10 +63,12 @@ header p {
     color: #555;
 }
 
+/* --- Audio Player --- */
 .audio-player-container {
     margin-bottom: 1rem;
 }
 
+/* --- Questions --- */
 .question-block {
     margin-bottom: 2.5rem;
 }
@@ -93,6 +85,7 @@ header p {
     gap: 1.5rem;
 }
 
+/* --- Option Cards --- */
 .option-card {
     border: 2px solid #ccc;
     border-radius: 8px;
@@ -126,7 +119,7 @@ header p {
     cursor: pointer;
 }
 
-/* Styles for feedback */
+/* --- Feedback States --- */
 .option-card.correct {
     border-color: #4caf50;
     background-color: #e8f5e9;
@@ -137,7 +130,8 @@ header p {
     background-color: #ffebee;
 }
 
-.option-card.correct::after, .option-card.incorrect::after {
+.option-card.correct::after,
+.option-card.incorrect::after {
     content: '';
     position: absolute;
     top: 10px;
@@ -164,6 +158,7 @@ header p {
     line-height: 24px;
 }
 
+/* --- Submission Button and Results --- */
 .submission-area {
     text-align: center;
     margin-top: 2rem;
@@ -209,3 +204,4 @@ header p {
 #results-display.incorrect {
     color: #c62828;
 }
+
