@@ -1,6 +1,39 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
 body {
+    /* Set the background image to your SVG pattern */
+    background-image: url('images/moversbackground.svg'); /* <-- IMPORTANT: Replace with your actual SVG filename */
+
+    /* Allow the pattern to repeat */
+    background-repeat: repeat; /* This is the default, but good to be explicit */
+
+    /* Set the size of each pattern tile (adjust as needed) */
+    background-size: 100px 100px; /* Example: Each tile is 100x100 pixels. Adjust for your pattern. */
+    /* Or you can use a percentage, e.g., background-size: 20%; */
+
+    /* No need for background-position: center center; if it's repeating */
+    /* No need for background-attachment: fixed; unless you want parallax on a repeating pattern */
+
+    /* Ensure the body takes up at least the full height of the viewport */
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+
+    /* Remove any previous solid background color */
+    /* background-color: initial; */
+}
+
+/* Optional but Recommended for Readability: Add a semi-transparent overlay to your content container */
+.test-container {
+    background-color: rgba(255, 255, 255, 0.85); /* White with 85% opacity (adjust as needed) */
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 20px auto;
+    /* Other styling for your container */
+}
+
+body {
     font-family: 'Poppins', sans-serif;
     background-color: #d8f5ff;
     color: #333;
