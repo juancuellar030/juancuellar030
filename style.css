@@ -198,6 +198,9 @@ header p {
     justify-content: center;
     margin-top: 2rem; /* Space between image and draggable names */
     min-height: 60px; /* Give it a minimum height even if empty */
+    /* Ensure it can receive drops */
+    position: relative; /* If it contains absolutely positioned children, this is relevant */
+    z-index: 0; /* Keep below other things if needed */
 }
 
 .draggable-name {
@@ -210,9 +213,12 @@ header p {
     font-weight: 600;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: transform 0.1s ease-in-out, background-color 0.2s ease;
-    /* Explicitly make them display as block or inline-block if needed
-       but flex on parent handles most of this */
-    display: inline-block; /* Ensure they render and respect padding/margin */
+    /* Explicitly ensure they are displayed */
+    display: inline-block; /* Or 'block' if you want them stacked */
+    /* Remove any old absolute positioning if it was there */
+    position: static; /* Ensure it flows normally within its flex container */
+    left: auto; /* Clear any leftover positioning */
+    top: auto; /* Clear any leftover positioning */
 }
 
 .draggable-name:hover {
@@ -228,7 +234,7 @@ header p {
 
 /* Drop targets are now rectangular, absolute over the image */
 .drop-target {
-    position: absolute;
+    position: absolute; /* Keep absolute for image overlay */
     width: 80px; /* Increased width */
     height: 45px; /* Decreased height to make it rectangular */
     border: 2px dashed rgba(255, 255, 255, 0.5); /* Semi-transparent border initially */
@@ -252,9 +258,7 @@ header p {
 
 /* Visually hide the original draggable name once it's placed in a drop target */
 .draggable-name.hidden-for-drop {
-    /* Instead of `visibility: hidden; position: absolute;` which takes it out of flow,
-       use `display: none;` to completely remove it from the layout when hidden. */
-    display: none;
+    display: none; /* Completely removes the element from the layout */
 }
 
 
