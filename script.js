@@ -88,6 +88,20 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             target.classList.remove('drag-over');
             if (!draggedItem) return;
+            
+            const droppedName = draggedItem.dataset.name;
+            const targetZoneId = target.dataset.description;
+
+        // First, find and remove any old answer for the name we just moved.
+            for (const key in userAnswers) {
+                if (userAnswers[key] === droppedName) {
+                    delete userAnswers[key];
+            }
+        }
+        // If we dropped on a valid question zone, add the new answer.
+        if (targetZoneId && targetZoneId !== 'unassigned-names-pool') {
+             userAnswers[targetZoneId] = droppedName;
+            
             const existingName = target.querySelector('.draggable-name');
             if (existingName) {
                 document.getElementById('names-pool-bottom').appendChild(existingName);
@@ -96,6 +110,26 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    document.querySelectorAll('#listening-part4 .option-card').forEach(card => {
+    card.addEventListener('click', () => {
+        const questionId = card.dataset.question;
+        const answer = card.dataset.answer;
+        // First, remove 'selected' from other options in the same question group
+        document.querySelectorAll(`#listening-part4 .option-card[data-question="${questionId}"]`).forEach(c => c.classList.remove('selected'));
+        // Then, add 'selected' to the one that was clicked
+        card.classList.add('selected');
+        // Finally, save the answer
+        userAnswers[questionId] = answer;
+    });
+});
+    
+    document.querySelectorAll('#listening-part2 .text-answer').forEach(input => {
+    input.addEventListener('input', (event) => {
+        // Save the answer using the input's ID as the key
+        userAnswers[event.target.id] = event.target.value.trim().toLowerCase();
+    });
+});
+    
     function resetAllAnswers() {
         userAnswers = {};
         document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
@@ -115,7 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- FIXED: Restored the actual Google Form submission logic ---
     function submitResultsToGoogle(name, score) {
-        const formId = "1FAIpQLScldo1YYLOKZR_dgKFNqSNi_UZiqOCGZQsXoRwTPyDzTiNnw";
+        const formId = "1FAIpQLSclDo1YYLOKZR_dgKFNqSNi_UZiqOCGZQsXsoRwTPyDzTiNnw";
         const nameEntryId = "entry.2134521223";
         const scoreEntryId = "entry.5411094";
 
