@@ -152,14 +152,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const currentDroppedNamePlaceholder = target.querySelector('.dropped-name-placeholder');
             if (currentDroppedNamePlaceholder && currentDroppedNamePlaceholder.textContent !== '') {
                 // If there's already a name here, return it to the draggable area
-                // We need to find the data-name of the item that was previously dropped here
-                let nameToReturnDataName = null;
-                for (const key in userAnswers) {
-                    if (userAnswers.hasOwnProperty(key) && key === dropTargetId) { // Check if this dropTargetId has a stored answer
-                        nameToReturnDataName = userAnswers[key]; // Get the data-name of the item currently in this target
-                        break;
-                    }
-                }
+                // Find the data-name of the item that was previously dropped here based on userAnswers
+                let nameToReturnDataName = userAnswers[dropTargetId]; 
                 
                 // Only return if the *new* dropped item is different from the one already there
                 if (nameToReturnDataName && nameToReturnDataName !== droppedName) {
