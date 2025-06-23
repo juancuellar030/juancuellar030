@@ -121,8 +121,86 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function submitResultsToGoogle(name, score) { /* ... Your Google Form logic is fine and remains here ... */ }
 
-    document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => { /* ... Your checking logic is fine and remains here ... */ });
+    // In script.js, replace the existing 'check-all-listening-answers-btn' listener with this:
+    document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
+    let correctCount = 0;
+    
+    // Clear all previous feedback first
+    document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
+    document.querySelectorAll('.text-answer').forEach(input => input.style.borderColor = '');
+    document.querySelectorAll('.option-card.selected').forEach(card => card.classList.remove('selected'));
 
-    // Initial setup
-    showSection('listening-intro');
+    // --- Check Part 1: Drag and Drop ---
+    const part1AnswerKeys = Object.keys(correctAnswers).filter(k => !k.startsWith('q'));
+    part1AnswerKeys.forEach(dropZoneId => {
+        const targetZone = document.querySelector(`.drop-target[data-description="${dropZoneId}"]`);
+        const droppedItem = targetZone.querySelector('.draggable-name');
+        const correctAnswerName = correctAnswers[dropZoneId];
+
+        if (droppedItem && droppedItem.dataset.name === correctAnswerName) {
+            correctCount++;
+            targetZone.classList.add('correct');
+            droppedItem.classList.add('correct');
+        } else {
+            targetZone.classList.add('incorrect');
+            if (droppedItem) {
+                droppedItem.classList.add('incorrect');
+            }
+            const correctNameElement = document.querySelector(`.draggable-name[data-name="${correctAnswerName}"]`);
+            if (correctNameElement) {
+                correctNameElement.classList.add('correct');
+            }
+        }
+    });
+
+    // --- Check Part 2: Text Inputs ---
+    Object.keys(correctAnswers).forEach(qId => {
+        if (qId.startsWith('q2_')) { 
+            const inputElement = document.getElementById(qId);
+            const userAnswer = (userAnswers[qId] || '').trim().toLowerCase();
+            if (userAnswer === correctAnswers[qId]) {
+                correctCount++;
+                inputElement.style.borderColor = '#4caf50'; // Green
+            } else {
+                inputElement.style.borderColor = '#f44336'; // Red
+            }
+        }
+    });
+
+    // --- Check Part 4: Tick the Box ---
+    Object.keys(correctAnswers).forEach(qId => {
+        if (qId.startsWith('q4_')) {
+            const userAnswer = userAnswers[qId];
+            const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer}"]`);
+            const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswers[qId]}"]`);
+
+            if (userAnswer === correctAnswers[qId]) {
+                correctCount++;
+                if(selectedOption) selectedOption.classList.add('correct');
+            } else {
+                if(selectedOption) selectedOption.classList.add('incorrect');
+                if(correctOption) correctOption.classList.add('correct'); // Highlight the correct one
+            }
+        }
+    });
+
+    // --- Display final score ---
+    const finalResultsDisplay = document.getElementById('final-results-display');
+    const percentage = (totalQuestions > 0) ? (correctCount / totalQuestions) * 100 : 0;
+    
+    let resultsHTML = '';
+    if (userName) {
+        resultsHTML += `<h3>Results for: ${userName}</h3>`;
+    }
+    resultsHTML += `<p>You scored ${correctCount} out of ${totalQuestions} (${percentage.toFixed(0)}%).</p>`;
+    
+    let resultClass = 'incorrect';
+    if (percentage === 100) resultClass = 'correct';
+    else if (percentage >= 50) resultClass = 'partial';
+    
+    finalResultsDisplay.innerHTML = resultsHTML;
+    finalResultsDisplay.className = resultClass;
+
+    // --- Call the function to send data to your Google Form ---
+    submitResultsToGoogle(userName, correctCount);
 });
