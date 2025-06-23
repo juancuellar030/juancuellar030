@@ -177,6 +177,7 @@ header p {
     margin: 1rem auto; /* Center the image wrapper horizontally */
     border-radius: 8px; /* Apply radius to the wrapper too for consistency */
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    /* Set a known aspect ratio if possible for consistent sizing, e.g., padding-bottom: 75%; */
 }
 
 .question-image-part1 { /* Specific image for Part 1 */
@@ -230,9 +231,12 @@ header p {
     border: 2px dashed rgba(255, 255, 255, 0.5); /* Semi-transparent border initially */
     background-color: rgba(255, 255, 255, 0.3); /* Slightly transparent background */
     border-radius: 8px; /* Small radius for drop zones */
-    display: flex;
-    align-items: center;
-    justify-content: center; /* Center the dropped name */
+    
+    /* Ensure content inside is centered horizontally and vertically */
+    display: flex; /* CRUCIAL: Enable flexbox for centering content */
+    align-items: center; /* CRUCIAL: Center items vertically */
+    justify-content: center; /* CRUCIAL: Center items horizontally */
+
     overflow: hidden; /* Hide overflow if name is too long */
     transition: background-color 0.2s ease, border-color 0.2s ease;
     cursor: pointer; /* Indicate it's interactive */
@@ -263,7 +267,7 @@ header p {
     white-space: nowrap; /* Keep name on one line */
     overflow: hidden;
     text-overflow: ellipsis; /* Add ellipsis if too long */
-    display: block; /* Changed to block to allow full width within new rectangular box */
+    display: block; /* Occupy full space within new rectangular box */
     line-height: 1.2; /* Adjust line height for vertical centering */
 }
 
