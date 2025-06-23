@@ -94,15 +94,18 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Event Listeners for Navigation Buttons ---
-    navButtons.forEach(button => {
-        button.addEventListener('click', (event) => {
-            const targetSection = event.target.dataset.target;
-            if (targetSection) {
-                showSection(targetSection);
-            }
-        });
-    });
+    // --- Event Listeners for Navigation Buttons (IMPROVED) ---
+document.body.addEventListener('click', (event) => {
+    // Check if the clicked element has the 'nav-btn' or 'start-test-btn' class
+    const button = event.target.closest('.nav-btn, .start-test-btn');
+
+    if (button) {
+        const targetSection = button.dataset.target;
+        if (targetSection) {
+            showSection(targetSection);
+        }
+    }
+});
 
     // --- Part 1: Drag and Drop Logic ---
     let draggedItem = null; // Store the actual dragged element
