@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
             target.classList.remove('drag-over');
 
             const droppedNameData = e.dataTransfer.getData('text/plain'); // e.g., 'katy'
-            const targetDropZoneId = target.dataset.description; // e.g., 'girl_in_tent_yellow_shirt' or 'unassigned_names' (if such a target exists for the pool)
+            const targetDropZoneId = target.dataset.description; // e.g., 'girl_in_tent_yellow_shirt' or 'unassigned-names-pool'
 
             const droppedDraggableElement = document.querySelector(`.draggable-name[data-name="${droppedNameData}"]`);
 
@@ -170,7 +170,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // --- 2. Handle the target drop zone ---
             // If the target zone is a specific picture drop zone (not the unassigned pool)
-            if (targetDropZoneId && targetDropZoneId !== 'unassigned_names') {
+            if (targetDropZoneId && targetDropZoneId !== 'unassigned-names-pool') {
                 // If the target zone is ALREADY occupied by a *different* name
                 if (userAnswers.hasOwnProperty(targetDropZoneId) && userAnswers[targetDropZoneId] !== droppedNameData) {
                     const oldNameInTargetData = userAnswers[targetDropZoneId];
@@ -196,12 +196,15 @@ document.addEventListener('DOMContentLoaded', () => {
                     userAnswers[targetDropZoneId] = droppedNameData; // Assign to new zone
                 }
 
-            } else { // If dropping into the unassigned names container (or a non-picture drop zone)
+            } else if (targetDropZoneId === 'unassigned-names-pool') { // If dropping into the unassigned names pool
                 droppedDraggableElement.classList.remove('hidden-for-drop'); // Make it visible in the draggable pool
-                // No need to set userAnswers for 'unassigned_names' as it's a pool, not an answer slot.
+                // No need to set userAnswers for 'unassigned-names-pool' as it's a pool, not an answer slot.
+                // Clear any feedback from the draggable name that was just returned to the pool
+                droppedDraggableElement.classList.remove('correct', 'incorrect');
             }
             
             // Clear feedback from the dragged item and its new (or cleared) drop target if it had any
+            // (This is redundant for the draggable element if it was just cleared in the unassigned pool logic, but harmless)
             droppedDraggableElement.classList.remove('correct', 'incorrect');
             target.classList.remove('correct', 'incorrect');
 
