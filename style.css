@@ -18,7 +18,7 @@ body {
     
     /* GitHub Pages absolute path */
     background-image: url('https://juancuellar030.github.io/juancuellar030/images/moversbackground.svg');
-    background-size: 200% 200%; /* This stretches to fill exactly, but may distort */
+    background-size: 180% 180%; /* This stretches to fill exactly, but may distort */
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
