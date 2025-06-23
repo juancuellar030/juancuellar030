@@ -11,15 +11,22 @@
     <div class="content-wrapper">
         <div class="test-container">
             <header>
-                <h1>A2 Flyers Listening Test</h1>
+                <h1>A2 Flyers</h1>
             </header>
 
             <!-- Listening Test Introduction/Instructions -->
             <section id="listening-intro" class="test-section active">
                 <h2>Start the Listening Test</h2>
                 <p>The A2 Flyers Listening test has 5 parts. You will hear each audio recording twice.</p>
-                <p>Read the instructions for each part carefully before you begin.</p>
-                <button class="start-test-btn" data-target="listening-part1">Start Listening Part 1</button>
+                
+                <!-- NEW: Name Input Container -->
+                <div class="name-input-container">
+                    <label for="user-name-input">Please enter your name to begin:</label>
+                    <input type="text" id="user-name-input" placeholder="Your Name Here" autocomplete="off">
+                </div>
+                
+                <!-- UPDATED: Added the 'disabled' attribute -->
+                <button class="start-test-btn" data-target="listening-part1" disabled>Start Listening Part 1</button>
             </section>
 
             <!-- Listening Part 1: Listen and draw lines (Drag and Drop) -->
