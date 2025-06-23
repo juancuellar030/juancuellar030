@@ -1,24 +1,28 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-/* --- HTML Styles with Background --- */
+/* --- HTML Styles --- */
 html {
     height: 100%;
-    background-image: url('images/moversbackground.svg'); /* Update path if needed */
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
 }
 
-/* --- Body Styles --- */
+/* --- Body Styles with Background --- */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    min-height: 100%;
+    min-height: 100vh; /* Changed from 100% to 100vh */
     width: 100%;
     overflow-x: hidden;
+    
+    /* Background properties moved to body */
+    background-image: url('images/moversbackground.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #f0f0f0; /* Fallback color */
 }
 
 /* --- Main Container --- */
@@ -31,6 +35,7 @@ body {
     padding: 2rem;
     margin: 20px auto;
     z-index: 1;
+    position: relative; /* Added to ensure proper stacking */
 }
 
 /* --- Header --- */
