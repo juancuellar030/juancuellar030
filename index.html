@@ -8,7 +8,7 @@
 </head>
 <body>
 
-    <div class="content-wrapper"> <!-- NEW: Add this wrapper -->
+    <div class="content-wrapper">
         <div class="test-container">
             <header>
                 <h1>A2 Flyers Listening Test</h1>
@@ -35,33 +35,47 @@
                     </audio>
                 </div>
                 <div class="question-content">
-                    <p>Example: Listen and draw a line from the name to the correct person in the picture. Then, drag each name to the correct description.</p>
-                    <img src="images/flyers_part1_main_image_placeholder.svg" alt="A scene with various people" class="question-image">
+                    <p>Example: Listen and drag each name to the correct person in the picture.</p>
                     
-                    <div class="drag-and-drop-area">
-                        <div class="draggable-names">
-                            <h4>Names:</h4>
-                            <div class="draggable-name" draggable="true" id="drag_katy" data-name="katy">Katy</div>
-                            <div class="draggable-name" draggable="true" id="drag_robert" data-name="robert">Robert</div>
-                            <div class="draggable-name" draggable="true" id="drag_oliver" data-name="oliver">Oliver</div>
-                            <div class="draggable-name" draggable="true" id="drag_helen" data-name="helen">Helen</div>
-                            <div class="draggable-name" draggable="true" id="drag_sophia" data-name="sophia">Sophia</div>
-                            <!-- Add Michael and Emma here if they are also draggable names for interaction -->
-                            <div class="draggable-name" draggable="true" id="drag_michael" data-name="michael">Michael</div>
-                            <div class="draggable-name" draggable="true" id="drag_emma" data-name="emma">Emma</div>
+                    <div class="image-with-dropzones-wrapper"> <!-- NEW: Wrapper for image and absolute drop zones -->
+                        <img src="images/flyers_part1_main_image_placeholder.svg" alt="A scene with various people" class="question-image-part1">
+                        
+                        <!-- Drop Zones positioned over the children in the image -->
+                        <!-- The 'data-description' values link to the correctAnswers in JS -->
+                        <div class="drop-target" data-description="girl_in_tent_yellow_shirt" style="top: 15%; left: 15%;">
+                            <span class="dropped-name-placeholder"></span>
+                        </div>
+                        <div class="drop-target" data-description="boy_on_red_bike" style="top: 60%; left: 10%;">
+                            <span class="dropped-name-placeholder"></span>
+                        </div>
+                        <div class="drop-target" data-description="boy_with_map" style="top: 45%; left: 70%;">
+                            <span class="dropped-name-placeholder"></span>
+                        </div>
+                        <div class="drop-target" data-description="girl_with_sticks" style="top: 80%; left: 85%;">
+                            <span class="dropped-name-placeholder"></span>
+                        </div>
+                        <div class="drop-target" data-description="girl_reading_book" style="top: 55%; left: 30%;">
+                            <span class="dropped-name-placeholder"></span>
+                        </div>
+                        <!-- Add additional drop targets for Michael and Emma if needed for interaction -->
+                        <div class="drop-target" data-description="boy_by_fire" style="top: 75%; left: 55%;">
+                            <span class="dropped-name-placeholder"></span>
+                        </div>
+                        <div class="drop-target" data-description="girl_fishing_net" style="top: 30%; left: 85%;">
+                            <span class="dropped-name-placeholder"></span>
                         </div>
 
-                        <div class="drop-targets">
-                            <h4>Descriptions:</h4>
-                            <!-- These are the actual drop targets. Their data-description should be unique. -->
-                            <div class="drop-target" data-description="girl_in_tent_yellow_shirt"> <span class="dropped-name-placeholder"></span></div>
-                            <div class="drop-target" data-description="boy_on_red_bike"> <span class="dropped-name-placeholder"></span></div>
-                            <div class="drop-target" data-description="boy_with_map"> <span class="dropped-name-placeholder"></span></div>
-                            <div class="drop-target" data-description="girl_with_sticks"> <span class="dropped-name-placeholder"></span></div>
-                            <div class="drop-target" data-description="girl_reading_book"> <span class="dropped-name-placeholder"></span></div>
-                            <div class="drop-target" data-description="boy_by_fire"> <span class="dropped-name-placeholder"></span></div>
-                            <div class="drop-target" data-description="girl_fishing_net"> <span class="dropped-name-placeholder"></span></div>
-                        </div>
+                    </div>
+                    
+                    <div class="draggable-names-container"> <!-- Contains the names to drag -->
+                        <h4>Names:</h4>
+                        <div class="draggable-name" draggable="true" id="drag_katy" data-name="katy">Katy</div>
+                        <div class="draggable-name" draggable="true" id="drag_robert" data-name="robert">Robert</div>
+                        <div class="draggable-name" draggable="true" id="drag_oliver" data-name="oliver">Oliver</div>
+                        <div class="draggable-name" draggable="true" id="drag_helen" data-name="helen">Helen</div>
+                        <div class="draggable-name" draggable="true" id="drag_sophia" data-name="sophia">Sophia</div>
+                        <div class="draggable-name" draggable="true" id="drag_michael" data-name="michael">Michael</div>
+                        <div class="draggable-name" draggable="true" id="drag_emma" data-name="emma">Emma</div>
                     </div>
                 </div>
                 <div class="navigation-buttons">
@@ -222,7 +236,7 @@
             </div>
 
         </div>
-    </div> <!-- NEW: End of content-wrapper -->
+    </div>
 
     <script src="script.js"></script>
 </body>
