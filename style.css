@@ -7,7 +7,7 @@ html, body {
     padding: 0;
 }
 
-/* --- Body Styles with Background (Original Method + Debug) --- */
+/* --- Body Styles with Background --- */
 body {
     font-family: 'Poppins', sans-serif;
     margin: 0;
@@ -16,16 +16,13 @@ body {
     width: 100%;
     overflow-x: hidden;
     
-    /* For GitHub Pages, try this path */
-    background-image: url('./images/moversbackground.svg');
-    
+    /* GitHub Pages absolute path */
+    background-image: url('https://juancuellar030.github.io/juancuellar030/images/moversbackground.svg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
-    
-    /* Temporary debug color - you should see this if SVG isn't loading */
-    background-color: #ffcccc; /* Light red - change this to see if CSS is working */
+    background-color: #87CEEB; /* Sky blue to match the SVG background */
 }
 
 /* --- Main Container --- */
