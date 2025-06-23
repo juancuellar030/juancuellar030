@@ -1,67 +1,57 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-/* --- HTML and Body Reset --- */
-html, body {
-    height: 100%;
+/* --- HTML Styles for Full Background --- */
+html {
+    height: 100%; /* Ensures html takes full height of the viewport */
+    width: 100%;  /* Ensures html takes full width of the viewport */
     margin: 0;
     padding: 0;
+    /* Place background properties on html for a true fixed full-screen background */
+    background-image: url('images/moversbackground.svg'); /* Relative path is usually best */
+    background-size: cover;        /* Scales the image to cover the entire viewport */
+    background-repeat: no-repeat;  /* Prevents the image from repeating */
+    background-position: center center; /* Centers the single image */
+    background-attachment: fixed;  /* Makes background fixed while content scrolls */
+    background-color: #87CEEB; /* Fallback color / matching color */
+    /* Prevent overflow on html itself, body will handle content scrolling */
+    overflow-x: hidden; 
+    overflow-y: hidden; /* HTML should not scroll, body will */
 }
 
-/* --- Body Styles with Background --- */
+/* --- Body Styles for Content and Scrolling --- */
 body {
     font-family: 'Poppins', sans-serif;
-    color: #333; /* Added back color for general text */
+    color: #333;
     margin: 0;
     padding: 0;
-    min-height: 100vh;
-    /* Use 100vw for width to ensure it covers the entire viewport width,
-       including space a vertical scrollbar might occupy. */
-    width: 100vw; 
+    min-height: 100vh; /* Body takes at least full viewport height */
+    width: 100%; /* Body takes full width of html */
     
-    /* Allow body to scroll if its content overflows vertically */
+    /* Allow body content to scroll vertically */
     overflow-y: auto;
-    /* Hide horizontal overflow to prevent unintended scrollbars from width calculations */
+    /* Hide horizontal overflow to prevent unintended scrollbars */
     overflow-x: hidden; 
     -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
     
-    /* GitHub Pages absolute path (keep if it fixed your background image) */
-    background-image: url('https://juancuellar030.github.io/juancuellar030/images/moversbackground.svg');
-    /* Use 'cover' for background-size to ensure it always covers the viewport without distortion.
-       If 180% 180% worked for your specific image, you can change it back,
-       but 'cover' is usually the most robust for full-screen backgrounds. */
-    background-size: cover; 
-    background-repeat: no-repeat;
-    background-position: center center;
-    background-attachment: fixed;
-    background-color: #87CEEB; /* Sky blue to match the SVG background */
-    
-    /* RE-INTRODUCE FLEXBOX FOR CENTERING CONTENT */
-    display: flex;
-    flex-direction: column; /* Stack children vertically */
-    align-items: center; /* Center content horizontally */
-    /* justify-content: center; will center content vertically if there's *extra* space.
-       If content overflows, it will start from the top and allow scrolling. */
-    justify-content: center; 
+    /* No display: flex on body here. We'll center .test-container with margin auto. */
 }
 
-/* --- Main Container --- */
+/* --- Main Container (.test-container) Styles --- */
 .test-container {
     max-width: 800px;
-    width: calc(100% - 40px); /* Account for left/right margins */
-    background-color: #ffffff;
+    width: calc(100% - 40px); /* Account for 20px margin on each side */
+    background-color: #ffffff; /* Opaque white background */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
-    /* Centers horizontally and provides consistent vertical margin from viewport edges.
-       With flexbox on body, this margin will push it correctly. */
+    /* Centers horizontally and provides consistent vertical margin.
+       This margin will correctly push content from the top and bottom of the *scrollable body*. */
     margin: 20px auto; 
-    position: relative;
-    z-index: 1;
-    /* Prevent test-container from shrinking if flex container tries to compress it */
-    flex-shrink: 0; 
+    position: relative; /* Ensure it respects z-index */
+    z-index: 1; /* Ensure it's above the fixed background */
 }
 
-/* --- Rest of your CSS remains the same --- */
+/* --- Rest of your CSS (unchanged from previous valid sections) --- */
 header {
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
@@ -132,6 +122,7 @@ header p {
     cursor: pointer;
 }
 
+/* Styles for feedback */
 .option-card.correct {
     border-color: #4caf50;
     background-color: #e8f5e9;
@@ -142,8 +133,7 @@ header p {
     background-color: #ffebee;
 }
 
-.option-card.correct::after,
-.option-card.incorrect::after {
+.option-card.correct::after, .option-card.incorrect::after {
     content: '';
     position: absolute;
     top: 10px;
