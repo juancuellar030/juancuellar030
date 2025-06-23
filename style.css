@@ -43,6 +43,39 @@ body {
     align-items: center;
 }
 
+.name-input-container {
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.name-input-container label {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+}
+
+#user-name-input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1.1em;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+}
+
+/* Style for the disabled button state */
+.start-test-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
 /* --- Main Container --- */
 .test-container {
     background-color: #ffffff;
