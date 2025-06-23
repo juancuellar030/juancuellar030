@@ -1,57 +1,56 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-/* --- HTML Styles for Full Background --- */
+/* --- HTML & Body Base Styles --- */
 html {
     height: 100%; /* Ensures html takes full height of the viewport */
-    width: 100%;  /* Ensures html takes full width of the viewport */
-    margin: 0;
-    padding: 0;
-    /* Place background properties on html for a true fixed full-screen background */
-    background-image: url('images/moversbackground.svg'); /* Relative path is usually best */
-    background-size: cover;        /* Scales the image to cover the entire viewport */
-    background-repeat: no-repeat;  /* Prevents the image from repeating */
-    background-position: center center; /* Centers the single image */
-    background-attachment: fixed;  /* Makes background fixed while content scrolls */
-    background-color: #87CEEB; /* Fallback color / matching color */
-    /* Prevent overflow on html itself, body will handle content scrolling */
-    overflow-x: hidden; 
-    overflow-y: hidden; /* HTML should not scroll, body will */
+    /* No overflow: hidden here anymore, to allow body to scroll */
 }
 
-/* --- Body Styles for Content and Scrolling --- */
 body {
     font-family: 'Poppins', sans-serif;
     color: #333;
     margin: 0;
-    padding: 0;
-    min-height: 100vh; /* Body takes at least full viewport height */
-    width: 100%; /* Body takes full width of html */
+    padding: 0; /* Remove any padding from body to prevent white bars */
     
-    /* Allow body content to scroll vertically */
+    /* Ensure body takes up at least the full viewport height */
+    min-height: 100vh;
+    
+    /* Allow body to scroll if its content overflows */
     overflow-y: auto;
-    /* Hide horizontal overflow to prevent unintended scrollbars */
-    overflow-x: hidden; 
     -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+
+    /* Background image properties directly on body - more reliable with fixed attachment */
+    background-image: url('images/moversbackground.svg'); /* Your SVG filename */
+    background-size: cover;        /* Scales the image to cover the entire viewport */
+    background-repeat: no-repeat;  /* Prevents the image from repeating */
+    background-position: center; /* Centers the single image */
+    background-attachment: fixed;  /* Makes background fixed while content scrolls */
+    background-color: #f0f0f0; /* Fallback color for transparent areas */
     
-    /* No display: flex on body here. We'll center .test-container with margin auto. */
+    /* NEW: Use flexbox on body to center content vertically/horizontally */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically if content doesn't fill height */
 }
 
-/* --- Main Container (.test-container) Styles --- */
+/* --- COMBINED .test-container STYLES (main content box) --- */
 .test-container {
     max-width: 800px;
-    width: calc(100% - 40px); /* Account for 20px margin on each side */
+    width: calc(100% - 40px); /* Account for left/right margins */
     background-color: #ffffff; /* Opaque white background */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
-    /* Centers horizontally and provides consistent vertical margin.
-       This margin will correctly push content from the top and bottom of the *scrollable body*. */
-    margin: 20px auto; 
-    position: relative; /* Ensure it respects z-index */
+    margin: 20px auto; /* This centers the block horizontally and provides vertical margin */
     z-index: 1; /* Ensure it's above the fixed background */
+    
+    /* No explicit height or overflow here. Let its content define its height. */
+    /* Add flex-shrink to prevent it from shrinking below its content size */
+    flex-shrink: 0; 
 }
 
-/* --- Rest of your CSS (unchanged from previous valid sections) --- */
+/* --- Rest of your CSS remains the same --- */
 header {
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
