@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const audioPlayers = document.querySelectorAll('.audio-player-container audio');
 
     let currentSectionId = 'listening-intro'; // Starting section
-    let userAnswers = {}; // Global object to store all user answers
+    let userAnswers = {}; // Global object to store all user answers: { dropZoneId: draggableNameData }
     let totalQuestions = 0; // Will be calculated based on correctAnswers
 
 
@@ -103,26 +103,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Part 1: Drag and Drop Logic ---
-    let draggedItem = null; // Stores the currently dragged element
+    let draggedItemData = null; // Stores the data-name of the currently dragged element
 
     const draggableNames = document.querySelectorAll('.draggable-name');
-    const dropTargets = document.querySelectorAll('.drop-target');
+    // Select all drop targets, including the unassigned container and specific zones
+    const allDropTargets = document.querySelectorAll('.drop-target');
 
     // Drag start event
     draggableNames.forEach(draggable => {
         draggable.addEventListener('dragstart', (e) => {
-            draggedItem = e.target;
-            e.dataTransfer.setData('text/plain', e.target.dataset.name); // Store the name (e.g., 'katy')
+            draggedItemData = e.target.dataset.name; // Store the data-name (e.g., 'katy')
+            e.dataTransfer.setData('text/plain', draggedItemData); 
             e.target.classList.add('dragging');
         });
 
         draggable.addEventListener('dragend', (e) => {
             e.target.classList.remove('dragging');
+            draggedItemData = null; // Clear dragged item data
         });
     });
 
-    // Drop target events
-    dropTargets.forEach(target => {
+    // Drop target events for ALL drop targets (specific zones and unassigned container)
+    allDropTargets.forEach(target => {
         target.addEventListener('dragover', (e) => {
             e.preventDefault(); // Allow drop
             target.classList.add('drag-over');
@@ -141,49 +143,71 @@ document.addEventListener('DOMContentLoaded', () => {
             e.preventDefault();
             target.classList.remove('drag-over');
 
-            // Get the name of the dragged item
-            const droppedName = e.dataTransfer.getData('text/plain'); // e.g., 'katy'
-            const dropTargetId = target.dataset.description; // e.g., 'girl_in_tent_yellow_shirt'
+            const droppedNameData = e.dataTransfer.getData('text/plain'); // e.g., 'katy'
+            const targetDropZoneId = target.dataset.description; // e.g., 'girl_in_tent_yellow_shirt' or 'unassigned_names'
 
-            // Find the original draggable element
-            const originalDraggable = document.querySelector(`.draggable-name[data-name="${droppedName}"]`);
+            const droppedDraggableElement = document.querySelector(`.draggable-name[data-name="${droppedNameData}"]`);
 
-            // --- Handle existing content in the drop target ---
-            const currentDroppedNamePlaceholder = target.querySelector('.dropped-name-placeholder');
-            if (currentDroppedNamePlaceholder && currentDroppedNamePlaceholder.textContent !== '') {
-                // If there's already a name here, return it to the draggable area
-                // Find the data-name of the item that was previously dropped here based on userAnswers
-                let nameToReturnDataName = userAnswers[dropTargetId]; 
-                
-                // Only return if the *new* dropped item is different from the one already there
-                if (nameToReturnDataName && nameToReturnDataName !== droppedName) {
-                    const nameToReturnElement = document.querySelector(`.draggable-name[data-name="${nameToReturnDataName}"]`);
-                    if (nameToReturnElement) {
-                        nameToReturnElement.classList.remove('hidden-for-drop'); // Make it visible again
-                        nameToReturnElement.classList.remove('correct', 'incorrect'); // Clear feedback
+            // --- Find the current location of the dragged name ---
+            let currentZoneOfDraggedName = null;
+            for (const zoneId in userAnswers) {
+                if (userAnswers.hasOwnProperty(zoneId) && userAnswers[zoneId] === droppedNameData) {
+                    currentZoneOfDraggedName = zoneId;
+                    break;
+                }
+            }
+
+            // --- Scenario 1: Dropping into the 'unassigned_names' container ---
+            if (targetDropZoneId === 'unassigned_names') {
+                if (currentZoneOfDraggedName) {
+                    // If the name was previously in a specific picture drop zone, clear that zone
+                    const oldTargetElement = document.querySelector(`.drop-target[data-description="${currentZoneOfDraggedName}"]`);
+                    if (oldTargetElement) {
+                        oldTargetElement.classList.remove('filled');
+                        oldTargetElement.querySelector('.dropped-name-placeholder').textContent = '';
+                    }
+                    delete userAnswers[currentZoneOfDraggedName]; // Remove old assignment
+                }
+                // Make the draggable item visible again in the unassigned pool
+                droppedDraggableElement.classList.remove('hidden-for-drop');
+                // Ensure it's not associated with any target
+                // (no entry in userAnswers for 'unassigned_names' as it's a pool, not an answer)
+
+            } 
+            // --- Scenario 2: Dropping into a specific picture drop zone (non-unassigned) ---
+            else { 
+                // Check if the target zone is already occupied by *another* name
+                if (userAnswers.hasOwnProperty(targetDropZoneId) && userAnswers[targetDropZoneId] !== droppedNameData) {
+                    const oldNameInTargetData = userAnswers[targetDropZoneId];
+                    const oldDraggableElement = document.querySelector(`.draggable-name[data-name="${oldNameInTargetData}"]`);
+                    
+                    if (oldDraggableElement) {
+                        oldDraggableElement.classList.remove('hidden-for-drop'); // Return old name to draggable pool
+                        // Remove old assignment from userAnswers
+                        delete userAnswers[targetDropZoneId];
+                    }
+                    target.classList.remove('filled');
+                    target.querySelector('.dropped-name-placeholder').textContent = '';
+                }
+
+                // If the dragged name came from a *different* specific drop zone, clear its previous spot
+                if (currentZoneOfDraggedName && currentZoneOfDraggedName !== targetDropZoneId && currentZoneOfDraggedName !== 'unassigned_names') {
+                    const oldSourceTargetElement = document.querySelector(`.drop-target[data-description="${currentZoneOfDraggedName}"]`);
+                    if (oldSourceTargetElement) {
+                        oldSourceTargetElement.classList.remove('filled');
+                        oldSourceTargetElement.querySelector('.dropped-name-placeholder').textContent = '';
+                        delete userAnswers[currentZoneOfDraggedName]; // Remove previous assignment
                     }
                 }
                 
-                // Clear the current placeholder text and 'filled' class
-                currentDroppedNamePlaceholder.textContent = '';
-                target.classList.remove('filled');
-                // Remove the old association from userAnswers
-                delete userAnswers[dropTargetId];
-            }
-
-            // --- Place the new dragged item ---
-            if (currentDroppedNamePlaceholder) {
-                currentDroppedNamePlaceholder.textContent = originalDraggable.textContent; // Display the name's text (e.g., "Katy")
+                // Place the dragged item into the current target zone
                 target.classList.add('filled');
-                userAnswers[dropTargetId] = droppedName; // Store the answer: { 'description_id': 'draggable_data_name' }
-                originalDraggable.classList.add('hidden-for-drop'); // Hide the original draggable item
-
-                // Clear feedback from the dragged item and its new drop target if it had any
-                originalDraggable.classList.remove('correct', 'incorrect');
-                target.classList.remove('correct', 'incorrect');
+                target.querySelector('.dropped-name-placeholder').textContent = droppedDraggableElement.textContent;
+                droppedDraggableElement.classList.add('hidden-for-drop');
+                userAnswers[targetDropZoneId] = droppedNameData; // Store the new assignment
             }
-
-            console.log(`Dropped ${droppedName} onto ${dropTargetId}`);
+            
+            console.log(`Dropped ${droppedNameData} onto ${targetDropZoneId}`);
             console.log("Current user answers for Part 1:", userAnswers);
         });
     });
@@ -194,13 +218,15 @@ document.addEventListener('DOMContentLoaded', () => {
             draggable.classList.remove('hidden-for-drop'); // Make all names visible again
             draggable.classList.remove('correct', 'incorrect'); // Clear feedback
         });
-        dropTargets.forEach(target => {
+        allDropTargets.forEach(target => { // Reset all drop targets
             target.classList.remove('filled', 'correct', 'incorrect'); // Clear filled state and feedback
             target.style.borderColor = ''; // Clear any direct style if applied
             target.style.backgroundColor = '';
-            target.querySelector('.dropped-name-placeholder').textContent = ''; // Clear displayed name
+            if (target.querySelector('.dropped-name-placeholder')) {
+                 target.querySelector('.dropped-name-placeholder').textContent = ''; // Clear displayed name
+            }
         });
-        // Clear Part 1 answers from userAnswers
+        // Clear all Part 1 answers from userAnswers
         const part1QuestionKeys = [
             'girl_in_tent_yellow_shirt',
             'boy_on_red_bike',
@@ -208,7 +234,8 @@ document.addEventListener('DOMContentLoaded', () => {
             'girl_with_sticks',
             'girl_reading_book',
             'boy_by_fire',
-            'girl_fishing_net'
+            'girl_fishing_net',
+            'unassigned_names' // Ensure this isn't treated as a question for scoring, but cleared
         ];
         part1QuestionKeys.forEach(key => {
             if (userAnswers.hasOwnProperty(key)) {
@@ -300,26 +327,29 @@ document.addEventListener('DOMContentLoaded', () => {
                         questionId === 'girl_fishing_net'
                     );
 
+                    // Clear all existing Part 1 feedback for a fresh check
                     if (isPart1Question) {
                         dropTargetElement = document.querySelector(`.drop-target[data-description="${questionId}"]`);
-                        draggableNameElement = document.querySelector(`.draggable-name[data-name="${userAnswers[questionId]}"]`); // Get the draggable element the user dropped
-
-                        // Clear previous feedback from related elements before applying new
                         if (dropTargetElement) {
                             dropTargetElement.classList.remove('correct', 'incorrect');
                             dropTargetElement.style.borderColor = ''; // Clear any direct style
                             dropTargetElement.style.backgroundColor = '';
                         }
-                        // Important: clear feedback from ALL draggable names, as their status might change
+                        // Important: clear feedback from ALL draggable names
                         document.querySelectorAll('.draggable-name').forEach(nameDiv => {
                             nameDiv.classList.remove('correct', 'incorrect');
                         });
-                        // And clear feedback from ALL drop targets
-                        document.querySelectorAll('.drop-target').forEach(targetDiv => {
+                        // And clear feedback from ALL drop targets (important for 'incorrect' where correct isn't the current)
+                        document.querySelectorAll('.specific-drop-zone').forEach(targetDiv => {
                             targetDiv.classList.remove('correct', 'incorrect');
                             targetDiv.style.borderColor = '';
                             targetDiv.style.backgroundColor = '';
                         });
+                        // Also clear feedback from unassigned names container if it has it
+                        const unassignedContainer = document.querySelector('.draggable-names-container');
+                        if (unassignedContainer) {
+                            unassignedContainer.classList.remove('correct', 'incorrect');
+                        }
 
                     } else if (questionElement && questionElement.classList.contains('option-card')) {
                         // For Part 4, clear previous feedback for all options in that question group
@@ -334,35 +364,32 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     if (userAnswer === expectedAnswer) {
                         correctCount++;
-                        if (dropTargetElement) {
+                        if (isPart1Question && dropTargetElement) {
                             dropTargetElement.classList.add('correct');
-                            // Also apply 'correct' to the draggable name if it was placed correctly
                             const currentDraggableForThisTarget = document.querySelector(`.draggable-name[data-name="${userAnswers[questionId]}"]`);
                             if (currentDraggableForThisTarget) {
                                 currentDraggableForThisTarget.classList.add('correct');
                             }
                         } else if (questionElement && questionElement.classList.contains('option-card')) {
-                            // Mark the selected card as correct
                             questionElement.classList.add('correct');
                         } else if (questionElement && (questionElement.tagName === 'INPUT' || questionElement.tagName === 'SELECT')) {
                             questionElement.style.borderColor = '#4caf50'; // Green border
                         }
                     } else { // User answer is incorrect or not provided
-                        if (dropTargetElement) {
+                        if (isPart1Question && dropTargetElement) {
                             dropTargetElement.classList.add('incorrect');
-                            // Mark the dropped name as incorrect
+                            // Mark the dropped name as incorrect if it was placed there
                             const currentDraggableForThisTarget = document.querySelector(`.draggable-name[data-name="${userAnswers[questionId]}"]`);
                             if (currentDraggableForThisTarget) {
                                 currentDraggableForThisTarget.classList.add('incorrect');
                             }
-                            // Optionally, visually indicate the correct draggable name/drop target
+                            // Highlight the correct draggable name by adding 'correct' class to it
                             const correctDraggableNameId = correctAnswers[questionId];
                             const correctDraggable = document.querySelector(`.draggable-name[data-name="${correctDraggableNameId}"]`);
                             if (correctDraggable) {
-                                correctDraggable.classList.add('correct'); // Show which name *should* have been there
+                                correctDraggable.classList.add('correct'); 
                             }
                         } else if (questionElement && questionElement.classList.contains('option-card')) {
-                            // Mark the selected card as incorrect
                             questionElement.classList.add('incorrect');
                             // Highlight the correct answer
                             const correctAnswerCard = document.querySelector(`.option-card[data-question="${questionId}"][data-answer="${correctAnswers[questionId]}"]`);
