@@ -205,19 +205,19 @@ header p {
 }
 
 /* Draggable names container */
-.draggable-names-container {
-    border: 1px solid #dcdcdc; /* Lighter border */
-    border-radius: 10px; /* More rounded */
-    padding: 15px; /* Adjusted padding */
-    background-color: #ecf0f1; /* Lighter background */
+.names-pool {
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #ecf0f1;
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    margin-top: 20px; /* Adjusted margin */
-    min-height: 80px; /* Ensure it has space even if empty */
+    margin: 20px 0; /* Add margin to top and bottom */
+    min-height: 60px; /* Adjusted height */
     position: relative;
-    z-index: 10; /* Retained user's z-index */
+    z-index: 10;
 }
 
 .draggable-names-container h4 {
