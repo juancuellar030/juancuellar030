@@ -31,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
         audioPlayers.forEach(player => player.pause());
         
         if (sectionId === 'listening-part1') {
-            const michaelElement = document.querySelector('.draggable-name[data-name="michael"]');
-            const michaelTargetZone = document.querySelector('.drop-target[data-description="boy_on_rock_magazine"]');
+            const michaelElement = document.query('.draggable-name[data-name="michael"]');
+            const michaelTargetZone = document.query('.drop-target[data-description="boy_on_rock_magazine"]');
             if (michaelElement && michaelTargetZone && michaelTargetZone.children.length === 0) {
                 michaelTargetZone.appendChild(michaelElement);
                 userAnswers['boy_on_rock_magazine'] = 'michael';
@@ -77,38 +77,43 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     document.querySelectorAll('.drop-target, .names-pool').forEach(target => {
-        target.addEventListener('dragover', e => {
-            e.preventDefault();
-            target.classList.add('drag-over');
-        });
-        target.addEventListener('dragleave', () => {
-            target.classList.remove('drag-over');
-        });
-        target.addEventListener('drop', e => {
-            e.preventDefault();
-            target.classList.remove('drag-over');
-            if (!draggedItem) return;
-            
-            const droppedName = draggedItem.dataset.name;
-            const targetZoneId = target.dataset.description;
+    target.addEventListener('dragover', e => {
+        e.preventDefault();
+        target.classList.add('drag-over');
+    });
+
+    target.addEventListener('dragleave', () => {
+        target.classList.remove('drag-over');
+    });
+
+    target.addEventListener('drop', e => {
+        e.preventDefault();
+        target.classList.remove('drag-over');
+        if (!draggedItem) return;
+
+        const droppedName = draggedItem.dataset.name;
+        const targetZoneId = target.dataset.description;
 
         // First, find and remove any old answer for the name we just moved.
-            for (const key in userAnswers) {
-                if (userAnswers[key] === droppedName) {
-                    delete userAnswers[key];
+        for (const key in userAnswers) {
+            if (userAnswers[key] === droppedName) {
+                delete userAnswers[key];
             }
         }
+        
         // If we dropped on a valid question zone, add the new answer.
         if (targetZoneId && targetZoneId !== 'unassigned-names-pool') {
-             userAnswers[targetZoneId] = droppedName;
-            
-            const existingName = target.querySelector('.draggable-name');
-            if (existingName) {
-                document.getElementById('names-pool-bottom').appendChild(existingName);
-            }
-            target.appendChild(draggedItem);
-        });
+            userAnswers[targetZoneId] = droppedName;
+        } // <--- THIS IS THE MISSING CURLY BRACE THAT WAS ADDED
+
+        // This logic now runs correctly for every drop
+        const existingName = target.querySelector('.draggable-name');
+        if (existingName) {
+            document.getElementById('names-pool-bottom').appendChild(existingName);
+        }
+        target.appendChild(draggedItem);
     });
+});
 
     document.querySelectorAll('#listening-part4 .option-card').forEach(card => {
     card.addEventListener('click', () => {
