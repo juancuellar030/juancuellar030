@@ -190,7 +190,7 @@ header p {
     background-color: #ddd; /* Placeholder background */
     border-radius: 8px;
     overflow: hidden; /* Ensure dropzones don't spill out */
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Shadow */
 }
 
