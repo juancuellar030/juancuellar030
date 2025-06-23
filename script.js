@@ -358,6 +358,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     } else if (questionElement && questionElement.classList.contains('option-card')) {
                         // For Part 4, clear previous feedback for all options in that question group
                         document.querySelectorAll(`.option-card[data-question="${questionId}"]`).forEach(card => {
+                            card.classList.remove('selected'); // Also clear selected state
                             card.classList.remove('correct', 'incorrect');
                         });
                     } else if (questionElement && (questionElement.tagName === 'INPUT' || questionElement.tagName === 'SELECT')) {
