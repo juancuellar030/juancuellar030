@@ -1,28 +1,33 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-/* --- HTML Styles --- */
-html {
+/* --- HTML and Body Reset --- */
+html, body {
     height: 100%;
     margin: 0;
     padding: 0;
 }
 
-/* --- Body Styles with Background --- */
-body {
-    font-family: 'Poppins', sans-serif;
-    margin: 0;
-    padding: 0;
-    min-height: 100vh; /* Changed from 100% to 100vh */
+/* --- Background Container --- */
+.background-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
     width: 100%;
-    overflow-x: hidden;
-    
-    /* Background properties moved to body */
+    height: 100%;
     background-image: url('images/moversbackground.svg');
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    background-attachment: fixed;
-    background-color: #f0f0f0; /* Fallback color */
+    background-color: #f0f0f0;
+    z-index: -1;
+}
+
+/* --- Body Styles --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    position: relative;
+    min-height: 100vh;
+    overflow-x: hidden;
 }
 
 /* --- Main Container --- */
@@ -34,8 +39,8 @@ body {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
     margin: 20px auto;
+    position: relative;
     z-index: 1;
-    position: relative; /* Added to ensure proper stacking */
 }
 
 /* --- Header --- */
@@ -178,17 +183,4 @@ header p {
 #results-display {
     margin-top: 1.5rem;
     font-size: 1.2rem;
-    font-weight: 600;
-}
-
-#results-display.correct {
-    color: #2e7d32;
-}
-
-#results-display.partial {
-    color: #ef6c00;
-}
-
-#results-display.incorrect {
-    color: #c62828;
-}
+    font-wei
