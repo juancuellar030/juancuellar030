@@ -76,22 +76,18 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- FIXED: Restored full logic for dragover and dragleave for hover effect ---
     document.querySelectorAll('.drop-target, .names-pool').forEach(target => {
         target.addEventListener('dragover', e => {
-            e.preventDefault(); // This is necessary to allow a drop
-            target.classList.add('drag-over'); // This creates the hover effect
+            e.preventDefault();
+            target.classList.add('drag-over');
         });
-
         target.addEventListener('dragleave', () => {
-            target.classList.remove('drag-over'); // This removes the hover effect
+            target.classList.remove('drag-over');
         });
-
         target.addEventListener('drop', e => {
             e.preventDefault();
-            target.classList.remove('drag-over'); // Also remove hover on drop
+            target.classList.remove('drag-over');
             if (!draggedItem) return;
-
             const existingName = target.querySelector('.draggable-name');
             if (existingName) {
                 document.getElementById('names-pool-bottom').appendChild(existingName);
@@ -100,7 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // --- FIXED: Updated reset logic to know Michael starts in the bottom pool ---
     function resetAllAnswers() {
         userAnswers = {};
         document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
@@ -113,94 +108,115 @@ document.addEventListener('DOMContentLoaded', () => {
             if (['katy', 'robert', 'oliver'].includes(name)) {
                 document.getElementById('names-pool-top').appendChild(nameEl);
             } else {
-                // All other names (Sophia, Michael, Helen, Emma) go to the bottom pool
                 document.getElementById('names-pool-bottom').appendChild(nameEl);
             }
         });
     }
 
-    function submitResultsToGoogle(name, score) { /* ... Your Google Form logic is fine and remains here ... */ }
+    // --- FIXED: Restored the actual Google Form submission logic ---
+    function submitResultsToGoogle(name, score) {
+        const formId = "1FAIpQLScldo1YYLOKZR_dgKFNqSNi_UZiqOCGZQsXoRwTPyDzTiNnw";
+        const nameEntryId = "entry.2134521223";
+        const scoreEntryId = "entry.5411094";
 
-    // In script.js, replace the existing 'check-all-listening-answers-btn' listener with this:
-    document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
-    let correctCount = 0;
-    
-    // Clear all previous feedback first
-    document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
-    document.querySelectorAll('.text-answer').forEach(input => input.style.borderColor = '');
-    document.querySelectorAll('.option-card.selected').forEach(card => card.classList.remove('selected'));
+        const formData = new FormData();
+        formData.append(nameEntryId, name);
+        formData.append(scoreEntryId, score);
 
-    // --- Check Part 1: Drag and Drop ---
-    const part1AnswerKeys = Object.keys(correctAnswers).filter(k => !k.startsWith('q'));
-    part1AnswerKeys.forEach(dropZoneId => {
-        const targetZone = document.querySelector(`.drop-target[data-description="${dropZoneId}"]`);
-        const droppedItem = targetZone.querySelector('.draggable-name');
-        const correctAnswerName = correctAnswers[dropZoneId];
+        const url = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
 
-        if (droppedItem && droppedItem.dataset.name === correctAnswerName) {
-            correctCount++;
-            targetZone.classList.add('correct');
-            droppedItem.classList.add('correct');
-        } else {
-            targetZone.classList.add('incorrect');
-            if (droppedItem) {
-                droppedItem.classList.add('incorrect');
-            }
-            const correctNameElement = document.querySelector(`.draggable-name[data-name="${correctAnswerName}"]`);
-            if (correctNameElement) {
-                correctNameElement.classList.add('correct');
-            }
-        }
-    });
-
-    // --- Check Part 2: Text Inputs ---
-    Object.keys(correctAnswers).forEach(qId => {
-        if (qId.startsWith('q2_')) { 
-            const inputElement = document.getElementById(qId);
-            const userAnswer = (userAnswers[qId] || '').trim().toLowerCase();
-            if (userAnswer === correctAnswers[qId]) {
-                correctCount++;
-                inputElement.style.borderColor = '#4caf50'; // Green
-            } else {
-                inputElement.style.borderColor = '#f44336'; // Red
-            }
-        }
-    });
-
-    // --- Check Part 4: Tick the Box ---
-    Object.keys(correctAnswers).forEach(qId => {
-        if (qId.startsWith('q4_')) {
-            const userAnswer = userAnswers[qId];
-            const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer}"]`);
-            const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswers[qId]}"]`);
-
-            if (userAnswer === correctAnswers[qId]) {
-                correctCount++;
-                if(selectedOption) selectedOption.classList.add('correct');
-            } else {
-                if(selectedOption) selectedOption.classList.add('incorrect');
-                if(correctOption) correctOption.classList.add('correct'); // Highlight the correct one
-            }
-        }
-    });
-
-    // --- Display final score ---
-    const finalResultsDisplay = document.getElementById('final-results-display');
-    const percentage = (totalQuestions > 0) ? (correctCount / totalQuestions) * 100 : 0;
-    
-    let resultsHTML = '';
-    if (userName) {
-        resultsHTML += `<h3>Results for: ${userName}</h3>`;
+        fetch(url, {
+            method: 'POST',
+            body: formData,
+            mode: 'no-cors'
+        }).then(() => {
+            console.log("Results submitted successfully to Google Forms!");
+        }).catch(error => {
+            console.error("Error submitting results:", error);
+        });
     }
-    resultsHTML += `<p>You scored ${correctCount} out of ${totalQuestions} (${percentage.toFixed(0)}%).</p>`;
-    
-    let resultClass = 'incorrect';
-    if (percentage === 100) resultClass = 'correct';
-    else if (percentage >= 50) resultClass = 'partial';
-    
-    finalResultsDisplay.innerHTML = resultsHTML;
-    finalResultsDisplay.className = resultClass;
 
-    // --- Call the function to send data to your Google Form ---
-    submitResultsToGoogle(userName, correctCount);
+    // This is the single, correct listener for the 'Check Answers' button.
+    document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
+        let correctCount = 0;
+        
+        // Clear all previous feedback first
+        document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
+        document.querySelectorAll('.text-answer').forEach(input => input.style.borderColor = '');
+        document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected', 'correct', 'incorrect'));
+
+        // Check Part 1
+        const part1AnswerKeys = Object.keys(correctAnswers).filter(k => !k.startsWith('q'));
+        part1AnswerKeys.forEach(dropZoneId => {
+            const targetZone = document.querySelector(`.drop-target[data-description="${dropZoneId}"]`);
+            const droppedItem = targetZone.querySelector('.draggable-name');
+            const correctAnswerName = correctAnswers[dropZoneId];
+
+            if (droppedItem && droppedItem.dataset.name === correctAnswerName) {
+                correctCount++;
+                targetZone.classList.add('correct');
+                droppedItem.classList.add('correct');
+            } else {
+                targetZone.classList.add('incorrect');
+                if (droppedItem) {
+                    droppedItem.classList.add('incorrect');
+                }
+                const correctNameElement = document.querySelector(`.draggable-name[data-name="${correctAnswerName}"]`);
+                if (correctNameElement) {
+                    correctNameElement.classList.add('correct');
+                }
+            }
+        });
+
+        // Check Part 2
+        Object.keys(correctAnswers).forEach(qId => {
+            if (qId.startsWith('q2_')) { 
+                const inputElement = document.getElementById(qId);
+                const userAnswer = (userAnswers[qId] || '').trim().toLowerCase();
+                if (userAnswer === correctAnswers[qId]) {
+                    correctCount++;
+                    inputElement.style.borderColor = '#4caf50';
+                } else {
+                    inputElement.style.borderColor = '#f44336';
+                }
+            }
+        });
+
+        // Check Part 4
+        Object.keys(correctAnswers).forEach(qId => {
+            if (qId.startsWith('q4_')) {
+                const userAnswer = userAnswers[qId];
+                const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer}"]`);
+                const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswers[qId]}"]`);
+
+                if (userAnswer === correctAnswers[qId]) {
+                    correctCount++;
+                    if(selectedOption) selectedOption.classList.add('correct');
+                } else {
+                    if(selectedOption) selectedOption.classList.add('incorrect');
+                    if(correctOption) correctOption.classList.add('correct');
+                }
+            }
+        });
+
+        // Display final score
+        const finalResultsDisplay = document.getElementById('final-results-display');
+        const percentage = (totalQuestions > 0) ? (correctCount / totalQuestions) * 100 : 0;
+        let resultsHTML = '';
+        if (userName) {
+            resultsHTML += `<h3>Results for: ${userName}</h3>`;
+        }
+        resultsHTML += `<p>You scored ${correctCount} out of ${totalQuestions} (${percentage.toFixed(0)}%).</p>`;
+        
+        let resultClass = 'incorrect';
+        if (percentage === 100) resultClass = 'correct';
+        else if (percentage >= 50) resultClass = 'partial';
+        
+        finalResultsDisplay.innerHTML = resultsHTML;
+        finalResultsDisplay.className = resultClass;
+
+        // Call the function to send data to your Google Form
+        submitResultsToGoogle(userName, correctCount);
+    });
+
 });
