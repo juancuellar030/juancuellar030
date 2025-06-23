@@ -13,9 +13,6 @@
             <header>
                 <h1>A2 Flyers Listening Test</h1>
                 <p>Welcome! Listen carefully and answer all questions.</p>
-                <nav id="main-navigation">
-                    <!-- Navigation buttons will be dynamically added or managed by JS -->
-                </nav>
             </header>
 
             <!-- Listening Test Introduction/Instructions -->
@@ -37,46 +34,29 @@
                 <div class="question-content">
                     <p>Example: Listen and drag each name to the correct person in the picture.</p>
                     
-                    <div class="image-with-dropzones-wrapper"> <!-- Wrapper for image and absolute drop zones -->
+                    <div class="image-with-dropzones-wrapper">
                         <img src="images/flyers_part1_main_image_placeholder.svg" alt="A scene with various people" class="question-image-part1">
                         
                         <!-- Drop Zones positioned over the children in the image -->
-                        <!-- PERCENTAGES FROM YOUR LAST PROVIDED CODE BLOCK -->
-                        <div class="drop-target" data-description="girl_in_tent_yellow_shirt" style="top: 17%; left: 26%;">
-                            <span class="dropped-name-placeholder"></span>
-                        </div>
-                        <div class="drop-target" data-description="boy_on_red_bike" style="top: 17%; left: 20%;">
-                            <span class="dropped-name-placeholder"></span>
-                        </div>
-                        <div class="drop-target" data-description="boy_with_map" style="top: 28%; left: 52%;">
-                            <span class="dropped-name-placeholder"></span>
-                        </div>
-                        <div class="drop-target" data-description="girl_with_sticks" style="top: 55%; left: 38%;">
-                            <span class="dropped-name-placeholder"></span>
-                        </div>
-                        <div class="drop-target" data-description="girl_reading_book" style="top: 80%; left: 16%;">
-                            <span class="dropped-name-placeholder"></span>
-                        </div>
-                        <!-- Additional drop targets for Michael and Emma (as seen in screenshot) -->
-                        <div class="drop-target" data-description="boy_by_fire" style="top: 80%; left: 63%;">
-                            <span class="dropped-name-placeholder"></span>
-                        </div>
-                        <div class="drop-target" data-description="girl_fishing_net" style="top: 65%; left: 83%;">
-                            <span class="dropped-name-placeholder"></span>
-                        </div>
-
+                        <div class="drop-target" data-description="girl_in_tent_yellow_shirt" style="top: 17%; left: 26%;"></div>
+                        <div class="drop-target" data-description="boy_on_red_bike" style="top: 17%; left: 20%;"></div>
+                        <div class="drop-target" data-description="boy_with_map" style="top: 28%; left: 52%;"></div>
+                        <div class="drop-target" data-description="girl_with_sticks" style="top: 55%; left: 38%;"></div>
+                        <div class="drop-target" data-description="girl_reading_book" style="top: 80%; left: 16%;"></div>
+                        <div class="drop-target" data-description="boy_by_fire" style="top: 80%; left: 63%;"></div>
+                        <div class="drop-target" data-description="girl_fishing_net" style="top: 65%; left: 83%;"></div>
                     </div>
                     
-                    <!-- FIXED: Removed drop-target class from names container -->
-                    <div class="draggable-names-container drop-target" data-description="unassigned-names-pool">
+                    <!-- CORRECTED: Removed drop-target class. It is now only a container. -->
+                    <div class="draggable-names-container" data-description="unassigned-names-pool">
                         <h4>Names:</h4>
-                        <div class="draggable-name" draggable="true" id="drag_katy" data-name="katy">Katy</div>
-                        <div class="draggable-name" draggable="true" id="drag_robert" data-name="robert">Robert</div>
-                        <div class="draggable-name" draggable="true" id="drag_oliver" data-name="oliver">Oliver</div>
-                        <div class="draggable-name" draggable="true" id="drag_helen" data-name="helen">Helen</div>
-                        <div class="draggable-name" draggable="true" id="drag_sophia" data-name="sophia">Sophia</div>
-                        <div class="draggable-name" draggable="true" id="drag_michael" data-name="michael">Michael</div>
-                        <div class="draggable-name" draggable="true" id="drag_emma" data-name="emma">Emma</div>
+                        <div class="draggable-name" draggable="true" data-name="katy">Katy</div>
+                        <div class="draggable-name" draggable="true" data-name="robert">Robert</div>
+                        <div class="draggable-name" draggable="true" data-name="oliver">Oliver</div>
+                        <div class="draggable-name" draggable="true" data-name="helen">Helen</div>
+                        <div class="draggable-name" draggable="true" data-name="sophia">Sophia</div>
+                        <div class="draggable-name" draggable="true" data-name="michael">Michael</div>
+                        <div class="draggable-name" draggable="true" data-name="emma">Emma</div>
                     </div>
                 </div>
                 <div class="navigation-buttons">
@@ -84,6 +64,9 @@
                     <button class="nav-btn next-btn" data-target="listening-part2">Next Part</button>
                 </div>
             </section>
+
+            <!-- Other sections remain unchanged, so they are omitted for brevity... -->
+            <!-- PASTE THE REST OF YOUR HTML SECTIONS (PART 2, 3, 4, 5, RESULTS) HERE -->
 
             <!-- Listening Part 2: Listen and write numbers or words -->
             <section id="listening-part2" class="test-section hidden">
@@ -186,7 +169,6 @@
                             <label>C</label>
                         </div>
                     </div>
-                    <!-- ... Add 4 more questions for Part 4 similar to this structure ... -->
                 </div>
                 <div class="navigation-buttons">
                     <button class="nav-btn prev-btn" data-target="listening-part3">Back</button>
@@ -209,7 +191,6 @@
                     
                     <p>1. Colour the ... <select id="q5_q1_color" class="color-select"><option value="">--Select Color--</option><option value="red">Red</option><option value="blue">Blue</option></select></p>
                     <p>2. Write the name of the ... <input type="text" id="q5_q2_text" class="text-answer"></p>
-                    <!-- ... Add 3 more questions for Part 5 ... -->
                 </div>
                 <div class="navigation-buttons">
                     <button class="nav-btn prev-btn" data-target="listening-part4">Back</button>
@@ -225,16 +206,8 @@
                 <div id="final-results-display"></div>
                 <div class="navigation-buttons">
                     <button class="nav-btn restart-btn" data-target="listening-intro">Restart Test</button>
-                    <!-- If you add Reading/Writing later, a button to that section could go here -->
                 </div>
             </section>
-
-            <div class="submission-area">
-                <!-- This button might be removed or dynamically shown based on context -->
-                <!-- <button id="check-answers-btn">Check Answers</button> -->
-                <!-- #results-display will be used by individual part checks or for overall results -->
-                <div id="results-display"></div>
-            </div>
 
         </div>
     </div>
