@@ -7,39 +7,41 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div class="content-wrapper">
         <div class="test-container">
             <header>
                 <h1>A2 Flyers Listening Test</h1>
                 <p>Welcome! Listen carefully and answer all questions.</p>
+                <nav id="main-navigation">
+                    <!-- Navigation buttons will be dynamically added or managed by JS -->
+                </nav>
             </header>
 
+            <!-- Listening Test Introduction/Instructions -->
             <section id="listening-intro" class="test-section active">
-                <div class="question-content">
-                    <h2>Welcome to the A2 Flyers Listening Test!</h2>
-                    <p>This test has 5 parts. Listen carefully to the audio for each part and follow the instructions to complete the questions.</p>
-                    <p>Good luck!</p>
-                </div>
-                <div class="navigation-buttons">
-                    <button class="start-test-btn" data-target="listening-part1">Start Test</button>
-                </div>
+                <h2>Start the Listening Test</h2>
+                <p>The A2 Flyers Listening test has 5 parts. You will hear each audio recording twice.</p>
+                <p>Read the instructions for each part carefully before you begin.</p>
+                <button class="start-test-btn" data-target="listening-part1">Start Listening Part 1</button>
             </section>
 
+            <!-- Listening Part 1: Listen and draw lines (Drag and Drop) -->
             <section id="listening-part1" class="test-section hidden">
+                <h3>Part 1: Listen and draw lines. (5 Questions)</h3>
+                <div class="audio-player-container">
+                    <audio controls src="audio/flyers_listening_part1.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
                 <div class="question-content">
-                    <h2>Part 1: Listen and draw lines. (5 Questions)</h2>
-                    <p>Example: Listen and drag each name to the correct box.</p>
-
-                    <div class="audio-player-container">
-                        <audio controls>
-                            <source src="audio/flyers_listening_part1.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
-
-                    <div class="image-with-dropzones-wrapper">
+                    <p>Example: Listen and drag each name to the correct person in the picture.</p>
+                    
+                    <div class="image-with-dropzones-wrapper"> <!-- Wrapper for image and absolute drop zones -->
                         <img src="images/flyers_part1_main_image_placeholder.svg" alt="A scene with various people" class="question-image-part1">
-
+                        
+                        <!-- Drop Zones positioned over the children in the image -->
+                        <!-- PERCENTAGES FROM YOUR LAST PROVIDED CODE BLOCK -->
                         <div class="drop-target" data-description="girl_in_tent_yellow_shirt" style="top: 17%; left: 26%;">
                             <span class="dropped-name-placeholder"></span>
                         </div>
@@ -55,6 +57,7 @@
                         <div class="drop-target" data-description="girl_reading_book" style="top: 80%; left: 16%;">
                             <span class="dropped-name-placeholder"></span>
                         </div>
+                        <!-- Additional drop targets for Michael and Emma (as seen in screenshot) -->
                         <div class="drop-target" data-description="boy_by_fire" style="top: 80%; left: 63%;">
                             <span class="dropped-name-placeholder"></span>
                         </div>
@@ -63,187 +66,179 @@
                         </div>
 
                     </div>
-
-                    <div class="draggable-names-container">
-                        <div class="draggable-name" data-name="katy">Katy</div>
-                        <div class="draggable-name" data-name="robert">Robert</div>
-                        <div class="draggable-name" data-name="oliver">Oliver</div>
-                        <div class="draggable-name" data-name="helen">Helen</div>
-                        <div class="draggable-name" data-name="sophia">Sophia</div>
-                        <div class="draggable-name" data-name="michael">Michael</div>
-                        <div class="draggable-name" data-name="emma">Emma</div>
+                    
+                    <!-- ADDED data-description="unassigned-names-pool" to make this a drop target -->
+                    <div class="draggable-names-container drop-target" data-description="unassigned-names-pool">
+                        <h4>Names:</h4>
+                        <div class="draggable-name" draggable="true" id="drag_katy" data-name="katy">Katy</div>
+                        <div class="draggable-name" draggable="true" id="drag_robert" data-name="robert">Robert</div>
+                        <div class="draggable-name" draggable="true" id="drag_oliver" data-name="oliver">Oliver</div>
+                        <div class="draggable-name" draggable="true" id="drag_helen" data-name="helen">Helen</div>
+                        <div class="draggable-name" draggable="true" id="drag_sophia" data-name="sophia">Sophia</div>
+                        <div class="draggable-name" draggable="true" id="drag_michael" data-name="michael">Michael</div>
+                        <div class="draggable-name" draggable="true" id="drag_emma" data-name="emma">Emma</div>
                     </div>
-
                 </div>
                 <div class="navigation-buttons">
-                    <button class="nav-btn" data-target="listening-intro">Back</button>
-                    <button class="nav-btn" data-target="listening-part2">Next Part</button>
+                    <button class="nav-btn prev-btn" data-target="listening-intro">Back</button>
+                    <button class="nav-btn next-btn" data-target="listening-part2">Next Part</button>
                 </div>
             </section>
 
+            <!-- Listening Part 2: Listen and write numbers or words -->
             <section id="listening-part2" class="test-section hidden">
+                <h3>Part 2: Listen and write numbers or words. (5 Questions)</h3>
+                <div class="audio-player-container">
+                    <audio controls src="audio/flyers_listening_part2.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
                 <div class="question-content">
-                    <h2>Part 2: Listen and write. (5 Questions)</h2>
-                    <p>Listen and write the missing information.</p>
-                    <div class="audio-player-container">
-                        <audio controls>
-                            <source src="audio/test-audio-part2.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
+                    <p>Example: Listen and write the missing information in the form.</p>
                     <div class="form-question">
-                        <p>1. How old is Tom? <input type="text" id="q2_q1" class="text-answer" placeholder="Age"></p>
-                        <p>2. What is his favourite hobby? <input type="text" id="q2_q2" class="text-answer" placeholder="Hobby"></p>
-                        <p>3. What street does he live on? <input type="text" id="q2_q3" class="text-answer" placeholder="Street Name"></p>
-                        <p>4. What is his phone number? <input type="text" id="q2_q4" class="text-answer" placeholder="Phone Number"></p>
-                        <p>5. What is his favourite food? <input type="text" id="q2_q5" class="text-answer" placeholder="Food"></p>
+                        <p>Friend's name: David</p>
+                        <p>1. Age: <input type="number" id="q2_q1" class="text-answer"></p>
+                        <p>2. Favorite hobby: <input type="text" id="q2_q2" class="text-answer"></p>
+                        <p>3. Lives on: <input type="text" id="q2_q3" class="text-answer"></p>
+                        <p>4. Telephone number: <input type="text" id="q2_q4" class="text-answer"></p>
+                        <p>5. Favorite food: <input type="text" id="q2_q5" class="text-answer"></p>
                     </div>
                 </div>
                 <div class="navigation-buttons">
-                    <button class="nav-btn" data-target="listening-part1">Back</button>
-                    <button class="nav-btn" data-target="listening-part3">Next Part</button>
+                    <button class="nav-btn prev-btn" data-target="listening-part1">Back</button>
+                    <button class="nav-btn next-btn" data-target="listening-part3">Next Part</button>
                 </div>
             </section>
 
+            <!-- Listening Part 3: Listen and match -->
             <section id="listening-part3" class="test-section hidden">
+                <h3>Part 3: Listen and match. (5 Questions)</h3>
+                <div class="audio-player-container">
+                    <audio controls src="audio/flyers_listening_part3.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
                 <div class="question-content">
-                    <h2>Part 3: Listen and match. (5 Questions)</h2>
-                    <p>Listen and draw lines to match the names to the pictures.</p>
-                    <div class="audio-player-container">
-                        <audio controls>
-                            <source src="audio/test-audio-part3.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
+                    <p>Example: Listen to the conversations and match the people on the left with the correct pictures on the right.</p>
                     <div class="matching-grid">
                         <div class="match-left">
-                            <p>David</p>
-                            <p>Sarah</p>
-                            <p>Fred</p>
-                            <p>Lucy</p>
-                            <p>Paul</p>
+                            <p>1. Fred</p>
+                            <p>2. Lucy</p>
+                            <p>3. Mr. White</p>
+                            <p>4. Daisy</p>
+                            <p>5. Paul</p>
                         </div>
                         <div class="match-right">
-                            <img src="https://via.placeholder.com/100x100?text=Pic1" alt="Picture 1">
-                            <img src="https://via.placeholder.com/100x100?text=Pic2" alt="Picture 2">
-                            <img src="https://via.placeholder.com/100x100?text=Pic3" alt="Picture 3">
-                            <img src="https://via.placeholder.com/100x100?text=Pic4" alt="Picture 4">
-                            <img src="https://via.placeholder.com/100x100?text=Pic5" alt="Picture 5">
+                            <img src="images/flyers_part3_option_a.jpg" alt="Option A"> (A)
+                            <img src="images/flyers_part3_option_b.jpg" alt="Option B"> (B)
+                            <img src="images/flyers_part3_option_c.jpg" alt="Option C"> (C)
+                            <img src="images/flyers_part3_option_d.jpg" alt="Option D"> (D)
+                            <img src="images/flyers_part3_option_e.jpg" alt="Option E"> (E)
+                            <img src="images/flyers_part3_option_f.jpg" alt="Option F"> (F)
+                            <img src="images/flyers_part3_option_g.jpg" alt="Option G"> (G)
                         </div>
                     </div>
-                    <p class="instruction-note">This part will involve drag-and-drop or drawing lines in a future update.</p>
+                    <p class="instruction-note">You will need to implement the interactive matching logic (e.g., drag-and-drop or dropdowns) in script.js for this part.</p>
                 </div>
                 <div class="navigation-buttons">
-                    <button class="nav-btn" data-target="listening-part2">Back</button>
-                    <button class="nav-btn" data-target="listening-part4">Next Part</button>
+                    <button class="nav-btn prev-btn" data-target="listening-part2">Back</button>
+                    <button class="nav-btn next-btn" data-target="listening-part4">Next Part</button>
                 </div>
             </section>
 
+            <!-- Listening Part 4: Listen and tick the box (like your Movers part) -->
             <section id="listening-part4" class="test-section hidden">
+                <h3>Part 4: Listen and tick (✔) the box. (5 Questions)</h3>
+                <div class="audio-player-container">
+                    <audio controls src="audio/flyers_listening_part4.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
                 <div class="question-content">
-                    <h2>Part 4: Listen and tick (✓) the box. (5 Questions)</h2>
-                    <p>Example: Which is Julia's favourite day of the week?</p>
-                    <div class="audio-player-container">
-                        <audio controls>
-                            <source src="audio/test-audio-part4.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
+                    <p>Example: What did Tom do yesterday(?)</p>
                     <div class="options-grid">
-                        <div class="option-card selected" data-question="q4_example" data-answer="A">
-                            <img src="images/q4_example_A.png" alt="Calendar with Sunday circled">
-                            <label>A ✓</label>
+                        <div class="option-card" data-question="q4_example" data-answer="A">
+                            <img src="images/flyers_part4_ex_a.jpg" alt="Example option A">
+                            <label>A</label>
                         </div>
                         <div class="option-card" data-question="q4_example" data-answer="B">
-                            <img src="images/q4_example_B.png" alt="Calendar with Monday circled">
+                            <img src="images/flyers_part4_ex_b.jpg" alt="Example option B">
                             <label>B</label>
                         </div>
                         <div class="option-card" data-question="q4_example" data-answer="C">
-                            <img src="images/q4_example_C.png" alt="Calendar with Tuesday circled">
+                            <img src="images/flyers_part4_ex_c.jpg" alt="Example option C">
                             <label>C</label>
                         </div>
                     </div>
 
-                    <p>1. Where are Daisy's black shoes?</p>
+                    <p>1. What is the girl wearing(?)</p>
                     <div class="options-grid">
                         <div class="option-card" data-question="q4_q1" data-answer="A">
-                            <img src="images/q4_q1_A.png" alt="Black shoes on a white nightstand.">
+                            <img src="images/flyers_part4_q1_a.jpg" alt="Question 1 option A">
                             <label>A</label>
                         </div>
                         <div class="option-card" data-question="q4_q1" data-answer="B">
-                            <img src="images/q4_q1_B.png" alt="Black shoes at the bottom of a staircase.">
+                            <img src="images/flyers_part4_q1_b.jpg" alt="Question 1 option B">
                             <label>B</label>
                         </div>
                         <div class="option-card" data-question="q4_q1" data-answer="C">
-                            <img src="images/q4_q1_C.png" alt="Black shoes on a kitchen floor.">
+                            <img src="images/flyers_part4_q1_c.jpg" alt="Question 1 option C">
                             <label>C</label>
                         </div>
                     </div>
-
-                    <p>2. What was the weather like in the mountains?</p>
-                    <div class="options-grid">
-                        <div class="option-card" data-question="q4_q2" data-answer="A">
-                            <img src="images/q4_q2_A.png" alt="Sunny day over mountains.">
-                            <label>A</label>
-                        </div>
-                        <div class="option-card" data-question="q4_q2" data-answer="B">
-                            <img src="images/q4_q2_B.png" alt="Snowy, cold day over mountains.">
-                            <label>B</label>
-                        </div>
-                        <div class="option-card" data-question="q4_q2" data-answer="C">
-                            <img src="images/q4_q2_C.png" alt="Rainy day over mountains.">
-                            <label>C</label>
-                        </div>
-                    </div>
-                    </div>
+                    <!-- ... Add 4 more questions for Part 4 similar to this structure ... -->
+                </div>
                 <div class="navigation-buttons">
-                    <button class="nav-btn" data-target="listening-part3">Back</button>
-                    <button class="nav-btn" data-target="listening-part5">Next Part</button>
+                    <button class="nav-btn prev-btn" data-target="listening-part3">Back</button>
+                    <button class="nav-btn next-btn" data-target="listening-part5">Next Part</button>
                 </div>
             </section>
 
+            <!-- Listening Part 5: Listen and colour / write -->
             <section id="listening-part5" class="test-section hidden">
+                <h3>Part 5: Listen and colour and write. (5 Questions)</h3>
+                <div class="audio-player-container">
+                    <audio controls src="audio/flyers_listening_part5.mp3" type="audio/mpeg">
+                        Your browser does not support the audio element.
+                    </audio>
+                </div>
                 <div class="question-content">
-                    <h2>Part 5: Listen and Colour / Write. (5 Questions)</h2>
-                    <p>Listen and colour the picture or write the words.</p>
-                    <div class="audio-player-container">
-                        <audio controls>
-                            <source src="audio/test-audio-part5.mp3" type="audio/mpeg">
-                            Your browser does not support the audio element.
-                        </audio>
-                    </div>
-                    <p>Example: Colour the cat's tail <select id="q5_example_color" class="color-select">
-                        <option value="">Select Color</option>
-                        <option value="red">Red</option>
-                        <option value="blue">Blue</option>
-                        <option value="green">Green</option>
-                    </select>.</p>
-                    <p>1. Write what Simon likes to eat: <input type="text" id="q5_q1_text" class="text-answer" placeholder="Food"></p>
-                    <p class="instruction-note">This part will involve interactive colouring or more complex writing inputs in a future update.</p>
+                    <p>Example: Listen to the conversation and colour the objects in the picture. Write one word.</p>
+                    <img src="images/flyers_part5_main_image_placeholder.jpg" alt="A scene with objects to color and label" class="question-image">
+                    <p class="instruction-note">You will need advanced JavaScript/Canvas API to implement interactive colouring. For a simpler approach, you can provide dropdowns for colours or text inputs for words based on the audio.</p>
+                    
+                    <p>1. Colour the ... <select id="q5_q1_color" class="color-select"><option value="">--Select Color--</option><option value="red">Red</option><option value="blue">Blue</option></select></p>
+                    <p>2. Write the name of the ... <input type="text" id="q5_q2_text" class="text-answer"></p>
+                    <!-- ... Add 3 more questions for Part 5 ... -->
                 </div>
                 <div class="navigation-buttons">
-                    <button class="nav-btn" data-target="listening-part4">Back</button>
-                    <button class="nav-btn" data-target="listening-results">Finish Test</button>
+                    <button class="nav-btn prev-btn" data-target="listening-part4">Back</button>
+                    <button class="nav-btn next-btn" data-target="listening-results">Finish Listening Test</button>
                 </div>
             </section>
 
+            <!-- Listening Test Results Summary -->
             <section id="listening-results" class="test-section hidden">
-                <div class="question-content">
-                    <h2>Test Complete!</h2>
-                    <p>Click the button below to check your answers.</p>
-                </div>
-                <div class="submission-area">
-                    <button id="check-all-listening-answers-btn">Check All Answers</button>
-                    <div id="final-results-display" class="results"></div>
-                </div>
+                <h2>Listening Test Complete!</h2>
+                <p>You have finished all parts of the Listening test.</p>
+                <button id="check-all-listening-answers-btn">Check All My Answers</button>
+                <div id="final-results-display"></div>
                 <div class="navigation-buttons">
-                    <button class="nav-btn" data-target="listening-part5">Back</button>
-                    <button class="nav-btn" data-target="listening-intro">Restart Test</button>
+                    <button class="nav-btn restart-btn" data-target="listening-intro">Restart Test</button>
+                    <!-- If you add Reading/Writing later, a button to that section could go here -->
                 </div>
             </section>
+
+            <div class="submission-area">
+                <!-- This button might be removed or dynamically shown based on context -->
+                <!-- <button id="check-answers-btn">Check Answers</button> -->
+                <!-- #results-display will be used by individual part checks or for overall results -->
+                <div id="results-display"></div>
+            </div>
 
         </div>
     </div>
+
     <script src="script.js"></script>
 </body>
 </html>
