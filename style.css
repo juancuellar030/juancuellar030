@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-/* --- HTML and Body Reset & Full Background --- */
+/* --- HTML Styles for Full Background --- */
 html {
     height: 100%; /* Ensures html takes full height of the viewport */
     width: 100%;  /* Ensures html takes full width of the viewport */
@@ -13,9 +13,8 @@ html {
     background-position: center center; /* Centers the single image */
     background-attachment: fixed;  /* Makes background fixed while content scrolls */
     background-color: #87CEEB; /* Fallback color / matching color */
-    /* Prevent overflow on html itself, body will handle content scrolling */
-    overflow-x: hidden; 
-    overflow-y: hidden; /* HTML should not scroll, body will */
+    /* Prevent overflow on html itself. Body will handle content scrolling. */
+    overflow: hidden; /* Crucial: Keep HTML from scrolling its own content */
 }
 
 /* --- Body Styles for Content and Scrolling --- */
@@ -23,29 +22,45 @@ body {
     font-family: 'Poppins', sans-serif;
     color: #333;
     margin: 0;
-    padding: 0;
-    min-height: 100vh; /* Body takes at least full viewport height */
-    width: 100%; /* Body takes full width of html */
+    /* Apply desired vertical spacing as padding to the body itself. */
+    /* This ensures content is within the scrollable flow and prevents margin collapse issues */
+    padding: 20px 0; /* Add 20px top and bottom padding to the body */
     
-    /* Allow body content to scroll vertically */
+    min-height: 100vh; /* Body takes at least full viewport height */
+    width: 100%; /* Body takes full width */
+    
+    /* Crucial: Allow body content to scroll vertically */
     overflow-y: auto;
     /* Hide horizontal overflow to prevent unintended scrollbars */
     overflow-x: hidden; 
     -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+    
+    /* Use flexbox to center the .test-container horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers items horizontally within the flex container */
+    /* IMPORTANT: Do NOT use justify-content: center here if content can overflow vertically.
+       It will try to center content even if it means pushing it off screen. */
 }
 
 /* --- Main Container (.test-container) Styles --- */
 .test-container {
     max-width: 800px;
-    width: calc(100% - 40px); /* Account for 20px margin on each side */
+    width: calc(100% - 40px); /* Account for desired 20px space on each side from padding/margin on body */
     background-color: #ffffff; /* Opaque white background */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
-    /* Centers horizontally and provides consistent vertical margin. */
-    margin: 20px auto; 
+    /* Remove vertical margin from here, as it's now handled by body's padding. */
+    /* Only keep horizontal auto margins for centering within the flex body. */
+    margin-left: auto;
+    margin-right: auto; 
     position: relative; /* Ensure it respects z-index */
     z-index: 1; /* Ensure it's above the fixed background */
+    flex-shrink: 0; /* Prevent it from shrinking too much if space is constrained */
+    /* flex-grow: 1; is often used here, but for content that *should* scroll,
+       it's not strictly necessary and can sometimes cause issues if not managed carefully.
+       Let content determine its height. */
 }
 
 /* --- Header --- */
@@ -211,7 +226,7 @@ header p {
     min-height: 40px; /* Ensure a minimum height for empty drop zones */
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Pushes placeholder to right */
+    justify-content: flex-end; /* Pushes placeholder to right */
     gap: 10px;
 }
 
@@ -236,12 +251,13 @@ header p {
     min-width: 80px; /* Give some width to the placeholder */
     text-align: center;
     border: 1px solid #a2c4fd;
-    display: none; /* Initially hidden, shown when a name is dropped */
+    display: inline-block; /* Always display placeholder, even if empty, to reserve space */
+    vertical-align: middle; /* Align with any text in the drop target */
 }
 
-/* For when a name has been dropped, show the placeholder */
+/* For when a name has been dropped, remove initial min-width if text is longer */
 .drop-target.filled .dropped-name-placeholder {
-    display: inline-block; 
+    min-width: unset; /* Let content determine width */
 }
 
 
