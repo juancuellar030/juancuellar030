@@ -76,6 +76,7 @@ header h1 {
 
 header p {
     font-size: 1.1em; /* Larger font size */
+    text-align: center;
     color: #555;
 }
 
@@ -231,7 +232,7 @@ header p {
 .draggable-name {
     background-color: #3498db; /* Blue for draggables */
     color: white;
-    padding: 10px 12px; /* Adjusted padding */
+    padding: 7px 12px; /* Adjusted padding */
     border-radius: 25px; /* Pill shape */
     cursor: grab;
     font-weight: 600;
