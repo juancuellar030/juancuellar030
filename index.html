@@ -3,78 +3,224 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Movers Listening Test</title>
+    <title>A2 Flyers Listening Test</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
     <div class="test-container">
         <header>
-            <h1>Listen and tick (✔) the box. There is one example.</h1>
+            <h1>A2 Flyers Listening Test</h1>
+            <p>Welcome! Listen carefully and answer all questions.</p>
+            <nav id="main-navigation">
+                <!-- Navigation buttons will be dynamically added or managed by JS -->
+            </nav>
+        </header>
+
+        <!-- Listening Test Introduction/Instructions -->
+        <section id="listening-intro" class="test-section active">
+            <h2>Start the Listening Test</h2>
+            <p>The A2 Flyers Listening test has 5 parts. You will hear each audio recording twice.</p>
+            <p>Read the instructions for each part carefully before you begin.</p>
+            <button class="start-test-btn" data-target="listening-part1">Start Listening Part 1</button>
+        </section>
+
+        <!-- Listening Part 1: Listen and draw lines (Drag and Drop) -->
+        <section id="listening-part1" class="test-section hidden">
+            <h3>Part 1: Listen and draw lines. (5 Questions)</h3>
             <div class="audio-player-container">
-                <audio controls>
-                    <source src="audio/movers4test3audio4.mp3" type="audio/mpeg">
+                <audio controls src="audio/flyers_listening_part1.mp3" type="audio/mpeg">
                     Your browser does not support the audio element.
                 </audio>
             </div>
-        </header>
+            <div class="question-content">
+                <p>Example: Listen and drag each name to the correct box</p>
+                <img src="images/flyers_part1_main_image_placeholder.jpg" alt="A scene with various people" class="question-image">
+                
+                <div class="drag-and-drop-area">
+                    <div class="draggable-names">
+                        <h4>Names:</h4>
+                        <div class="draggable-name" draggable="true" id="drag_katy" data-name="katy">Katy</div>
+                        <div class="draggable-name" draggable="true" id="drag_robert" data-name="robert">Robert</div>
+                        <div class="draggable-name" draggable="true" id="drag_oliver" data-name="oliver">Oliver</div>
+                        <div class="draggable-name" draggable="true" id="drag_helen" data-name="helen">Helen</div>
+                        <div class="draggable-name" draggable="true" id="drag_sophia" data-name="sophia">Sophia</div>
+                        <div class="draggable-name" draggable="true" id="drag_michael" data-name="michael">Michael</div>
+                        <div class="draggable-name" draggable="true" id="drag_emma" data-name="emma">Emma</div>
+                    </div>
 
-        <div class="question-block">
-            <p class="question-text">Example: Which is Julia's favourite day of the week?</p>
-            <div class="options-grid">
-                <div class="option-card selected" data-question="example" data-answer="A">
-                    <img src="images/calendar_sunday.jpg" alt="Calendar with Sunday circled">
-                    <label>A calendar with Sunday circled.</label>
-                </div>
-                <div class="option-card" data-question="example" data-answer="B">
-                    <img src="images/calendar_monday.jpg" alt="Calendar with Monday circled">
-                    <label>A calendar with Monday circled.</label>
-                </div>
-                <div class="option-card" data-question="example" data-answer="C">
-                    <img src="images/calendar_tuesday.jpg" alt="Calendar with Tuesday circled">
-                    <label>A calendar with Tuesday circled.</label>
+                    <div class="drop-targets">
+                        <h4>Descriptions:</h4>
+                        <!-- Descriptions removed, only placeholder remains -->
+                        <div class="drop-target" data-description="girl_in_tent_yellow_shirt"> <span class="dropped-name-placeholder"></span></div>
+                        <div class="drop-target" data-description="boy_on_red_bike"> <span class="dropped-name-placeholder"></span></div>
+                        <div class="drop-target" data-description="boy_with_map"> <span class="dropped-name-placeholder"></span></div>
+                        <div class="drop-target" data-description="girl_with_sticks"> <span class="dropped-name-placeholder"></span></div>
+                        <div class="drop-target" data-description="girl_reading_book"> <span class="dropped-name-placeholder"></span></div>
+                        <div class="drop-target" data-description="boy_by_fire"> <span class="dropped-name-placeholder"></span></div>
+                        <div class="drop-target" data-description="girl_fishing_net"> <span class="dropped-name-placeholder"></span></div>
+                    </div>
                 </div>
             </div>
-        </div>
+            <div class="navigation-buttons">
+                <button class="nav-btn prev-btn" data-target="listening-intro">Back</button>
+                <button class="nav-btn next-btn" data-target="listening-part2">Next Part</button>
+            </div>
+        </section>
 
-        <div class="question-block">
-            <p class="question-text">1. Where are Daisy's black shoes?</p>
-            <div class="options-grid">
-                <div class="option-card" data-question="q1" data-answer="A">
-                    <img src="images/shoes_nightstand.jpg" alt="Black shoes on a white nightstand">
-                    <label>Black shoes on a white nightstand.</label>
-                </div>
-                <div class="option-card" data-question="q1" data-answer="B">
-                    <img src="images/shoes_staircase.jpg" alt="Black shoes at the bottom of a staircase">
-                    <label>Black shoes at the bottom of a staircase.</label>
-                </div>
-                <div class="option-card" data-question="q1" data-answer="C">
-                    <img src="images/shoes_kitchen.jpg" alt="Black shoes on a kitchen floor.">
-                    <label>Black shoes on a kitchen floor.</label>
+        <!-- Listening Part 2: Listen and write numbers or words -->
+        <section id="listening-part2" class="test-section hidden">
+            <h3>Part 2: Listen and write numbers or words. (5 Questions)</h3>
+            <div class="audio-player-container">
+                <audio controls src="audio/flyers_listening_part2.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <div class="question-content">
+                <p>Example: Listen and write the missing information in the form.</p>
+                <div class="form-question">
+                    <p>Friend's name: David</p>
+                    <p>1. Age: <input type="number" id="q2_q1" class="text-answer"></p>
+                    <p>2. Favorite hobby: <input type="text" id="q2_q2" class="text-answer"></p>
+                    <p>3. Lives on: <input type="text" id="q2_q3" class="text-answer"></p>
+                    <p>4. Telephone number: <input type="text" id="q2_q4" class="text-answer"></p>
+                    <p>5. Favorite food: <input type="text" id="q2_q5" class="text-answer"></p>
                 </div>
             </div>
-        </div>
-
-        <div class="question-block">
-            <p class="question-text">2. What was the weather like in the mountains?</p>
-            <div class="options-grid">
-                <div class="option-card" data-question="q2" data-answer="A">
-                    <img src="images/sunny_mountains.jpg" alt="Sunny day over mountains">
-                    <label>Sunny day over mountains.</label>
-                </div>
-                <div class="option-card" data-question="q2" data-answer="B">
-                    <img src="images/snowy_mountains.jpg" alt="Snowy, cold day over mountains">
-                    <label>Snowy, cold day over mountains.</label>
-                </div>
-                <div class="option-card" data-question="q2" data-answer="C">
-                    <img src="images/clear_mountains.jpg" alt="Clear mountains">
-                    <label>Clear mountains</label>
-                </div>
+            <div class="navigation-buttons">
+                <button class="nav-btn prev-btn" data-target="listening-part1">Back</button>
+                <button class="nav-btn next-btn" data-target="listening-part3">Next Part</button>
             </div>
-        </div>
+        </section>
+
+        <!-- Listening Part 3: Listen and match -->
+        <section id="listening-part3" class="test-section hidden">
+            <h3>Part 3: Listen and match. (5 Questions)</h3>
+            <div class="audio-player-container">
+                <audio controls src="audio/flyers_listening_part3.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <div class="question-content">
+                <p>Example: Listen to the conversations and match the people on the left with the correct pictures on the right.</p>
+                <div class="matching-grid">
+                    <div class="match-left">
+                        <p>1. Fred</p>
+                        <p>2. Lucy</p>
+                        <p>3. Mr. White</p>
+                        <p>4. Daisy</p>
+                        <p>5. Paul</p>
+                    </div>
+                    <div class="match-right">
+                        <img src="images/flyers_part3_option_a.jpg" alt="Option A"> (A)
+                        <img src="images/flyers_part3_option_b.jpg" alt="Option B"> (B)
+                        <img src="images/flyers_part3_option_c.jpg" alt="Option C"> (C)
+                        <img src="images/flyers_part3_option_d.jpg" alt="Option D"> (D)
+                        <img src="images/flyers_part3_option_e.jpg" alt="Option E"> (E)
+                        <img src="images/flyers_part3_option_f.jpg" alt="Option F"> (F)
+                        <img src="images/flyers_part3_option_g.jpg" alt="Option G"> (G)
+                    </div>
+                </div>
+                <p class="instruction-note">You will need to implement the interactive matching logic (e.g., drag-and-drop or dropdowns) in script.js for this part.</p>
+            </div>
+            <div class="navigation-buttons">
+                <button class="nav-btn prev-btn" data-target="listening-part2">Back</button>
+                <button class="nav-btn next-btn" data-target="listening-part4">Next Part</button>
+            </div>
+        </section>
+
+        <!-- Listening Part 4: Listen and tick the box (like your Movers part) -->
+        <section id="listening-part4" class="test-section hidden">
+            <h3>Part 4: Listen and tick (✔) the box. (5 Questions)</h3>
+            <div class="audio-player-container">
+                <audio controls src="audio/flyers_listening_part4.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <div class="question-content">
+                <p>Example: What did Tom do yesterday?</p>
+                <div class="options-grid">
+                    <div class="option-card" data-question="q4_example" data-answer="A">
+                        <img src="images/flyers_part4_ex_a.jpg" alt="Example option A">
+                        <label>A</label>
+                    </div>
+                    <div class="option-card" data-question="q4_example" data-answer="B">
+                        <img src="images/flyers_part4_ex_b.jpg" alt="Example option B">
+                        <label>B</label>
+                    </div>
+                    <div class="option-card" data-question="q4_example" data-answer="C">
+                        <img src="images/flyers_part4_ex_c.jpg" alt="Example option C">
+                        <label>C</label>
+                    </div>
+                </div>
+
+                <p>1. What is the girl wearing?</p>
+                <div class="options-grid">
+                    <div class="option-card" data-question="q4_q1" data-answer="A">
+                        <img src="images/flyers_part4_q1_a.jpg" alt="Question 1 option A">
+                        <label>A</label>
+                    </div>
+                    <div class="option-card" data-question="q4_q1" data-answer="B">
+                        <img src="images/flyers_part4_q1_b.jpg" alt="Question 1 option B">
+                        <label>B</label>
+                    </div>
+                    <div class="option-card" data-question="q4_q1" data-answer="C">
+                        <img src="images/flyers_part4_q1_c.jpg" alt="Question 1 option C">
+                        <label>C</label>
+                    </div>
+                </div>
+                <!-- ... Add 4 more questions for Part 4 similar to this structure ... -->
+            </div>
+            <div class="navigation-buttons">
+                <button class="nav-btn prev-btn" data-target="listening-part3">Back</button>
+                <button class="nav-btn next-btn" data-target="listening-part5">Next Part</button>
+            </div>
+        </section>
+
+        <!-- Listening Part 5: Listen and colour / write -->
+        <section id="listening-part5" class="test-section hidden">
+            <h3>Part 5: Listen and colour and write. (5 Questions)</h3>
+            <div class="audio-player-container">
+                <audio controls src="audio/flyers_listening_part5.mp3" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                </audio>
+            </div>
+            <div class="question-content">
+                <p>Example: Listen to the conversation and colour the objects in the picture. Write one word.</p>
+                <img src="images/flyers_part5_main_image_placeholder.jpg" alt="A scene with objects to color and label" class="question-image">
+                <p class="instruction-note">You will need advanced JavaScript/Canvas API to implement interactive colouring. For a simpler approach, you can provide dropdowns for colours or text inputs for words based on the audio.</p>
+                
+                <p>1. Colour the ... <select id="q5_q1_color" class="color-select"><option value="">--Select Color--</option><option value="red">Red</option><option value="blue">Blue</option></select></p>
+                <p>2. Write the name of the ... <input type="text" id="q5_q2_text" class="text-answer"></p>
+                <!-- ... Add 3 more questions for Part 5 ... -->
+            </div>
+            <div class="navigation-buttons">
+                <button class="nav-btn prev-btn" data-target="listening-part4">Back</button>
+                <button class="nav-btn next-btn" data-target="listening-results">Finish Listening Test</button>
+            </div>
+        </section>
+
+        <!-- Listening Test Results Summary -->
+        <section id="listening-results" class="test-section hidden">
+            <h2>Listening Test Complete!</h2>
+            <p>You have finished all parts of the Listening test.</p>
+            <button id="check-all-listening-answers-btn">Check All My Answers</button>
+            <div id="final-results-display"></div>
+            <div class="navigation-buttons">
+                <button class="nav-btn restart-btn" data-target="listening-intro">Restart Test</button>
+                <!-- If you add Reading/Writing later, a button to that section could go here -->
+            </div>
+        </section>
+
         <div class="submission-area">
-            <button id="check-answers-btn">Check Answers</button>
+            <!-- This button might be removed or dynamically shown based on context -->
+            <!-- <button id="check-answers-btn">Check Answers</button> -->
+            <!-- #results-display will be used by individual part checks or for overall results -->
             <div id="results-display"></div>
         </div>
-    </div> <script src="script.js"></script>
+
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
