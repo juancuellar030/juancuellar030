@@ -221,8 +221,8 @@ header p {
 .image-with-dropzones-wrapper {
     position: relative;
     width: 100%; /* Make wrapper responsive */
-    padding-bottom: 125%; /* 4:3 aspect ratio (adjust if your image has different ratio) */
-    background-color: #ddd; /* Placeholder background */
+    padding-bottom: 127%; /* 4:3 aspect ratio (adjust if your image has different ratio) */
+    background-color: transparent; /* Placeholder background */
     border-radius: 8px;
     overflow: hidden; /* Ensure dropzones don't spill out */
     margin-bottom: 10px;
@@ -265,7 +265,7 @@ header p {
 .draggable-name {
     background-color: #3498db; /* Blue for draggables */
     color: white;
-    padding: 7px 12px; /* Adjusted padding */
+    padding: 6px 15px; /* Adjusted padding */
     border-radius: 25px; /* Pill shape */
     cursor: grab;
     font-weight: 600;
