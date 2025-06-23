@@ -172,8 +172,9 @@ header p {
     line-height: 1.5;
 }
 .instruction-note {
-    font-size: 0.9rem;
+    font-size: 1rem;
     color: #7f8c8d; /* Muted color */
+    font-weight: 600;
     font-style: italic;
     margin-top: 15px; /* Adjusted margin */
     padding: 10px; /* Adjusted padding */
@@ -230,7 +231,7 @@ header p {
 .draggable-name {
     background-color: #3498db; /* Blue for draggables */
     color: white;
-    padding: 10px 15px; /* Adjusted padding */
+    padding: 10px 12px; /* Adjusted padding */
     border-radius: 25px; /* Pill shape */
     cursor: grab;
     font-weight: 600;
