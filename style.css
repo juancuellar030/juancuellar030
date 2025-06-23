@@ -154,14 +154,7 @@ header p {
     margin-bottom: 0.8rem;
     line-height: 1.5;
 }
-.question-image {
-    max-width: 100%;
-    height: auto;
-    display: block; /* Ensures image takes its own line */
-    margin: 1rem auto; /* Center images */
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-}
+/* Removed .question-image as it's now specific to Part 1 */
 .instruction-note {
     font-size: 0.9rem;
     color: #666;
@@ -176,14 +169,24 @@ header p {
 /* --- Specific Question Type Styling --- */
 
 /* Part 1: Drag and Drop Styles */
-.drag-and-drop-area {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 1.5rem;
+.image-with-dropzones-wrapper { /* NEW: This wrapper makes positioning relative to the image */
+    position: relative;
+    max-width: 100%; /* Ensure it fits container */
+    height: auto; /* Maintain aspect ratio */
+    display: inline-block; /* Essential for containing absolute children based on its size */
+    margin: 1rem auto; /* Center the image wrapper */
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    /* Set a known aspect ratio if possible for consistent sizing, e.g., padding-bottom: 75%; */
 }
 
-.draggable-names {
+.question-image-part1 { /* Specific image for Part 1 */
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+.draggable-names-container { /* Renamed for clarity */
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 1rem;
@@ -192,6 +195,7 @@ header p {
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
+    margin-top: 2rem; /* Space between image and draggable names */
 }
 
 .draggable-name {
@@ -216,29 +220,25 @@ header p {
     transform: scale(1.05);
 }
 
-.drop-targets {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 1rem;
-    background-color: #fff;
-}
-
+/* Drop targets are now small, absolute squares over the image */
 .drop-target {
-    border: 2px dashed #bbb;
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    min-height: 40px; /* Ensure a minimum height for empty drop zones */
+    position: absolute;
+    width: 60px; /* Adjust size based on how big you want the hit area */
+    height: 60px; /* Square hit area */
+    border: 2px dashed rgba(255, 255, 255, 0.5); /* Semi-transparent border initially */
+    background-color: rgba(255, 255, 255, 0.3); /* Slightly transparent background */
+    border-radius: 8px;
     display: flex;
     align-items: center;
-    justify-content: flex-end; /* Pushes placeholder to right */
-    gap: 10px;
+    justify-content: center; /* Center the dropped name */
+    overflow: hidden; /* Hide overflow if name is too long */
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    cursor: pointer; /* Indicate it's interactive */
 }
 
 .drop-target.drag-over {
     border-color: #3f51b5;
-    background-color: #e8eaf6;
+    background-color: rgba(63, 81, 181, 0.2); /* More visible on drag over */
 }
 
 /* Visually hide the original draggable name once it's placed in a drop target */
@@ -252,18 +252,28 @@ header p {
     font-weight: bold;
     color: #1a237e;
     background-color: #cfe2ff;
-    padding: 5px 10px;
+    padding: 3px 6px; /* Smaller padding for smaller boxes */
     border-radius: 3px;
-    min-width: 80px; /* Give some width to the placeholder */
+    min-width: 0; /* Let content shrink if needed */
     text-align: center;
     border: 1px solid #a2c4fd;
-    display: inline-block; /* Always display placeholder, even if empty, to reserve space */
-    vertical-align: middle; /* Align with any text in the drop target */
+    font-size: 0.8rem; /* Smaller font for smaller boxes */
+    white-space: nowrap; /* Keep name on one line */
+    overflow: hidden;
+    text-overflow: ellipsis; /* Add ellipsis if too long */
+    /* Remove display: inline-block; and vertical-align: middle; if it's the ONLY content */
 }
 
 /* For when a name has been dropped, remove initial min-width if text is longer */
 .drop-target.filled .dropped-name-placeholder {
     min-width: unset; /* Let content determine width */
+    display: block; /* Occupy full space in drop target */
+}
+
+/* Additional styling for the drop target when it's filled */
+.drop-target.filled {
+    background-color: rgba(207, 226, 255, 0.5); /* A bit more solid when filled */
+    border-color: #3f51b5;
 }
 
 
