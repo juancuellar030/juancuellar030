@@ -18,10 +18,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     totalQuestions = Object.keys(correctAnswers).length;
 
+    // --- Enable start button on input ---
     nameInput.addEventListener('input', () => {
         startButton.disabled = nameInput.value.trim() === '';
     });
 
+    // --- Core navigation logic ---
     function showSection(sectionId) {
         testSections.forEach(section => {
             section.classList.toggle('active', section.id === sectionId);
@@ -30,11 +32,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
         audioPlayers.forEach(player => player.pause());
         
+        // This logic correctly places Michael as the example
         if (sectionId === 'listening-part1') {
-            const michaelElement = document.query('.draggable-name[data-name="michael"]');
-            const michaelTargetZone = document.query('.drop-target[data-description="boy_on_rock_magazine"]');
+            const michaelElement = document.querySelector('.draggable-name[data-name="michael"]');
+            const michaelTargetZone = document.querySelector('.drop-target[data-description="boy_on_rock_magazine"]');
             if (michaelElement && michaelTargetZone && michaelTargetZone.children.length === 0) {
                 michaelTargetZone.appendChild(michaelElement);
+                // Also pre-fill the answer for checking purposes
                 userAnswers['boy_on_rock_magazine'] = 'michael';
             }
         }
@@ -46,6 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelector('.test-container')?.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
+    // --- Main click handler ---
     document.body.addEventListener('click', (event) => {
         const button = event.target.closest('.nav-btn, .start-test-btn, .restart-btn');
         if (button) {
@@ -56,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // --- Drag and Drop Logic ---
     let draggedItem = null;
     const scrollContainer = document.querySelector('.content-wrapper');
     document.addEventListener('drag', (e) => {
@@ -75,66 +81,64 @@ document.addEventListener('DOMContentLoaded', () => {
             draggedItem = null;
         });
     });
-
+    
+    // --- THIS IS THE FULLY CORRECTED DROP LOGIC ---
     document.querySelectorAll('.drop-target, .names-pool').forEach(target => {
-    target.addEventListener('dragover', e => {
-        e.preventDefault();
-        target.classList.add('drag-over');
-    });
+        target.addEventListener('dragover', e => {
+            e.preventDefault();
+            target.classList.add('drag-over');
+        });
 
-    target.addEventListener('dragleave', () => {
-        target.classList.remove('drag-over');
-    });
+        target.addEventListener('dragleave', () => {
+            target.classList.remove('drag-over');
+        });
 
-    target.addEventListener('drop', e => {
-        e.preventDefault();
-        target.classList.remove('drag-over');
-        if (!draggedItem) return;
+        target.addEventListener('drop', e => {
+            e.preventDefault();
+            target.classList.remove('drag-over');
+            if (!draggedItem) return;
 
-        const droppedName = draggedItem.dataset.name;
-        const targetZoneId = target.dataset.description;
+            const droppedName = draggedItem.dataset.name;
+            const targetZoneId = target.dataset.description;
 
-        // First, find and remove any old answer for the name we just moved.
-        for (const key in userAnswers) {
-            if (userAnswers[key] === droppedName) {
-                delete userAnswers[key];
+            // Update userAnswers object
+            for (const key in userAnswers) {
+                if (userAnswers[key] === droppedName) {
+                    delete userAnswers[key];
+                }
             }
-        }
-        
-        // If we dropped on a valid question zone, add the new answer.
-        if (targetZoneId && targetZoneId !== 'unassigned-names-pool') {
-            userAnswers[targetZoneId] = droppedName;
-        } // <--- THIS IS THE MISSING CURLY BRACE THAT WAS ADDED
+            if (targetZoneId && targetZoneId !== 'unassigned-names-pool') {
+                userAnswers[targetZoneId] = droppedName;
+            }
 
-        // This logic now runs correctly for every drop
-        const existingName = target.querySelector('.draggable-name');
-        if (existingName) {
-            document.getElementById('names-pool-bottom').appendChild(existingName);
-        }
-        target.appendChild(draggedItem);
+            // Handle swapping
+            const existingName = target.querySelector('.draggable-name');
+            if (existingName) {
+                document.getElementById('names-pool-bottom').appendChild(existingName);
+            }
+            // This now correctly runs for every drop, placing the item
+            target.appendChild(draggedItem);
+        });
     });
-});
 
+    // --- Answer Saving Logic (Restored) ---
     document.querySelectorAll('#listening-part4 .option-card').forEach(card => {
-    card.addEventListener('click', () => {
-        const questionId = card.dataset.question;
-        const answer = card.dataset.answer;
-        // First, remove 'selected' from other options in the same question group
-        document.querySelectorAll(`#listening-part4 .option-card[data-question="${questionId}"]`).forEach(c => c.classList.remove('selected'));
-        // Then, add 'selected' to the one that was clicked
-        card.classList.add('selected');
-        // Finally, save the answer
-        userAnswers[questionId] = answer;
+        card.addEventListener('click', () => {
+            const questionId = card.dataset.question;
+            const answer = card.dataset.answer;
+            document.querySelectorAll(`#listening-part4 .option-card[data-question="${questionId}"]`).forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            userAnswers[questionId] = answer;
+        });
     });
-});
     
     document.querySelectorAll('#listening-part2 .text-answer').forEach(input => {
-    input.addEventListener('input', (event) => {
-        // Save the answer using the input's ID as the key
-        userAnswers[event.target.id] = event.target.value.trim().toLowerCase();
+        input.addEventListener('input', (event) => {
+            userAnswers[event.target.id] = event.target.value.trim().toLowerCase();
+        });
     });
-});
     
+    // --- Reset Logic ---
     function resetAllAnswers() {
         userAnswers = {};
         document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
@@ -152,7 +156,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // --- FIXED: Restored the actual Google Form submission logic ---
+    // --- Google Forms Submission ---
     function submitResultsToGoogle(name, score) {
         const formId = "1FAIpQLSclDo1YYLOKZR_dgKFNqSNi_UZiqOCGZQsXsoRwTPyDzTiNnw";
         const nameEntryId = "entry.2134521223";
@@ -175,11 +179,10 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // This is the single, correct listener for the 'Check Answers' button.
+    // --- Final Grading Logic ---
     document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
         let correctCount = 0;
         
-        // Clear all previous feedback first
         document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
         document.querySelectorAll('.text-answer').forEach(input => input.style.borderColor = '');
         document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected', 'correct', 'incorrect'));
@@ -207,7 +210,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Check Part 2
+        // Check Part 2 & 4
         Object.keys(correctAnswers).forEach(qId => {
             if (qId.startsWith('q2_')) { 
                 const inputElement = document.getElementById(qId);
@@ -218,12 +221,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     inputElement.style.borderColor = '#f44336';
                 }
-            }
-        });
-
-        // Check Part 4
-        Object.keys(correctAnswers).forEach(qId => {
-            if (qId.startsWith('q4_')) {
+            } else if (qId.startsWith('q4_')) {
                 const userAnswer = userAnswers[qId];
                 const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer}"]`);
                 const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswers[qId]}"]`);
@@ -254,8 +252,9 @@ document.addEventListener('DOMContentLoaded', () => {
         finalResultsDisplay.innerHTML = resultsHTML;
         finalResultsDisplay.className = resultClass;
 
-        // Call the function to send data to your Google Form
         submitResultsToGoogle(userName, correctCount);
     });
-
+    
+    // Initial page setup
+    showSection('listening-intro');
 });
