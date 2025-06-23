@@ -7,27 +7,25 @@ html, body {
     padding: 0;
 }
 
-/* --- Background Container --- */
-.background-wrapper {
-    position: fixed;
-    top: 0;
-    left: 0;
+/* --- Body Styles with Background (Original Method + Debug) --- */
+body {
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
     width: 100%;
-    height: 100%;
-    background-image: url('images/moversbackground.svg');
+    overflow-x: hidden;
+    
+    /* For GitHub Pages, try this path */
+    background-image: url('./images/moversbackground.svg');
+    
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
-    background-color: #f0f0f0;
-    z-index: -1;
-}
-
-/* --- Body Styles --- */
-body {
-    font-family: 'Poppins', sans-serif;
-    position: relative;
-    min-height: 100vh;
-    overflow-x: hidden;
+    background-attachment: fixed;
+    
+    /* Temporary debug color - you should see this if SVG isn't loading */
+    background-color: #ffcccc; /* Light red - change this to see if CSS is working */
 }
 
 /* --- Main Container --- */
@@ -183,4 +181,17 @@ header p {
 #results-display {
     margin-top: 1.5rem;
     font-size: 1.2rem;
-    font-wei
+    font-weight: 600;
+}
+
+#results-display.correct {
+    color: #2e7d32;
+}
+
+#results-display.partial {
+    color: #ef6c00;
+}
+
+#results-display.incorrect {
+    color: #c62828;
+}
