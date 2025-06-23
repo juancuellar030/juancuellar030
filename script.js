@@ -71,15 +71,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- NEW: Function to submit results to Google Forms ---
     // You must replace the placeholder values below with your own!
     function submitResultsToGoogle(name, score) {
-        const formId = "YOUR_LONG_FORM_ID"; // <-- PASTE YOUR FORM ID HERE
-        const nameEntryId = "entry.XXXXXXXXX";   // <-- PASTE NAME FIELD ID HERE
-        const scoreEntryId = "entry.YYYYYYYYY";  // <-- PASTE SCORE FIELD ID HERE
-
-        // Don't try to submit if the placeholder values haven't been changed
-        if (formId === "YOUR_LONG_FORM_ID") {
-            console.log("Google Form submission skipped: Please configure formId and entry IDs.");
-            return;
-        }
+        const formId = "1FAIpQLSclDo1YYLOKZR_dgKFNqSNi_UZiqOCGZQsXsoRwTPyDzTiNnw"; // <-- PASTE YOUR FORM ID HERE
+        const nameEntryId = "entry.2134521223";   // <-- PASTE NAME FIELD ID HERE
+        const scoreEntryId = "entry.5411094";  // <-- PASTE SCORE FIELD ID HERE
 
         const formData = new FormData();
         formData.append(nameEntryId, name);
