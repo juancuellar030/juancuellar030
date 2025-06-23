@@ -258,8 +258,8 @@ header p {
 .drop-target {
     position: absolute;
     width: 12%; /* Adjusted size as needed */
-    height: 6%; /* Adjusted size as needed */
-    border: 2px dashed #3498db; /* Blue dashed border */
+    height: 5%; /* Adjusted size as needed */
+    border: 2px dashed #ffffff; /* White dashed border */
     border-radius: 8px;
     display: flex;
     align-items: center;
@@ -269,7 +269,7 @@ header p {
     cursor: default; /* Indicate not directly clickable */
     z-index: 5; /* Retained user's z-index */
     box-sizing: border-box;
-    background-color: rgba(255, 255, 255, 0.7); /* Lighter background for empty targets */
+    background-color: rgba(255, 255, 255, 0.5); /* Lighter background for empty targets */
 }
 
 .drop-target.drag-over {
