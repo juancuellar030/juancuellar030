@@ -141,89 +141,55 @@ document.addEventListener('DOMContentLoaded', () => {
             target.classList.remove('drag-over');
         });
 
-        target.addEventListener('drop', (e) => {
-            e.preventDefault();
-            target.classList.remove('drag-over');
+target.addEventListener('drop', (e) => {
+    e.preventDefault();
+    target.classList.remove('drag-over');
 
-            const droppedNameData = e.dataTransfer.getData('text/plain'); // e.g., 'katy'
-            const targetDropZoneId = target.dataset.description; // e.g., 'girl_in_tent_yellow_shirt' or 'unassigned-names-pool'
+    // Ensure we have a reference to the element being dragged
+    if (!draggedItem) {
+        return;
+    }
 
-            // If we don't have the element reference, find it (fallback for external drags or complex scenarios)
-            if (!draggedItem) {
-                draggedItem = document.querySelector(`.draggable-name[data-name="${droppedNameData}"]`);
-            }
+    const droppedNameData = draggedItem.dataset.name;
+    const targetDropZoneId = target.dataset.description;
 
-            // Ensure draggedItem is not null before proceeding
-            if (!draggedItem) {
-                console.error("Dragged item element not found.");
-                return;
-            }
+    // --- LOGIC TO HANDLE SWAPPING ---
+    // If the target is a picture zone AND it already contains a name,
+    // move that existing name back to the main list.
+    const existingNameInTarget = target.querySelector('.draggable-name');
+    if (existingNameInTarget && existingNameInTarget !== draggedItem) {
+        const unassignedPool = document.querySelector('.draggable-names-container');
+        unassignedPool.appendChild(existingNameInTarget);
+        // Clear feedback from the returned name
+        existingNameInTarget.classList.remove('correct', 'incorrect');
+    }
 
-            // --- 1. Clear previous assignment ---
-            // Remove from previous drop zone if any
-            const previousDropZone = draggedItem.closest('.drop-target');
-            if (previousDropZone) {
-                const prevZoneId = previousDropZone.dataset.description;
-                // Only delete from userAnswers if it was a 'picture' drop zone
-                if (prevZoneId && prevZoneId !== 'unassigned-names-pool') {
-                    delete userAnswers[prevZoneId]; 
-                    previousDropZone.classList.remove('filled');
-                    // If it was a picture drop zone, its placeholder should be cleared
-                    const prevPlaceholder = previousDropZone.querySelector('.dropped-name-placeholder');
-                    if(prevPlaceholder) prevPlaceholder.textContent = '';
-                }
-            }
-            
-            // --- 2. Handle the new drop ---
-            // If dropping into a picture drop zone
-            if (targetDropZoneId && targetDropZoneId !== 'unassigned-names-pool') {
-                // If there's already a name in this zone, move it back to pool
-                // We need to check if the target drop zone currently *contains* a draggable-name element
-                const existingNameInTarget = target.querySelector('.draggable-name');
-                if (existingNameInTarget) {
-                    const unassignedPool = document.querySelector('.draggable-names-container[data-description="unassigned-names-pool"]');
-                    if (unassignedPool) {
-                        unassignedPool.appendChild(existingNameInTarget);
-                        // Clear feedback and hidden state for the name returned to the pool
-                        existingNameInTarget.classList.remove('hidden-for-drop', 'correct', 'incorrect');
-                    }
-                    
-                    // Clear its assignment from userAnswers
-                    const existingNameData = existingNameInTarget.dataset.name;
-                    for (const [zone, name] of Object.entries(userAnswers)) {
-                        if (name === existingNameData) delete userAnswers[zone];
-                    }
-                }
-                
-                // Place new name in zone
-                target.appendChild(draggedItem);
-                target.classList.add('filled');
-                draggedItem.classList.add('hidden-for-drop'); // Hide it from the original pool
-                userAnswers[targetDropZoneId] = droppedNameData;
-                
-            } else if (targetDropZoneId === 'unassigned-names-pool') {
-                // Dropping back into unassigned pool
-                const unassignedPool = document.querySelector('.draggable-names-container[data-description="unassigned-names-pool"]');
-                if (unassignedPool) {
-                    unassignedPool.appendChild(draggedItem);
-                    // Ensure it's visible and cleared of feedback
-                    draggedItem.classList.remove('hidden-for-drop', 'correct', 'incorrect');
-                }
-                
-                // Clear any assignments for this name from picture drop zones
-                for (const [zone, name] of Object.entries(userAnswers)) {
-                    if (name === droppedNameData) delete userAnswers[zone];
-                }
-            }
-            
-            // Clear feedback classes from the currently dragged item and the drop target
-            draggedItem.classList.remove('correct', 'incorrect');
-            target.classList.remove('correct', 'incorrect');
+    // --- CORE LOGIC: MOVE THE DRAGGED ITEM ---
+    // Now, append the item we are dragging to the target.
+    // This works whether the target is a picture zone or the main list.
+    target.appendChild(draggedItem);
 
-            console.log(`Dropped ${droppedNameData} onto ${targetDropZoneId}`);
-            console.log("Current user answers for Part 1:", userAnswers);
-        });
-    });
+    // --- UPDATE USER ANSWERS OBJECT ---
+    // First, find and remove any old answer for the name we just moved.
+    for (const zone in userAnswers) {
+        if (userAnswers[zone] === droppedNameData) {
+            delete userAnswers[zone];
+            const oldDropZone = document.querySelector(`.drop-target[data-description="${zone}"]`);
+            if (oldDropZone) oldDropZone.classList.remove('filled');
+        }
+    }
+
+    // If we dropped on a picture zone, add the new answer.
+    if (target.dataset.description !== 'unassigned-names-pool') {
+        userAnswers[target.dataset.description] = droppedNameData;
+        target.classList.add('filled');
+    }
+
+    // Always clear feedback from the item you just dropped, letting the "Check Answers" button re-apply it.
+    draggedItem.classList.remove('correct', 'incorrect');
+    
+    console.log("Current user answers for Part 1:", userAnswers);
+});
 
     // Function to reset drag and drop state for Part 1
     function resetDragAndDrop() {
