@@ -77,21 +77,73 @@
 
             <!-- Listening Part 2: Listen and write numbers or words -->
             <section id="listening-part2" class="test-section hidden">
-                <h3>Part 2: Listen and write numbers or words. (5 Questions)</h3>
+                <h3>Part 2: Listen and write. (5 Questions)</h3>
                 <div class="audio-player-container">
                     <audio controls src="audio/flyers_listening_part2.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
                 </div>
                 <div class="question-content">
-                    <p>Example: Listen and write the missing information in the form.</p>
-                    <div class="form-question">
-                        <p>Friend's name: David</p>
-                        <p>1. Age: <input type="number" id="q2_q1" class="text-answer"></p>
-                        <p>2. Favorite hobby: <input type="text" id="q2_q2" class="text-answer"></p>
-                        <p>3. Lives on: <input type="text" id="q2_q3" class="text-answer"></p>
-                        <p>4. Telephone number: <input type="text" id="q2_q4" class="text-answer"></p>
-                        <p>5. Favorite food: <input type="text" id="q2_q5" class="text-answer"></p>
+                    <!-- New image for this part -->
+                    <img src="images/flyers_part2_homework.jpg" alt="Holly doing her homework with her teacher" class="question-image">
+                    
+                    <div class="homework-form">
+                        <h4>Holly's homework</h4>
+                        
+                        <!-- Example row -->
+                        <div class="form-row example">
+                            <span class="label">School subject</span>
+                            <span class="answer-line">history</span>
+                        </div>
+                        
+                        <!-- Question 1 -->
+                        <div class="form-row">
+                            <span class="number">1</span>
+                            <span class="label">Name of teacher:</span>
+                            <div class="input-wrapper">
+                                <span class="pre-text">Mr</span>
+                                <input type="text" id="q2_q1" class="text-answer" autocomplete="off">
+                            </div>
+                        </div>
+                        
+                        <!-- Question 2 -->
+                        <div class="form-row">
+                            <span class="number">2</span>
+                            <span class="label">Read about person who invented:</span>
+                            <div class="input-wrapper">
+                                <span class="pre-text">the</span>
+                                <input type="text" id="q2_q2" class="text-answer" autocomplete="off">
+                            </div>
+                        </div>
+                        
+                        <!-- Question 3 -->
+                        <div class="form-row">
+                            <span class="number">3</span>
+                            <span class="label">Number of questions:</span>
+                            <div class="input-wrapper">
+                                <input type="text" id="q2_q3" class="text-answer" autocomplete="off">
+                            </div>
+                        </div>
+                        
+                        <!-- Question 4 -->
+                        <div class="form-row">
+                            <span class="number">4</span>
+                            <span class="label">Must give homework to teacher on:</span>
+                            <div class="input-wrapper">
+                                <input type="text" id="q2_q4" class="text-answer" autocomplete="off">
+                            </div>
+                        </div>
+                        
+                        <!-- Question 5 -->
+                        <div class="form-row">
+                            <span class="number">5</span>
+                            <span class="label">What to take to school:</span>
+                            <div class="input-wrapper">
+                                <span class="pre-text">some</span>
+                                <input type="text" id="q2_q5" class="text-answer" autocomplete="off">
+                            </div>
+                        </div>
+                    
                     </div>
                 </div>
                 <div class="navigation-buttons">
