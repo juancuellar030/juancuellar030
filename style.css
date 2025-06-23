@@ -177,7 +177,6 @@ header p {
     margin: 1rem auto; /* Center the image wrapper horizontally */
     border-radius: 8px; /* Apply radius to the wrapper too for consistency */
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    /* Set a known aspect ratio if possible for consistent sizing, e.g., padding-bottom: 75%; */
 }
 
 .question-image-part1 { /* Specific image for Part 1 */
@@ -193,11 +192,12 @@ header p {
     border-radius: 8px;
     padding: 1rem;
     background-color: #eef;
-    display: flex;
+    display: flex; /* Ensure children are laid out in a row */
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
     margin-top: 2rem; /* Space between image and draggable names */
+    min-height: 60px; /* Give it a minimum height even if empty */
 }
 
 .draggable-name {
@@ -210,6 +210,9 @@ header p {
     font-weight: 600;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: transform 0.1s ease-in-out, background-color 0.2s ease;
+    /* Explicitly make them display as block or inline-block if needed
+       but flex on parent handles most of this */
+    display: inline-block; /* Ensure they render and respect padding/margin */
 }
 
 .draggable-name:hover {
@@ -249,8 +252,9 @@ header p {
 
 /* Visually hide the original draggable name once it's placed in a drop target */
 .draggable-name.hidden-for-drop {
-    visibility: hidden;
-    position: absolute; /* Take it out of flow to not affect layout */
+    /* Instead of `visibility: hidden; position: absolute;` which takes it out of flow,
+       use `display: none;` to completely remove it from the layout when hidden. */
+    display: none;
 }
 
 
