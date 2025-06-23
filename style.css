@@ -169,21 +169,22 @@ header p {
 /* --- Specific Question Type Styling --- */
 
 /* Part 1: Drag and Drop Styles */
-.image-with-dropzones-wrapper { /* NEW: This wrapper makes positioning relative to the image */
+.image-with-dropzones-wrapper { /* This wrapper makes positioning relative to the image */
     position: relative;
     max-width: 100%; /* Ensure it fits container */
     height: auto; /* Maintain aspect ratio */
-    display: inline-block; /* Essential for containing absolute children based on its size */
-    margin: 1rem auto; /* Center the image wrapper */
-    border-radius: 8px;
+    display: block; /* Changed to block to allow auto margins for centering */
+    margin: 1rem auto; /* Center the image wrapper horizontally */
+    border-radius: 8px; /* Apply radius to the wrapper too for consistency */
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-    /* Set a known aspect ratio if possible for consistent sizing, e.g., padding-bottom: 75%; */
 }
 
 .question-image-part1 { /* Specific image for Part 1 */
     max-width: 100%;
     height: auto;
-    display: block;
+    display: block; /* Ensures image takes its own line for centering */
+    margin: 0 auto; /* Center the image within its wrapper */
+    border-radius: 8px; /* Small radius on image corners */
 }
 
 .draggable-names-container { /* Renamed for clarity */
@@ -201,7 +202,8 @@ header p {
 .draggable-name {
     background-color: #3f51b5;
     color: white;
-    padding: 8px 15px;
+    /* Make it more rectangular */
+    padding: 10px 20px; /* Increased horizontal padding, slightly more vertical */
     border-radius: 5px;
     cursor: grab;
     font-weight: 600;
@@ -220,14 +222,14 @@ header p {
     transform: scale(1.05);
 }
 
-/* Drop targets are now small, absolute squares over the image */
+/* Drop targets are now rectangular, absolute over the image */
 .drop-target {
     position: absolute;
-    width: 60px; /* Adjust size based on how big you want the hit area */
-    height: 60px; /* Square hit area */
+    width: 80px; /* Increased width */
+    height: 45px; /* Decreased height to make it rectangular */
     border: 2px dashed rgba(255, 255, 255, 0.5); /* Semi-transparent border initially */
     background-color: rgba(255, 255, 255, 0.3); /* Slightly transparent background */
-    border-radius: 8px;
+    border-radius: 8px; /* Small radius for drop zones */
     display: flex;
     align-items: center;
     justify-content: center; /* Center the dropped name */
@@ -261,13 +263,13 @@ header p {
     white-space: nowrap; /* Keep name on one line */
     overflow: hidden;
     text-overflow: ellipsis; /* Add ellipsis if too long */
-    /* Remove display: inline-block; and vertical-align: middle; if it's the ONLY content */
+    display: block; /* Changed to block to allow full width within new rectangular box */
+    line-height: 1.2; /* Adjust line height for vertical centering */
 }
 
 /* For when a name has been dropped, remove initial min-width if text is longer */
 .drop-target.filled .dropped-name-placeholder {
     min-width: unset; /* Let content determine width */
-    display: block; /* Occupy full space in drop target */
 }
 
 /* Additional styling for the drop target when it's filled */
