@@ -263,6 +263,71 @@ header p {
     border-color: #3f51b5;
 }
 
+/* ... your existing CSS ... */
+
+/* --- Submission & Results Area --- */
+.submission-area {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+#results-display, #final-results-display {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+#results-display.correct, #final-results-display.correct {
+    color: #2e7d32;
+}
+
+#results-display.partial, #final-results-display.partial {
+    color: #ef6c00;
+}
+
+#results-display.incorrect, #final-results-display.incorrect {
+    color: #c62828;
+}
+
+/* Style for names in drop zones */
+.drop-target .draggable-name {
+    pointer-events: auto;
+    cursor: move;
+    position: static;
+    margin: 2px auto;
+    text-align: center;
+    width: 90%;
+    font-size: 12px;
+    padding: 2px 5px;
+    box-shadow: none;
+    transform: none;
+}
+
+/* Style for names in unassigned pool */
+.unassigned-names-pool .draggable-name {
+    margin: 5px;
+    padding: 10px 20px; /* Original padding */
+    font-size: 1rem; /* Original size */
+    width: auto; /* Reset width */
+}
+
+/* Adjust drop targets to accommodate moved elements */
+.drop-target.filled {
+    padding: 0; /* Remove padding to fit elements */
+    display: flex; /* Center child elements */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Remove placeholder styling since we're using actual elements */
+.dropped-name-placeholder {
+    display: none !important;
+}
+
 /* --- Part 2: Form inputs --- */
 .form-question input[type="text"],
 .form-question input[type="number"] {
