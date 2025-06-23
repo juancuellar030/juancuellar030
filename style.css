@@ -13,54 +13,60 @@ html {
     background-position: center center; /* Centers the single image */
     background-attachment: fixed;  /* Makes background fixed while content scrolls */
     background-color: #87CEEB; /* Fallback color / matching color */
-    /* Prevent overflow on html itself. Body will handle content scrolling. */
-    overflow: hidden; /* Crucial: Keep HTML from scrolling its own content */
+    /* Crucial: Keep HTML from scrolling its own content */
+    overflow: hidden; 
 }
 
-/* --- Body Styles for Content and Scrolling --- */
+/* --- Body Styles: Full viewport, holds content-wrapper --- */
 body {
     font-family: 'Poppins', sans-serif;
     color: #333;
     margin: 0;
-    /* Apply desired vertical spacing as padding to the body itself. */
-    /* This ensures content is within the scrollable flow and prevents margin collapse issues */
-    padding: 20px 0; /* Add 20px top and bottom padding to the body */
+    padding: 0; /* No padding on body itself; content-wrapper will handle spacing */
     
-    min-height: 100vh; /* Body takes at least full viewport height */
-    width: 100%; /* Body takes full width */
+    height: 100vh; /* Body itself takes exactly 100% viewport height */
+    width: 100vw; /* Body itself takes exactly 100% viewport width */
     
-    /* Crucial: Allow body content to scroll vertically */
-    overflow-y: auto;
-    /* Hide horizontal overflow to prevent unintended scrollbars */
-    overflow-x: hidden; 
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
-    
-    /* Use flexbox to center the .test-container horizontally */
+    /* Use flexbox to ensure content-wrapper fills space and can be centered if needed */
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers items horizontally within the flex container */
-    /* IMPORTANT: Do NOT use justify-content: center here if content can overflow vertically.
-       It will try to center content even if it means pushing it off screen. */
+    /* No overflow-y: auto on body now. The content-wrapper will handle it. */
+    overflow: hidden; /* Prevent body from creating scrollbars */
+}
+
+/* --- NEW: Content Wrapper for Scrolling --- */
+.content-wrapper {
+    flex-grow: 1; /* Allows it to fill available vertical space */
+    width: 100%; /* Take full width of body */
+    overflow-y: auto; /* This is the element that will scroll! */
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+    
+    /* Add padding to this wrapper to create the desired space around your test container */
+    padding: 20px 0; /* This padding will be part of the scrollable content */
+    
+    /* Use flexbox on the wrapper to center the test-container horizontally */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers .test-container horizontally */
+    /* No justify-content here, let content flow naturally from top if it overflows */
 }
 
 /* --- Main Container (.test-container) Styles --- */
 .test-container {
     max-width: 800px;
-    width: calc(100% - 40px); /* Account for desired 20px space on each side from padding/margin on body */
+    width: calc(100% - 40px); /* Account for 20px space on each side (now from content-wrapper padding) */
     background-color: #ffffff; /* Opaque white background */
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
-    /* Remove vertical margin from here, as it's now handled by body's padding. */
-    /* Only keep horizontal auto margins for centering within the flex body. */
+    /* No vertical margin on test-container itself anymore.
+       Horizontal auto margins will center it within the content-wrapper's flex context. */
     margin-left: auto;
     margin-right: auto; 
     position: relative; /* Ensure it respects z-index */
     z-index: 1; /* Ensure it's above the fixed background */
     flex-shrink: 0; /* Prevent it from shrinking too much if space is constrained */
-    /* flex-grow: 1; is often used here, but for content that *should* scroll,
-       it's not strictly necessary and can sometimes cause issues if not managed carefully.
-       Let content determine its height. */
 }
 
 /* --- Header --- */
