@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         startButton.disabled = nameInput.value.trim() === '';
     });
 
-    // --- THIS FUNCTION WAS MISSING: It's needed to change sections ---
+    // --- Core navigation function ---
     function showSection(sectionId) {
         testSections.forEach(section => {
             section.classList.toggle('active', section.id === sectionId);
@@ -52,28 +52,74 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener('click', (event) => {
         const button = event.target.closest('.nav-btn, .start-test-btn, .restart-btn');
         if (button) {
-            // Capture the name when the start button is clicked
             if (button.classList.contains('start-test-btn')) {
                 userName = nameInput.value.trim();
             }
-            // Now call the function to change the section
             showSection(button.dataset.target);
         }
     });
 
-    /* ... all your other functions from before are here ... */
+    // --- FIXED: Drag and Drop logic is now fully restored ---
     let draggedItem = null;
-    document.addEventListener('drag', (e) => { /* ... drag scroll logic ... */ });
-    document.querySelectorAll('.draggable-name').forEach(draggable => { /* ... dragstart/end logic ... */ });
-    document.querySelectorAll('.drop-target, .names-pool').forEach(target => { /* ... drop logic ... */ });
-    function resetAllAnswers() { /* ... reset logic ... */ }
+    const scrollContainer = document.querySelector('.content-wrapper');
+    document.addEventListener('drag', (e) => {
+        if (!draggedItem) return;
+        const rect = scrollContainer.getBoundingClientRect();
+        if (e.clientY < rect.top + 60) scrollContainer.scrollTop -= 15;
+        else if (e.clientY > rect.bottom - 60) scrollContainer.scrollTop += 15;
+    });
 
-    // --- NEW: Function to submit results to Google Forms ---
-    // You must replace the placeholder values below with your own!
+    document.querySelectorAll('.draggable-name').forEach(draggable => {
+        draggable.addEventListener('dragstart', (e) => {
+            draggedItem = e.target;
+            setTimeout(() => e.target.classList.add('dragging'), 0);
+        });
+        draggable.addEventListener('dragend', () => {
+            draggedItem?.classList.remove('dragging');
+            draggedItem = null;
+        });
+    });
+
+    document.querySelectorAll('.drop-target, .names-pool').forEach(target => {
+        target.addEventListener('dragover', e => e.preventDefault());
+        target.addEventListener('drop', e => {
+            e.preventDefault();
+            if (!draggedItem) return;
+
+            const existingName = target.querySelector('.draggable-name');
+            // If swapping, send existing name to a default pool (e.g., the bottom one)
+            if (existingName) {
+                document.getElementById('names-pool-bottom').appendChild(existingName);
+            }
+            // Append the item being dragged
+            target.appendChild(draggedItem);
+        });
+    });
+
+    // --- FIXED: Reset logic is now fully restored ---
+    function resetAllAnswers() {
+        userAnswers = {};
+        document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
+        document.querySelectorAll('.text-answer').forEach(input => { input.value = ''; input.style.borderColor = ''; });
+        document.querySelectorAll('.option-card.selected').forEach(card => card.classList.remove('selected'));
+        document.getElementById('final-results-display').innerHTML = '';
+
+        document.querySelectorAll('.draggable-name').forEach(nameEl => {
+            const name = nameEl.dataset.name;
+            if (['katy', 'robert', 'oliver', 'michael'].includes(name)) { // Added Michael here for reset
+                document.getElementById('names-pool-top').appendChild(nameEl);
+            } else {
+                document.getElementById('names-pool-bottom').appendChild(nameEl);
+            }
+        });
+    }
+
+    // --- Function to submit results to Google Forms ---
+    // (You have already configured this part)
     function submitResultsToGoogle(name, score) {
-        const formId = "1FAIpQLSclDo1YYLOKZR_dgKFNqSNi_UZiqOCGZQsXsoRwTPyDzTiNnw"; // <-- PASTE YOUR FORM ID HERE
-        const nameEntryId = "entry.2134521223";   // <-- PASTE NAME FIELD ID HERE
-        const scoreEntryId = "entry.5411094";  // <-- PASTE SCORE FIELD ID HERE
+        const formId = "1FAIpQLScldo1YYLOKZR_dgKFNqSNi_UZiqOCGZQsXoRwTPyDzTiNnw";
+        const nameEntryId = "entry.2134521223";
+        const scoreEntryId = "entry.5411094";
 
         const formData = new FormData();
         formData.append(nameEntryId, name);
@@ -96,24 +142,47 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
         let correctCount = 0;
         
-        // --- Your existing answer checking logic ---
-        // (This part is simplified for clarity, your full logic is fine)
+        // Clear all previous feedback first
+        document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
+
+        // Check Part 1 answers
         const part1AnswerKeys = Object.keys(correctAnswers).filter(k => !k.startsWith('q'));
         part1AnswerKeys.forEach(dropZoneId => {
             const targetZone = document.querySelector(`.drop-target[data-description="${dropZoneId}"]`);
-            if (targetZone) {
-                const droppedItem = targetZone.querySelector('.draggable-name');
-                if (droppedItem && droppedItem.dataset.name === correctAnswers[dropZoneId]) {
+            const droppedItem = targetZone.querySelector('.draggable-name');
+            const correctAnswerName = correctAnswers[dropZoneId];
+
+            if (droppedItem && droppedItem.dataset.name === correctAnswerName) {
+                correctCount++;
+                targetZone.classList.add('correct');
+                droppedItem.classList.add('correct');
+            } else {
+                targetZone.classList.add('incorrect');
+                if (droppedItem) {
+                    droppedItem.classList.add('incorrect');
+                }
+                const correctNameElement = document.querySelector(`.draggable-name[data-name="${correctAnswerName}"]`);
+                if (correctNameElement) {
+                    correctNameElement.classList.add('correct');
+                }
+            }
+        });
+
+        // --- Add your checking logic for other parts here to get the full score ---
+        // (Example for Part 2)
+        Object.keys(correctAnswers).forEach(qId => {
+            if (qId.startsWith('q2_')) { 
+                const inputElement = document.getElementById(qId);
+                const userAnswer = userAnswers[qId] || '';
+                if (userAnswer === correctAnswers[qId]) {
                     correctCount++;
                 }
             }
         });
-        // ... include your logic for checking Parts 2 and 4 to get the full score ...
 
-        // --- UPDATED: Display final score and submit data ---
+        // Display final score
         const finalResultsDisplay = document.getElementById('final-results-display');
         const percentage = (totalQuestions > 0) ? (correctCount / totalQuestions) * 100 : 0;
-
         let resultsHTML = '';
         if (userName) {
             resultsHTML += `<h3>Results for: ${userName}</h3>`;
@@ -127,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
         finalResultsDisplay.innerHTML = resultsHTML;
         finalResultsDisplay.className = resultClass;
 
-        // --- NEW: Call the function to send data to your Google Form ---
+        // Call the function to send data to your Google Form
         submitResultsToGoogle(userName, correctCount);
     });
 
