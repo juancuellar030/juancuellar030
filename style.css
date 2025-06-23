@@ -10,35 +10,58 @@ html, body {
 /* --- Body Styles with Background --- */
 body {
     font-family: 'Poppins', sans-serif;
+    color: #333; /* Added back color for general text */
     margin: 0;
     padding: 0;
     min-height: 100vh;
-    width: 100%;
-    overflow-x: hidden;
+    /* Use 100vw for width to ensure it covers the entire viewport width,
+       including space a vertical scrollbar might occupy. */
+    width: 100vw; 
     
-    /* GitHub Pages absolute path */
+    /* Allow body to scroll if its content overflows vertically */
+    overflow-y: auto;
+    /* Hide horizontal overflow to prevent unintended scrollbars from width calculations */
+    overflow-x: hidden; 
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
+    
+    /* GitHub Pages absolute path (keep if it fixed your background image) */
     background-image: url('https://juancuellar030.github.io/juancuellar030/images/moversbackground.svg');
-    background-size: 180% 180%; /* This stretches to fill exactly, but may distort */
+    /* Use 'cover' for background-size to ensure it always covers the viewport without distortion.
+       If 180% 180% worked for your specific image, you can change it back,
+       but 'cover' is usually the most robust for full-screen backgrounds. */
+    background-size: cover; 
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
     background-color: #87CEEB; /* Sky blue to match the SVG background */
+    
+    /* RE-INTRODUCE FLEXBOX FOR CENTERING CONTENT */
+    display: flex;
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center content horizontally */
+    /* justify-content: center; will center content vertically if there's *extra* space.
+       If content overflows, it will start from the top and allow scrolling. */
+    justify-content: center; 
 }
 
 /* --- Main Container --- */
 .test-container {
     max-width: 800px;
-    width: calc(100% - 40px);
+    width: calc(100% - 40px); /* Account for left/right margins */
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
-    margin: 20px auto;
+    /* Centers horizontally and provides consistent vertical margin from viewport edges.
+       With flexbox on body, this margin will push it correctly. */
+    margin: 20px auto; 
     position: relative;
     z-index: 1;
+    /* Prevent test-container from shrinking if flex container tries to compress it */
+    flex-shrink: 0; 
 }
 
-/* --- Header --- */
+/* --- Rest of your CSS remains the same --- */
 header {
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
