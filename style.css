@@ -2,71 +2,58 @@
 
 /* --- HTML Styles for Full Background --- */
 html {
-    height: 100%; /* Ensures html takes full height of the viewport */
-    width: 100%;  /* Ensures html takes full width of the viewport */
+    height: 100%;
+    width: 100%;
     margin: 0;
     padding: 0;
-    /* Place background properties on html for a true fixed full-screen background */
-    background-image: url('images/flyers_background.svg'); /* Your SVG filename */
-    background-size: cover;        /* Scales the image to cover the entire viewport */
-    background-repeat: no-repeat;  /* Prevents the image from repeating */
-    background-position: center center; /* Centers the single image */
-    background-attachment: fixed;  /* Makes background fixed while content scrolls */
-    background-color: #87CEEB; /* Fallback color / matching color */
-    /* Crucial: Keep HTML from scrolling its own content */
+    background-image: url('images/flyers_background.svg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #87CEEB;
     overflow: hidden; 
 }
 
-/* --- Body Styles: Full viewport, holds content-wrapper --- */
+/* --- Body Styles --- */
 body {
     font-family: 'Poppins', sans-serif;
     color: #333;
     margin: 0;
-    padding: 0; /* No padding on body itself; content-wrapper will handle spacing */
-    
-    height: 100vh; /* Body itself takes exactly 100% viewport height */
-    width: 100vw; /* Body itself takes exactly 100% viewport width */
-    
-    /* Use flexbox to ensure content-wrapper fills space and can be centered if needed */
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
     display: flex;
     flex-direction: column;
-    /* No overflow-y: auto on body now. The content-wrapper will handle it. */
-    overflow: hidden; /* Prevent body from creating scrollbars */
+    overflow: hidden;
 }
 
-/* --- NEW: Content Wrapper for Scrolling --- */
+/* --- Content Wrapper for Scrolling --- */
 .content-wrapper {
-    flex-grow: 1; /* Allows it to fill available vertical space */
-    width: 100%; /* Take full width of body */
-    overflow-y: auto; /* This is the element that will scroll! */
-    overflow-x: hidden; /* Prevent horizontal scrolling */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling for iOS */
-    
-    /* Add padding to this wrapper to create the desired space around your test container */
-    padding: 20px 0; /* This padding will be part of the scrollable content */
-    
-    /* Use flexbox on the wrapper to center the test-container horizontally */
+    flex-grow: 1;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 0;
     display: flex;
     flex-direction: column;
-    align-items: center; /* Centers .test-container horizontally */
-    /* No justify-content here, let content flow naturally from top if it overflows */
+    align-items: center;
 }
 
-/* --- Main Container (.test-container) Styles --- */
+/* --- Main Container --- */
 .test-container {
     max-width: 800px;
-    width: calc(100% - 40px); /* Account for 20px space on each side (now from content-wrapper padding) */
-    background-color: #ffffff; /* Opaque white background */
+    width: calc(100% - 40px);
+    background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 2rem;
-    /* No vertical margin on test-container itself anymore.
-       Horizontal auto margins will center it within the content-wrapper's flex context. */
     margin-left: auto;
-    margin-right: auto; 
-    position: relative; /* Ensure it respects z-index */
-    z-index: 1; /* Ensure it's above the fixed background */
-    flex-shrink: 0; /* Prevent it from shrinking too much if space is constrained */
+    margin-right: auto;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
 }
 
 /* --- Header --- */
@@ -90,22 +77,21 @@ header p {
 /* --- Audio Player Container --- */
 .audio-player-container {
     margin-bottom: 1rem;
-    text-align: center; /* Center the audio player */
+    text-align: center;
 }
 .audio-player-container audio {
-    width: 100%; /* Make audio player fill its container */
-    max-width: 400px; /* Limit max width for larger screens */
+    width: 100%;
+    max-width: 400px;
 }
 
-
-/* --- Test Section Display (for hiding/showing parts) --- */
+/* --- Test Section Display --- */
 .test-section {
-    padding: 1rem 0; /* Add some internal padding */
-    border-top: 1px solid #eee; /* Separator between sections */
+    padding: 1rem 0;
+    border-top: 1px solid #eee;
     margin-top: 1rem;
 }
 .test-section:first-of-type {
-    border-top: none; /* No top border for the first section */
+    border-top: none;
     margin-top: 0;
 }
 
@@ -113,7 +99,7 @@ header p {
     display: none;
 }
 .test-section.active {
-    display: block; /* Ensure it's visible */
+    display: block;
 }
 
 /* --- Navigation Buttons --- */
@@ -133,7 +119,7 @@ header p {
     border-radius: 8px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    margin: 5px; /* Space between buttons */
+    margin: 5px;
 }
 
 .nav-btn:hover, .start-test-btn:hover {
@@ -144,7 +130,7 @@ header p {
     cursor: not-allowed;
 }
 
-/* --- Question Content (general) --- */
+/* --- Question Content --- */
 .question-content {
     margin-top: 1.5rem;
     margin-bottom: 1.5rem;
@@ -154,7 +140,6 @@ header p {
     margin-bottom: 0.8rem;
     line-height: 1.5;
 }
-/* Removed .question-image as it's now specific to Part 1 */
 .instruction-note {
     font-size: 0.9rem;
     color: #666;
@@ -165,60 +150,54 @@ header p {
     background-color: #f9f9f9;
 }
 
-
-/* --- Specific Question Type Styling --- */
-
-/* Part 1: Drag and Drop Styles */
-.image-with-dropzones-wrapper { /* This wrapper makes positioning relative to the image */
+/* --- Part 1: Drag and Drop Styles --- */
+.image-with-dropzones-wrapper {
     position: relative;
-    max-width: 100%; /* Ensure it fits container */
-    height: auto; /* Maintain aspect ratio */
-    display: block; /* Changed to block to allow auto margins for centering */
-    margin: 1rem auto; /* Center the image wrapper horizontally */
-    border-radius: 8px; /* Apply radius to the wrapper too for consistency */
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 8px;
     box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
-.question-image-part1 { /* Specific image for Part 1 */
+.question-image-part1 {
     max-width: 100%;
     height: auto;
-    display: block; /* Ensures image takes its own line for centering */
-    margin: 0 auto; /* Center the image within its wrapper */
-    border-radius: 8px; /* Small radius on image corners */
+    display: block;
+    margin: 0 auto;
+    border-radius: 8px;
 }
 
-.draggable-names-container { /* Renamed for clarity */
+/* FIXED: Draggable names container now has higher z-index */
+.draggable-names-container {
     border: 1px solid #ccc;
     border-radius: 8px;
     padding: 1rem;
     background-color: #eef;
-    display: flex; /* Ensure children are laid out in a row */
+    display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    margin-top: 2rem; /* Space between image and draggable names */
-    min-height: 60px; /* Give it a minimum height even if empty */
-    /* Ensure it can receive drops */
-    position: relative; /* If it contains absolutely positioned children, this is relevant */
-    z-index: 0; /* Keep below other things if needed */
+    margin-top: 2rem;
+    min-height: 60px;
+    position: relative;
+    z-index: 10; /* Increased z-index to appear above drop targets */
 }
 
 .draggable-name {
     background-color: #3f51b5;
     color: white;
-    /* Make it more rectangular */
-    padding: 10px 20px; /* Increased horizontal padding, slightly more vertical */
+    padding: 10px 20px;
     border-radius: 5px;
     cursor: grab;
     font-weight: 600;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
     transition: transform 0.1s ease-in-out, background-color 0.2s ease;
-    /* Explicitly ensure they are displayed */
-    display: inline-block; /* Or 'block' if you want them stacked */
-    /* Remove any old absolute positioning if it was there */
-    position: static; /* Ensure it flows normally within its flex container */
-    left: auto; /* Clear any leftover positioning */
-    top: auto; /* Clear any leftover positioning */
+    display: inline-block;
+    position: static;
+    left: auto;
+    top: auto;
 }
 
 .draggable-name:hover {
@@ -232,91 +211,84 @@ header p {
     transform: scale(1.05);
 }
 
-/* Drop targets are now rectangular, absolute over the image */
+/* FIXED: Drop targets now have explicit z-index */
 .drop-target {
-    position: absolute; /* Keep absolute for image overlay */
-    width: 80px; /* Increased width */
-    height: 45px; /* Decreased height to make it rectangular */
-    border: 2px dashed rgba(255, 255, 255, 0.5); /* Semi-transparent border initially */
-    background-color: rgba(255, 255, 255, 0.3); /* Slightly transparent background */
-    border-radius: 8px; /* Small radius for drop zones */
-    
-    /* Ensure content inside is centered horizontally and vertically */
-    display: flex; /* CRUCIAL: Enable flexbox for centering content */
-    align-items: center; /* CRUCIAL: Center items vertically */
-    justify-content: center; /* CRUCIAL: Center items horizontally */
-
-    overflow: hidden; /* Hide overflow if name is too long */
+    position: absolute;
+    width: 80px;
+    height: 45px;
+    border: 2px dashed rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.3);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
     transition: background-color 0.2s ease, border-color 0.2s ease;
-    cursor: pointer; /* Indicate it's interactive */
+    cursor: pointer;
+    z-index: 5; /* Explicit z-index below draggable names */
 }
 
 .drop-target.drag-over {
     border-color: #3f51b5;
-    background-color: rgba(63, 81, 181, 0.2); /* More visible on drag over */
+    background-color: rgba(63, 81, 181, 0.2);
 }
 
-/* Visually hide the original draggable name once it's placed in a drop target */
 .draggable-name.hidden-for-drop {
-    display: none; /* Completely removes the element from the layout */
+    display: none;
 }
-
 
 .dropped-name-placeholder {
     font-weight: bold;
     color: #1a237e;
     background-color: #cfe2ff;
-    padding: 3px 6px; /* Smaller padding for smaller boxes */
+    padding: 3px 6px;
     border-radius: 3px;
-    min-width: 0; /* Let content shrink if needed */
+    min-width: 0;
     text-align: center;
     border: 1px solid #a2c4fd;
-    font-size: 0.8rem; /* Smaller font for smaller boxes */
-    white-space: nowrap; /* Keep name on one line */
+    font-size: 0.8rem;
+    white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis; /* Add ellipsis if too long */
-    display: block; /* Occupy full space within new rectangular box */
-    line-height: 1.2; /* Adjust line height for vertical centering */
+    text-overflow: ellipsis;
+    display: block;
+    line-height: 1.2;
 }
 
-/* For when a name has been dropped, remove initial min-width if text is longer */
 .drop-target.filled .dropped-name-placeholder {
-    min-width: unset; /* Let content determine width */
+    min-width: unset;
 }
 
-/* Additional styling for the drop target when it's filled */
 .drop-target.filled {
-    background-color: rgba(207, 226, 255, 0.5); /* A bit more solid when filled */
+    background-color: rgba(207, 226, 255, 0.5);
     border-color: #3f51b5;
 }
 
-
-/* Part 2: Form inputs */
+/* --- Part 2: Form inputs --- */
 .form-question input[type="text"],
 .form-question input[type="number"] {
-    width: calc(100% - 20px); /* Adjust based on padding */
+    width: calc(100% - 20px);
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
-    box-sizing: border-box; /* Include padding/border in element's total width */
+    box-sizing: border-box;
 }
 .form-question p {
     margin-bottom: 0.5rem;
 }
 
-/* Part 3: Matching Grid (Placeholder styles) */
+/* --- Part 3: Matching Grid --- */
 .matching-grid {
     display: flex;
     justify-content: space-around;
     gap: 1.5rem;
     margin-top: 1.5rem;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    flex-wrap: wrap;
 }
 .match-left, .match-right {
-    flex: 1; /* Allow columns to grow */
-    min-width: 150px; /* Minimum width for columns */
+    flex: 1;
+    min-width: 150px;
 }
 .match-right img {
     width: 100%;
@@ -334,13 +306,12 @@ header p {
     border-radius: 5px;
 }
 
-
-/* Part 4: Tick the box (like your original Movers) */
+/* --- Part 4: Tick the box --- */
 .options-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     gap: 1.5rem;
-    margin-bottom: 1.5rem; /* Space below the grid */
+    margin-bottom: 1.5rem;
 }
 
 .option-card {
@@ -376,18 +347,17 @@ header p {
     cursor: pointer;
 }
 
-/* Part 5: Colour and Write (Placeholder styles) */
+/* --- Part 5: Colour and Write --- */
 .color-select {
     padding: 8px;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
     margin-bottom: 10px;
-    width: auto; /* Adjust as needed */
+    width: auto;
 }
 
-
-/* --- Feedback Styles (Correct/Incorrect indicators) --- */
+/* --- Feedback Styles --- */
 .option-card.correct {
     border-color: #4caf50;
     background-color: #e8f5e9;
@@ -432,9 +402,6 @@ header p {
     padding-top: 1.5rem;
     border-top: 1px solid #e0e0e0;
 }
-
-/* Removed #check-answers-btn from here, as specific check buttons are per part */
-/* #check-answers-btn { ... } */
 
 #results-display, #final-results-display {
     margin-top: 1.5rem;
