@@ -6,18 +6,18 @@ html {
     width: 100%;
     margin: 0;
     padding: 0;
-    background-image: url('images/flyers_background.svg');
+    background-image: url('images/flyers_background.svg'); /* Retained user's background */
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
-    background-color: #87CEEB;
-    overflow: hidden; 
+    background-color: #87CEEB; /* Retained user's background color fallback */
+    overflow: hidden; /* Prevents main page scroll */
 }
 
 /* --- Body Styles --- */
 body {
-    font-family: 'Poppins', sans-serif;
+    font-family: 'Poppins', sans-serif; /* Retained user's font */
     color: #333;
     margin: 0;
     padding: 0;
@@ -25,14 +25,16 @@ body {
     width: 100vw;
     display: flex;
     flex-direction: column;
-    overflow: hidden;
+    overflow: hidden; /* Prevents main body scroll */
+    box-sizing: border-box;
+    line-height: 1.6; /* Improved readability */
 }
 
 /* --- Content Wrapper for Scrolling --- */
 .content-wrapper {
     flex-grow: 1;
     width: 100%;
-    overflow-y: auto;
+    overflow-y: auto; /* Allows content within to scroll */
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     padding: 20px 0;
@@ -43,14 +45,16 @@ body {
 
 /* --- Main Container --- */
 .test-container {
-    max-width: 800px;
-    width: calc(100% - 40px);
     background-color: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    padding: 2rem;
-    margin-left: auto;
-    margin-right: auto;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
+    padding: 30px; /* Increased padding */
+    margin: 20px 0;
+    width: 100%;
+    max-width: 900px; /* Adjusted max-width */
+    overflow-y: auto; /* Enable scrolling for content that exceeds container height */
+    max-height: calc(100vh - 40px); /* Adjust max-height to fit viewport */
+    box-sizing: border-box;
     position: relative;
     z-index: 1;
     flex-shrink: 0;
@@ -60,33 +64,37 @@ body {
 header {
     text-align: center;
     border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 1rem;
-    margin-bottom: 2rem;
+    padding-bottom: 20px; /* Adjusted padding */
+    margin-bottom: 30px; /* Adjusted margin */
 }
 
 header h1 {
-    font-size: 1.5rem;
+    font-size: 2.2em; /* Larger font size */
     color: #1a237e;
+    margin-bottom: 10px;
 }
 
 header p {
-    font-size: 0.9rem;
+    font-size: 1.1em; /* Larger font size */
     color: #555;
 }
 
 /* --- Audio Player Container --- */
 .audio-player-container {
-    margin-bottom: 1rem;
+    margin: 25px 0; /* Adjusted margins */
     text-align: center;
 }
 .audio-player-container audio {
     width: 100%;
-    max-width: 400px;
+    max-width: 500px; /* Larger max-width */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+    outline: none;
 }
 
 /* --- Test Section Display --- */
 .test-section {
-    padding: 1rem 0;
+    padding: 1rem 0; /* Original padding */
     border-top: 1px solid #eee;
     margin-top: 1rem;
 }
@@ -100,219 +108,200 @@ header p {
 }
 .test-section.active {
     display: block;
+    animation: fadeIn 0.5s ease-out; /* Added fade-in animation */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* --- Navigation Buttons --- */
-.navigation-buttons {
-    text-align: center;
-    margin-top: 2rem;
-    padding-top: 1rem;
+.navigation-buttons, .submission-area {
+    display: flex;
+    justify-content: center;
+    gap: 15px; /* Added gap */
+    margin-top: 30px; /* Adjusted margin */
+    padding-top: 20px; /* Adjusted padding */
     border-top: 1px solid #e0e0e0;
 }
-.nav-btn, .start-test-btn {
+
+.nav-btn, .start-test-btn, #check-all-listening-answers-btn {
     background-color: #3f51b5;
     color: white;
     border: none;
-    padding: 12px 24px;
-    font-size: 1rem;
+    padding: 12px 25px; /* Adjusted padding */
+    font-size: 1.1em; /* Larger font size */
     font-weight: 600;
-    border-radius: 8px;
+    border-radius: 8px; /* Rounded corners */
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Enhanced transition */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Added shadow */
     margin: 5px;
 }
 
-.nav-btn:hover, .start-test-btn:hover {
+.nav-btn:hover, .start-test-btn:hover, #check-all-listening-answers-btn:hover {
     background-color: #303f9f;
+    transform: translateY(-2px); /* Lift effect on hover */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
 }
 .nav-btn:disabled, .start-test-btn:disabled {
     background-color: #9fa8da;
     cursor: not-allowed;
 }
 
+.nav-btn.prev-btn {
+    background-color: #95a5a6; /* Distinct color for back button */
+}
+
+.nav-btn.prev-btn:hover {
+    background-color: #7f8c8d;
+}
+
 /* --- Question Content --- */
 .question-content {
-    margin-top: 1.5rem;
-    margin-bottom: 1.5rem;
+    margin-top: 20px; /* Adjusted margin */
+    padding: 15px; /* Added padding */
+    background-color: #f9f9f9; /* Light background */
+    border-radius: 10px; /* Rounded corners */
+    border: 1px solid #e0e0e0; /* Border */
 }
 .question-content p {
-    font-size: 1.1rem;
-    margin-bottom: 0.8rem;
+    font-size: 1.05em; /* Adjusted font size */
+    margin-bottom: 10px; /* Adjusted margin */
     line-height: 1.5;
 }
 .instruction-note {
     font-size: 0.9rem;
-    color: #666;
+    color: #7f8c8d; /* Muted color */
     font-style: italic;
-    margin-top: 1rem;
-    padding: 0.5rem;
-    border-left: 3px solid #ccc;
-    background-color: #f9f9f9;
+    margin-top: 15px; /* Adjusted margin */
+    padding: 10px; /* Adjusted padding */
+    border-left: 4px solid #3498db; /* Blue border */
+    background-color: #f5f5f5;
+    border-radius: 4px;
 }
 
 /* --- Part 1: Drag and Drop Styles --- */
 .image-with-dropzones-wrapper {
     position: relative;
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 1rem auto;
+    width: 100%; /* Make wrapper responsive */
+    padding-bottom: 56.25%; /* 16:9 aspect ratio (adjust if your image has different ratio) */
+    background-color: #ddd; /* Placeholder background */
     border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    overflow: hidden; /* Ensure dropzones don't spill out */
+    margin-bottom: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Shadow */
 }
 
 .question-image-part1 {
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ensures the image fits within the bounds without cropping */
     border-radius: 8px;
 }
 
-/* FIXED: Draggable names container now has higher z-index */
+/* Draggable names container */
 .draggable-names-container {
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    padding: 1rem;
-    background-color: #eef;
+    border: 1px solid #dcdcdc; /* Lighter border */
+    border-radius: 10px; /* More rounded */
+    padding: 15px; /* Adjusted padding */
+    background-color: #ecf0f1; /* Lighter background */
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    margin-top: 2rem;
-    min-height: 60px;
+    margin-top: 20px; /* Adjusted margin */
+    min-height: 80px; /* Ensure it has space even if empty */
     position: relative;
-    z-index: 10; /* Increased z-index to appear above drop targets */
+    z-index: 10; /* Retained user's z-index */
+}
+
+.draggable-names-container h4 {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 10px 0;
+    color: #34495e;
 }
 
 .draggable-name {
-    background-color: #3f51b5;
+    background-color: #3498db; /* Blue for draggables */
     color: white;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 10px 15px; /* Adjusted padding */
+    border-radius: 25px; /* Pill shape */
     cursor: grab;
     font-weight: 600;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
-    transition: transform 0.1s ease-in-out, background-color 0.2s ease;
-    display: inline-block;
-    position: static;
-    left: auto;
-    top: auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Softer shadow */
+    transition: all 0.2s ease; /* All properties transition */
+    display: inline-flex; /* Ensures content fits */
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
 }
 
 .draggable-name:hover {
-    background-color: #303f9f;
+    background-color: #2980b9;
     transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .draggable-name.dragging {
-    opacity: 0.5;
+    opacity: 0.6;
     cursor: grabbing;
     transform: scale(1.05);
 }
 
-/* FIXED: Drop targets now have explicit z-index */
+/* Drop targets */
 .drop-target {
     position: absolute;
-    width: 80px;
-    height: 45px;
-    border: 2px dashed rgba(255, 255, 255, 0.5);
-    background-color: rgba(255, 255, 255, 0.3);
+    width: 12%; /* Adjusted size as needed */
+    height: 18%; /* Adjusted size as needed */
+    border: 2px dashed #3498db; /* Blue dashed border */
     border-radius: 8px;
     display: flex;
     align-items: center;
     justify-content: center;
     overflow: hidden;
     transition: background-color 0.2s ease, border-color 0.2s ease;
-    cursor: pointer;
-    z-index: 5; /* Explicit z-index below draggable names */
+    cursor: default; /* Indicate not directly clickable */
+    z-index: 5; /* Retained user's z-index */
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.7); /* Lighter background for empty targets */
 }
 
 .drop-target.drag-over {
-    border-color: #3f51b5;
-    background-color: rgba(63, 81, 181, 0.2);
-}
-
-.draggable-name.hidden-for-drop {
-    display: none;
-}
-
-.dropped-name-placeholder {
-    font-weight: bold;
-    color: #1a237e;
-    background-color: #cfe2ff;
-    padding: 3px 6px;
-    border-radius: 3px;
-    min-width: 0;
-    text-align: center;
-    border: 1px solid #a2c4fd;
-    font-size: 0.8rem;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: block;
-    line-height: 1.2;
-}
-
-.drop-target.filled .dropped-name-placeholder {
-    min-width: unset;
+    border-color: #27ae60; /* Green on drag over */
+    background-color: rgba(46, 204, 113, 0.2); /* Light green tint */
+    transform: scale(1.05);
 }
 
 .drop-target.filled {
-    background-color: rgba(207, 226, 255, 0.5);
-    border-color: #3f51b5;
+    border-style: solid;
+    border-color: #7f8c8d; /* Grey solid border when filled */
+    background-color: rgba(127, 140, 141, 0.1); /* Light grey tint */
 }
 
-/* ... your existing CSS ... */
-
-/* --- Submission & Results Area --- */
-.submission-area {
-    text-align: center;
-    margin-top: 2rem;
-    padding-top: 1.5rem;
-    border-top: 1px solid #e0e0e0;
-}
-
-#results-display, #final-results-display {
-    margin-top: 1.5rem;
-    font-size: 1.2rem;
-    font-weight: 600;
-    text-align: center;
-    padding: 0.5rem;
-}
-
-#results-display.correct, #final-results-display.correct {
-    color: #2e7d32;
-}
-
-#results-display.partial, #final-results-display.partial {
-    color: #ef6c00;
-}
-
-#results-display.incorrect, #final-results-display.incorrect {
-    color: #c62828;
-}
-
-/* Style for names in drop zones */
+/* Style for names in drop zones (actual draggable element now lives here) */
 .drop-target .draggable-name {
-    pointer-events: auto;
+    pointer-events: auto; /* Can be dragged back out */
     cursor: move;
-    position: static;
+    position: static; /* Important: reset positioning */
     margin: 2px auto;
     text-align: center;
-    width: 90%;
-    font-size: 12px;
-    padding: 2px 5px;
+    width: 90%; /* Fit within drop target */
+    font-size: 12px; /* Smaller font */
+    padding: 2px 5px; /* Smaller padding */
     box-shadow: none;
     transform: none;
+    background-color: #3f51b5; /* Ensure color consistency */
 }
 
-/* Style for names in unassigned pool */
-.unassigned-names-pool .draggable-name {
-    margin: 5px;
-    padding: 10px 20px; /* Original padding */
-    font-size: 1rem; /* Original size */
-    width: auto; /* Reset width */
+/* Remove placeholder styling (not needed as actual draggable is moved) */
+.dropped-name-placeholder {
+    display: none !important;
 }
 
 /* Adjust drop targets to accommodate moved elements */
@@ -323,45 +312,54 @@ header p {
     justify-content: center;
 }
 
-/* Remove placeholder styling since we're using actual elements */
-.dropped-name-placeholder {
-    display: none !important;
+/* --- Part 2: Form inputs --- */
+.form-question p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
 }
 
-/* --- Part 2: Form inputs --- */
 .form-question input[type="text"],
-.form-question input[type="number"] {
-    width: calc(100% - 20px);
+.form-question input[type="number"],
+.color-select {
+    width: calc(100% - 20px); /* Adjust for padding/border */
     padding: 10px;
-    margin-bottom: 10px;
+    margin-top: 5px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-    box-sizing: border-box;
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box; /* Ensures consistent sizing */
 }
-.form-question p {
-    margin-bottom: 0.5rem;
+
+.form-question input:focus,
+.color-select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    outline: none;
 }
 
 /* --- Part 3: Matching Grid --- */
 .matching-grid {
     display: flex;
     justify-content: space-around;
-    gap: 1.5rem;
-    margin-top: 1.5rem;
-    flex-wrap: wrap;
+    gap: 20px; /* Adjusted gap */
+    padding: 20px; /* Adjusted padding */
+    border: 1px dashed #a0a0a0;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
 }
 .match-left, .match-right {
     flex: 1;
     min-width: 150px;
 }
 .match-right img {
-    width: 100%;
-    max-width: 120px;
-    height: auto;
-    display: block;
-    margin: 0.5rem auto;
-    border-radius: 4px;
+    width: 100px; /* Example size */
+    height: 100px; /* Example size */
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 10px;
 }
 .match-left p {
     border: 1px solid #eee;
@@ -375,54 +373,91 @@ header p {
 .options-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 1.5rem;
-    margin-bottom: 1.5rem;
+    gap: 15px; /* Adjusted gap */
+    margin-top: 20px; /* Adjusted margin */
+    margin-bottom: 20px;
+    justify-content: center;
 }
 
 .option-card {
-    border: 2px solid #ccc;
-    border-radius: 8px;
-    padding: 0.5rem;
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
     text-align: center;
     cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: relative; /* For check/cross marks */
 }
 
 .option-card:hover {
-    border-color: #3f51b5;
-    box-shadow: 0 2px 8px rgba(63, 81, 181, 0.2);
+    border-color: #3498db; /* Blue border on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
 }
 
 .option-card.selected {
-    border-color: #3f51b5;
-    background-color: #e8eaf6;
+    border-color: #3498db;
+    background-color: #e8f3fa; /* Light blue background when selected */
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
 }
 
 .option-card img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
-    border-radius: 4px;
-    margin-bottom: 0.5rem;
+    border-radius: 6px;
+    margin-bottom: 10px;
 }
 
 .option-card label {
-    font-weight: 600;
-    font-size: 1.2rem;
-    cursor: pointer;
+    font-weight: bold;
+    color: #555;
+    font-size: 1.1em;
 }
 
 /* --- Part 5: Colour and Write --- */
+.question-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
 .color-select {
-    padding: 8px;
+    padding: 10px; /* Adjusted padding */
     border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
+    border-radius: 6px; /* Rounded corners */
+    font-size: 1em;
     margin-bottom: 10px;
     width: auto;
 }
 
 /* --- Feedback Styles --- */
+/* General Correct/Incorrect Feedback */
+.correct {
+    border-color: #28a745 !important; /* Green for correct */
+    background-color: rgba(40, 167, 69, 0.1) !important;
+}
+
+.incorrect {
+    border-color: #dc3545 !important; /* Red for incorrect */
+    background-color: rgba(220, 53, 69, 0.1) !important;
+}
+
+/* Specific feedback for draggable names */
+.draggable-name.correct {
+    background-color: #28a745 !important;
+    color: white !important;
+}
+
+.draggable-name.incorrect {
+    background-color: #dc3545 !important;
+    color: white !important;
+}
+
+/* Feedback for Option Cards (Part 4) */
 .option-card.correct {
     border-color: #4caf50;
     background-color: #e8f5e9;
@@ -442,22 +477,23 @@ header p {
     height: 24px;
     border-radius: 50%;
     background-size: contain;
+    display: flex; /* Use flex to center text */
+    align-items: center;
+    justify-content: center;
+    font-size: 16px; /* Adjust size of check/cross */
+    font-weight: bold;
 }
 
 .option-card.correct::after {
     content: '✔';
     color: white;
     background-color: #4caf50;
-    text-align: center;
-    line-height: 24px;
 }
 
 .option-card.incorrect::after {
     content: '✖';
     color: white;
     background-color: #f44336;
-    text-align: center;
-    line-height: 24px;
 }
 
 /* --- Submission & Results Area --- */
@@ -486,4 +522,63 @@ header p {
 
 #results-display.incorrect, #final-results-display.incorrect {
     color: #c62828;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .test-container {
+        padding: 20px;
+        margin: 10px 0;
+        max-height: calc(100vh - 20px); /* Adjust max-height for smaller screens */
+    }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    .nav-btn, .start-test-btn, #check-all-listening-answers-btn {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    .options-grid {
+        grid-template-columns: 1fr; /* Stack options on small screens */
+    }
+
+    .image-with-dropzones-wrapper {
+        padding-bottom: 75%; /* Adjust aspect ratio for potentially taller images on mobile */
+    }
+
+    .drop-target {
+        width: 15%; /* Slightly larger touch target on mobile */
+        height: 20%;
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .test-container {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    .nav-btn, .start-test-btn, #check-all-listening-answers-btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .navigation-buttons, .submission-area {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .drop-target {
+        width: 20%; /* Even larger touch target on very small screens */
+        height: 25%;
+    }
+    .drop-target .draggable-name {
+        font-size: 10px; /* Smaller font for names in drop zones */
+    }
 }
