@@ -611,5 +611,5 @@ body::before {
     z-index: -1; 
     
     /* Apply the animation */
-    animation: backgroundFadeIn 2s ease-out forwards;
+    animation: backgroundFadeIn 1.5s ease-out forwards;
 }
