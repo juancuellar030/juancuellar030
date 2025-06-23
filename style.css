@@ -9,9 +9,6 @@ html {
     background-position: center center;
     background-attachment: fixed;
     background-color: #f0f0f0;
-
-    /* Optional: Debug outline */
-    outline: 2px solid red;
 }
 
 /* --- Body Styles --- */
@@ -22,9 +19,6 @@ body {
     min-height: 100%;
     width: 100%;
     overflow-x: hidden;
-
-    /* Optional: Debug outline */
-    outline: 2px solid blue;
 }
 
 /* --- Main Container --- */
