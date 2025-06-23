@@ -32,7 +32,13 @@
                     </audio>
                 </div>
                 <div class="question-content">
-                    <p>Example: Listen and drag each name to the correct person in the picture.</p>
+                    <p>Listen and drag each name to the correct person in the picture. There is one example.</p>
+                    
+                    <div class="names-pool" id="names-pool-top">
+                        <div class="draggable-name" draggable="true" data-name="katy">Katy</div>
+                        <div class="draggable-name" draggable="true" data-name="robert">Robert</div>
+                        <div class="draggable-name" draggable="true" data-name="oliver">Oliver</div>
+                    </div>
                     
                     <div class="image-with-dropzones-wrapper">
                         <img src="images/flyers_part1_main_image_placeholder.svg" alt="A scene with various people" class="question-image-part1">
@@ -47,14 +53,9 @@
                     </div>
                     
                     <!-- CORRECTED: Removed drop-target class. It is now only a container. -->
-                    <div class="draggable-names-container" data-description="unassigned-names-pool">
-                        <h4>Names:</h4>
-                        <div class="draggable-name" draggable="true" data-name="katy">Katy</div>
-                        <div class="draggable-name" draggable="true" data-name="robert">Robert</div>
-                        <div class="draggable-name" draggable="true" data-name="oliver">Oliver</div>
-                        <div class="draggable-name" draggable="true" data-name="helen">Helen</div>
+                    <div class="names-pool" id="names-pool-bottom">
                         <div class="draggable-name" draggable="true" data-name="sophia">Sophia</div>
-                        <div class="draggable-name" draggable="true" data-name="michael">Michael</div>
+                        <div class="draggable-name" draggable="true" data-name="helen">Helen</div> <!-- The unused name -->
                         <div class="draggable-name" draggable="true" data-name="emma">Emma</div>
                     </div>
                 </div>
