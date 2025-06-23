@@ -21,7 +21,7 @@ body {
 
     /* Background image properties directly on body - more reliable with fixed attachment */
     background-image: url('images/moversbackground.svg'); /* Your SVG filename */
-    background-size: 175% 175%; /* This stretches to fill exactly, but may distort */
+    background-size: 178% 178%; /* This stretches to fill exactly, but may distort */
     background-repeat: no-repeat;  /* Prevents the image from repeating */
     background-position: center; /* Centers the single image */
     background-attachment: fixed;  /* Makes background fixed while content scrolls */
