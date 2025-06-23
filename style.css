@@ -257,8 +257,8 @@ header p {
 /* Drop targets */
 .drop-target {
     position: absolute;
-    width: 10%; /* Adjusted size as needed */
-    height: 15%; /* Adjusted size as needed */
+    width: 15%; /* Adjusted size as needed */
+    height: 10%; /* Adjusted size as needed */
     border: 2px dashed #3498db; /* Blue dashed border */
     border-radius: 8px;
     display: flex;
@@ -273,7 +273,7 @@ header p {
 }
 
 .drop-target.drag-over {
-    border-color: #79ceff; /* Blue on drag over */
+    border-color: #fafdff; /* Blue on drag over */
     background-color: rgba(240, 240, 240, 0.4); /* White */
     transform: scale(1.05);
 }
