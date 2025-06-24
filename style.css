@@ -501,9 +501,9 @@ header p {
 .palette-color[data-color="purple"] { background-color: purple; }
 .palette-color[data-color="blue"]   { background-color: blue; }
 .palette-color[data-color="green"]  { background-color: green; }
-.palette-color[data-color="green"]  { background-color: yellow; }
-.palette-color[data-color="green"]  { background-color: pink; }
-.palette-color[data-color="green"]  { background-color: grey; }
+.palette-color[data-color="yellow"]  { background-color: yellow; }
+.palette-color[data-color="pink"]  { background-color: pink; }
+.palette-color[data-color="grey"]  { background-color: grey; }
 
 .write-tool,
 .eraser-tool {
