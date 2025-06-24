@@ -194,7 +194,7 @@
                             </div>
                             <!-- Question 4 -->
                             <div class="match-item">
-                                <img src="images/part3_bracelet.png" alt="A bracelet">
+                                <img src="images/part3_bracelet.svg" alt="A bracelet">
                                 <span>bracelet</span>
                                 <input type="text" id="q3_bracelet" class="letter-box" maxlength="1" autocomplete="off">
                             </div>
@@ -209,7 +209,7 @@
                         <!-- Column 2: The grid of locations -->
                         <div class="part3-locations">
                             <div class="location-card">
-                                <img src="images/part3_location_a.png" alt="An airport">
+                                <img src="images/part3_location_a.svg" alt="An airport">
                                 <div class="location-letter">A</div>
                             </div>
                             <div class="location-card">
@@ -217,7 +217,7 @@
                                 <div class="location-letter">B</div>
                             </div>
                             <div class="location-card">
-                                <img src="images/part3_location_c.png" alt="A factory">
+                                <img src="images/part3_location_c.svg" alt="A factory">
                                 <div class="location-letter">C</div>
                             </div>
                             <div class="location-card">
@@ -250,7 +250,7 @@
                 </div>
             </section>
 
-            <!-- Listening Part 4: Listen and tick the box (like your Movers part) -->
+            <!-- Listening Part 4: Listen and tick the box -->
             <section id="listening-part4" class="test-section hidden">
                 <h3>Part 4: Listen and tick (✔) the box. (5 Questions)</h3>
                 <div class="audio-player-container">
@@ -259,37 +259,122 @@
                     </audio>
                 </div>
                 <div class="question-content">
-                    <p>Example: What did Tom do yesterday(?)</p>
-                    <div class="options-grid">
-                        <div class="option-card" data-question="q4_example" data-answer="A">
-                            <img src="images/flyers_part4_ex_a.jpg" alt="Example option A">
-                            <label>A</label>
-                        </div>
-                        <div class="option-card" data-question="q4_example" data-answer="B">
-                            <img src="images/flyers_part4_ex_b.jpg" alt="Example option B">
-                            <label>B</label>
-                        </div>
-                        <div class="option-card" data-question="q4_example" data-answer="C">
-                            <img src="images/flyers_part4_ex_c.jpg" alt="Example option C">
-                            <label>C</label>
-                        </div>
-                    </div>
-
-                    <p>1. What is the girl wearing(?)</p>
-                    <div class="options-grid">
-                        <div class="option-card" data-question="q4_q1" data-answer="A">
-                            <img src="images/flyers_part4_q1_a.jpg" alt="Question 1 option A">
-                            <label>A</label>
-                        </div>
-                        <div class="option-card" data-question="q4_q1" data-answer="B">
-                            <img src="images/flyers_part4_q1_b.jpg" alt="Question 1 option B">
-                            <label>B</label>
-                        </div>
-                        <div class="option-card" data-question="q4_q1" data-answer="C">
-                            <img src="images/flyers_part4_q1_c.jpg" alt="Question 1 option C">
-                            <label>C</label>
+                    
+                    <!-- Example Question -->
+                    <div class="part4-question-block">
+                        <p><strong>Example:</strong> Which sport is David going to play?</p>
+                        <div class="options-grid">
+                            <div class="option-card" data-question="q4_example" data-answer="A">
+                                <img src="images/part4_ex_a.png" alt="Boy playing volleyball">
+                                <label>A</label>
+                            </div>
+                            <div class="option-card" data-question="q4_example" data-answer="B">
+                                <img src="images/part4_ex_b.png" alt="Boy playing hockey">
+                                <label>B</label>
+                            </div>
+                            <div class="option-card" data-question="q4_example" data-answer="C">
+                                <img src="images/part4_ex_c.png" alt="Boy playing football">
+                                <label>C</label>
+                            </div>
                         </div>
                     </div>
+                    
+                    <!-- Question 1 -->
+                    <div class="part4-question-block">
+                        <p><strong>1.</strong> Where will the match be?</p>
+                        <div class="options-grid">
+                            <div class="option-card" data-question="q4_q1" data-answer="A">
+                                <img src="images/part4_q1_a.png" alt="Gates to a park">
+                                <label>A</label>
+                            </div>
+                            <div class="option-card" data-question="q4_q1" data-answer="B">
+                                <img src="images/part4_q1_b.png" alt="A small stadium">
+                                <label>B</label>
+                            </div>
+                            <div class="option-card" data-question="q4_q1" data-answer="C">
+                                <img src="images/part4_q1_c.png" alt="A large, modern stadium">
+                                <label>C</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 2 -->
+                    <div class="part4-question-block">
+                        <p><strong>2.</strong> How will David get to the match?</p>
+                        <div class="options-grid">
+                            <div class="option-card" data-question="q4_q2" data-answer="A">
+                                <img src="images/part4_q2_a.png" alt="A train">
+                                <label>A</label>
+                            </div>
+                            <div class="option-card" data-question="q4_q2" data-answer="B">
+                                <img src="images/part4_q2_b.png" alt="A blue car">
+                                <label>B</label>
+                            </div>
+                            <div class="option-card" data-question="q4_q2" data-answer="C">
+                                <img src="images/part4_q2_c.png" alt="A school bus">
+                                <label>C</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 3 -->
+                    <div class="part4-question-block">
+                        <p><strong>3.</strong> What time will the match begin?</p>
+                        <div class="options-grid">
+                            <div class="option-card" data-question="q4_q3" data-answer="A">
+                                <img src="images/part4_q3_a.png" alt="Clock showing 4:15">
+                                <label>A</label>
+                            
+                            </div>
+                            <div class="option-card" data-question="q4_q3" data-answer="B">
+                                <img src="images/part4_q3_b.png" alt="Clock showing 4:45">
+                                <label>B</label>
+                            </div>
+                            <div class="option-card" data-question="q4_q3" data-answer="C">
+                                <img src="images/part4_q3_c.png" alt="Clock showing 5:15">
+                                <label>C</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 4 -->
+                    <div class="part4-question-block">
+                        <p><strong>4.</strong> Who asked David to play in the match?</p>
+                        <div class="options-grid">
+                            <div class="option-card" data-question="q4_q4" data-answer="A">
+                                <img src="images/part4_q4_a.png" alt="A man in a suit">
+                                <label>A</label>
+                            </div>
+                            <div class="option-card" data-question="q4_q4" data-answer="B">
+                                <img src="images/part4_q4_b.png" alt="A boy in a red shirt">
+                                <label>B</label>
+                            </div>
+                            <div class="option-card" data-question="q4_q4" data-answer="C">
+                                <img src="images/part4_q4_c.png" alt="A girl with a whistle">
+                                <label>C</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Question 5 -->
+                    <div class="part4-question-block">
+                        <p><strong>5.</strong> How is David feeling now?</p>
+                        <div class="options-grid">
+                            <div class="option-card" data-question="q4_q5" data-answer="A">
+                                <img src="images/part4_q5_a.png" alt="A tired boy">
+                                <label>A</label>
+                            </div>
+                            <div class="option-card" data-question="q4_q5" data-answer="B">
+                                <img src="images/part4_q5_b.png" alt="An angry boy">
+                                <label>B</label>
+                            </div>
+                            <div class="option-card" data-question="q4_q5" data-answer="C">
+                                <img src="images/part4_q5_c.png" alt="A nervous boy">
+                                <label>C</label>
+                            </div>
+                        </div>
+                    </div>
+                
                 </div>
                 <div class="navigation-buttons">
                     <button class="nav-btn prev-btn" data-target="listening-part3">Back</button>
