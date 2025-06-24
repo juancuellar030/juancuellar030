@@ -36,6 +36,13 @@ document.addEventListener('DOMContentLoaded', () => {
         'q4_q3': 'C',      // 3C
         'q4_q4': 'A',      // 4A
         'q4_q5': 'B',      // 5B
+
+         // NEW: Part 5 Interactive Answers
+        'glove-shape': 'orange',
+        'butterfly-shape': 'red',
+        'drum-text-area': 'frank',
+        'poster-text-area': 'sleep',
+        'flag-shape': 'purple',
     };
     totalQuestions = Object.keys(correctAnswers).length;
 
@@ -61,9 +68,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 michaelTargetZone.appendChild(michaelElement);
                 // Also pre-fill the answer for checking purposes
                 userAnswers['boy_on_rock_magazine'] = 'michael';
-            }
-        }
+
+        // NEW: Load the SVG when we enter Part 5
+        if (sectionId === 'listening-part5') { loadPart5Svg(); }
         
+        if (sectionId === 'listening-intro') {
+            resetAllAnswers();
+        }
+                
         if (sectionId === 'listening-intro') {
             resetAllAnswers();
         }
@@ -157,6 +169,80 @@ document.addEventListener('DOMContentLoaded', () => {
             userAnswers[event.target.id] = event.target.value.trim().toLowerCase();
         });
     });
+
+    // --- ADVANCED LOGIC FOR INTERACTIVE PART 5 ---
+    
+    let activeTool = { type: null, value: null }; // Variable to track the selected tool
+    const interactiveContainer = document.getElementById('part5-interactive-container');
+    let svgLoaded = false; // Prevents loading the SVG more than once
+            
+    // This function loads the SVG file and makes it ready for interaction
+    function loadPart5Svg() {
+        if (svgLoaded) return;
+        fetch('images/part5_interactive.svg')
+            .then(response => response.text())
+            .then(svgData => {
+                interactiveContainer.innerHTML = svgData;
+                const svg = interactiveContainer.querySelector('svg');
+                if (svg) {
+                    svg.addEventListener('click', handleSvgClick);
+                    svgLoaded = true;
+                }
+            });
+    }
+            
+    // Listen for clicks on the color palette
+    document.querySelector('.color-palette').addEventListener('click', (e) => {
+        if (e.target.classList.contains('palette-color')) {
+            document.querySelectorAll('.palette-color, .write-tool').forEach(el => el.classList.remove('selected'));
+            e.target.classList.add('selected');
+            activeTool = { type: 'color', value: e.target.dataset.color };
+        }
+    });
+            
+    // Listen for clicks on the "Write" button
+    document.getElementById('write-tool-btn').addEventListener('click', (e) => {
+        document.querySelectorAll('.palette-color').forEach(el => el.classList.remove('selected'));
+        e.currentTarget.classList.add('selected');
+        activeTool = { type: 'write', value: null };
+    });
+            
+    // This is the main function that runs when a shape inside the SVG is clicked
+    function handleSvgClick(e) {
+        const targetShape = e.target.closest('path, rect, polygon');
+        if (!targetShape || !targetShape.id) return; 
+        
+        const shapeId = targetShape.id;
+        
+        if (!activeTool.type) {
+            alert("Please select a color or the 'Write' tool first!");
+            return;
+        }
+        
+        if (activeTool.type === 'color') {
+            targetShape.style.fill = activeTool.value;
+            userAnswers[shapeId] = activeTool.value; // Save answer
+        }
+        
+        if (activeTool.type === 'write') {
+            const textToWrite = prompt("What word do you want to write?");
+            if (textToWrite && textToWrite.trim() !== '') {
+                userAnswers[shapeId] = textToWrite.trim().toLowerCase(); // Save answer
+                
+                // This part adds the text visually on top of the SVG
+                const bbox = targetShape.getBBox();
+                const textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                textElement.setAttribute("x", bbox.x + bbox.width / 2);
+                textElement.setAttribute("y", bbox.y + bbox.height / 2);
+                textElement.setAttribute("font-size", "16");
+                textElement.setAttribute("fill", "black");
+                textElement.setAttribute("text-anchor", "middle");
+                textElement.setAttribute("alignment-baseline", "middle");
+                textElement.textContent = textToWrite.toUpperCase();
+                targetShape.parentNode.appendChild(textElement);
+            }
+        }
+    }
     
     // --- Reset Logic ---
     function resetAllAnswers() {
@@ -273,6 +359,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 } else {
                     if(selectedOption) selectedOption.classList.add('incorrect');
                     if(correctOption) correctOption.classList.add('correct');
+                }
+            }
+
+            else if (qId.endsWith('-shape') || qId.endsWith('-area')) {
+                const userAnswer = userAnswers[qId] || 'No Answer';
+                
+                if (userAnswer === correctAnswers[qId]) {
+                    correctCount++;
+                    // Visual feedback is already on the SVG, so no extra styling needed here.
+                } else {
+                    // Add to the detailed text feedback on the results screen
+                    let questionLabel = qId.replace(/_/g, ' ').replace('q5', 'Part 5,').replace('color', '').replace('text', '');
+                    detailedFeedback.push(`${questionLabel}: Your answer "${userAnswer}" was incorrect. The correct answer was "${correctAnswers[qId]}".`);
                 }
             }
         });
