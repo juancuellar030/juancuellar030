@@ -22,6 +22,13 @@ document.addEventListener('DOMContentLoaded', () => {
         'q2_q4': 'wednesday',
         'q2_q5': 'glue',
         
+        // NEW: Updated Part 3 Answers
+        'q3_bracelet': 'A',  // bracelet -> airport
+        'q3_soap': 'G',      // soap -> hotel
+        'q3_belt': 'B',      // belt -> castle
+        'q3_scissors': 'F',  // scissors -> chemist's
+        'q3_letter': 'D',    // letter -> restaurant
+        
         // Part 4
         'q4_example': 'C', 'q4_q1': 'A',
     };
