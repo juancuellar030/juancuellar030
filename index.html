@@ -161,26 +161,88 @@
                     </audio>
                 </div>
                 <div class="question-content">
-                    <p>Example: Listen to the conversations and match the people on the left with the correct pictures on the right.</p>
-                    <div class="matching-grid">
-                        <div class="match-left">
-                            <p>1. Fred</p>
-                            <p>2. Lucy</p>
-                            <p>3. Mr. White</p>
-                            <p>4. Daisy</p>
-                            <p>5. Paul</p>
+                    <p>Listen and write a letter in each box. There is one example.</p>
+                    
+                    <!-- Main wrapper for the two-column layout -->
+                    <div class="part3-wrapper">
+                        
+                        <!-- Column 1: The objects to match -->
+                        <div class="part3-objects">
+                            <!-- Example Row -->
+                            <div class="match-item">
+                                <img src="images/part3_comb.png" alt="A comb">
+                                <span>comb</span>
+                                <input type="text" class="letter-box" value="H" readonly>
+                            </div>
+                            <!-- Question 1 -->
+                            <div class="match-item">
+                                <img src="images/part3_letter.png" alt="A letter">
+                                <span>letter</span>
+                                <input type="text" id="q3_letter" class="letter-box" maxlength="1" autocomplete="off">
+                            </div>
+                            <!-- Question 2 -->
+                            <div class="match-item">
+                                <img src="images/part3_soap.png" alt="A bar of soap">
+                                <span>soap</span>
+                                <input type="text" id="q3_soap" class="letter-box" maxlength="1" autocomplete="off">
+                            </div>
+                            <!-- Question 3 -->
+                            <div class="match-item">
+                                <img src="images/part3_scissors.png" alt="A pair of scissors">
+                                <span>scissors</span>
+                                <input type="text" id="q3_scissors" class="letter-box" maxlength="1" autocomplete="off">
+                            </div>
+                            <!-- Question 4 -->
+                            <div class="match-item">
+                                <img src="images/part3_bracelet.png" alt="A bracelet">
+                                <span>bracelet</span>
+                                <input type="text" id="q3_bracelet" class="letter-box" maxlength="1" autocomplete="off">
+                            </div>
+                            <!-- Question 5 -->
+                            <div class="match-item">
+                                <img src="images/part3_belt.png" alt="A belt">
+                                <span>belt</span>
+                                <input type="text" id="q3_belt" class="letter-box" maxlength="1" autocomplete="off">
+                            </div>
                         </div>
-                        <div class="match-right">
-                            <img src="images/flyers_part3_option_a.jpg" alt="Option A"> (A)
-                            <img src="images/flyers_part3_option_b.jpg" alt="Option B"> (B)
-                            <img src="images/flyers_part3_option_c.jpg" alt="Option C"> (C)
-                            <img src="images/flyers_part3_option_d.jpg" alt="Option D"> (D)
-                            <img src="images/flyers_part3_option_e.jpg" alt="Option E"> (E)
-                            <img src="images/flyers_part3_option_f.jpg" alt="Option F"> (F)
-                            <img src="images/flyers_part3_option_g.jpg" alt="Option G"> (G)
+                        
+                        <!-- Column 2: The grid of locations -->
+                        <div class="part3-locations">
+                            <div class="location-card">
+                                <img src="images/part3_location_a.png" alt="An airport">
+                                <div class="location-letter">A</div>
+                            </div>
+                            <div class="location-card">
+                                <img src="images/part3_location_b.png" alt="A castle">
+                                <div class="location-letter">B</div>
+                            </div>
+                            <div class="location-card">
+                                <img src="images/part3_location_c.png" alt="A factory">
+                                <div class="location-letter">C</div>
+                            </div>
+                            <div class="location-card">
+                                <img src="images/part3_location_d.png" alt="A restaurant">
+                                <div class="location-letter">D</div>
+                            </div>
+                            <div class="location-card">
+                                <img src="images/part3_location_e.png" alt="A modern house">
+                                <div class="location-letter">E</div>
+                            </div>
+                            <div class="location-card">
+                                <img src="images/part3_location_f.png" alt="A pharmacy or chemist">
+                                <div class="location-letter">F</div>
+                            </div>
+                            <div class="location-card">
+                                <img src="images/part3_location_g.png" alt="A hotel reception">
+                                <div class="location-letter">G</div>
+                            </div>
+                            <div class="location-card">
+                                <img src="images/part3_location_h.png" alt="A museum or gallery">
+                                <div class="location-letter">H</div>
+                            </div>
                         </div>
+                    
                     </div>
-                    <p class="instruction-note">You will need to implement the interactive matching logic (e.g., drag-and-drop or dropdowns) in script.js for this part.</p>
                 </div>
                 <div class="navigation-buttons">
                     <button class="nav-btn prev-btn" data-target="listening-part2">Back</button>
