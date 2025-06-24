@@ -501,16 +501,39 @@ header p {
 .palette-color[data-color="purple"] { background-color: purple; }
 .palette-color[data-color="blue"]   { background-color: blue; }
 .palette-color[data-color="green"]  { background-color: green; }
+.palette-color[data-color="green"]  { background-color: yellow; }
+.palette-color[data-color="green"]  { background-color: pink; }
+.palette-color[data-color="green"]  { background-color: grey; }
 
-.write-tool {
+.write-tool,
+.eraser-tool {
     padding: 10px 20px;
     font-size: 1em;
+    font-weight: 600;
+    color: #333;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 8px;
     cursor: pointer;
-    border: 2px solid transparent;
+    transition: all 0.2s ease;
 }
-.write-tool.selected {
+
+.write-tool:hover,
+.eraser-tool:hover {
+    background-color: #f8f8f8;
+    border-color: #aaa;
+}
+
+.write-tool.selected,
+.eraser-tool.selected {
     border-color: #007bff;
-    background-color: #e7f1ff;
+    color: #007bff;
+    box-shadow: 0 0 10px rgba(0,123,255,0.3);
+}
+
+.eraser-tool.selected {
+    border-color: #dc3545; /* Red border for eraser */
+    color: #dc3545;
 }
 
 #part5-interactive-container svg {
