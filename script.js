@@ -11,9 +11,18 @@ document.addEventListener('DOMContentLoaded', () => {
     let totalQuestions = 0;
 
     const correctAnswers = {
+        // Part 1
         'boy_on_rock_magazine': 'michael', 'girl_jumping_stream': 'sophia', 'boy_on_bike_helmet': 'oliver',
         'girl_by_fire': 'emma', 'boy_in_cave_torch': 'robert', 'girl_on_tablet_no_shoes': 'katy',
-        'q2_q1': '10', 'q2_q2': 'reading', 'q2_q3': 'green street', 'q2_q4': '07700900123', 'q2_q5': 'pizza',
+        
+        // Part 2 - UPDATED ANSWERS
+        'q2_q1': 'badger',
+        'q2_q2': 'telephone',
+        'q2_q3': '24', // We'll handle 'twenty-four' in the checking logic
+        'q2_q4': 'wednesday',
+        'q2_q5': 'glue',
+        
+        // Part 4
         'q4_example': 'C', 'q4_q1': 'A',
     };
     totalQuestions = Object.keys(correctAnswers).length;
@@ -182,7 +191,9 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Final Grading Logic ---
     document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
         let correctCount = 0;
+        let detailedFeedback = [];
         
+        // Reset all feedback
         document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
         document.querySelectorAll('.text-answer').forEach(input => input.style.borderColor = '');
         document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected', 'correct', 'incorrect'));
@@ -212,16 +223,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Check Part 2 & 4
         Object.keys(correctAnswers).forEach(qId => {
-            if (qId.startsWith('q2_')) { 
-                const inputElement = document.getElementById(qId);
-                const userAnswer = (userAnswers[qId] || '').trim().toLowerCase();
-                if (userAnswer === correctAnswers[qId]) {
-                    correctCount++;
-                    inputElement.style.borderColor = '#4caf50';
-                } else {
-                    inputElement.style.borderColor = '#f44336';
+             if (qId.startsWith('q2_')) { 
+                 const inputElement = document.getElementById(qId);
+                 const userAnswer = (userAnswers[qId] || 'No Answer').trim().toLowerCase();
+                 let isCorrect = false;
+                 
+                 // SPECIAL CASE for question 3 (q2_q3)
+                 if (qId === 'q2_q3') {
+                     if (userAnswer === '24' || userAnswer === 'twenty-four') {
+                         isCorrect = true;
+                     }
+                 } else {
+                     // Standard check for all other Part 2 questions
+                     if (userAnswer === correctAnswers[qId]) {
+                         isCorrect = true;
                 }
-            } else if (qId.startsWith('q4_')) {
+            }
+                 
+                 // Apply feedback
+                 if (isCorrect) {
+                     correctCount++;
+                     inputElement.style.borderColor = '#4caf50';
+                 } else {
+                     inputElement.style.borderColor = '#f44336';
+                     let expectedAnswer = (qId === 'q2_q3') ? "'24' or 'twenty-four'" : `'${correctAnswers[qId]}'`;
+                     detailedFeedback.push(`Part 2, Question ${qId.slice(-1)}: Your answer "${userAnswer}" was incorrect. The correct answer was ${expectedAnswer}.`);
+                 }
+            }
+             
+             else if (qId.startsWith('q4_')) {
                 const userAnswer = userAnswers[qId];
                 const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer}"]`);
                 const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswers[qId]}"]`);
