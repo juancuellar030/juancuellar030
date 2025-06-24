@@ -76,8 +76,8 @@ body {
     box-shadow: none;
 }
 
-/* --- Main er --- */
-.test-er {
+/* --- Main Container --- */
+.test-container {
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
