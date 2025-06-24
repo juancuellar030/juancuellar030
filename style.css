@@ -549,12 +549,6 @@ header p {
     transition: fill 0.3s ease;
 }
 
-/* Optional: Show a faint outline on hover to guide the user */
-#part5-interactive-container [id$='-shape']:hover,
-#part5-interactive-container [id$='-area']:hover {
-    fill: rgba(0, 123, 255, 0.2) !important;
-}
-
 /* --- Feedback Styles --- */
 /* General Correct/Incorrect Feedback */
 .correct {
