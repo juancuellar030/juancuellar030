@@ -362,108 +362,93 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
         let correctCount = 0;
         let detailedFeedback = [];
-        
-        // Reset all feedback
+    
+        // Reset all visual feedback before grading
         document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
-        document.querySelectorAll('.text-answer').forEach(input => input.style.borderColor = '');
+        document.querySelectorAll('.text-answer, .letter-box').forEach(input => input.style.borderColor = '');
         document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected', 'correct', 'incorrect'));
 
-        // Check Part 1
-        const part1AnswerKeys = Object.keys(correctAnswers).filter(k => !k.startsWith('q'));
-        part1AnswerKeys.forEach(dropZoneId => {
-            const targetZone = document.querySelector(`.drop-target[data-description="${dropZoneId}"]`);
-            const droppedItem = targetZone.querySelector('.draggable-name');
-            const correctAnswerName = correctAnswers[dropZoneId];
-
-            if (droppedItem && droppedItem.dataset.name === correctAnswerName) {
-                correctCount++;
-                targetZone.classList.add('correct');
-                droppedItem.classList.add('correct');
-            } else {
-                targetZone.classList.add('incorrect');
-                if (droppedItem) {
-                    droppedItem.classList.add('incorrect');
-                }
-                const correctNameElement = document.querySelector(`.draggable-name[data-name="${correctAnswerName}"]`);
-                if (correctNameElement) {
-                    correctNameElement.classList.add('correct');
-                }
-            }
-        });
-
-        // Check Part 2 & 4
+        // Grade all parts safely
         Object.keys(correctAnswers).forEach(qId => {
-             if (qId.startsWith('q2_')) {
-                 const inputElement = document.getElementById(qId);
-                 const userAnswer = (userAnswers[qId] || 'No Answer').trim().toLowerCase();
-                 let isCorrect = false;
-                 
-                 // SPECIAL CASE for question 3 (q2_q3)
-                 if (qId === 'q2_q3') {
-                     if (userAnswer === '24' || userAnswer === 'twenty-four') {
-                         isCorrect = true;
-                     }
-                 } else {
-                     // Standard check for all other Part 2 questions
-                     if (userAnswer === correctAnswers[qId]) {
-                         isCorrect = true;
-                     }
-                 } // The extra brace has been removed from here.
-                 
-                 // Apply feedback (this logic is now inside the q2_ block)
-                 if (isCorrect) {
-                     correctCount++;
-                     inputElement.style.borderColor = '#4caf50';
-                 } else {
-                     inputElement.style.borderColor = '#f44336';
-                     let expectedAnswer = (qId === 'q2_q3') ? "'24' or 'twenty-four'" : `'${correctAnswers[qId]}'`;
-                     detailedFeedback.push(`Part 2, Question ${qId.slice(-1)}: Your answer "${userAnswer}" was incorrect. The correct answer was ${expectedAnswer}.`);
-                 }
-            }
-             
-             else if (qId.startsWith('q4_')) {
-                const userAnswer = userAnswers[qId];
-                const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer}"]`);
-                const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswers[qId]}"]`);
+        
+            // --- Safe Grading for Part 1 ---
+            if (!qId.startsWith('q')) {
+                const targetZone = document.querySelector(`.drop-target[data-description="${qId}"]`);
+                // ONLY proceed if the element was found
+                if (targetZone) { 
+                    const droppedItem = targetZone.querySelector('.draggable-name');
+                    const correctAnswerName = correctAnswers[qId];
 
-                if (userAnswer === correctAnswers[qId]) {
-                    correctCount++;
-                    if(selectedOption) selectedOption.classList.add('correct');
-                } else {
-                    if(selectedOption) selectedOption.classList.add('incorrect');
-                    if(correctOption) correctOption.classList.add('correct');
+                    if (droppedItem && droppedItem.dataset.name === correctAnswerName) {
+                        correctCount++;
+                        targetZone.classList.add('correct');
+                        droppedItem.classList.add('correct');
+                    } else {
+                        targetZone.classList.add('incorrect');
+                        if (droppedItem) droppedItem.classList.add('incorrect');
+                        const correctNameElement = document.querySelector(`.draggable-name[data-name="${correctAnswerName}"]`);
+                        if (correctNameElement) correctNameElement.classList.add('correct');
+                    }
                 }
             }
+            // --- Safe Grading for Parts 2 & 3 ---
+            else if (qId.startsWith('q2_') || qId.startsWith('q3_')) {
+                const inputElement = document.getElementById(qId);
+                if (inputElement) { // Check if the input exists
+                    const userAnswer = (userAnswers[qId] || '').trim().toLowerCase();
+                    let isCorrect = false;
 
-            else if (qId.endsWith('-shape') || qId.endsWith('-area')) {
-                const userAnswer = userAnswers[qId] || 'No Answer';
+                    if (qId === 'q2_q3' && (userAnswer === '24' || userAnswer === 'twenty-four')) {
+                        isCorrect = true;
+                    } else {
+                        if (userAnswer === correctAnswers[qId]) isCorrect = true;
+                    }
                 
+                    if (isCorrect) {
+                        correctCount++;
+                        inputElement.style.borderColor = '#4caf50';
+                    } else {
+                        inputElement.style.borderColor = '#f44336';
+                    }
+                }
+            }
+            // --- Safe Grading for Part 4 ---
+            else if (qId.startsWith('q4_')) {
+                const userAnswer = userAnswers[qId];
+                const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswers[qId]}"]`);
+                if (correctOption) { // Check if the options exist
+                    const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer}"]`);
+                    if (userAnswer === correctAnswers[qId]) {
+                        correctCount++;
+                        if(selectedOption) selectedOption.classList.add('correct');
+                    } else {
+                        if(selectedOption) selectedOption.classList.add('incorrect');
+                        correctOption.classList.add('correct');
+                    }
+                }
+            }
+                // --- Safe Grading for Part 5 ---
+            else if (qId.endsWith('-shape') || qId.endsWith('-area')) {
+                const userAnswer = (userAnswers[qId] || 'No Answer').toLowerCase();
                 if (userAnswer === correctAnswers[qId]) {
                     correctCount++;
-                    // Visual feedback is already on the SVG, so no extra styling needed here.
                 } else {
-                    // Add to the detailed text feedback on the results screen
-                    let questionLabel = qId.replace(/_/g, ' ').replace('q5', 'Part 5,').replace('color', '').replace('text', '');
-                    detailedFeedback.push(`${questionLabel}: Your answer "${userAnswer}" was incorrect. The correct answer was "${correctAnswers[qId]}".`);
+                    detailedFeedback.push(`Part 5, Item "${qId.split('-')[0]}": Your answer "${userAnswer}" was incorrect.`);
                 }
             }
         });
 
-        // Display final score
+        // Display final score and feedback (this part is fine)
         const finalResultsDisplay = document.getElementById('final-results-display');
         const percentage = (totalQuestions > 0) ? (correctCount / totalQuestions) * 100 : 0;
         let resultsHTML = '';
-        if (userName) {
-            resultsHTML += `<h3>Results for: ${userName}</h3>`;
-        }
+        if (userName) resultsHTML += `<h3>Results for: ${userName}</h3>`;
         resultsHTML += `<p>You scored ${correctCount} out of ${totalQuestions} (${percentage.toFixed(0)}%).</p>`;
-        
-        let resultClass = 'incorrect';
-        if (percentage === 100) resultClass = 'correct';
-        else if (percentage >= 50) resultClass = 'partial';
-        
+        if (detailedFeedback.length > 0) {
+            resultsHTML += `<div class="detailed-results"><h4>Review your answers:</h4><p>${detailedFeedback.join('<br>')}</p></div>`;
+        }
         finalResultsDisplay.innerHTML = resultsHTML;
-        finalResultsDisplay.className = resultClass;
+        finalResultsDisplay.className = percentage === 100 ? 'correct' : (percentage >= 50 ? 'partial' : 'incorrect');
 
         submitResultsToGoogle(userName, correctCount);
     });
