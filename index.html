@@ -382,7 +382,7 @@
                 </div>
             </section>
 
-            <!-- Listening Part 5: Listen and colour / write -->
+            <!-- Listening Part 5: Interactive Colour and Write -->
             <section id="listening-part5" class="test-section hidden">
                 <h3>Part 5: Listen and colour and write. (5 Questions)</h3>
                 <div class="audio-player-container">
@@ -391,12 +391,24 @@
                     </audio>
                 </div>
                 <div class="question-content">
-                    <p>Example: Listen to the conversation and colour the objects in the picture. Write one word.</p>
-                    <img src="images/flyers_part5_main_image_placeholder.jpg" alt="A scene with objects to color and label" class="question-image">
-                    <p class="instruction-note">You will need advanced JavaScript/Canvas API to implement interactive colouring. For a simpler approach, you can provide dropdowns for colours or text inputs for words based on the audio.</p>
+                    <p>Listen, then click a color or the "Write" button and select an object in the picture.</p>
                     
-                    <p>1. Colour the ... <select id="q5_q1_color" class="color-select"><option value="">--Select Color--</option><option value="red">Red</option><option value="blue">Blue</option></select></p>
-                    <p>2. Write the name of the ... <input type="text" id="q5_q2_text" class="text-answer"></p>
+                    <!-- The controls for the user -->
+                    <div class="part5-controls">
+                        <div class="color-palette">
+                            <div class="palette-color" data-color="orange"></div>
+                            <div class="palette-color" data-color="red"></div>
+                            <div class="palette-color" data-color="purple"></div>
+                            <div class="palette-color" data-color="blue"></div>
+                            <div class="palette-color" data-color="green"></div>
+                        </div>
+                        <button id="write-tool-btn" class="write-tool">Write Text</button>
+                    </div>
+                    
+                    <!-- Container for the interactive SVG -->
+                    <div id="part5-interactive-container">
+                        <!-- Your SVG file will be loaded here by JavaScript -->
+                    </div>
                 </div>
                 <div class="navigation-buttons">
                     <button class="nav-btn prev-btn" data-target="listening-part4">Back</button>
