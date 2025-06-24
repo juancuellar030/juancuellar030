@@ -43,7 +43,7 @@ body {
     align-items: center;
 }
 
-.name-input-container {
+.name-input-er {
     margin: 30px 0;
     display: flex;
     flex-direction: column;
@@ -51,7 +51,7 @@ body {
     gap: 10px;
 }
 
-.name-input-container label {
+.name-input-er label {
     font-size: 1.1em;
     font-weight: 600;
     color: #333;
@@ -76,8 +76,8 @@ body {
     box-shadow: none;
 }
 
-/* --- Main Container --- */
-.test-container {
+/* --- Main er --- */
+.test-er {
     background-color: #ffffff;
     border-radius: 12px;
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
@@ -85,7 +85,7 @@ body {
     margin: 20px 0;
     width: 100%;
     max-width: 900px; /* Adjusted max-width */
-    overflow-y: auto; /* Enable scrolling for content that exceeds container height */
+    overflow-y: auto; /* Enable scrolling for content that exceeds er height */
     max-height: calc(100vh - 40px); /* Adjust max-height to fit viewport */
     box-sizing: border-box;
     position: relative;
@@ -113,12 +113,12 @@ header p {
     color: #555;
 }
 
-/* --- Audio Player Container --- */
-.audio-player-container {
+/* --- Audio Player er --- */
+.audio-player-er {
     margin: 25px 0; /* Adjusted margins */
     text-align: center;
 }
-.audio-player-container audio {
+.audio-player-er audio {
     width: 100%;
     max-width: 500px; /* Larger max-width */
     border-radius: 8px; /* Rounded corners */
@@ -234,11 +234,11 @@ header p {
     left: 0;
     width: 100%;
     height: 100%;
-    object-fit: contain; /* Ensures the image fits within the bounds without cropping */
+    object-fit: ; /* Ensures the image fits within the bounds without cropping */
     border-radius: 8px;
 }
 
-/* Draggable names container */
+/* Draggable names er */
 .names-pool {
     border: 1px solid #dcdcdc;
     border-radius: 10px;
@@ -254,7 +254,7 @@ header p {
     z-index: 10;
 }
 
-.draggable-names-container h4 {
+.draggable-names-er h4 {
     width: 100%;
     text-align: center;
     margin: 0 0 10px 0;
@@ -510,7 +510,7 @@ header p {
     width: 24px;
     height: 24px;
     border-radius: 50%;
-    background-size: contain;
+    background-size: ;
     display: flex; /* Use flex to center text */
     align-items: center;
     justify-content: center;
@@ -658,7 +658,7 @@ header p {
 .match-item img {
     width: 90px;
     height: 60px;
-    object-fit: contain;
+    object-fit: cover;
     border: 1px solid #ddd;
     border-radius: 5px;
 }
