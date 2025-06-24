@@ -123,9 +123,8 @@ document.addEventListener('DOMContentLoaded', () => {
             // Handle swapping
             const existingName = target.querySelector('.draggable-name');
             if (existingName) {
-                document.getElementById('names-pool-bottom').appendChild(existingName);
+            document.getElementById('names-pool-bottom').appendChild(existingName);
             }
-            // This now correctly runs for every drop, placing the item
             target.appendChild(draggedItem);
         });
     });
@@ -223,7 +222,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Check Part 2 & 4
         Object.keys(correctAnswers).forEach(qId => {
-             if (qId.startsWith('q2_')) { 
+             if (qId.startsWith('q2_')) {
                  const inputElement = document.getElementById(qId);
                  const userAnswer = (userAnswers[qId] || 'No Answer').trim().toLowerCase();
                  let isCorrect = false;
@@ -237,10 +236,10 @@ document.addEventListener('DOMContentLoaded', () => {
                      // Standard check for all other Part 2 questions
                      if (userAnswer === correctAnswers[qId]) {
                          isCorrect = true;
-                }
-            }
+                     }
+                 } // The extra brace has been removed from here.
                  
-                 // Apply feedback
+                 // Apply feedback (this logic is now inside the q2_ block)
                  if (isCorrect) {
                      correctCount++;
                      inputElement.style.borderColor = '#4caf50';
