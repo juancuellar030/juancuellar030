@@ -34,7 +34,6 @@ body {
 .content-wrapper {
     flex-grow: 1;
     width: 100%;
-    overflow-y: auto; /* Allows content within to scroll */
     overflow-x: hidden;
     -webkit-overflow-scrolling: touch;
     padding: 20px 0;
