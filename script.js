@@ -52,34 +52,39 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Core navigation logic ---
+    // --- THIS IS THE CORRECTED AND CLEANED-UP VERSION ---
     function showSection(sectionId) {
         testSections.forEach(section => {
             section.classList.toggle('active', section.id === sectionId);
             section.classList.toggle('hidden', section.id !== sectionId);
         });
-
-        audioPlayers.forEach(player => player.pause());
         
-        // This logic correctly places Michael as the example
+        // This should apply to all section changes
+        document.querySelectorAll('audio').forEach(p => p.pause());
+        
+        // --- The logic for each section is now separate and correct ---
+        
+        // Logic for Part 1
         if (sectionId === 'listening-part1') {
             const michaelElement = document.querySelector('.draggable-name[data-name="michael"]');
             const michaelTargetZone = document.querySelector('.drop-target[data-description="boy_on_rock_magazine"]');
             if (michaelElement && michaelTargetZone && michaelTargetZone.children.length === 0) {
                 michaelTargetZone.appendChild(michaelElement);
-                // Also pre-fill the answer for checking purposes
                 userAnswers['boy_on_rock_magazine'] = 'michael';
-
-        // NEW: Load the SVG when we enter Part 5
-        if (sectionId === 'listening-part5') { loadPart5Svg(); }
-        
+            }
+        }
+    
+        // Logic for Part 5
+        if (sectionId === 'listening-part5') {
+            loadPart5Svg();
+        }
+    
+        // Logic for Intro (resetting the test)
         if (sectionId === 'listening-intro') {
             resetAllAnswers();
         }
-                
-        if (sectionId === 'listening-intro') {
-            resetAllAnswers();
-        }
-        
+    
+        // This should also apply to all section changes
         document.querySelector('.test-container')?.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
