@@ -627,6 +627,88 @@ header p {
     color: #c62828;
 }
 
+/* --- Part 3: Matching Question Styles --- */
+.part3-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* Allows columns to stack on small screens */
+    gap: 30px;
+    margin-top: 20px;
+}
+
+.part3-objects {
+    flex: 1; /* Takes up half the space */
+    min-width: 300px;
+}
+
+.part3-locations {
+    flex: 1; /* Takes up the other half */
+    min-width: 300px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* Creates a 2-column grid */
+    gap: 15px;
+}
+
+.match-item {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.match-item img {
+    width: 90px;
+    height: 60px;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.match-item span {
+    width: 80px; /* Gives the text a consistent width */
+    font-size: 1.1em;
+}
+
+.letter-box {
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    font-size: 1.6em;
+    font-weight: bold;
+    border: 2px solid #777;
+    border-radius: 5px;
+    text-transform: uppercase; /* Automatically makes typed letter uppercase */
+    color: #0056b3;
+}
+/* Style for the example box */
+.letter-box[readonly] {
+    background-color: #f0f0f0;
+    color: #333;
+    cursor: default;
+}
+
+.location-card {
+    position: relative;
+}
+
+.location-card img {
+    width: 100%;
+    display: block; /* Removes any extra space below the image */
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.location-letter {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 2px 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.2em;
+    border: 1px solid #888;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .test-container {
