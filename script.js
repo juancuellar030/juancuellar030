@@ -283,20 +283,56 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // --- Reset Logic ---
     function resetAllAnswers() {
+        // 1. Reset the core data object
         userAnswers = {};
-        document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
-        document.querySelectorAll('.text-answer').forEach(input => { input.value = ''; input.style.borderColor = ''; });
-        document.querySelectorAll('.option-card.selected').forEach(card => card.classList.remove('selected'));
-        document.getElementById('final-results-display').innerHTML = '';
 
+        // 2. Clear all visual feedback (green/red highlights) from all elements
+        document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
+
+        // 3. Reset all text input fields from Parts 2 and 3
+        document.querySelectorAll('.text-answer, .letter-box').forEach(input => {
+            input.value = '';
+            input.style.borderColor = ''; // Removes the green/red border
+        });
+
+        // 4. Reset the "tick the box" selections from Part 4
+        document.querySelectorAll('.option-card.selected').forEach(card => card.classList.remove('selected'));
+
+        // 5. Reset Part 1 by moving all draggable names back to their original pools
         document.querySelectorAll('.draggable-name').forEach(nameEl => {
             const name = nameEl.dataset.name;
+            // This logic ensures Michael also returns to the bottom pool
             if (['katy', 'robert', 'oliver'].includes(name)) {
                 document.getElementById('names-pool-top').appendChild(nameEl);
             } else {
                 document.getElementById('names-pool-bottom').appendChild(nameEl);
             }
         });
+        
+        // --- NEW: Reset all interactive elements for Part 5 ---
+
+        // 6. Reset all colored shapes to be transparent
+        document.querySelectorAll('#part5-interactive-container [id$="-shape"]').forEach(shape => {
+            shape.style.fill = 'transparent';
+        });
+    
+        // 7. Find and remove any text elements that were added by the "Write" tool
+        document.querySelectorAll('#part5-interactive-container text').forEach(text => {
+        text.remove();
+        });
+        
+        // 8. Deselect any active tool (color, write, or eraser)
+        document.querySelectorAll('.palette-color, .write-tool, .eraser-tool').forEach(el => el.classList.remove('selected'));
+    
+        // 9. Reset the active tool variable in the script
+        activeTool = { type: null, value: null };
+
+        // 10. Clear the final results and score display
+        const finalResultsDisplay = document.getElementById('final-results-display');
+        if (finalResultsDisplay) {
+            finalResultsDisplay.innerHTML = '';
+            finalResultsDisplay.className = '';
+        }
     }
 
     // --- Google Forms Submission ---
