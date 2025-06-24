@@ -30,7 +30,12 @@ document.addEventListener('DOMContentLoaded', () => {
         'q3_letter': 'D',    // letter -> restaurant
         
         // Part 4
-        'q4_example': 'C', 'q4_q1': 'A',
+        'q4_example': 'A', // The example answer is A
+        'q4_q1': 'C',      // 1C
+        'q4_q2': 'B',      // 2B
+        'q4_q3': 'C',      // 3C
+        'q4_q4': 'A',      // 4A
+        'q4_q5': 'B',      // 5B
     };
     totalQuestions = Object.keys(correctAnswers).length;
 
