@@ -211,38 +211,70 @@ document.addEventListener('DOMContentLoaded', () => {
         e.currentTarget.classList.add('selected');
         activeTool = { type: 'write', value: null };
     });
+
+    // Listen for clicks on the new Eraser button
+    document.getElementById('eraser-tool-btn').addEventListener('click', (e) => {
+        // Deselect all other tools
+        document.querySelectorAll('.palette-color, .write-tool').forEach(el => el.classList.remove('selected'));
+        // Select the eraser
+        e.currentTarget.classList.add('selected');
+        activeTool = { type: 'eraser', value: null };
+    });
             
     // This is the main function that runs when a shape inside the SVG is clicked
+    
     function handleSvgClick(e) {
         const targetShape = e.target.closest('path, rect, polygon');
         if (!targetShape || !targetShape.id) return; 
-        
+    
         const shapeId = targetShape.id;
-        
+
         if (!activeTool.type) {
-            alert("Please select a color or the 'Write' tool first!");
-            return;
+        alert("Please select a color or the 'Write' tool first!");
+        return;
         }
+
+        // --- NEW: ERASER LOGIC ---
+        if (activeTool.type === 'eraser') {
+            // Reset the fill color
+            targetShape.style.fill = 'transparent';
         
+            // Find and remove any text that was written on this shape
+            const existingText = document.getElementById(`text-for-${shapeId}`);
+            if (existingText) {
+                existingText.remove();
+            }
+        
+            // Remove the answer from our records so it's not graded
+            delete userAnswers[shapeId];
+            return; // Stop here after erasing
+        }
+    
         if (activeTool.type === 'color') {
             targetShape.style.fill = activeTool.value;
-            userAnswers[shapeId] = activeTool.value; // Save answer
+            userAnswers[shapeId] = activeTool.value;
         }
-        
+    
         if (activeTool.type === 'write') {
             const textToWrite = prompt("What word do you want to write?");
             if (textToWrite && textToWrite.trim() !== '') {
-                userAnswers[shapeId] = textToWrite.trim().toLowerCase(); // Save answer
-                
-                // This part adds the text visually on top of the SVG
+                userAnswers[shapeId] = textToWrite.trim().toLowerCase();
+            
+                // First, remove any old text on this shape
+                const oldText = document.getElementById(`text-for-${shapeId}`);
+                if (oldText) oldText.remove();
+            
+                // --- UPDATED: The new text element now gets a unique ID ---
                 const bbox = targetShape.getBBox();
                 const textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                textElement.id = `text-for-${shapeId}`; // Assign an ID for easy removal later
                 textElement.setAttribute("x", bbox.x + bbox.width / 2);
                 textElement.setAttribute("y", bbox.y + bbox.height / 2);
                 textElement.setAttribute("font-size", "16");
                 textElement.setAttribute("fill", "black");
                 textElement.setAttribute("text-anchor", "middle");
                 textElement.setAttribute("alignment-baseline", "middle");
+                textElement.style.pointerEvents = 'none'; // Makes sure the text can't be clicked
                 textElement.textContent = textToWrite.toUpperCase();
                 targetShape.parentNode.appendChild(textElement);
             }
