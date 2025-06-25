@@ -261,15 +261,16 @@ header p {
 }
 
 .draggable-name {
-    background-color: #3498db; /* Blue for draggables */
+    background-color: #3498db;
     color: white;
-    padding: 6px 13px; /* Adjusted padding */
-    border-radius: 20px; /* Pill shape */
+    padding: 3px 12px; /* <-- UPDATED: Flatter padding */
+    border-radius: 20px;
     cursor: grab;
     font-weight: 600;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Softer shadow */
-    transition: all 0.2s ease; /* All properties transition */
-    display: inline-flex; /* Ensures content fits */
+    font-size: 1em; /* UPDATE: Consistent font size */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
     white-space: nowrap;
@@ -319,17 +320,17 @@ header p {
 
 /* Style for names in drop zones (actual draggable element now lives here) */
 .drop-target .draggable-name {
-    pointer-events: auto; /* Can be dragged back out */
+    pointer-events: auto;
     cursor: move;
-    position: static; /* Important: reset positioning */
+    position: static;
     margin: 2px auto;
     text-align: center;
-    width: 90%; /* Fit within drop target */
-    font-size: 14px; /* Smaller font */
-    padding: 2px 4px; /* Smaller padding */
+    width: 95%; /* UPDATE: A bit wider to fill the space */
+    font-size: 1em; /* UPDATE: Consistent font size */
+    padding: 3px 12px; /* <-- UPDATED: Same flat padding as the pool version */
     box-shadow: none;
     transform: none;
-    background-color: #3f51b5; /* Ensure color consistency */
+    background-color: #3f51b5; /* This color can be different, which is fine */
 }
 
 /* Remove placeholder styling (not needed as actual draggable is moved) */
