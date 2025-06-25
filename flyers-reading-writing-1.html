@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flyers Reading & Writing Test 1</title>
+    <!-- We link to the SAME style.css file for a consistent look -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="content-wrapper">
+        <div class="test-container">
+            <header>
+                <h1>A2 Flyers</h1>
+            </header>
+
+            <!-- Reading & Writing Test Introduction -->
+            <section id="rw-intro" class="test-section active">
+                <h2>Reading & Writing Test</h2>
+                <p>This test has 7 parts. Read the instructions for each part carefully.</p>
+                <button class="start-rw-btn" data-target="rw-part1">Start Part 1</button>
+            </section>
+
+            <!-- Reading & Writing Part 1 -->
+            <section id="rw-part1" class="test-section hidden">
+                <h3>Part 1 (10 Questions)</h3>
+                <p class="part-instructions">Look and read. Choose the correct words and write them on the lines. There is one example.</p>
+                
+                <div class="question-content">
+                    <div class="rw-part1-wrapper">
+                        
+                        <!-- Left Column of Words -->
+                        <div class="word-column-left">
+                            <div class="vocab-word green">a mechanic</div>
+                            <div class="vocab-word red">yoghurt</div>
+                            <div class="vocab-word red">a bridge</div>
+                            <div class="vocab-word green">an artist</div>
+                            <div class="vocab-word blue">air</div>
+                        </div>
+
+                        <!-- Center Column with Definitions -->
+                        <div class="definitions-column">
+                            <!-- Example -->
+                            <div class="definition-row example">
+                                <span class="number"></span>
+                                <span class="label">This place is dark and cold. Bats often live here.</span>
+                                <div class="input-wrapper">
+                                    <input type="text" class="text-answer" value="a cave" readonly>
+                                </div>
+                            </div>
+                            <!-- Questions 1-10 -->
+                            <div class="definition-row"><span class="number">1</span><span class="label">People use milk to make this white food. Many people like to eat it for breakfast with honey.</span><div class="input-wrapper"><input type="text" id="rw_q1" class="text-answer" autocomplete="off"></div></div>
+                            <div class="definition-row"><span class="number">2</span><span class="label">This person can fly a rocket into space.</span><div class="input-wrapper"><input type="text" id="rw_q2" class="text-answer" autocomplete="off"></div></div>
+                            <div class="definition-row"><span class="number">3</span><span class="label">Camels often live in this hot dry place, where there is only a little water.</span><div class="input-wrapper"><input type="text" id="rw_q3" class="text-answer" autocomplete="off"></div></div>
+                            <div class="definition-row"><span class="number">4</span><span class="label">Farmers close this when they want to keep their animals inside the fields.</span><div class="input-wrapper"><input type="text" id="rw_q4" class="text-answer" autocomplete="off"></div></div>
+                            <div class="definition-row"><span class="number">5</span><span class="label">This person is good at drawing and might have paintings in a museum.</span><div class="input-wrapper"><input type="text" id="rw_q5" class="text-answer" autocomplete="off"></div></div>
+                            <div class="definition-row"><span class="number">6</span><span class="label">People usually use metal to make this. We hold it in our hand to eat our food.</span><div class="input-wrapper"><input type="text" id="rw_q6" class="text-answer" autocomplete="off"></div></div>
+                            <div class="definition-row"><span class="number">7</span><span class="label">If you have problems with your car, you take it to this person.</span><div class="input-wrapper"><input type="text" id="rw_q7" class="text-answer" autocomplete="off"></div></div>
+                            <div class="definition-row"><span class="number">8</span><span class="label">This person can work in a restaurant or a hotel. They bring food to people.</span><div class="input-wrapper"><input type="text" id="rw_q8" class="text-answer" autocomplete="off"></div></div>
+                            <div class="definition-row"><span class="number">9</span><span class="label">If you want to go over a river you have to walk across this.</span><div class="input-wrapper"><input type="text" id="rw_q9" class="text-answer" autocomplete="off"></div></div>
+                            <div class="definition-row"><span class="number">10</span><span class="label">This is sweet and people use it when they make chocolate and cakes.</span><div class="input-wrapper"><input type="text" id="rw_q10" class="text-answer" autocomplete="off"></div></div>
+                        </div>
+
+                        <!-- Right Column of Words -->
+                        <div class="word-column-right">
+                            <div class="vocab-word red">a cook</div>
+                            <div class="vocab-word red">sugar</div>
+                            <div class="vocab-word green">a planet</div>
+                            <div class="vocab-word green">an astronaut</div>
+                            <div class="vocab-word green">a desert</div>
+                            <div class="vocab-word red">an anorak</div>
+                            <div class="vocab-word red">a fork</div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Navigation can be added later when you have more R&W parts -->
+            </section>
+
+            <!-- Future R&W parts will go here -->
+
+            <!-- Test Results Section -->
+            <section id="rw-results" class="test-section hidden">
+                <h2>Reading & Writing Test Complete!</h2>
+                <button id="check-all-rw-answers-btn">Check My Answers</button>
+                <div id="final-rw-results-display"></div>
+                <!-- Link back to a future homepage -->
+                <!-- <a href="index.html">Back to Main Menu</a> -->
+            </section>
+        </div>
+    </div>
+    <!-- We will create a NEW script file for this test -->
+    <script src="reading-writing-1.js"></script>
+</body>
+</html>
