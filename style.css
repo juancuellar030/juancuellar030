@@ -1016,8 +1016,8 @@ body.page-flyers::before {
 
 /* --- Animated Student Girl Styles --- */
 
-/* 1. Define the "slide in from left" animation */
-@keyframes slideInFromLeft {
+/* 1. Define the "slide in from right" animation */
+@keyframes slideInFromRight {
     from {
         /* Start 100% off the LEFT side of the screen and transparent */
         transform: translateX(-100%);
@@ -1035,7 +1035,7 @@ body.page-flyers::before {
     /* Position her fixed to the bottom LEFT of the screen */
     position: fixed;
     bottom: 0;
-    right: 0;
+    right: 5%;
     
     /* Control her size - adjust as needed */
     width: auto;
