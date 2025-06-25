@@ -974,3 +974,42 @@ body.page-flyers::before {
     cursor: default;
     background-color: #f0f0f0; /* We can keep the grey background here */
 }
+
+/* --- Animated Mascot Styles --- */
+
+/* 1. Define the "slide in from right" animation */
+@keyframes slideInFromRight {
+    from {
+        /* Start 100% off the right side of the screen and completely transparent */
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        /* End at its natural position and fully visible */
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 2. Style the mascot image itself */
+.animated-mascot {
+    /* Position it fixed to the bottom right of the screen */
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    
+    /* Control its size - adjust as needed */
+    width: auto;
+    height: 40vh; /* 40% of the viewport height */
+    max-height: 400px; /* But don't let it get too big on large screens */
+    
+    /* Put it behind the main content but in front of the page background */
+    z-index: 0; 
+
+    /* Make it transparent initially so the animation can fade it in */
+    opacity: 0;
+
+    /* 3. Apply the animation! */
+    animation: slideInFromRight 1.5s ease-out forwards;
+    animation-delay: 0.5s; /* Optional: Wait half a second before starting */
+}
