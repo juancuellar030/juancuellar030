@@ -225,35 +225,54 @@ document.addEventListener('DOMContentLoaded', () => {
     
     function handleSvgClick(e) {
         const targetShape = e.target.closest('path, rect, polygon');
-        if (!targetShape || !targetShape.id) return; 
-    
+
+        // 1. If the user didn't click on a shape, do nothing.
+        if (!targetShape) {
+            return;
+        }
+
+        // 2. NEW: Define the specific outline color to ignore.
+        const OUTLINE_COLOR_RGB = 'rgb(58, 40, 45)'; // This is the RGB for #3A282D
+
+        // 3. Get the actual rendered colors of the shape.
+        const style = window.getComputedStyle(targetShape);
+        const fillColor = style.fill;
+        const strokeColor = style.stroke;
+
+        // 4. NEW: Check if the shape IS the specific outline color.
+        const isOutline = 
+            fillColor === OUTLINE_COLOR_RGB || 
+            (fillColor === 'none' && strokeColor === OUTLINE_COLOR_RGB);
+
+        // If it's the outline color, ignore the click completely.
+        if (isOutline) {
+            return;
+        }
+
+        // 5. If it's not an outline, the rest of the logic proceeds as before.
         const shapeId = targetShape.id;
 
         if (!activeTool.type) {
-        alert("Please select a color or the 'Write' tool first!");
-        return;
+            alert("Please select a color or the 'Write' tool first!");
+            return;
         }
 
-        // --- NEW: ERASER LOGIC ---
         if (activeTool.type === 'eraser') {
-            // Reset the fill color
-            targetShape.style.fill = 'transparent';
-        
-            // Find and remove any text that was written on this shape
-            const existingText = document.getElementById(`text-for-${shapeId}`);
-            if (existingText) {
-                existingText.remove();
+            targetShape.style.fill = ''; 
+            if (shapeId) {
+                const existingText = document.getElementById(`text-for-${shapeId}`);
+                if (existingText) existingText.remove();
+                delete userAnswers[shapeId];
             }
-        
-            // Remove the answer from our records so it's not graded
-            delete userAnswers[shapeId];
-            return; // Stop here after erasing
-        }
+            return;
+        } 
     
-        if (activeTool.type === 'color') {
+        else if (activeTool.type === 'color') {
             targetShape.style.fill = activeTool.value;
-            userAnswers[shapeId] = activeTool.value;
-        }
+            if (shapeId) {
+                userAnswers[shapeId] = activeTool.value;
+            }
+        } 
     
         if (activeTool.type === 'write') {
             const textToWrite = prompt("What word do you want to write?");
