@@ -978,7 +978,7 @@ body.page-flyers::before {
 /* --- Animated Mascot Styles --- */
 
 /* 1. Define the "slide in from right" animation */
-@keyframes slideInFromRight {
+@keyframes slideInFromLeft {
     from {
         /* Start 100% off the right side of the screen and completely transparent */
         transform: translateX(100%);
@@ -996,12 +996,12 @@ body.page-flyers::before {
     /* Position it fixed to the bottom right of the screen */
     position: fixed;
     bottom: 0;
-    right: 0;
+    left: 0;
     
     /* Control its size - adjust as needed */
     width: auto;
-    height: 40vh; /* 40% of the viewport height */
-    max-height: 400px; /* But don't let it get too big on large screens */
+    height: 60vh; /* 40% of the viewport height */
+    max-height: 600px; /* But don't let it get too big on large screens */
     
     /* Put it behind the main content but in front of the page background */
     z-index: 0; 
@@ -1010,7 +1010,7 @@ body.page-flyers::before {
     opacity: 0;
 
     /* 3. Apply the animation! */
-    animation: slideInFromRight 1.5s ease-out forwards;
+    animation: slideInFromLeft 1.5s ease-out forwards;
     animation-delay: 0.5s; /* Optional: Wait half a second before starting */
 }
 
@@ -1035,12 +1035,12 @@ body.page-flyers::before {
     /* Position her fixed to the bottom LEFT of the screen */
     position: fixed;
     bottom: 0;
-    left: 0;
+    right: 0;
     
     /* Control her size - adjust as needed */
     width: auto;
-    height: 40vh; /* Make her the same relative height as the monkey */
-    max-height: 380px; /* A slightly different max-height can add variety */
+    height: 60vh; /* Make her the same relative height as the monkey */
+    max-height: 620px; /* A slightly different max-height can add variety */
     
     /* Put her on the same background layer as the monkey */
     z-index: 0; 
@@ -1049,7 +1049,7 @@ body.page-flyers::before {
     opacity: 0;
 
     /* 3. Apply the NEW animation! */
-    animation: slideInFromLeft 1.5s ease-out forwards;
+    animation: slideInFromRight 1.5s ease-out forwards;
     animation-delay: 0.5s; /* Use the same delay so they slide in together */
 }
 
