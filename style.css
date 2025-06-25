@@ -260,14 +260,14 @@ header p {
     color: #34495e;
 }
 
-.draggable-name {
+#listening-part1 .draggable-name {
     background-color: #3498db;
     color: white;
-    padding: 3px 12px; /* <-- UPDATED: Flatter padding */
+    padding: 3px 12px !important; /* Force the flat padding */
     border-radius: 20px;
     cursor: grab;
     font-weight: 600;
-    font-size: 1em; /* UPDATE: Consistent font size */
+    font-size: 1em;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
     display: inline-flex;
@@ -319,18 +319,18 @@ header p {
 }
 
 /* Style for names in drop zones (actual draggable element now lives here) */
-.drop-target .draggable-name {
+#listening-part1 .drop-target .draggable-name {
     pointer-events: auto;
     cursor: move;
     position: static;
     margin: 2px auto;
     text-align: center;
-    width: 95%; /* UPDATE: A bit wider to fill the space */
-    font-size: 1em; /* UPDATE: Consistent font size */
-    padding: 3px 12px; /* <-- UPDATED: Same flat padding as the pool version */
+    width: 95%;
+    font-size: 1em;
+    padding: 3px 12px !important; /* Force the flat padding */
     box-shadow: none;
     transform: none;
-    background-color: #3f51b5; /* This color can be different, which is fine */
+    background-color: #3f51b5;
 }
 
 /* Remove placeholder styling (not needed as actual draggable is moved) */
@@ -770,12 +770,6 @@ header p {
     text-transform: uppercase; /* Automatically makes typed letter uppercase */
     color: #0056b3;
 }
-/* Style for the example box */
-.letter-box[readonly] {
-    background-color: #f0f0f0;
-    color: #333;
-    cursor: default;
-}
 
 .location-card {
     position: relative;
@@ -970,4 +964,11 @@ body::before {
 
 .definition-row.example .text-answer {
     color: #333; /* Make example text visible */
+}
+
+/* --- Part 3 Example Box FINAL Fix --- */
+#listening-part3 .match-item .letter-box[readonly] {
+    color: #333 !important; /* Makes the example "H" dark grey and visible */
+    cursor: default;
+    background-color: #f0f0f0; /* We can keep the grey background here */
 }
