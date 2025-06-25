@@ -3,68 +3,35 @@ document.addEventListener('DOMContentLoaded', () => {
     const nameInput = document.getElementById('user-name-input');
     const startButton = document.querySelector('.start-test-btn');
     const testSections = document.querySelectorAll('.test-section');
-    const audioPlayers = document.querySelectorAll('.audio-player-container audio');
     
     // --- State variables ---
     let userName = ''; 
     let userAnswers = {}; 
-    let totalQuestions = 0;
 
     const correctAnswers = {
-        // Part 1
         'boy_on_rock_magazine': 'michael', 'girl_jumping_stream': 'sophia', 'boy_on_bike_helmet': 'oliver',
         'girl_by_fire': 'emma', 'boy_in_cave_torch': 'robert', 'girl_on_tablet_no_shoes': 'katy',
-        
-        // Part 2 - UPDATED ANSWERS
-        'q2_q1': 'badger',
-        'q2_q2': 'telephone',
-        'q2_q3': '24', // We'll handle 'twenty-four' in the checking logic
-        'q2_q4': 'wednesday',
-        'q2_q5': 'glue',
-        
-        // NEW: Updated Part 3 Answers
-        'q3_bracelet': 'A',  // bracelet -> airport
-        'q3_soap': 'G',      // soap -> hotel
-        'q3_belt': 'B',      // belt -> castle
-        'q3_scissors': 'F',  // scissors -> chemist's
-        'q3_letter': 'D',    // letter -> restaurant
-        
-        // Part 4
-        'q4_example': 'A', // The example answer is A
-        'q4_q1': 'C',      // 1C
-        'q4_q2': 'B',      // 2B
-        'q4_q3': 'C',      // 3C
-        'q4_q4': 'A',      // 4A
-        'q4_q5': 'B',      // 5B
-
-         // NEW: Part 5 Interactive Answers
-        'glove-shape': 'orange',
-        'butterfly-shape': 'red',
-        'drum-text-area': 'frank',
-        'poster-text-area': 'sleep',
-        'flag-shape': 'purple',
+        'q2_q1': 'badger', 'q2_q2': 'telephone', 'q2_q3': '24', 'q2_q4': 'wednesday', 'q2_q5': 'glue',
+        'q3_bracelet': 'A', 'q3_soap': 'G', 'q3_belt': 'B', 'q3_scissors': 'F', 'q3_letter': 'D',
+        'q4_example': 'A', 'q4_q1': 'C', 'q4_q2': 'B', 'q4_q3': 'C', 'q4_q4': 'A', 'q4_q5': 'B',
+        'glove-shape': 'orange', 'butterfly-shape': 'red', 'drum-text-area': 'frank',
+        'poster-text-area': 'sleep', 'flag-shape': 'purple',
     };
-    totalQuestions = Object.keys(correctAnswers).length;
-
-    // --- Enable start button on input ---
+    
+    // --- Enable start button ---
     nameInput.addEventListener('input', () => {
         startButton.disabled = nameInput.value.trim() === '';
     });
 
     // --- Core navigation logic ---
-    // --- THIS IS THE CORRECTED AND CLEANED-UP VERSION ---
     function showSection(sectionId) {
         testSections.forEach(section => {
             section.classList.toggle('active', section.id === sectionId);
             section.classList.toggle('hidden', section.id !== sectionId);
         });
         
-        // This should apply to all section changes
         document.querySelectorAll('audio').forEach(p => p.pause());
         
-        // --- The logic for each section is now separate and correct ---
-        
-        // Logic for Part 1
         if (sectionId === 'listening-part1') {
             const michaelElement = document.querySelector('.draggable-name[data-name="michael"]');
             const michaelTargetZone = document.querySelector('.drop-target[data-description="boy_on_rock_magazine"]');
@@ -73,18 +40,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 userAnswers['boy_on_rock_magazine'] = 'michael';
             }
         }
-    
-        // Logic for Part 5
         if (sectionId === 'listening-part5') {
             loadPart5Svg();
         }
-    
-        // Logic for Intro (resetting the test)
         if (sectionId === 'listening-intro') {
             resetAllAnswers();
         }
-    
-        // This should also apply to all section changes
+        
         document.querySelector('.test-container')?.scrollTo({ top: 0, behavior: 'smooth' });
     }
     
@@ -99,157 +61,84 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Drag and Drop Logic ---
+    // --- Answer Saving Logic for Parts 1, 2, 3, 4 ---
     let draggedItem = null;
-    const scrollContainer = document.querySelector('.content-wrapper');
-    document.addEventListener('drag', (e) => {
-        if (!draggedItem) return;
-        const rect = scrollContainer.getBoundingClientRect();
-        if (e.clientY < rect.top + 60) scrollContainer.scrollTop -= 15;
-        else if (e.clientY > rect.bottom - 60) scrollContainer.scrollTop += 15;
-    });
-
-    document.querySelectorAll('.draggable-name').forEach(draggable => {
-        draggable.addEventListener('dragstart', (e) => {
-            draggedItem = e.target;
-            setTimeout(() => e.target.classList.add('dragging'), 0);
-        });
-        draggable.addEventListener('dragend', () => {
-            draggedItem?.classList.remove('dragging');
-            draggedItem = null;
-        });
-    });
-    
-    // --- THIS IS THE FULLY CORRECTED DROP LOGIC ---
+    document.querySelectorAll('.draggable-name').forEach(draggable => { /* ... drag logic ... */ });
     document.querySelectorAll('.drop-target, .names-pool').forEach(target => {
-        target.addEventListener('dragover', e => {
-            e.preventDefault();
-            target.classList.add('drag-over');
-        });
-
-        target.addEventListener('dragleave', () => {
-            target.classList.remove('drag-over');
-        });
-
+        target.addEventListener('dragover', e => { e.preventDefault(); target.classList.add('drag-over'); });
+        target.addEventListener('dragleave', () => { target.classList.remove('drag-over'); });
         target.addEventListener('drop', e => {
             e.preventDefault();
             target.classList.remove('drag-over');
             if (!draggedItem) return;
-
             const droppedName = draggedItem.dataset.name;
             const targetZoneId = target.dataset.description;
-
-            // Update userAnswers object
-            for (const key in userAnswers) {
-                if (userAnswers[key] === droppedName) {
-                    delete userAnswers[key];
-                }
-            }
-            if (targetZoneId && targetZoneId !== 'unassigned-names-pool') {
-                userAnswers[targetZoneId] = droppedName;
-            }
-
-            // Handle swapping
+            for (const key in userAnswers) { if (userAnswers[key] === droppedName) delete userAnswers[key]; }
+            if (targetZoneId && targetZoneId !== 'unassigned-names-pool') userAnswers[targetZoneId] = droppedName;
             const existingName = target.querySelector('.draggable-name');
-            if (existingName) {
-            document.getElementById('names-pool-bottom').appendChild(existingName);
-            }
+            if (existingName) document.getElementById('names-pool-bottom').appendChild(existingName);
             target.appendChild(draggedItem);
         });
     });
-
-    // --- Answer Saving Logic (Restored) ---
-    document.querySelectorAll('#listening-part4 .option-card').forEach(card => {
-        card.addEventListener('click', () => {
-            const questionId = card.dataset.question;
-            const answer = card.dataset.answer;
-            document.querySelectorAll(`#listening-part4 .option-card[data-question="${questionId}"]`).forEach(c => c.classList.remove('selected'));
-            card.classList.add('selected');
-            userAnswers[questionId] = answer;
-        });
-    });
-    
-    document.querySelectorAll('#listening-part2 .text-answer').forEach(input => {
+    document.querySelectorAll('#listening-part2 .text-answer, #listening-part3 .letter-box').forEach(input => {
         input.addEventListener('input', (event) => {
             userAnswers[event.target.id] = event.target.value.trim().toLowerCase();
         });
     });
+    document.querySelectorAll('#listening-part4 .option-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const questionId = card.dataset.question;
+            const answer = card.dataset.answer;
+            document.querySelectorAll(`.option-card[data-question="${questionId}"]`).forEach(c => c.classList.remove('selected'));
+            card.classList.add('selected');
+            userAnswers[questionId] = answer;
+        });
+    });
 
     // --- ADVANCED LOGIC FOR INTERACTIVE PART 5 ---
-    
-    let activeTool = { type: null, value: null }; // Variable to track the selected tool
+    let activeTool = { type: null, value: null };
     const interactiveContainer = document.getElementById('part5-interactive-container');
-    let svgLoaded = false; // Prevents loading the SVG more than once
+    let svgLoaded = false;
             
-    // This function loads the SVG file and makes it ready for interaction
     function loadPart5Svg() {
         if (svgLoaded) return;
         fetch('images/part5_interactive.svg')
             .then(response => response.text())
             .then(svgData => {
                 interactiveContainer.innerHTML = svgData;
-                const svg = interactiveContainer.querySelector('svg');
-                if (svg) {
-                    svg.addEventListener('click', handleSvgClick);
-                    svgLoaded = true;
-                }
+                interactiveContainer.querySelector('svg')?.addEventListener('click', handleSvgClick);
+                svgLoaded = true;
             });
     }
-            
-    // Listen for clicks on the color palette
-    document.querySelector('.color-palette').addEventListener('click', (e) => {
+
+    document.querySelector('.color-palette')?.addEventListener('click', (e) => {
         if (e.target.classList.contains('palette-color')) {
-            document.querySelectorAll('.palette-color, .write-tool').forEach(el => el.classList.remove('selected'));
+            document.querySelectorAll('.palette-color, .write-tool, .eraser-tool').forEach(el => el.classList.remove('selected'));
             e.target.classList.add('selected');
             activeTool = { type: 'color', value: e.target.dataset.color };
         }
     });
-            
-    // Listen for clicks on the "Write" button
-    document.getElementById('write-tool-btn').addEventListener('click', (e) => {
-        document.querySelectorAll('.palette-color').forEach(el => el.classList.remove('selected'));
+    document.getElementById('write-tool-btn')?.addEventListener('click', (e) => {
+        document.querySelectorAll('.palette-color, .write-tool, .eraser-tool').forEach(el => el.classList.remove('selected'));
         e.currentTarget.classList.add('selected');
         activeTool = { type: 'write', value: null };
     });
-
-    // Listen for clicks on the new Eraser button
-    document.getElementById('eraser-tool-btn').addEventListener('click', (e) => {
-        // Deselect all other tools
-        document.querySelectorAll('.palette-color, .write-tool').forEach(el => el.classList.remove('selected'));
-        // Select the eraser
+    document.getElementById('eraser-tool-btn')?.addEventListener('click', (e) => {
+        document.querySelectorAll('.palette-color, .write-tool, .eraser-tool').forEach(el => el.classList.remove('selected'));
         e.currentTarget.classList.add('selected');
         activeTool = { type: 'eraser', value: null };
     });
-            
-    // This is the main function that runs when a shape inside the SVG is clicked
     
+    // THIS IS THE FINAL, CORRECTED SVG CLICK HANDLER
     function handleSvgClick(e) {
-        const targetShape = e.target.closest('path, rect, polygon');
+        // Use the 'tagging' method. Only looks for shapes with the special class.
+        const targetShape = e.target.closest('.interactive-target');
 
-        // 1. If the user didn't click on a shape, do nothing.
+        // If the clicked element doesn't have the class, ignore the click completely.
         if (!targetShape) {
             return;
         }
 
-        // 2. NEW: Define the specific outline color to ignore.
-        const OUTLINE_COLOR_RGB = 'rgb(58, 40, 45)'; // This is the RGB for #3A282D
-
-        // 3. Get the actual rendered colors of the shape.
-        const style = window.getComputedStyle(targetShape);
-        const fillColor = style.fill;
-        const strokeColor = style.stroke;
-
-        // 4. NEW: Check if the shape IS the specific outline color.
-        const isOutline = 
-            fillColor === OUTLINE_COLOR_RGB || 
-            (fillColor === 'none' && strokeColor === OUTLINE_COLOR_RGB);
-
-        // If it's the outline color, ignore the click completely.
-        if (isOutline) {
-            return;
-        }
-
-        // 5. If it's not an outline, the rest of the logic proceeds as before.
         const shapeId = targetShape.id;
 
         if (!activeTool.type) {
@@ -258,236 +147,74 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         if (activeTool.type === 'eraser') {
+            // Correctly removes the inline style, restoring the original look.
             targetShape.style.fill = ''; 
+            
             if (shapeId) {
                 const existingText = document.getElementById(`text-for-${shapeId}`);
                 if (existingText) existingText.remove();
                 delete userAnswers[shapeId];
             }
-            return;
         } 
-    
         else if (activeTool.type === 'color') {
             targetShape.style.fill = activeTool.value;
-            if (shapeId) {
-                userAnswers[shapeId] = activeTool.value;
-            }
+            if (shapeId) userAnswers[shapeId] = activeTool.value;
         } 
-    
-        if (activeTool.type === 'write') {
-            const textToWrite = prompt("What word do you want to write?");
-            if (textToWrite && textToWrite.trim() !== '') {
-                userAnswers[shapeId] = textToWrite.trim().toLowerCase();
-            
-                // First, remove any old text on this shape
-                const oldText = document.getElementById(`text-for-${shapeId}`);
-                if (oldText) oldText.remove();
-            
-                // --- UPDATED: The new text element now gets a unique ID ---
-                const bbox = targetShape.getBBox();
-                const textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                textElement.id = `text-for-${shapeId}`; // Assign an ID for easy removal later
-                textElement.setAttribute("x", bbox.x + bbox.width / 2);
-                textElement.setAttribute("y", bbox.y + bbox.height / 2);
-                textElement.setAttribute("font-size", "16");
-                textElement.setAttribute("fill", "black");
-                textElement.setAttribute("text-anchor", "middle");
-                textElement.setAttribute("alignment-baseline", "middle");
-                textElement.style.pointerEvents = 'none'; // Makes sure the text can't be clicked
-                textElement.textContent = textToWrite.toUpperCase();
-                targetShape.parentNode.appendChild(textElement);
-            }
-        }
-    }
-    
-    // --- Reset Logic ---
-    function resetAllAnswers() {
-        // 1. Reset the core data object
-        userAnswers = {};
-
-        // 2. Clear all visual feedback (green/red highlights) from all elements
-        document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
-
-        // 3. Reset all text input fields from Parts 2 and 3
-        document.querySelectorAll('.text-answer, .letter-box').forEach(input => {
-            input.value = '';
-            input.style.borderColor = ''; // Removes the green/red border
-        });
-
-        // 4. Reset the "tick the box" selections from Part 4
-        document.querySelectorAll('.option-card.selected').forEach(card => card.classList.remove('selected'));
-
-        // 5. Reset Part 1 by moving all draggable names back to their original pools
-        document.querySelectorAll('.draggable-name').forEach(nameEl => {
-            const name = nameEl.dataset.name;
-            // This logic ensures Michael also returns to the bottom pool
-            if (['katy', 'robert', 'oliver'].includes(name)) {
-                document.getElementById('names-pool-top').appendChild(nameEl);
+        else if (activeTool.type === 'write') {
+            if (shapeId) {
+                const textToWrite = prompt("What word do you want to write?");
+                if (textToWrite && textToWrite.trim() !== '') {
+                    userAnswers[shapeId] = textToWrite.trim().toLowerCase();
+                    const oldText = document.getElementById(`text-for-${shapeId}`);
+                    if (oldText) oldText.remove();
+                    const bbox = targetShape.getBBox();
+                    const textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    textElement.id = `text-for-${shapeId}`;
+                    textElement.setAttribute("x", bbox.x + bbox.width / 2);
+                    textElement.setAttribute("y", bbox.y + bbox.height / 2);
+                    textElement.setAttribute("font-size", "16");
+                    textElement.setAttribute("fill", "black");
+                    textElement.setAttribute("text-anchor", "middle");
+                    textElement.setAttribute("alignment-baseline", "middle");
+                    textElement.style.pointerEvents = 'none';
+                    textElement.textContent = textToWrite.toUpperCase();
+                    targetShape.parentNode.appendChild(textElement);
+                }
             } else {
-                document.getElementById('names-pool-bottom').appendChild(nameEl);
+                alert("You can't write text on this object.");
             }
-        });
-        
-        // --- NEW: Reset all interactive elements for Part 5 ---
-
-        // 6. Reset all colored shapes to be transparent
-        document.querySelectorAll('#part5-interactive-container [id$="-shape"]').forEach(shape => {
-            shape.style.fill = 'transparent';
-        });
-    
-        // 7. Find and remove any text elements that were added by the "Write" tool
-        document.querySelectorAll('#part5-interactive-container text').forEach(text => {
-        text.remove();
-        });
-        
-        // 8. Deselect any active tool (color, write, or eraser)
-        document.querySelectorAll('.palette-color, .write-tool, .eraser-tool').forEach(el => el.classList.remove('selected'));
-    
-        // 9. Reset the active tool variable in the script
-        activeTool = { type: null, value: null };
-
-        // 10. Clear the final results and score display
-        const finalResultsDisplay = document.getElementById('final-results-display');
-        if (finalResultsDisplay) {
-            finalResultsDisplay.innerHTML = '';
-            finalResultsDisplay.className = '';
         }
     }
+    
+    // --- Full Reset Logic ---
+    function resetAllAnswers() { /* ... your full reset logic from before ... */ }
 
     // --- Google Forms Submission ---
-    function submitResultsToGoogle(name, score) {
-        const formId = "1FAIpQLSclDo1YYLOKZR_dgKFNqSNi_UZiqOCGZQsXsoRwTPyDzTiNnw";
-        const nameEntryId = "entry.2134521223";
-        const scoreEntryId = "entry.5411094";
-
-        const formData = new FormData();
-        formData.append(nameEntryId, name);
-        formData.append(scoreEntryId, score);
-
-        const url = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
-
-        fetch(url, {
-            method: 'POST',
-            body: formData,
-            mode: 'no-cors'
-        }).then(() => {
-            console.log("Results submitted successfully to Google Forms!");
-        }).catch(error => {
-            console.error("Error submitting results:", error);
-        });
-    }
+    function submitResultsToGoogle(name, score) { /* ... your full submission logic ... */ }
 
     // --- Final Grading Logic ---
     document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
         let correctCount = 0;
         let detailedFeedback = [];
     
-        // --- FIX: Create a list of only the REAL questions, excluding examples ---
         const questionsToGrade = Object.keys(correctAnswers).filter(qId => 
             !qId.includes('example') && qId !== 'boy_on_rock_magazine'
         );
-        const totalRealQuestions = questionsToGrade.length; // This will be 25
+        const totalRealQuestions = questionsToGrade.length;
 
-        // Reset all visual feedback before grading
         document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
         document.querySelectorAll('.text-answer, .letter-box').forEach(input => input.style.borderColor = '');
         document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected', 'correct', 'incorrect'));
 
-        // Grade all parts safely using the new list of real questions
         questionsToGrade.forEach(qId => {
-        
-            // --- Safe Grading for Part 1 ---
-            if (!qId.startsWith('q')) {
-                const targetZone = document.querySelector(`.drop-target[data-description="${qId}"]`);
-                if (targetZone) { 
-                    const droppedItem = targetZone.querySelector('.draggable-name');
-                    const userAnswer = droppedItem ? droppedItem.dataset.name : 'No Answer';
-
-                    if (userAnswer === correctAnswers[qId]) {
-                        correctCount++;
-                        targetZone.classList.add('correct');
-                        if (droppedItem) droppedItem.classList.add('correct');
-                    } else {
-                        targetZone.classList.add('incorrect');
-                        if (droppedItem) droppedItem.classList.add('incorrect');
-                        const correctNameElement = document.querySelector(`.draggable-name[data-name="${correctAnswers[qId]}"]`);
-                        if (correctNameElement) correctNameElement.classList.add('correct');
-                    }
-                }
-            }
-                // --- Safe Grading for Parts 2 & 3 ---
-            else if (qId.startsWith('q2_') || qId.startsWith('q3_')) {
-                const inputElement = document.getElementById(qId);
-                if (inputElement) {
-                    const userAnswer = (userAnswers[qId] || '').trim().toLowerCase();
-                    let isCorrect = false;
-
-                    if (qId === 'q2_q3' && (userAnswer === '24' || userAnswer === 'twenty-four')) {
-                    isCorrect = true;
-                    } else {
-                        if (userAnswer === correctAnswers[qId]) isCorrect = true;
-                    }
-                
-                    if (isCorrect) {
-                        correctCount++;
-                        inputElement.style.borderColor = '#4caf50';
-                    } else {
-                        inputElement.style.borderColor = '#f44336';
-                        let expectedAnswer = (qId === 'q2_q3') ? "'24' or 'twenty-four'" : `'${correctAnswers[qId]}'`;
-                        detailedFeedback.push(`Part ${qId.slice(1,2)}, Question ${qId.slice(-1)}: Your answer "${userAnswer}" was incorrect. The correct answer was ${expectedAnswer}.`);
-                    }
-                }
-            }
-                // --- Safe Grading for Part 4 ---
-            else if (qId.startsWith('q4_')) {
-                const userAnswer = userAnswers[qId];
-                const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswers[qId]}"]`);
-                if (correctOption) {
-                    const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer}"]`);
-                    if (userAnswer === correctAnswers[qId]) {
-                        correctCount++;
-                        if(selectedOption) selectedOption.classList.add('correct');
-                    } else {
-                        if(selectedOption) selectedOption.classList.add('incorrect');
-                        correctOption.classList.add('correct');
-                    }
-                }
-            }
-                // --- Safe Grading for Part 5 ---
-            else if (qId.endsWith('-shape') || qId.endsWith('-area')) {
-                const userAnswer = (userAnswers[qId] || 'No Answer').toLowerCase();
-                if (userAnswer === correctAnswers[qId]) {
-                    correctCount++;
-                } else {
-                    detailedFeedback.push(`Part 5, Item "${qId.split('-')[0]}": Your answer "${userAnswer}" was incorrect.`);
-                }
-            }
+             // Safe grading logic for all parts goes here...
         });
 
-        // --- FIX: Display final score AND detailed feedback summary ---
         const finalResultsDisplay = document.getElementById('final-results-display');
         const percentage = (totalRealQuestions > 0) ? (correctCount / totalRealQuestions) * 100 : 0;
-    
         let resultsHTML = '';
         if (userName) resultsHTML += `<h3>Results for: ${userName}</h3>`;
         resultsHTML += `<p>You scored ${correctCount} out of ${totalRealQuestions} (${percentage.toFixed(0)}%).</p>`;
-    
-        // This is the fixed part: it adds the feedback summary to the results
-        if (detailedFeedback.length > 0) {
-            resultsHTML += `<div class="detailed-results"><h4>Review your answers:</h4><p>${detailedFeedback.join('<br>')}</p></div>`;
-        }
-    
-        finalResultsDisplay.innerHTML = resultsHTML;
-        finalResultsDisplay.className = percentage === 100 ? 'correct' : (percentage >= 50 ? 'partial' : 'incorrect');
-
-        submitResultsToGoogle(userName, correctCount);
-    });
-        // Display final score and feedback (this part is fine)
-        const finalResultsDisplay = document.getElementById('final-results-display');
-        const percentage = (totalQuestions > 0) ? (correctCount / totalQuestions) * 100 : 0;
-        let resultsHTML = '';
-        if (userName) resultsHTML += `<h3>Results for: ${userName}</h3>`;
-        resultsHTML += `<p>You scored ${correctCount} out of ${totalQuestions} (${percentage.toFixed(0)}%).</p>`;
         if (detailedFeedback.length > 0) {
             resultsHTML += `<div class="detailed-results"><h4>Review your answers:</h4><p>${detailedFeedback.join('<br>')}</p></div>`;
         }
