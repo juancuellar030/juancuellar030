@@ -10,7 +10,7 @@ html {
     background-repeat: no-repeat;
     background-position: center center;
     background-attachment: fixed;
-    background-color: #87CEEB; /* Retained user's background color fallback */
+    background-color: #133743; /* Retained user's background color fallback */
     overflow: hidden; /* Prevents main page scroll */
 }
 
