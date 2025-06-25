@@ -61,25 +61,61 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // --- Answer Saving Logic for Parts 1, 2, 3, 4 ---
+    // --- FIXED: FULL DRAG AND DROP LOGIC IS NOW RESTORED ---
     let draggedItem = null;
-    document.querySelectorAll('.draggable-name').forEach(draggable => { /* ... drag logic ... */ });
+    const scrollContainer = document.querySelector('.content-wrapper');
+    document.addEventListener('drag', (e) => {
+        if (!draggedItem) return;
+        const rect = scrollContainer.getBoundingClientRect();
+        if (e.clientY < rect.top + 60) scrollContainer.scrollTop -= 15;
+        else if (e.clientY > rect.bottom - 60) scrollContainer.scrollTop += 15;
+    });
+
+    document.querySelectorAll('.draggable-name').forEach(draggable => {
+        draggable.addEventListener('dragstart', (e) => {
+            draggedItem = e.target;
+            setTimeout(() => e.target.classList.add('dragging'), 0);
+        });
+        draggable.addEventListener('dragend', () => {
+            draggedItem?.classList.remove('dragging');
+            draggedItem = null;
+        });
+    });
+    
     document.querySelectorAll('.drop-target, .names-pool').forEach(target => {
-        target.addEventListener('dragover', e => { e.preventDefault(); target.classList.add('drag-over'); });
-        target.addEventListener('dragleave', () => { target.classList.remove('drag-over'); });
+        target.addEventListener('dragover', e => {
+            e.preventDefault();
+            target.classList.add('drag-over');
+        });
+        target.addEventListener('dragleave', () => {
+            target.classList.remove('drag-over');
+        });
         target.addEventListener('drop', e => {
             e.preventDefault();
             target.classList.remove('drag-over');
             if (!draggedItem) return;
+
             const droppedName = draggedItem.dataset.name;
             const targetZoneId = target.dataset.description;
-            for (const key in userAnswers) { if (userAnswers[key] === droppedName) delete userAnswers[key]; }
-            if (targetZoneId && targetZoneId !== 'unassigned-names-pool') userAnswers[targetZoneId] = droppedName;
+
+            for (const key in userAnswers) {
+                if (userAnswers[key] === droppedName) {
+                    delete userAnswers[key];
+                }
+            }
+            if (targetZoneId && targetZoneId !== 'unassigned-names-pool') {
+                userAnswers[targetZoneId] = droppedName;
+            }
+
             const existingName = target.querySelector('.draggable-name');
-            if (existingName) document.getElementById('names-pool-bottom').appendChild(existingName);
+            if (existingName) {
+                document.getElementById('names-pool-bottom').appendChild(existingName);
+            }
             target.appendChild(draggedItem);
         });
     });
+
+    // --- Answer Saving Logic for other parts ---
     document.querySelectorAll('#listening-part2 .text-answer, #listening-part3 .letter-box').forEach(input => {
         input.addEventListener('input', (event) => {
             userAnswers[event.target.id] = event.target.value.trim().toLowerCase();
@@ -129,27 +165,16 @@ document.addEventListener('DOMContentLoaded', () => {
         activeTool = { type: 'eraser', value: null };
     });
     
-    // THIS IS THE FINAL, CORRECTED SVG CLICK HANDLER
     function handleSvgClick(e) {
-        // Use the 'tagging' method. Only looks for shapes with the special class.
         const targetShape = e.target.closest('.interactive-target');
-
-        // If the clicked element doesn't have the class, ignore the click completely.
-        if (!targetShape) {
-            return;
-        }
-
+        if (!targetShape) return;
         const shapeId = targetShape.id;
-
         if (!activeTool.type) {
             alert("Please select a color or the 'Write' tool first!");
             return;
         }
-
         if (activeTool.type === 'eraser') {
-            // Correctly removes the inline style, restoring the original look.
             targetShape.style.fill = ''; 
-            
             if (shapeId) {
                 const existingText = document.getElementById(`text-for-${shapeId}`);
                 if (existingText) existingText.remove();
@@ -187,10 +212,52 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     // --- Full Reset Logic ---
-    function resetAllAnswers() { /* ... your full reset logic from before ... */ }
+    function resetAllAnswers() {
+        userAnswers = {};
+        document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
+        document.querySelectorAll('.text-answer, .letter-box').forEach(input => {
+            input.value = '';
+            input.style.borderColor = '';
+        });
+        document.querySelectorAll('.option-card.selected').forEach(card => card.classList.remove('selected'));
+        document.querySelectorAll('.draggable-name').forEach(nameEl => {
+            const name = nameEl.dataset.name;
+            if (['katy', 'robert', 'oliver'].includes(name)) {
+                document.getElementById('names-pool-top').appendChild(nameEl);
+            } else {
+                document.getElementById('names-pool-bottom').appendChild(nameEl);
+            }
+        });
+        document.querySelectorAll('#part5-interactive-container [id$="-shape"]').forEach(shape => {
+            shape.style.fill = '';
+        });
+        document.querySelectorAll('#part5-interactive-container text').forEach(text => {
+            text.remove();
+        });
+        document.querySelectorAll('.palette-color, .write-tool, .eraser-tool').forEach(el => el.classList.remove('selected'));
+        activeTool = { type: null, value: null };
+        const finalResultsDisplay = document.getElementById('final-results-display');
+        if (finalResultsDisplay) {
+            finalResultsDisplay.innerHTML = '';
+            finalResultsDisplay.className = '';
+        }
+    }
 
     // --- Google Forms Submission ---
-    function submitResultsToGoogle(name, score) { /* ... your full submission logic ... */ }
+    function submitResultsToGoogle(name, score) {
+        const formId = "1FAIpQLSclDo1YYLOKZR_dgKFNqSNi_UZiqOCGZQsXsoRwTPyDzTiNnw";
+        const nameEntryId = "entry.2134521223";
+        const scoreEntryId = "entry.5411094";
+        const formData = new FormData();
+        formData.append(nameEntryId, name);
+        formData.append(scoreEntryId, score);
+        const url = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
+        fetch(url, {
+            method: 'POST',
+            body: formData,
+            mode: 'no-cors'
+        }).catch(error => console.error("Error submitting results:", error));
+    }
 
     // --- Final Grading Logic ---
     document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
@@ -207,7 +274,60 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected', 'correct', 'incorrect'));
 
         questionsToGrade.forEach(qId => {
-             // Safe grading logic for all parts goes here...
+            if (!qId.startsWith('q') && !qId.endsWith('-shape') && !qId.endsWith('-area')) {
+                const targetZone = document.querySelector(`.drop-target[data-description="${qId}"]`);
+                if (targetZone) { 
+                    const droppedItem = targetZone.querySelector('.draggable-name');
+                    const userAnswer = droppedItem ? droppedItem.dataset.name : 'No Answer';
+                    if (userAnswer === correctAnswers[qId]) {
+                        correctCount++;
+                        targetZone.classList.add('correct');
+                        if (droppedItem) droppedItem.classList.add('correct');
+                    } else {
+                        targetZone.classList.add('incorrect');
+                        if (droppedItem) droppedItem.classList.add('incorrect');
+                        const correctNameElement = document.querySelector(`.draggable-name[data-name="${correctAnswers[qId]}"]`);
+                        if (correctNameElement) correctNameElement.classList.add('correct');
+                    }
+                }
+            }
+            else if (qId.startsWith('q2_') || qId.startsWith('q3_')) {
+                const inputElement = document.getElementById(qId);
+                if (inputElement) {
+                    const userAnswer = (userAnswers[qId] || '').trim().toLowerCase();
+                    let isCorrect = (qId === 'q2_q3' && (userAnswer === '24' || userAnswer === 'twenty-four')) || (userAnswer === correctAnswers[qId]);
+                    if (isCorrect) {
+                        correctCount++;
+                        inputElement.style.borderColor = '#4caf50';
+                    } else {
+                        inputElement.style.borderColor = '#f44336';
+                        let expectedAnswer = (qId === 'q2_q3') ? "'24' or 'twenty-four'" : `'${correctAnswers[qId]}'`;
+                        detailedFeedback.push(`Part ${qId.slice(1,2)}, Question ${qId.slice(-1)}: Your answer "${userAnswer}" was incorrect. The correct answer was ${expectedAnswer}.`);
+                    }
+                }
+            }
+            else if (qId.startsWith('q4_')) {
+                const userAnswer = userAnswers[qId];
+                const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswers[qId]}"]`);
+                if (correctOption) {
+                    const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer}"]`);
+                    if (userAnswer === correctAnswers[qId]) {
+                        correctCount++;
+                        if(selectedOption) selectedOption.classList.add('correct');
+                    } else {
+                        if(selectedOption) selectedOption.classList.add('incorrect');
+                        correctOption.classList.add('correct');
+                    }
+                }
+            }
+            else if (qId.endsWith('-shape') || qId.endsWith('-area')) {
+                const userAnswer = (userAnswers[qId] || 'No Answer').toLowerCase();
+                if (userAnswer === correctAnswers[qId]) {
+                    correctCount++;
+                } else {
+                    detailedFeedback.push(`Part 5, Item "${qId.split('-')[0]}": Your answer "${userAnswer}" was incorrect.`);
+                }
+            }
         });
 
         const finalResultsDisplay = document.getElementById('final-results-display');
@@ -220,7 +340,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         finalResultsDisplay.innerHTML = resultsHTML;
         finalResultsDisplay.className = percentage === 100 ? 'correct' : (percentage >= 50 ? 'partial' : 'incorrect');
-
         submitResultsToGoogle(userName, correctCount);
     });
     
