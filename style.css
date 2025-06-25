@@ -1035,11 +1035,11 @@ body.page-flyers::before {
     /* Position her fixed to the bottom LEFT of the screen */
     position: fixed;
     bottom: 0;
-    right: 3%;
+    right: 1%;
     
     /* Control her size - adjust as needed */
     width: auto;
-    height: 65vh; /* Make her the same relative height as the monkey */
+    height: 70vh; /* Make her the same relative height as the monkey */
     max-height: 600px; /* A slightly different max-height can add variety */
     
     /* Put her on the same background layer as the monkey */
