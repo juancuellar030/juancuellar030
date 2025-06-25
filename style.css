@@ -815,6 +815,12 @@ header p {
     font-style: italic;
 }
 
+/* --- Part 3 Example Box Fix --- */
+.match-item .letter-box[readonly] {
+    color: #333 !important; /* Makes the example "H" dark grey and visible */
+    cursor: default;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .test-container {
