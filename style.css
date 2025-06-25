@@ -980,8 +980,8 @@ body.page-flyers::before {
 /* 1. Define the "slide in from right" animation */
 @keyframes slideInFromLeft {
     from {
-        /* Start 100% off the right side of the screen and completely transparent */
-        transform: translateX(100%);
+        /* Start 100% off the left side of the screen and completely transparent */
+        transform: translateX(-100%);
         opacity: 0;
     }
     to {
@@ -1016,11 +1016,11 @@ body.page-flyers::before {
 
 /* --- Animated Student Girl Styles --- */
 
-/* 1. Define the "slide in from right" animation */
+/* 1. Define the "slide in from left" animation */
 @keyframes slideInFromRight {
     from {
         /* Start 100% off the LEFT side of the screen and transparent */
-        transform: translateX(-100%);
+        transform: translateX(100%);
         opacity: 0;
     }
     to {
@@ -1035,12 +1035,12 @@ body.page-flyers::before {
     /* Position her fixed to the bottom LEFT of the screen */
     position: fixed;
     bottom: 0;
-    right: 5%;
+    right: 3%;
     
     /* Control her size - adjust as needed */
     width: auto;
-    height: 60vh; /* Make her the same relative height as the monkey */
-    max-height: 620px; /* A slightly different max-height can add variety */
+    height: 65vh; /* Make her the same relative height as the monkey */
+    max-height: 600px; /* A slightly different max-height can add variety */
     
     /* Put her on the same background layer as the monkey */
     z-index: 0; 
