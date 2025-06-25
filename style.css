@@ -1053,3 +1053,18 @@ body.page-flyers::before {
     animation-delay: 0.5s; /* Use the same delay so they slide in together */
 }
 
+/* --- Back to Menu Link Style --- */
+.back-to-menu-link {
+    display: block; /* Allows for margin and padding */
+    margin-top: 15px;
+    font-size: 1em;
+    font-weight: 600;
+    color: #3f51b5; /* Same color as your buttons */
+    text-decoration: none; /* Removes the default underline */
+    transition: color 0.2s ease;
+}
+
+.back-to-menu-link:hover {
+    color: #303f9f; /* Darker blue on hover */
+    text-decoration: underline;
+}
