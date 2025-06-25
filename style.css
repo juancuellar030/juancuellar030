@@ -422,6 +422,9 @@ header p {
     transition: all 0.2s ease;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     position: relative; /* For check/cross marks */
+    display: flex; /* UPDATE: Add flex display */
+    flex-direction: column; /* UPDATE: Stack items vertically */
+    aspect-ratio: 1 / 1; /* UPDATE: This forces the card to be a perfect square */
 }
 
 .option-card:hover {
@@ -438,9 +441,12 @@ header p {
 
 .option-card img {
     max-width: 100%;
-    height: auto;
+    flex-grow: 1; 
+    object-fit: cover;
     border-radius: 6px;
     margin-bottom: 10px;
+    /* UPDATE: Add this to prevent image distortion on some browsers */
+    min-height: 0;
 }
 
 .option-card label {
@@ -712,9 +718,11 @@ header p {
 /* --- Part 3: Matching Question Styles --- */
 .part3-wrapper {
     display: flex;
-    flex-direction: column; /* Allows columns to stack on small screens */
+    flex-direction: row; /* UPDATE: This makes the layout side-by-side */
+    flex-wrap: wrap; /* Allows stacking on very small screens */
     gap: 30px;
     margin-top: 20px;
+    align-items: flex-start; /* UPDATE: Aligns the top of both columns */
 }
 
 .part3-objects {
@@ -723,11 +731,11 @@ header p {
 }
 
 .part3-locations {
-    flex: 1; /* Takes up the other half */
-    min-width: 300px;
+    flex-basis: 250px; /* UPDATE: Give the locations column a fixed base width */
+    flex-shrink: 0; /* UPDATE: Prevent this column from shrinking */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 15px;
+    grid-template-columns: 1fr; /* UPDATE: This forces a single vertical column */
+    gap: 10px; /* UPDATE: A smaller gap for the vertical list */
 }
 
 .match-item {
