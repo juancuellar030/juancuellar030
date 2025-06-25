@@ -504,6 +504,7 @@ header p {
 .palette-color[data-color="yellow"]  { background-color: yellow; }
 .palette-color[data-color="pink"]  { background-color: pink; }
 .palette-color[data-color="grey"]  { background-color: grey; }
+.palette-color[data-color="black"] { background-color: black; }
 
 .write-tool,
 .eraser-tool {
