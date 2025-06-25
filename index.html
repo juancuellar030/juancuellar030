@@ -19,26 +19,24 @@
                 <h2>Listening Test</h2>
                 <p>The A2 Flyers Listening test has 5 parts. You will hear each audio recording twice.</p>
                 
-                <!-- NEW: Name Input Container -->
                 <div class="name-input-container">
                     <label for="user-name-input">Please enter your name to begin:</label>
                     <input type="text" id="user-name-input" placeholder="Your Name Here" autocomplete="off">
                 </div>
                 
-                <!-- UPDATED: Added the 'disabled' attribute -->
                 <button class="start-test-btn" data-target="listening-part1" disabled>Start Listening Part 1</button>
-            </section>
+            </section> <!-- The intro section now closes correctly HERE -->
 
             <!-- Listening Part 1: Listen and draw lines (Drag and Drop) -->
             <section id="listening-part1" class="test-section hidden">
                 <h3>Part 1 (5 Questions)</h3>
                 <p class="part-instructions">Drag each name to the correct person in the picture. There is one example.</p>
+                <div class="audio-player-container"> <!-- This container was opened but never closed -->
                     <audio controls src="audio/flyers_listening_part1.mp3" type="audio/mpeg">
                         Your browser does not support the audio element.
                     </audio>
-                </div>
+                </div> <!-- The missing closing div is now added -->
                 <div class="question-content">
-                    <p>Listen and drag each name to the correct person in the picture. There is one example.</p>
                     
                     <div class="names-pool" id="names-pool-top">
                         <div class="draggable-name" draggable="true" data-name="katy">Katy</div>
@@ -49,7 +47,6 @@
                     <div class="image-with-dropzones-wrapper">
                         <img src="images/flyers_part1_main_image_placeholder.svg" alt="A scene with various people" class="question-image-part1">
                         
-                        <!-- Drop Zones positioned over the children in the image -->
                         <div class="drop-target" data-description="boy_in_cave_torch" style="top: 27%; left: 53%;"></div>
                         <div class="drop-target" data-description="boy_on_bike_helmet" style="top: 23%; left: 24%;"></div>
                         <div class="drop-target" data-description="girl_on_tablet_no_shoes" style="top: 52%; left: 10%;"></div>
@@ -58,11 +55,10 @@
                         <div class="drop-target" data-description="girl_by_fire" style="top: 80%; left: 51%;"></div>
                     </div>
                     
-                    <!-- CORRECTED: Removed drop-target class. It is now only a container. -->
                     <div class="names-pool" id="names-pool-bottom">
                         <div class="draggable-name" draggable="true" data-name="sophia">Sophia</div>
                         <div class="draggable-name" draggable="true" data-name="michael">Michael</div>
-                        <div class="draggable-name" draggable="true" data-name="helen">Helen</div> <!-- The unused name -->
+                        <div class="draggable-name" draggable="true" data-name="helen">Helen</div>
                         <div class="draggable-name" draggable="true" data-name="emma">Emma</div>
                     </div>
                 </div>
@@ -71,7 +67,7 @@
                     <button class="nav-btn next-btn" data-target="listening-part2">Next Part</button>
                 </div>
             </section>
-
+            
             <!-- Listening Part 2: Listen and write numbers or words -->
             <section id="listening-part2" class="test-section hidden">
                 <h3>Part 2 (5 Questions)</h3>
