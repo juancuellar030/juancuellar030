@@ -1031,7 +1031,7 @@ body.page-flyers::before {
 }
 
 /* 2. Style the girl image itself */
-.student-girl {
+.animated-girl {
     /* Position her fixed to the bottom LEFT of the screen */
     position: fixed;
     bottom: 0;
