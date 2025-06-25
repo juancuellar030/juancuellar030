@@ -382,43 +382,48 @@ document.addEventListener('DOMContentLoaded', () => {
         let correctCount = 0;
         let detailedFeedback = [];
     
+        // --- FIX: Create a list of only the REAL questions, excluding examples ---
+        const questionsToGrade = Object.keys(correctAnswers).filter(qId => 
+            !qId.includes('example') && qId !== 'boy_on_rock_magazine'
+        );
+        const totalRealQuestions = questionsToGrade.length; // This will be 25
+
         // Reset all visual feedback before grading
         document.querySelectorAll('.correct, .incorrect').forEach(el => el.classList.remove('correct', 'incorrect'));
         document.querySelectorAll('.text-answer, .letter-box').forEach(input => input.style.borderColor = '');
         document.querySelectorAll('.option-card').forEach(card => card.classList.remove('selected', 'correct', 'incorrect'));
 
-        // Grade all parts safely
-        Object.keys(correctAnswers).forEach(qId => {
+        // Grade all parts safely using the new list of real questions
+        questionsToGrade.forEach(qId => {
         
             // --- Safe Grading for Part 1 ---
             if (!qId.startsWith('q')) {
                 const targetZone = document.querySelector(`.drop-target[data-description="${qId}"]`);
-                // ONLY proceed if the element was found
                 if (targetZone) { 
                     const droppedItem = targetZone.querySelector('.draggable-name');
-                    const correctAnswerName = correctAnswers[qId];
+                    const userAnswer = droppedItem ? droppedItem.dataset.name : 'No Answer';
 
-                    if (droppedItem && droppedItem.dataset.name === correctAnswerName) {
+                    if (userAnswer === correctAnswers[qId]) {
                         correctCount++;
                         targetZone.classList.add('correct');
-                        droppedItem.classList.add('correct');
+                        if (droppedItem) droppedItem.classList.add('correct');
                     } else {
                         targetZone.classList.add('incorrect');
                         if (droppedItem) droppedItem.classList.add('incorrect');
-                        const correctNameElement = document.querySelector(`.draggable-name[data-name="${correctAnswerName}"]`);
+                        const correctNameElement = document.querySelector(`.draggable-name[data-name="${correctAnswers[qId]}"]`);
                         if (correctNameElement) correctNameElement.classList.add('correct');
                     }
                 }
             }
-            // --- Safe Grading for Parts 2 & 3 ---
+                // --- Safe Grading for Parts 2 & 3 ---
             else if (qId.startsWith('q2_') || qId.startsWith('q3_')) {
                 const inputElement = document.getElementById(qId);
-                if (inputElement) { // Check if the input exists
+                if (inputElement) {
                     const userAnswer = (userAnswers[qId] || '').trim().toLowerCase();
                     let isCorrect = false;
 
                     if (qId === 'q2_q3' && (userAnswer === '24' || userAnswer === 'twenty-four')) {
-                        isCorrect = true;
+                    isCorrect = true;
                     } else {
                         if (userAnswer === correctAnswers[qId]) isCorrect = true;
                     }
@@ -428,14 +433,16 @@ document.addEventListener('DOMContentLoaded', () => {
                         inputElement.style.borderColor = '#4caf50';
                     } else {
                         inputElement.style.borderColor = '#f44336';
+                        let expectedAnswer = (qId === 'q2_q3') ? "'24' or 'twenty-four'" : `'${correctAnswers[qId]}'`;
+                        detailedFeedback.push(`Part ${qId.slice(1,2)}, Question ${qId.slice(-1)}: Your answer "${userAnswer}" was incorrect. The correct answer was ${expectedAnswer}.`);
                     }
                 }
             }
-            // --- Safe Grading for Part 4 ---
+                // --- Safe Grading for Part 4 ---
             else if (qId.startsWith('q4_')) {
                 const userAnswer = userAnswers[qId];
                 const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswers[qId]}"]`);
-                if (correctOption) { // Check if the options exist
+                if (correctOption) {
                     const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer}"]`);
                     if (userAnswer === correctAnswers[qId]) {
                         correctCount++;
@@ -457,6 +464,24 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
+        // --- FIX: Display final score AND detailed feedback summary ---
+        const finalResultsDisplay = document.getElementById('final-results-display');
+        const percentage = (totalRealQuestions > 0) ? (correctCount / totalRealQuestions) * 100 : 0;
+    
+        let resultsHTML = '';
+        if (userName) resultsHTML += `<h3>Results for: ${userName}</h3>`;
+        resultsHTML += `<p>You scored ${correctCount} out of ${totalRealQuestions} (${percentage.toFixed(0)}%).</p>`;
+    
+        // This is the fixed part: it adds the feedback summary to the results
+        if (detailedFeedback.length > 0) {
+            resultsHTML += `<div class="detailed-results"><h4>Review your answers:</h4><p>${detailedFeedback.join('<br>')}</p></div>`;
+        }
+    
+        finalResultsDisplay.innerHTML = resultsHTML;
+        finalResultsDisplay.className = percentage === 100 ? 'correct' : (percentage >= 50 ? 'partial' : 'incorrect');
+
+        submitResultsToGoogle(userName, correctCount);
+    });
         // Display final score and feedback (this part is fine)
         const finalResultsDisplay = document.getElementById('final-results-display');
         const percentage = (totalQuestions > 0) ? (correctCount / totalQuestions) * 100 : 0;
