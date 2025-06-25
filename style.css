@@ -1013,3 +1013,43 @@ body.page-flyers::before {
     animation: slideInFromRight 1.5s ease-out forwards;
     animation-delay: 0.5s; /* Optional: Wait half a second before starting */
 }
+
+/* --- Animated Student Girl Styles --- */
+
+/* 1. Define the "slide in from left" animation */
+@keyframes slideInFromLeft {
+    from {
+        /* Start 100% off the LEFT side of the screen and transparent */
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        /* End at its natural position and fully visible */
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 2. Style the girl image itself */
+.student-girl {
+    /* Position her fixed to the bottom LEFT of the screen */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    
+    /* Control her size - adjust as needed */
+    width: auto;
+    height: 40vh; /* Make her the same relative height as the monkey */
+    max-height: 380px; /* A slightly different max-height can add variety */
+    
+    /* Put her on the same background layer as the monkey */
+    z-index: 0; 
+
+    /* Make her transparent initially */
+    opacity: 0;
+
+    /* 3. Apply the NEW animation! */
+    animation: slideInFromLeft 1.5s ease-out forwards;
+    animation-delay: 0.5s; /* Use the same delay so they slide in together */
+}
+
