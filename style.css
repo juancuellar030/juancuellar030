@@ -799,6 +799,22 @@ header p {
     border: 1px solid #888;
 }
 
+.test-section > h3 {
+    text-align: center;
+    font-size: 1.5em; /* A slightly larger font for the main part titles */
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* This is the new style for our consistent instruction lines */
+.part-instructions {
+    text-align: center;
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 25px; /* Adds space between the instructions and the audio player */
+    font-style: italic;
+}
+
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .test-container {
