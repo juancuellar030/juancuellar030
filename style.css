@@ -911,3 +911,63 @@ body::before {
     /* Apply the animation */
     animation: backgroundFadeIn 1.5s ease-out forwards;
 }
+
+/* --- Reading & Writing Part 1 Styles --- */
+.rw-part1-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.word-column-left, .word-column-right {
+    flex-basis: 120px; /* Give side columns a fixed base width */
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between words */
+}
+
+.word-column-right {
+    align-items: flex-end; /* Align words to the right */
+}
+
+.definitions-column {
+    flex-grow: 1; /* Allow middle column to take up remaining space */
+}
+
+.vocab-word {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+/* Colors to match the test paper */
+.vocab-word.red { color: #d9534f; }
+.vocab-word.green { color: #5cb85c; }
+.vocab-word.blue { color: #428bca; }
+
+.definition-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 18px;
+    font-size: 1.1em;
+}
+
+.definition-row .label {
+    flex-grow: 1;
+}
+
+.definition-row .input-wrapper {
+    flex-basis: 35%;
+}
+
+.definition-row .text-answer {
+    border: none;
+    border-bottom: 2px dotted #555;
+    background: transparent;
+    outline: none;
+    width: 100%;
+}
+
+.definition-row.example .text-answer {
+    color: #333; /* Make example text visible */
+}
