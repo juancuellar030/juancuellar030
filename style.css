@@ -98,6 +98,7 @@ header {
     border-bottom: 1px solid #e0e0e0;
     padding-bottom: 20px; /* Adjusted padding */
     margin-bottom: 30px; /* Adjusted margin */
+    position: relative;
 }
 
 header h1 {
@@ -1055,12 +1056,15 @@ body.page-flyers::before {
 
 /* --- Back to Menu Link Style --- */
 .back-to-menu-link {
-    display: block; /* Allows for margin and padding */
-    margin-top: 15px;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%); /* This vertically centers the link */
+
     font-size: 1em;
     font-weight: 600;
-    color: #3f51b5; /* Same color as your buttons */
-    text-decoration: none; /* Removes the default underline */
+    color: #3f51b5;
+    text-decoration: none;
     transition: color 0.2s ease;
 }
 
