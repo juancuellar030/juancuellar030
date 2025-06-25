@@ -291,18 +291,36 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             }
+                
             else if (qId.startsWith('q2_') || qId.startsWith('q3_')) {
                 const inputElement = document.getElementById(qId);
                 if (inputElement) {
-                    const userAnswer = (userAnswers[qId] || '').trim().toLowerCase();
-                    let isCorrect = (qId === 'q2_q3' && (userAnswer === '24' || userAnswer === 'twenty-four')) || (userAnswer === correctAnswers[qId]);
+                    const userAnswer = (userAnswers[qId] || 'No Answer').trim().toLowerCase();
+                    let isCorrect = false;
+
+                    // Check Part 2 answers
+                    if (qId.startsWith('q2_')) {
+                        isCorrect = (qId === 'q2_q3' && (userAnswer === '24' || userAnswer === 'twenty-four')) || (userAnswer === correctAnswers[qId]);
+                        if (!isCorrect) {
+                            let expectedAnswer = (qId === 'q2_q3') ? "'24' or 'twenty-four'" : `'${correctAnswers[qId]}'`;
+                            detailedFeedback.push(`Part 2, Question ${qId.slice(-1)}: Your answer "${userAnswer}" was incorrect. Correct: ${expectedAnswer}.`);
+                        }
+                    } 
+                    // Check Part 3 answers
+                    else if (qId.startsWith('q3_')) {
+                        isCorrect = (userAnswer.toUpperCase() === correctAnswers[qId]);
+                        if (!isCorrect) {
+                            let itemName = qId.slice(3); // Extracts 'bracelet' from 'q3_bracelet'
+                            detailedFeedback.push(`Part 3, Item ${itemName}: Your answer "${userAnswer.toUpperCase()}" was incorrect. Correct: '${correctAnswers[qId]}'.`);
+                        }
+                    }
+        
+                    // Apply feedback styles
                     if (isCorrect) {
                         correctCount++;
                         inputElement.style.borderColor = '#4caf50';
                     } else {
                         inputElement.style.borderColor = '#f44336';
-                        let expectedAnswer = (qId === 'q2_q3') ? "'24' or 'twenty-four'" : `'${correctAnswers[qId]}'`;
-                        detailedFeedback.push(`Part ${qId.slice(1,2)}, Question ${qId.slice(-1)}: Your answer "${userAnswer}" was incorrect. The correct answer was ${expectedAnswer}.`);
                     }
                 }
             }
