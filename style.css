@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@700&display=swap');
 
 /* --- HTML Styles for Full Background --- */
 html {
@@ -150,46 +151,74 @@ header p {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* --- Navigation Buttons --- */
-.navigation-buttons, .submission-area {
+/* In style.css */
+
+/* --- Universal Button Styles --- */
+
+.navigation-buttons {
     display: flex;
-    justify-content: space-between;
-    gap: 15px; /* Added gap */
-    margin-top: 30px; /* Adjusted margin */
-    padding-top: 20px; /* Adjusted padding */
+    justify-content: space-between; /* This correctly aligns buttons to the edges */
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
     border-top: 1px solid #e0e0e0;
 }
 
-.nav-btn, .start-test-btn, #check-all-listening-answers-btn {
-    background-color: #3f51b5;
-    color: white;
-    border: none;
-    padding: 12px 25px; /* Adjusted padding */
-    font-size: 1.1em; /* Larger font size */
-    font-weight: 600;
-    border-radius: 8px; /* Rounded corners */
+/* Base style for ALL buttons to share */
+.nav-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Space between icon and text, if you add icons later */
+    font-family: 'Mulish', sans-serif; /* NEW FONT */
+    font-size: 1.1em;
+    font-weight: 700; /* Bolder font weight */
+    padding: 12px 30px; /* More horizontal padding */
+    border-radius: 50px; /* This creates the "pill" shape */
+    border: 2px solid transparent; /* The border will be used for the secondary style */
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease; /* Enhanced transition */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Added shadow */
-    margin: 5px;
+    text-decoration: none; /* For cases where we use <a> tags as buttons */
+    transition: all 0.2s ease-in-out;
 }
 
-.nav-btn:hover, .start-test-btn:hover, #check-all-listening-answers-btn:hover {
-    background-color: #303f9f;
-    transform: translateY(-2px); /* Lift effect on hover */
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15); /* Enhanced shadow on hover */
+/* Style for Primary Buttons (Purple) */
+/* This will apply to .nav-btn.next-btn, .start-test-btn, and the Check Answers button */
+.nav-btn, 
+#check-all-listening-answers-btn,
+#check-all-rw-answers-btn {
+    background-color: #8723ff; /* NEW purple color */
+    color: white;
 }
-.nav-btn:disabled, .start-test-btn:disabled {
-    background-color: #9fa8da;
-    cursor: not-allowed;
+.nav-btn:hover,
+#check-all-listening-answers-btn:hover,
+#check-all-rw-answers-btn:hover {
+    background-color: #6a1ce8; /* A slightly darker purple for hover */
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(135, 35, 255, 0.3);
 }
 
+/* Style for Secondary Buttons (White with Purple Outline) */
+/* This will apply to the "Back" buttons */
 .nav-btn.prev-btn {
-    background-color: #95a5a6; /* Distinct color for back button */
+    background-color: #ffffff;
+    color: #8723ff;
+    border-color: #8723ff;
+}
+.nav-btn.prev-btn:hover {
+    background-color: #f5f0ff; /* A very light purple tint for hover */
+    color: #6a1ce8;
+    border-color: #6a1ce8;
 }
 
-.nav-btn.prev-btn:hover {
-    background-color: #7f8c8d;
+/* Disabled state remains the same */
+.nav-btn:disabled {
+    background-color: #bdc3c7;
+    border-color: #bdc3c7;
+    color: white;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
 /* --- Question Content --- */
