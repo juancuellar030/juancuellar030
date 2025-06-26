@@ -998,6 +998,69 @@ body.page-flyers::before {
     width: 100%;
 }
 
+/* --- Reading & Writing Part 1 (SVG Method) --- */
+
+/* This container holds the SVG and the inputs, and creates the coordinate system */
+.rw-part1-container {
+    position: relative; /* This is essential for positioning the inputs */
+    width: 100%;
+    max-width: 900px; /* Or whatever max-width your test uses */
+    margin: 20px auto; /* Centers the container */
+}
+
+/* This makes the SVG image responsive and the base of our layout */
+.rw-part1-container img {
+    width: 100%;
+    height: auto;
+    display: block; /* Removes any extra space below the image */
+}
+
+/* This is the base style for ALL input fields in this section */
+.rw-part1-container input {
+    position: absolute; /* Allows us to place it anywhere on the container */
+    background-color: transparent; /* Makes the input see-through */
+    border: none; /* Removes the default input border */
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px; /* Adjust as needed */
+    color: #0056b3; /* A blue color for the typed text */
+    padding: 2px 5px;
+    box-sizing: border-box;
+}
+
+/* --- Positioning for EACH individual input box --- */
+/* You will need to adjust these top/left/width values */
+
+#rw1-q1 {
+    top: 26.5%; left: 47%; width: 44%; height: 3.5%;
+}
+#rw1-q2 {
+    top: 32.2%; left: 47%; width: 44%; height: 3.5%;
+}
+#rw1-q3 {
+    top: 38%; left: 47%; width: 44%; height: 3.5%;
+}
+#rw1-q4 {
+    top: 43.8%; left: 47%; width: 44%; height: 3.5%;
+}
+#rw1-q5 {
+    top: 49.5%; left: 47%; width: 44%; height: 3.5%;
+}
+#rw1-q6 {
+    top: 55.2%; left: 47%; width: 44%; height: 3.5%;
+}
+#rw1-q7 {
+    top: 61%; left: 47%; width: 44%; height: 3.5%;
+}
+#rw1-q8 {
+    top: 66.8%; left: 47%; width: 44%; height: 3.5%;
+}
+#rw1-q9 {
+    top: 72.5%; left: 47%; width: 44%; height: 3.5%;
+}
+#rw1-q10 {
+    top: 78.2%; left: 47%; width: 44%; height: 3.5%;
+}
+
 /* --- Listening Part 3: Correct Layout & Visible "H" --- */
 
 #listening-part3 .part3-wrapper {
