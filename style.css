@@ -1023,6 +1023,7 @@ body.page-flyers::before {
     color: #0056b3; 
     padding: 2px 5px;
     box-sizing: border-box;
+    text-align: center;
     
     /* --- TEMPORARY STYLES FOR POSITIONING --- */
     background-color: rgba(0, 119, 255, 0.2); /* A semi-transparent blue fill */
@@ -1036,31 +1037,31 @@ body.page-flyers::before {
     top: 21%; left: 67%; width: 17%; height: 3.5%;
 }
 #rw1-q2 {
-    top: 32.2%; left: 47%; width: 44%; height: 3.5%;
+    top: 28%; left: 67%; width: 17%; height: 3.5%;
 }
 #rw1-q3 {
-    top: 38%; left: 47%; width: 44%; height: 3.5%;
+    top: 35%; left: 67%; width: 17%; height: 3.5%;
 }
 #rw1-q4 {
-    top: 43.8%; left: 47%; width: 44%; height: 3.5%;
+    top: 42%; left: 67%; width: 17%; height: 3.5%;
 }
 #rw1-q5 {
-    top: 49.5%; left: 47%; width: 44%; height: 3.5%;
+    top: 49.5%; left: 67%; width: 17%; height: 3.5%;
 }
 #rw1-q6 {
-    top: 55.2%; left: 47%; width: 44%; height: 3.5%;
+    top: 55.2%; left: 67%; width: 17%; height: 3.5%;
 }
 #rw1-q7 {
-    top: 61%; left: 47%; width: 44%; height: 3.5%;
+    top: 61%; left: 67%; width: 17%; height: 3.5%;
 }
 #rw1-q8 {
-    top: 66.8%; left: 47%; width: 44%; height: 3.5%;
+    top: 66.8%; left: 67%; width: 17%; height: 3.5%;
 }
 #rw1-q9 {
-    top: 72.5%; left: 47%; width: 44%; height: 3.5%;
+    top: 72.5%; left: 67%; width: 17%; height: 3.5%;
 }
 #rw1-q10 {
-    top: 78.2%; left: 47%; width: 44%; height: 3.5%;
+    top: 78.2%; left: 67%; width: 17%; height: 3.5%;
 }
 
 /* --- Listening Part 3: Correct Layout & Visible "H" --- */
