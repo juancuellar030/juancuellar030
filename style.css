@@ -22,6 +22,7 @@ body {
 
 .content-wrapper {
     flex-grow: 1; width: 100%;
+    overflow-y: auto; /* Allow this wrapper to scroll */
     overflow-x: hidden;
     padding: 20px 0;
     display: flex; flex-direction: column;
@@ -34,8 +35,6 @@ body {
     box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
     padding: 30px; margin: 20px 0;
     width: 100%; max-width: 900px;
-    overflow-y: auto;
-    max-height: calc(100vh - 40px);
     box-sizing: border-box; position: relative;
     z-index: 1; flex-shrink: 0;
 }
@@ -59,30 +58,19 @@ body.page-menu::before { background-image: url('images/new-menu-background.svg')
 body.page-flyers::before { background-image: url('images/flyers_background.svg'); }
 
 .animated-mascot {
-    position: fixed; bottom: 0; left: 5%; /* Positioned inward */
-    height: 60vh; max-height: 600px;
-    z-index: 0; opacity: 0;
+    position: fixed; bottom: 0; left: 5%;
+    height: 60vh; max-height: 500px; z-index: 0; opacity: 0;
     animation: slideInFromLeft 1.5s ease-out 0.5s forwards;
 }
 .animated-girl {
-    position: fixed; bottom: -15vh; right: 5%; /* Positioned inward and down */
-    height: 71vh; max-height: 600px;
-    z-index: 0; opacity: 0;
+    position: fixed; bottom: -15vh; right: 5%;
+    height: 71vh; max-height: 550px; z-index: 0; opacity: 0;
     animation: slideInFromRight 1.5s ease-out 0.5s forwards;
 }
 
 /* ===================================================================== */
 /* --- HEADERS & GENERAL STYLING --- */
 /* ===================================================================== */
-
-#listening-intro h2, #rw-intro h2 {
-    text-align: left;
-    font-size: 1.6em;
-    font-weight: 600;
-    margin-bottom: 20px;
-    border-bottom: none;
-    padding-bottom: 0;
-}
 
 header {
     text-align: center; border-bottom: 1px solid #e0e0e0;
@@ -92,19 +80,23 @@ header {
 header h1 { font-size: 2.2em; color: #1a237e; margin-bottom: 10px; }
 header p { font-size: 1.1em; color: #555; }
 
-.test-section {
-    padding: 1rem 0;
-    border-top: 1px solid #eee; margin-top: 1rem;
-}
+.test-section { padding: 1rem 0; }
 .test-section:first-of-type { border-top: none; margin-top: 0; }
 .test-section.hidden { display: none; }
 .test-section.active { display: block; animation: fadeIn 0.5s ease-out; }
 
+/* Main Part Titles (e.g., Part 1 (10 Questions)) */
 .test-section > h3 { text-align: center; font-size: 1.5em; margin-bottom: 10px; }
 .part-instructions { text-align: center; font-size: 1.1em; color: #555; margin-bottom: 25px; font-style: italic; }
 
+/* Intro Page Subtitles */
+#listening-intro h2, #rw-intro h2 {
+    font-size: 1.6em; font-weight: 600;
+    margin-bottom: 20px; text-align: left;
+}
+
 .question-content {
-    margin-top: 20px; padding: 15px;
+    margin-top: 20px; padding: 20px;
     background-color: #f9f9f9;
     border-radius: 10px; border: 1px solid #e0e0e0;
 }
@@ -128,7 +120,8 @@ header p { font-size: 1.1em; color: #555; }
     border-top: 1px solid #e0e0e0;
 }
 
-.nav-btn, #check-all-listening-answers-btn, #check-all-rw-answers-btn, .start-test-btn {
+/* Base style for ALL buttons */
+.nav-btn, #check-all-listening-answers-btn, #check-all-rw-answers-btn {
     display: inline-flex; align-items: center; justify-content: center;
     gap: 8px; font-family: 'Mulish', sans-serif; font-size: 1.1em;
     font-weight: 700; padding: 12px 30px; border-radius: 50px;
@@ -137,10 +130,10 @@ header p { font-size: 1.1em; color: #555; }
 }
 
 /* Primary Button (Purple) */
-.nav-btn:not(.prev-btn), #check-all-listening-answers-btn, #check-all-rw-answers-btn, .start-test-btn {
+.nav-btn:not(.prev-btn), #check-all-listening-answers-btn, #check-all-rw-answers-btn {
     background-color: #8723ff; color: white;
 }
-.nav-btn:not(.prev-btn):hover, #check-all-listening-answers-btn:hover, #check-all-rw-answers-btn:hover, .start-test-btn:hover {
+.nav-btn:not(.prev-btn):hover, #check-all-listening-answers-btn:hover, #check-all-rw-answers-btn:hover {
     background-color: #6a1ce8; transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(135, 35, 255, 0.3);
 }
@@ -150,7 +143,7 @@ header p { font-size: 1.1em; color: #555; }
 .nav-btn.prev-btn:hover { background-color: #f5f0ff; color: #6a1ce8; border-color: #6a1ce8; }
 
 /* Disabled State */
-.nav-btn:disabled, .start-test-btn:disabled {
+.nav-btn:disabled {
     background-color: #bdc3c7; border-color: #bdc3c7;
     color: white; cursor: not-allowed; transform: none; box-shadow: none;
 }
@@ -162,67 +155,38 @@ header p { font-size: 1.1em; color: #555; }
 #listening-part1 .image-with-dropzones-wrapper { position: relative; width: 100%; padding-bottom: 75%; }
 #listening-part1 .question-image-part1 { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: contain; }
 #listening-part1 .names-pool { border: 1px solid #dcdcdc; border-radius: 10px; padding: 15px; background-color: #ecf0f1; display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin: 20px 0; }
-#listening-part1 .draggable-name { background-color: #3498db; color: white; padding: 0 !important; border-radius: 20px; cursor: grab; font-weight: 600; font-size: 1em; box-shadow: 0 2px 5px rgba(0,0,0,0.1); display: inline-flex; align-items: center; justify-content: center; white-space: nowrap; height: 30px; box-sizing: border-box; }
+#listening-part1 .draggable-name { background-color: #3498db; color: white; padding: 0 12px !important; border-radius: 20px; cursor: grab; font-weight: 600; font-size: 1em; display: inline-flex; align-items: center; justify-content: center; height: 30px; box-sizing: border-box; }
 #listening-part1 .draggable-name:hover { background-color: #2980b9; transform: translateY(-2px); }
 #listening-part1 .draggable-name.dragging { opacity: 0.6; }
 #listening-part1 .drop-target { position: absolute; border: 2px dashed #ffffff; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-#listening-part1 .drop-target .draggable-name {
-    background-color: #3f51b5;
-    padding: 0 !important;
-    height: 30px;
-    box-sizing: border-box;
-    font-size: 1em;
-    font-weight: 600;
-    width: 95%;
-    margin: 0;
-    box-shadow: none;
-}
+#listening-part1 .drop-target .draggable-name { background-color: #3f51b5; box-shadow: none; width: 95%; margin: 0; }
 
 /* ===================================================================== */
-/* --- LISTENING PART 2, 3, R&W PART 1: TEXT INPUTS --- */
+/* --- LISTENING PART 2 & 3: TEXT INPUTS --- */
 /* ===================================================================== */
 
-.form-row {
-    display: flex;
-    align-items: baseline; /* This keeps text and inputs aligned */
-    margin-bottom: 25px;
-    font-size: 1.1em;
-    gap: 10px; /* Use gap for consistent spacing */
-}
+.homework-form, .part3-objects { flex: 1; min-width: 300px; }
+.form-row, .match-item { display: flex; align-items: baseline; margin-bottom: 25px; gap: 15px; }
+.form-row .number { font-weight: bold; }
+.form-row .label, .match-item span { flex-shrink: 0; padding-right: 15px; }
+.input-wrapper { display: flex; align-items: baseline; flex-grow: 1; }
+.input-wrapper .pre-text { margin-right: 5px; }
 
-.form-row .number, .definition-row .number { font-weight: bold; }
-.form-row .label, .definition-row .label, .match-item span { flex-shrink: 0; }
-.input-wrapper, .letter-box { flex-grow: 1; }
-.input-wrapper .pre-text {
-    margin-right: 5px;
-    color: #333;
-    font-family: 'Poppins', sans-serif; /* Use the main body font */
-}
-
-/* Dotted Line Style */
-.text-answer, .letter-box {
+/* Dotted Line Style for inputs */
+.text-answer, #listening-part3 .letter-box {
     border: none; background: transparent; outline: none;
-    border-bottom: 2px dotted #555;
-    width: 100%; font-size: 1em; color: #0056b3; padding-bottom: 2px;
+    border-bottom: 2px dotted #555; width: 100%;
+    font-family: 'Poppins', sans-serif; color: #0056b3;
 }
-.letter-box { text-align: center; text-transform: uppercase; max-width: 45px; height: 45px; font-size: 1.6em; border-radius: 5px; border: 2px solid #777; }
-
-/* Example Styles */
-.form-row.example .answer-line { flex-basis: 45%; border-bottom: 2px dotted #ccc; color: #555; }
+#listening-part3 .letter-box { text-align: center; text-transform: uppercase; max-width: 45px; height: 45px; font-size: 1.6em; border: 2px solid #777; border-radius: 5px; }
+.form-row.example .answer-line { border-bottom: 2px dotted #ccc; color: #555; }
 #listening-part3 .match-item .letter-box[readonly] { color: #333 !important; background-color: #f0f0f0 !important; cursor: default; }
 
 /* ===================================================================== */
 /* --- LISTENING PART 3 & 4: IMAGES & GRIDS --- */
 /* ===================================================================== */
 
-#listening-part3 .part3-wrapper {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 30px;
-    align-items: flex-start;
-}
-#listening-part3 .part3-objects { flex: 1; min-width: 300px; }
+#listening-part3 .part3-wrapper { display: flex; flex-direction: row; flex-wrap: wrap; gap: 30px; align-items: flex-start; }
 #listening-part3 .part3-locations { flex-basis: 250px; flex-shrink: 0; display: grid; grid-template-columns: 1fr; gap: 10px; }
 #listening-part3 .match-item img { width: 120px; height: 80px; object-fit: cover; border: 1px solid #ddd; }
 #listening-part3 .location-card { position: relative; }
@@ -249,97 +213,29 @@ header p { font-size: 1.1em; color: #555; }
 #listening-part5 .write-tool.selected, #listening-part5 .eraser-tool.selected { border-color: #007bff; color: #007bff; }
 #listening-part5 .eraser-tool.selected { border-color: #dc3545; color: #dc3545; }
 #listening-part5 #part5-interactive-container .interactive-target { cursor: pointer; transition: fill 0.3s ease; }
-/* (Hover effect removed as requested) */
 
 /* ===================================================================== */
 /* --- READING & WRITING PART 1 --- */
 /* ===================================================================== */
 
-#rw-part1 .rw-part1-wrapper {
-    display: flex;
-    flex-direction: column; /* This is the key: stacks top, middle, bottom vertically */
-    gap: 15px;
-}
-
-#rw-part1 .word-row {
-    display: flex;
-    justify-content: space-around; /* Spreads words out evenly */
-    padding: 0 5%;
-}
-
-#rw-part1 .main-content-row {
-    display: flex;
-    gap: 20px; /* Space between side columns and center box */
-}
-
-#rw-part1 .word-column {
-    flex-basis: 130px; /* Fixed width for side columns */
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around; /* Evenly space words vertically */
-}
-
-#rw-part1 .word-column.right {
-    align-items: flex-end; /* Align right-side words to the right */
-}
-
-#rw-part1 .definitions-column {
-    flex-grow: 1; /* Allow center box to take all available space */
-    border: 1px solid #ccc; /* The visible box */
-    padding: 25px;
-    border-radius: 8px;
-}
-
-#rw-part1 .vocab-word {
-    font-size: 1.1em;
-    font-weight: 600;
-}
+#rw-part1 .rw-part1-wrapper { display: flex; flex-direction: column; gap: 15px; }
+#rw-part1 .word-row { display: flex; justify-content: space-around; padding: 0 5%; }
+#rw-part1 .main-content-row { display: flex; gap: 20px; }
+#rw-part1 .word-column { flex-basis: 130px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: space-around; }
+#rw-part1 .word-column.right { align-items: flex-end; }
+#rw-part1 .definitions-column { flex-grow: 1; border: 1px solid #ccc; padding: 25px; border-radius: 8px; }
+#rw-part1 .vocab-word { font-weight: 600; font-size: 1.1em; }
 #rw-part1 .vocab-word.red { color: #d9534f; }
 #rw-part1 .vocab-word.green { color: #5cb85c; }
 #rw-part1 .vocab-word.blue { color: #428bca; }
-
-#rw-part1 .definition-row {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    margin-bottom: 22px;
-    font-size: 1.1em;
-}
-#rw-part1 .definition-row:last-child {
-    margin-bottom: 0;
-}
-
-#rw-part1 .definition-row .label {
-    flex-grow: 1;
-}
-
-#rw-part1 .definition-row .input-wrapper {
-    flex-basis: 30%;
-    flex-shrink: 0;
-}
-
-#rw-part1 .definition-row .text-answer {
-    border: none;
-    border-bottom: 2px dotted #555;
-    background: transparent;
-    outline: none;
-    width: 100%;
-}
-
-/* Varying widths for the input lines */
-#rw-part1 .definition-row:nth-child(4) .input-wrapper,
-#rw-part1 .definition-row:nth-child(8) .input-wrapper {
-    flex-basis: 25%;
-}
-#rw-part1 .definition-row:nth-child(2) .input-wrapper,
-#rw-part1 .definition-row:nth-child(10) .input-wrapper {
-    flex-basis: 40%;
-}
-
-#rw-part1 .definition-row.example .text-answer {
-    color: #333;
-}
+#rw-part1 .definition-row { display: flex; align-items: baseline; gap: 10px; margin-bottom: 22px; }
+#rw-part1 .definition-row:last-child { margin-bottom: 0; }
+#rw-part1 .definition-row .label { flex-grow: 1; }
+#rw-part1 .definition-row .input-wrapper { flex-basis: 30%; flex-shrink: 0; }
+#rw-part1 .definition-row .text-answer { border: none; border-bottom: 2px dotted #555; background: transparent; outline: none; width: 100%; }
+#rw-part1 .definition-row:nth-child(4) .input-wrapper, #rw-part1 .definition-row:nth-child(8) .input-wrapper { flex-basis: 25%; }
+#rw-part1 .definition-row:nth-child(2) .input-wrapper, #rw-part1 .definition-row:nth-child(10) .input-wrapper { flex-basis: 40%; }
+#rw-part1 .definition-row.example .text-answer { color: #333; }
 
 /* ===================================================================== */
 /* --- FEEDBACK & RESULTS --- */
@@ -349,20 +245,10 @@ header p { font-size: 1.1em; color: #555; }
 .incorrect { border-color: #dc3545 !important; background-color: rgba(220, 53, 69, 0.1) !important; }
 #listening-part1 .draggable-name.correct { background-color: #28a745 !important; color: white !important; }
 #listening-part1 .draggable-name.incorrect { background-color: #dc3545 !important; color: white !important; }
-
+#listening-part4 .option-card.correct::after, #listening-part4 .option-card.incorrect::after { position: absolute; top: 10px; right: 10px; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; font-weight: bold; }
 #listening-part4 .option-card.correct::after { content: '✔'; color: white; background-color: #4caf50; }
 #listening-part4 .option-card.incorrect::after { content: '✖'; color: white; background-color: #f44336; }
-#listening-part4 .option-card.correct::after, #listening-part4 .option-card.incorrect::after {
-    position: absolute; top: 10px; right: 10px;
-    width: 24px; height: 24px; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 16px; font-weight: bold;
-}
-
 #final-results-display { margin-top: 1.5rem; font-size: 1.2rem; font-weight: 600; text-align: center; }
-#final-results-display.correct { color: #2e7d32; }
-#final-results-display.partial { color: #ef6c00; }
-#final-results-display.incorrect { color: #c62828; }
 .detailed-results { margin-top: 25px; padding: 15px; background-color: #f8f9fa; border: 1px solid #e9ecef; border-radius: 8px; text-align: left; font-size: 0.95em; }
 .detailed-results h4 { margin-top: 0; color: #495057; }
 .detailed-results p { line-height: 1.6; color: #6c757d; }
@@ -373,12 +259,14 @@ header p { font-size: 1.1em; color: #555; }
 @media (max-width: 768px) { /* Tablet and smaller */
     .test-container { padding: 20px; margin: 10px 0; max-height: calc(100vh - 20px); }
     header h1 { font-size: 1.8em; }
-    .nav-btn, .start-test-btn, #check-all-listening-answers-btn { padding: 10px 20px; font-size: 1em; }
-    .options-grid { grid-template-columns: 1fr; }
+    .nav-btn, .start-test-btn, #check-all-listening-answers-btn, #check-all-rw-answers-btn { padding: 10px 20px; font-size: 1em; }
+    #listening-part4 .options-grid { grid-template-columns: 1fr; }
+    #rw-part1 .main-content-row { flex-direction: column; } /* Stack columns on mobile */
+    #rw-part1 .word-column { flex-direction: row; flex-wrap: wrap; justify-content: center; flex-basis: auto; }
 }
 @media (max-width: 480px) { /* Phone */
     .test-container { padding: 15px; }
     header h1 { font-size: 1.5em; }
-    .nav-btn, .start-test-btn, #check-all-listening-answers-btn { padding: 8px 15px; font-size: 0.9em; }
+    .nav-btn, .start-test-btn, #check-all-listening-answers-btn, #check-all-rw-answers-btn { padding: 8px 15px; font-size: 0.9em; }
     .navigation-buttons { flex-direction: column; }
 }
