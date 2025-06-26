@@ -1034,13 +1034,6 @@ body.page-flyers::before {
     color: #333;
 }
 
-/* --- Part 3 Example Box FINAL Fix --- */
-#listening-part3 .match-item .letter-box[readonly] {
-    color: #333 !important;
-    background-color: #f0f0f0;
-    cursor: default;
-}
-
 /* --- Animated Mascot Styles --- */
 
 /* 1. Define the "slide in from right" animation */
