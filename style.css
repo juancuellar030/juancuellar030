@@ -407,37 +407,6 @@ header p {
     outline: none;
 }
 
-/* --- Part 3: Matching Grid --- */
-.matching-grid {
-    display: flex;
-    justify-content: space-around;
-    gap: 20px; /* Adjusted gap */
-    padding: 20px; /* Adjusted padding */
-    border: 1px dashed #a0a0a0;
-    border-radius: 8px;
-    background-color: #f0f0f0;
-    flex-wrap: wrap; /* Allows wrapping on smaller screens */
-}
-.match-left, .match-right {
-    flex: 1;
-    min-width: 150px;
-}
-.match-right img {
-    width: 100px; /* Example size */
-    height: 100px; /* Example size */
-    object-fit: cover;
-    border: 1px solid #ccc;
-    border-radius: 8px;
-    margin-bottom: 10px;
-}
-.match-left p {
-    border: 1px solid #eee;
-    padding: 0.8rem;
-    margin: 0.5rem 0;
-    background-color: #fcfcfc;
-    border-radius: 5px;
-}
-
 /* --- Part 4: Tick the box --- */
 .options-grid {
     display: grid;
@@ -652,8 +621,6 @@ header p {
     background-color: #f44336;
 }
 
-/* In style.css */
-
 /* --- Part 2: Homework Form Styles --- */
 .homework-form {
     background-color: #fff;
@@ -747,58 +714,6 @@ header p {
 
 #results-display.incorrect, #final-results-display.incorrect {
     color: #c62828;
-}
-
-.part3-objects {
-    flex: 1; /* Takes up half the space */
-    min-width: 300px;
-}
-
-.part3-locations {
-    flex-basis: 250px; /* UPDATE: Give the locations column a fixed base width */
-    flex-shrink: 0; /* UPDATE: Prevent this column from shrinking */
-    display: grid;
-    grid-template-columns: 1fr; /* UPDATE: This forces a single vertical column */
-    gap: 10px; /* UPDATE: A smaller gap for the vertical list */
-}
-
-.match-item img {
-    width: 120px;
-    height: 80px;
-    object-fit: cover;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.match-item span {
-    width: 100px; /* Gives the text a consistent width */
-    font-size: 1.2em;
-}
-
-/* This new rule specifically targets the read-only example box */
-.letter-box[readonly] {
-    color: #333; /* Visible dark grey color for the 'H' */
-    background-color: #f0f0f0; /* Light grey background for example */
-    cursor: default; /* Show a normal cursor, not a text cursor */
-}
-
-.location-card img {
-    width: 100%;
-    display: block; /* Removes any extra space below the image */
-    border-radius: 8px;
-    border: 1px solid #ccc;
-}
-
-.location-letter {
-    position: absolute;
-    bottom: 8px;
-    left: 8px;
-    background-color: rgba(255, 255, 255, 0.9);
-    padding: 5px 12px;
-    border-radius: 5px;
-    font-weight: bold;
-    font-size: 1.2em;
-    border: 1px solid #888;
 }
 
 .test-section > h3 {
