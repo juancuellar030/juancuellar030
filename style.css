@@ -164,6 +164,7 @@ header p {
 
 /* Base style for ALL buttons */
 .nav-btn,
+.start-test-btn,
 #check-all-listening-answers-btn,
 #check-all-rw-answers-btn {
     display: inline-flex;
@@ -183,12 +184,14 @@ header p {
 
 /* Style for Primary Buttons (Purple) */
 .nav-btn:not(.prev-btn), /* Target all nav buttons EXCEPT the 'prev-btn' */
+.start-test-btn,
 #check-all-listening-answers-btn,
 #check-all-rw-answers-btn {
     background-color: #8723ff;
     color: white;
 }
 .nav-btn:not(.prev-btn):hover,
+.start-test-btn:hover,
 #check-all-listening-answers-btn:hover,
 #check-all-rw-answers-btn:hover {
     background-color: #6a1ce8;
