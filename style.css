@@ -941,31 +941,45 @@ body.page-flyers::before {
 /* --- Reading & Writing Part 1 Styles --- */
 .rw-part1-wrapper {
     display: flex;
-    justify-content: space-between;
+    flex-direction: column; /* Main axis is vertical */
+}
+
+.word-row {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 20px;
+}
+.word-row.bottom {
+    margin-top: 20px;
+}
+
+.main-content-row {
+    display: flex;
     gap: 20px;
 }
 
-.word-column-left, .word-column-right {
-    flex-basis: 120px; /* Give side columns a fixed base width */
+.word-column {
+    flex-basis: 120px;
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    gap: 15px; /* Space between words */
+    justify-content: space-around; /* Distributes words evenly */
 }
-
-.word-column-right {
-    align-items: flex-end; /* Align words to the right */
+.word-column.right {
+    align-items: flex-end;
 }
 
 .definitions-column {
-    flex-grow: 1; /* Allow middle column to take up remaining space */
+    flex-grow: 1;
+    border: 1px solid #ccc; /* The box around the definitions */
+    padding: 20px;
+    border-radius: 8px;
 }
 
 .vocab-word {
     font-size: 1.1em;
     font-weight: 600;
 }
-/* Colors to match the test paper */
 .vocab-word.red { color: #d9534f; }
 .vocab-word.green { color: #5cb85c; }
 .vocab-word.blue { color: #428bca; }
@@ -974,8 +988,11 @@ body.page-flyers::before {
     display: flex;
     align-items: baseline;
     gap: 10px;
-    margin-bottom: 18px;
+    margin-bottom: 20px;
     font-size: 1.1em;
+}
+.definition-row:last-child {
+    margin-bottom: 0;
 }
 
 .definition-row .label {
@@ -983,7 +1000,8 @@ body.page-flyers::before {
 }
 
 .definition-row .input-wrapper {
-    flex-basis: 35%;
+    flex-basis: 30%; /* Base width for the answer area */
+    flex-shrink: 0;
 }
 
 .definition-row .text-answer {
@@ -991,7 +1009,21 @@ body.page-flyers::before {
     border-bottom: 2px dotted #555;
     background: transparent;
     outline: none;
-    width: 100%;
+    width: 100%; /* The input will fill its wrapper */
+}
+
+/* NEW: Varying widths for the input lines */
+.definition-row:nth-child(4) .input-wrapper,
+.definition-row:nth-child(8) .input-wrapper {
+    flex-basis: 25%;
+}
+.definition-row:nth-child(2) .input-wrapper,
+.definition-row:nth-child(10) .input-wrapper {
+    flex-basis: 40%;
+}
+
+.definition-row.example .text-answer {
+    color: #333;
 }
 
 .definition-row.example .text-answer {
