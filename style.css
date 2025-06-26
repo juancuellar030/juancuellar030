@@ -1,0 +1,1158 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@700&display=swap');
+
+/* --- HTML Styles for Full Background --- */
+html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #133743; /* Retained user's background color fallback */
+    overflow: hidden; /* Prevents main page scroll */
+}
+
+/* --- Body Styles --- */
+body {
+    font-family: 'Poppins', sans-serif; /* Retained user's font */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevents main body scroll */
+    box-sizing: border-box;
+    line-height: 1.6; /* Improved readability */
+    position: relative; /* ADD this line */
+}
+
+/* --- Content Wrapper for Scrolling --- */
+.content-wrapper {
+    flex-grow: 1;
+    width: 100%;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.name-input-er {
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.name-input-er label {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+}
+
+#user-name-input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1.1em;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+}
+
+/* Style for the disabled button state */
+.start-test-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* --- Main Container --- */
+.test-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
+    padding: 30px; /* Increased padding */
+    margin: 20px 0;
+    width: 100%;
+    max-width: 900px; /* Adjusted max-width */
+    overflow-y: auto; /* Enable scrolling for content that exceeds er height */
+    max-height: calc(100vh - 40px); /* Adjust max-height to fit viewport */
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+/* --- Header --- */
+header {
+    text-align: center;
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 20px; /* Adjusted padding */
+    margin-bottom: 30px; /* Adjusted margin */
+    position: relative;
+}
+
+header h1 {
+    font-size: 2.2em; /* Larger font size */
+    color: #1a237e;
+    margin-bottom: 10px;
+}
+
+header p {
+    font-size: 1.1em; /* Larger font size */
+    text-align: center;
+    color: #555;
+}
+
+/* --- Audio Player er --- */
+.audio-player-er {
+    margin: 25px 0; /* Adjusted margins */
+    text-align: center;
+}
+.audio-player-er audio {
+    width: 100%;
+    max-width: 500px; /* Larger max-width */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+    outline: none;
+}
+
+/* --- Test Section Display --- */
+.test-section {
+    padding: 1rem 0; /* Original padding */
+    border-top: 1px solid #eee;
+    margin-top: 1rem;
+}
+.test-section:first-of-type {
+    border-top: none;
+    margin-top: 0;
+}
+
+.test-section.hidden {
+    display: none;
+}
+.test-section.active {
+    display: block;
+    animation: fadeIn 0.5s ease-out; /* Added fade-in animation */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Universal Button Styles --- */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Base style for ALL buttons */
+.nav-btn,
+#check-all-listening-answers-btn,
+#check-all-rw-answers-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Mulish', sans-serif;
+    font-size: 1.1em;
+    font-weight: 700;
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Style for Primary Buttons (Purple) */
+.nav-btn:not(.prev-btn), /* Target all nav buttons EXCEPT the 'prev-btn' */
+#check-all-listening-answers-btn,
+#check-all-rw-answers-btn {
+    background-color: #8723ff;
+    color: white;
+}
+.nav-btn:not(.prev-btn):hover,
+#check-all-listening-answers-btn:hover,
+#check-all-rw-answers-btn:hover {
+    background-color: #6a1ce8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(135, 35, 255, 0.3);
+}
+
+/* Style for Secondary Buttons (White Outline) */
+.nav-btn.prev-btn {
+    background-color: #ffffff;
+    color: #8723ff;
+    border-color: #8723ff;
+}
+.nav-btn.prev-btn:hover {
+    background-color: #f5f0ff;
+    color: #6a1ce8;
+    border-color: #6a1ce8;
+}
+
+/* Disabled state */
+.nav-btn:disabled {
+    background-color: #bdc3c7;
+    border-color: #bdc3c7;
+    color: white;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* --- Question Content --- */
+.question-content {
+    margin-top: 20px; /* Adjusted margin */
+    padding: 15px; /* Added padding */
+    background-color: #f9f9f9; /* Light background */
+    border-radius: 10px; /* Rounded corners */
+    border: 1px solid #e0e0e0; /* Border */
+}
+.question-content p {
+    font-size: 1.05em; /* Adjusted font size */
+    margin-bottom: 10px; /* Adjusted margin */
+    line-height: 1.5;
+}
+.instruction-note {
+    font-size: 1rem;
+    color: #7f8c8d; /* Muted color */
+    font-weight: 600;
+    font-style: italic;
+    margin-top: 15px; /* Adjusted margin */
+    padding: 10px; /* Adjusted padding */
+    border-left: 4px solid #3498db; /* Blue border */
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
+
+/* --- Part 1: Drag and Drop Styles --- */
+.image-with-dropzones-wrapper {
+    position: relative;
+    width: 100%; /* Make wrapper responsive */
+    padding-bottom: 125%; /* 4:3 aspect ratio (adjust if your image has different ratio) */
+    background-color: transparent; /* Placeholder background */
+    border-radius: 8px;
+    overflow: hidden; /* Ensure dropzones don't spill out */
+    margin-bottom: 10px;
+}
+
+.question-image-part1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: ; /* Ensures the image fits within the bounds without cropping */
+    border-radius: 8px;
+}
+
+/* Draggable names er */
+.names-pool {
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #ecf0f1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 20px 0; /* Add margin to top and bottom */
+    min-height: 50px; /* Adjusted height */
+    position: relative;
+    z-index: 10;
+}
+
+.draggable-names-er h4 {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 10px 0;
+    color: #34495e;
+}
+
+#listening-part1 .draggable-name {
+    background-color: #3498db;
+    color: white;
+    padding: 8px 15px !important; /* Force the flat padding */
+    border-radius: 20px;
+    cursor: grab;
+    font-weight: 600;
+    font-size: 1.3em;
+    margin: 2px auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    height: 30px; /* ADD a fixed height to prevent overrides */
+    box-sizing: border-box; /* ADD this to include padding in the height calculation */
+}
+
+.draggable-name:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.draggable-name.dragging {
+    opacity: 0.6;
+    cursor: grabbing;
+    transform: scale(1.05);
+}
+
+/* Drop targets */
+.drop-target {
+    position: absolute;
+    width: 12%; /* Adjusted size as needed */
+    height: 5%; /* Adjusted size as needed */
+    border: 2px dashed #ffffff; /* White dashed border */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+    cursor: default; /* Indicate not directly clickable */
+    z-index: 5; /* Retained user's z-index */
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.5); /* Lighter background for empty targets */
+}
+
+.drop-target.drag-over {
+    border-color: #fafdff; /* Blue on drag over */
+    background-color: rgba(240, 240, 240, 0.4); /* White */
+    transform: scale(1.05);
+}
+
+.drop-target.filled {
+    border-style: solid;
+    border-color: #7f8c8d; /* Grey solid border when filled */
+    background-color: rgba(127, 140, 141, 0.1); /* Light grey tint */
+}
+
+/* Style for names in drop zones (actual draggable element now lives here) */
+#listening-part1 .drop-target .draggable-name {
+    pointer-events: auto;
+    cursor: move;
+    position: static;
+    margin: 2px auto;
+    text-align: center;
+    width: 95%;
+    font-size: 1em;
+    padding: 3px 12px !important; /* Force the flat padding */
+    box-shadow: none;
+    transform: none;
+    background-color: #3f51b5;
+    height: 28px; /* ADD the same fixed height */
+    box-sizing: border-box; /* ADD this as well */
+}
+
+/* Remove placeholder styling (not needed as actual draggable is moved) */
+.dropped-name-placeholder {
+    display: none !important;
+}
+
+/* Adjust drop targets to accommodate moved elements */
+.drop-target.filled {
+    padding: 0; /* Remove padding to fit elements */
+    display: flex; /* Center child elements */
+    align-items: center;
+    justify-content: center;
+}
+
+/* --- Part 2: Form inputs --- */
+.form-question p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.form-question input[type="text"],
+.form-question input[type="number"],
+.color-select {
+    width: calc(100% - 20px); /* Adjust for padding/border */
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box; /* Ensures consistent sizing */
+}
+
+.form-question input:focus,
+.color-select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+/* --- Part 3: Matching Grid --- */
+.matching-grid {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px; /* Adjusted gap */
+    padding: 20px; /* Adjusted padding */
+    border: 1px dashed #a0a0a0;
+    border-radius: 8px;
+    background-color: #f0f0f0;
+    flex-wrap: wrap; /* Allows wrapping on smaller screens */
+}
+.match-left, .match-right {
+    flex: 1;
+    min-width: 150px;
+}
+.match-right img {
+    width: 100px; /* Example size */
+    height: 100px; /* Example size */
+    object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+.match-left p {
+    border: 1px solid #eee;
+    padding: 0.8rem;
+    margin: 0.5rem 0;
+    background-color: #fcfcfc;
+    border-radius: 5px;
+}
+
+/* --- Part 4: Tick the box --- */
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px; /* Adjusted gap */
+    margin-top: 20px; /* Adjusted margin */
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.option-card {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: relative; /* For check/cross marks */
+    display: flex; /* UPDATE: Add flex display */
+    flex-direction: column; /* UPDATE: Stack items vertically */
+    aspect-ratio: 1 / 1; /* UPDATE: This forces the card to be a perfect square */
+}
+
+.option-card:hover {
+    border-color: #3498db; /* Blue border on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+.option-card.selected {
+    border-color: #3498db;
+    background-color: #e8f3fa; /* Light blue background when selected */
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+.option-card img {
+    max-width: 100%;
+    flex-grow: 1; 
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    /* UPDATE: Add this to prevent image distortion on some browsers */
+    min-height: 0;
+}
+
+.option-card label {
+    font-weight: bold;
+    color: #555;
+    font-size: 1.1em;
+}
+
+/* --- Part 4: Question Spacing --- */
+.part4-question-block {
+    margin-bottom: 40px; /* Adds space between each question block */
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee; /* Adds a faint line between questions */
+}
+
+.part4-question-block:last-of-type {
+    border-bottom: none; /* Removes the line after the very last question */
+}
+
+/* --- Part 5: Interactive Canvas Styles --- */
+.part5-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
+
+.color-palette {
+    display: flex;
+    gap: 10px;
+}
+
+.palette-color {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.palette-color:hover {
+    transform: scale(1.1);
+}
+.palette-color.selected {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0,123,255,0.5);
+}
+
+/* Set the background color for each palette option */
+.palette-color[data-color="orange"] { background-color: orange; }
+.palette-color[data-color="red"]    { background-color: red; }
+.palette-color[data-color="purple"] { background-color: purple; }
+.palette-color[data-color="blue"]   { background-color: blue; }
+.palette-color[data-color="green"]  { background-color: green; }
+.palette-color[data-color="yellow"]  { background-color: yellow; }
+.palette-color[data-color="pink"]  { background-color: pink; }
+.palette-color[data-color="grey"]  { background-color: grey; }
+.palette-color[data-color="black"] { background-color: black; }
+
+.write-tool,
+.eraser-tool {
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: 600;
+    color: #333;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.write-tool:hover,
+.eraser-tool:hover {
+    background-color: #f8f8f8;
+    border-color: #aaa;
+}
+
+.write-tool.selected,
+.eraser-tool.selected {
+    border-color: #007bff;
+    color: #007bff;
+    box-shadow: 0 0 10px rgba(0,123,255,0.3);
+}
+
+.eraser-tool.selected {
+    border-color: #dc3545; /* Red border for eraser */
+    color: #dc3545;
+}
+
+#part5-interactive-container svg {
+    width: 100%;
+    height: auto;
+}
+
+/* Target the shapes inside the loaded SVG */
+#part5-interactive-container path,
+#part5-interactive-container rect,
+#part5-interactive-container polygon {
+    cursor: pointer;
+    transition: fill 0.3s ease;
+}
+
+/* --- Feedback Styles --- */
+/* General Correct/Incorrect Feedback */
+.correct {
+    border-color: #28a745 !important; /* Green for correct */
+    background-color: rgba(40, 167, 69, 0.1) !important;
+}
+
+.incorrect {
+    border-color: #dc3545 !important; /* Red for incorrect */
+    background-color: rgba(220, 53, 69, 0.1) !important;
+}
+
+/* Specific feedback for draggable names */
+.draggable-name.correct {
+    background-color: #28a745 !important;
+    color: white !important;
+}
+
+.draggable-name.incorrect {
+    background-color: #dc3545 !important;
+    color: white !important;
+}
+
+/* Feedback for Option Cards (Part 4) */
+.option-card.correct {
+    border-color: #4caf50;
+    background-color: #e8f5e9;
+}
+
+.option-card.incorrect {
+    border-color: #f44336;
+    background-color: #ffebee;
+}
+
+.option-card.correct::after, .option-card.incorrect::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-size: ;
+    display: flex; /* Use flex to center text */
+    align-items: center;
+    justify-content: center;
+    font-size: 16px; /* Adjust size of check/cross */
+    font-weight: bold;
+}
+
+.option-card.correct::after {
+    content: '✔';
+    color: white;
+    background-color: #4caf50;
+}
+
+.option-card.incorrect::after {
+    content: '✖';
+    color: white;
+    background-color: #f44336;
+}
+
+/* In style.css */
+
+/* --- Part 2: Homework Form Styles --- */
+.homework-form {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.homework-form h4 {
+    text-align: center;
+    font-size: 1.4em;
+    color: #333;
+    margin-bottom: 25px;
+    text-decoration: underline;
+}
+
+.form-row {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 25px;
+    font-size: 1.1em;
+}
+
+.form-row .number {
+    font-weight: bold;
+    margin-right: 15px;
+    color: #555;
+}
+
+.form-row .label {
+    flex-grow: 1; /* Pushes the input to the right */
+    padding-right: 15px;
+}
+
+.form-row .input-wrapper {
+    flex-basis: 45%; /* Allocates a consistent width for the input area */
+    display: flex;
+    align-items: baseline;
+}
+
+.input-wrapper .pre-text {
+    margin-right: 5px;
+    color: #333;
+}
+
+/* This creates the dotted line effect for inputs */
+.form-row .text-answer {
+    border: none;
+    background: transparent;
+    outline: none;
+    border-bottom: 2px dotted #555;
+    width: 100%;
+    font-size: 1em;
+    font-family: 'Poppins', sans-serif;
+    color: #0056b3; /* Color for user's typed text */
+    padding-bottom: 2px;
+}
+
+/* Styling for the example answer line */
+.form-row.example .answer-line {
+    flex-basis: 45%;
+    border-bottom: 2px dotted #ccc;
+    color: #555;
+    padding-left: 10px; /* Align text a bit */
+}
+
+/* --- Submission & Results Area --- */
+.submission-area {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+#results-display, #final-results-display {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+#results-display.correct, #final-results-display.correct {
+    color: #2e7d32;
+}
+
+#results-display.partial, #final-results-display.partial {
+    color: #ef6c00;
+}
+
+#results-display.incorrect, #final-results-display.incorrect {
+    color: #c62828;
+}
+
+/* --- Part 3: Matching Question Styles --- */
+.part3-wrapper {
+    display: flex;
+    flex-direction: row; /* UPDATE: This makes the layout side-by-side */
+    flex-wrap: wrap; /* Allows stacking on very small screens */
+    gap: 30px;
+    margin-top: 20px;
+    align-items: flex-start; /* UPDATE: Aligns the top of both columns */
+}
+
+.part3-objects {
+    flex: 1; /* Takes up half the space */
+    min-width: 300px;
+}
+
+.part3-locations {
+    flex-basis: 250px; /* UPDATE: Give the locations column a fixed base width */
+    flex-shrink: 0; /* UPDATE: Prevent this column from shrinking */
+    display: grid;
+    grid-template-columns: 1fr; /* UPDATE: This forces a single vertical column */
+    gap: 10px; /* UPDATE: A smaller gap for the vertical list */
+}
+
+.match-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+.match-item img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+.match-item span {
+    width: 100px; /* Gives the text a consistent width */
+    font-size: 1.2em;
+}
+
+.letter-box {
+    width: 45px;
+    height: 45px;
+    text-align: center;
+    font-size: 1.6em;
+    font-weight: bold;
+    border: 2px solid #777;
+    border-radius: 5px;
+    text-transform: uppercase; /* Automatically makes typed letter uppercase */
+    color: #0056b3;
+}
+
+.location-card {
+    position: relative;
+}
+
+.location-card img {
+    width: 100%;
+    display: block; /* Removes any extra space below the image */
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.location-letter {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.2em;
+    border: 1px solid #888;
+}
+
+.test-section > h3 {
+    text-align: center;
+    font-size: 1.5em; /* A slightly larger font for the main part titles */
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* This is the new style for our consistent instruction lines */
+.part-instructions {
+    text-align: center;
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 25px; /* Adds space between the instructions and the audio player */
+    font-style: italic;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .test-container {
+        padding: 20px;
+        margin: 10px 0;
+        max-height: calc(100vh - 20px); /* Adjust max-height for smaller screens */
+    }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    .nav-btn, .start-test-btn, #check-all-listening-answers-btn {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    .options-grid {
+        grid-template-columns: 1fr; /* Stack options on small screens */
+    }
+
+    .image-with-dropzones-wrapper {
+        padding-bottom: 75%; /* Adjust aspect ratio for potentially taller images on mobile */
+    }
+
+    .drop-target {
+        width: 15%; /* Slightly larger touch target on mobile */
+        height: 20%;
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .test-container {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    .nav-btn, .start-test-btn, #check-all-listening-answers-btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .navigation-buttons, .submission-area {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .drop-target {
+        width: 20%; /* Even larger touch target on very small screens */
+        height: 25%;
+    }
+    .drop-target .draggable-name {
+        font-size: 10px; /* Smaller font for names in drop zones */
+    }
+}
+
+/* --- Background Fade-in Animation --- */
+@keyframes backgroundFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: -1; 
+    animation: backgroundFadeIn 1.5s ease-out forwards;
+    /* The specific background-image is REMOVED from here */
+}
+
+/* --- Specific Backgrounds for Each Page Type --- */
+
+/* Background for the main menu homepage */
+body.page-menu::before {
+    background-image: url('images/new-menu-background.svg'); /* <-- PROVIDE YOUR NEW BACKGROUND IMAGE HERE */
+}
+
+/* Background for all Flyers tests */
+body.page-flyers::before {
+    background-image: url('images/flyers_background.svg'); /* This is the monkey background */
+}
+
+/* --- Reading & Writing Part 1 Styles --- */
+
+#rw-part1 .rw-part1-wrapper {
+    display: flex;
+    flex-direction: column; /* This is the key fix. It stacks the top, middle, and bottom rows vertically. */
+    gap: 15px;
+}
+
+#rw-part1 .word-row {
+    display: flex;
+    justify-content: space-around; /* This spreads the words out evenly in the top and bottom rows */
+    padding: 0 5%; /* Adds some space on the sides */
+}
+
+#rw-part1 .main-content-row {
+    display: flex;
+    gap: 20px; /* This creates the space between the word columns and the center box */
+}
+
+#rw-part1 .word-column {
+    flex-basis: 130px; /* Give the side columns a fixed base width */
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; /* Distributes words evenly down the column */
+}
+
+#rw-part1 .word-column.right {
+    align-items: flex-end; /* Aligns words to the right side of their column */
+}
+
+#rw-part1 .definitions-column {
+    flex-grow: 1; /* Allow middle column to take up all remaining space */
+    border: 1px solid #ccc; /* This creates the visual box around the definitions */
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#rw-part1 .vocab-word {
+    font-size: 1.1em;
+    font-weight: 600;
+}
+
+#rw-part1 .vocab-word.red { color: #d9534f; }
+#rw-part1 .vocab-word.green { color: #5cb85c; }
+#rw-part1 .vocab-word.blue { color: #428bca; }
+
+#rw-part1 .definition-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 22px; /* Adjusted for better vertical spacing */
+    font-size: 1.1em;
+}
+#rw-part1 .definition-row:last-child {
+    margin-bottom: 0;
+}
+
+#rw-part1 .definition-row .label {
+    flex-grow: 1;
+}
+
+#rw-part1 .definition-row .input-wrapper {
+    flex-basis: 30%; /* Base width for the answer area */
+    flex-shrink: 0;
+}
+
+#rw-part1 .definition-row .text-answer {
+    border: none;
+    border-bottom: 2px dotted #555;
+    background: transparent;
+    outline: none;
+    width: 100%;
+}
+
+/* Varying widths for the input lines to match the original */
+#rw-part1 .definition-row:nth-child(4) .input-wrapper,
+#rw-part1 .definition-row:nth-child(8) .input-wrapper {
+    flex-basis: 25%;
+}
+#rw-part1 .definition-row:nth-child(2) .input-wrapper,
+#rw-part1 .definition-row:nth-child(10) .input-wrapper {
+    flex-basis: 40%;
+}
+
+#rw-part1 .definition-row.example .text-answer {
+    color: #333;
+}
+
+/* --- Part 3 Example Box FINAL Fix --- */
+#listening-part3 .match-item .letter-box[readonly] {
+    color: #333 !important;
+    background-color: #f0f0f0;
+    cursor: default;
+}
+
+/* --- Animated Mascot Styles --- */
+
+/* 1. Define the "slide in from right" animation */
+@keyframes slideInFromLeft {
+    from {
+        /* Start 100% off the left side of the screen and completely transparent */
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        /* End at its natural position and fully visible */
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 2. Style the mascot image itself */
+.animated-mascot {
+    /* Position it fixed to the bottom right of the screen */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    
+    /* Control its size - adjust as needed */
+    width: auto;
+    height: 60vh; /* 40% of the viewport height */
+    max-height: 600px; /* But don't let it get too big on large screens */
+    
+    /* Put it behind the main content but in front of the page background */
+    z-index: 0; 
+
+    /* Make it transparent initially so the animation can fade it in */
+    opacity: 0;
+
+    /* 3. Apply the animation! */
+    animation: slideInFromLeft 1.5s ease-out forwards;
+    animation-delay: 0.5s; /* Optional: Wait half a second before starting */
+}
+
+/* --- Animated Student Girl Styles --- */
+
+/* 1. Define the "slide in from left" animation */
+@keyframes slideInFromRight {
+    from {
+        /* Start 100% off the LEFT side of the screen and transparent */
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        /* End at its natural position and fully visible */
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 2. Style the girl image itself */
+.animated-girl {
+    /* Position her fixed to the bottom LEFT of the screen */
+    position: fixed;
+    bottom: 0;
+    right: 0%;
+    
+    /* Control her size - adjust as needed */
+    width: auto;
+    height: 71vh; /* Make her the same relative height as the monkey */
+    max-height: 600px; /* A slightly different max-height can add variety */
+    
+    /* Put her on the same background layer as the monkey */
+    z-index: 0; 
+
+    /* Make her transparent initially */
+    opacity: 0;
+
+    /* 3. Apply the NEW animation! */
+    animation: slideInFromRight 1.5s ease-out forwards;
+    animation-delay: 0.5s; /* Use the same delay so they slide in together */
+}
+
+/* --- Back to Menu Link Style --- */
+.back-to-menu-link {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%); /* This vertically centers the link */
+
+    font-size: 1em;
+    font-weight: 600;
+    color: #3f51b5;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.back-to-menu-link:hover {
+    color: #303f9f; /* Darker blue on hover */
+    text-decoration: underline;
+}
+
+/* ===================================================================== */
+/* --- FINAL SPECIFICITY OVERRIDES --- */
+/* ===================================================================== */
+
+/* --- 1. Fix ALL "Start" buttons --- */
+/* This targets the start button on BOTH the listening and R&W intro pages */
+#listening-intro .nav-btn,
+#rw-intro .nav-btn {
+    background-color: #8723ff !important;
+    color: white !important;
+}
+#listening-intro .nav-btn:hover,
+#rw-intro .nav-btn:hover {
+    background-color: #6a1ce8 !important;
+}
+
+/* --- 2. Fix Part 1 Draggable Name Pills --- */
+/* This forces the height and removes conflicting padding for the pills */
+#listening-part1 .draggable-name {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    height: 30px; /* A fixed height is the most robust solution */
+    box-sizing: border-box;
+}
+
+/* --- 3. Fix Part 3 Invisible "H" --- */
+/* This forces the color and background for the readonly example box */
+#listening-part3 .match-item .letter-box[readonly] {
+    color: #333 !important;
+    background-color: #f0f0f0 !important;
+}
