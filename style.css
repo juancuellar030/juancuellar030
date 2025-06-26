@@ -290,11 +290,11 @@ header p {
 #listening-part1 .draggable-name {
     background-color: #3498db;
     color: white;
-    padding: 3px 12px !important; /* Force the flat padding */
+    padding: 4px 15px !important; /* Force the flat padding */
     border-radius: 20px;
     cursor: grab;
     font-weight: 600;
-    font-size: 1em;
+    font-size: 1.5em;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
     display: inline-flex;
@@ -839,12 +839,6 @@ header p {
     font-style: italic;
 }
 
-/* --- Part 3 Example Box Fix --- */
-.match-item .letter-box[readonly] {
-    color: #333 !important; /* Makes the example "H" dark grey and visible */
-    cursor: default;
-}
-
 /* Responsive Adjustments */
 @media (max-width: 768px) {
     .test-container {
@@ -938,39 +932,39 @@ body.page-flyers::before {
 }
 
 /* --- Reading & Writing Part 1 Styles --- */
+
 .rw-part1-wrapper {
     display: flex;
-    flex-direction: column; /* Main axis is vertical */
+    flex-direction: column; /* UPDATE: This is the key fix. It stacks the top, middle, and bottom rows vertically. */
+    gap: 15px;
 }
 
 .word-row {
     display: flex;
-    justify-content: space-around;
-    margin-bottom: 20px;
-}
-.word-row.bottom {
-    margin-top: 20px;
+    justify-content: space-around; /* This spreads the words out evenly in the top and bottom rows */
+    padding: 0 10%; /* Adds some space on the sides */
 }
 
 .main-content-row {
     display: flex;
-    gap: 20px;
+    gap: 20px; /* This creates the space between the word columns and the center box */
 }
 
 .word-column {
-    flex-basis: 120px;
+    flex-basis: 130px; /* Give the side columns a fixed base width */
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-around; /* Distributes words evenly */
+    justify-content: space-around; /* Distributes words evenly down the column */
 }
+
 .word-column.right {
-    align-items: flex-end;
+    align-items: flex-end; /* Aligns words to the right side of their column */
 }
 
 .definitions-column {
-    flex-grow: 1;
-    border: 1px solid #ccc; /* The box around the definitions */
+    flex-grow: 1; /* Allow middle column to take up all remaining space */
+    border: 1px solid #ccc; /* This creates the visual box around the definitions */
     padding: 20px;
     border-radius: 8px;
 }
@@ -979,6 +973,7 @@ body.page-flyers::before {
     font-size: 1.1em;
     font-weight: 600;
 }
+
 .vocab-word.red { color: #d9534f; }
 .vocab-word.green { color: #5cb85c; }
 .vocab-word.blue { color: #428bca; }
@@ -987,7 +982,7 @@ body.page-flyers::before {
     display: flex;
     align-items: baseline;
     gap: 10px;
-    margin-bottom: 20px;
+    margin-bottom: 22px; /* Adjusted for better vertical spacing */
     font-size: 1.1em;
 }
 .definition-row:last-child {
@@ -1008,10 +1003,10 @@ body.page-flyers::before {
     border-bottom: 2px dotted #555;
     background: transparent;
     outline: none;
-    width: 100%; /* The input will fill its wrapper */
+    width: 100%;
 }
 
-/* NEW: Varying widths for the input lines */
+/* Varying widths for the input lines to match the original */
 .definition-row:nth-child(4) .input-wrapper,
 .definition-row:nth-child(8) .input-wrapper {
     flex-basis: 25%;
@@ -1023,10 +1018,6 @@ body.page-flyers::before {
 
 .definition-row.example .text-answer {
     color: #333;
-}
-
-.definition-row.example .text-answer {
-    color: #333; /* Make example text visible */
 }
 
 /* --- Part 3 Example Box FINAL Fix --- */
@@ -1131,4 +1122,21 @@ body.page-flyers::before {
 .back-to-menu-link:hover {
     color: #303f9f; /* Darker blue on hover */
     text-decoration: underline;
+}
+
+/* --- FINAL BUTTON FIXES --- */
+
+/* This rule specifically targets the "Start" button on the intro page */
+#listening-intro .nav-btn {
+    background-color: #8723ff !important;
+    color: white !important;
+}
+#listening-intro .nav-btn:hover {
+    background-color: #6a1ce8 !important;
+}
+
+/* --- FINAL PART 3 EXAMPLE FIX --- */
+#listening-part3 .match-item .letter-box[readonly] {
+    color: #333 !important; /* Force the text to be dark and visible */
+    background-color: #f0f0f0 !important; /* Force the background to be grey */
 }
