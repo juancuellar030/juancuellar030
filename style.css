@@ -302,7 +302,7 @@ header p {
     align-items: center;
     justify-content: center;
     white-space: nowrap;
-    height: 28px; /* ADD a fixed height to prevent overrides */
+    height: 30px; /* ADD a fixed height to prevent overrides */
     box-sizing: border-box; /* ADD this to include padding in the height calculation */
 }
 
@@ -1125,19 +1125,34 @@ body.page-flyers::before {
     text-decoration: underline;
 }
 
-/* --- FINAL BUTTON FIXES --- */
+/* ===================================================================== */
+/* --- FINAL SPECIFICITY OVERRIDES --- */
+/* ===================================================================== */
 
-/* This rule specifically targets the "Start" button on the intro page */
-#listening-intro .nav-btn {
+/* --- 1. Fix ALL "Start" buttons --- */
+/* This targets the start button on BOTH the listening and R&W intro pages */
+#listening-intro .nav-btn,
+#rw-intro .nav-btn {
     background-color: #8723ff !important;
     color: white !important;
 }
-#listening-intro .nav-btn:hover {
+#listening-intro .nav-btn:hover,
+#rw-intro .nav-btn:hover {
     background-color: #6a1ce8 !important;
 }
 
-/* --- FINAL PART 3 EXAMPLE FIX --- */
+/* --- 2. Fix Part 1 Draggable Name Pills --- */
+/* This forces the height and removes conflicting padding for the pills */
+#listening-part1 .draggable-name {
+    padding-top: 0 !important;
+    padding-bottom: 0 !important;
+    height: 30px; /* A fixed height is the most robust solution */
+    box-sizing: border-box;
+}
+
+/* --- 3. Fix Part 3 Invisible "H" --- */
+/* This forces the color and background for the readonly example box */
 #listening-part3 .match-item .letter-box[readonly] {
-    color: #333 !important; /* Force the text to be dark and visible */
-    background-color: #f0f0f0 !important; /* Force the background to be grey */
+    color: #333 !important;
+    background-color: #f0f0f0 !important;
 }
