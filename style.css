@@ -749,16 +749,6 @@ header p {
     color: #c62828;
 }
 
-/* --- Part 3: Matching Question Styles --- */
-.part3-wrapper {
-    display: flex;
-    flex-direction: row; /* UPDATE: This makes the layout side-by-side */
-    flex-wrap: wrap; /* Allows stacking on very small screens */
-    gap: 30px;
-    margin-top: 20px;
-    align-items: flex-start; /* UPDATE: Aligns the top of both columns */
-}
-
 .part3-objects {
     flex: 1; /* Takes up half the space */
     min-width: 300px;
@@ -770,13 +760,6 @@ header p {
     display: grid;
     grid-template-columns: 1fr; /* UPDATE: This forces a single vertical column */
     gap: 10px; /* UPDATE: A smaller gap for the vertical list */
-}
-
-.match-item {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-bottom: 25px;
 }
 
 .match-item img {
@@ -792,30 +775,11 @@ header p {
     font-size: 1.2em;
 }
 
-/* --- This is the new, combined rule --- */
-.letter-box {
-    width: 45px;
-    height: 45px;
-    text-align: center;
-    font-size: 1.6em;
-    font-weight: bold;
-    border: 2px solid #777;
-    border-radius: 5px;
-    text-transform: uppercase;
-    color: #0056b3; /* Color for student's answer */
-    background-color: #fff; /* White background for active boxes */
-    transition: background-color 0.2s, color 0.2s; /* Smooth transition */
-}
-
 /* This new rule specifically targets the read-only example box */
 .letter-box[readonly] {
     color: #333; /* Visible dark grey color for the 'H' */
     background-color: #f0f0f0; /* Light grey background for example */
     cursor: default; /* Show a normal cursor, not a text cursor */
-}
-
-.location-card {
-    position: relative;
 }
 
 .location-card img {
@@ -945,102 +909,6 @@ body.page-flyers::before {
     background-image: url('images/flyers_background.svg'); /* This is the monkey background */
 }
 
-/* --- Reading & Writing Part 1 Styles --- */
-
-#rw-part1 .rw-part1-wrapper {
-    display: flex;
-    flex-direction: column; /* This is the key fix. It stacks the top, middle, and bottom rows vertically. */
-    gap: 15px;
-}
-
-#rw-part1 .word-row {
-    display: flex;
-    justify-content: space-around; /* This spreads the words out evenly in the top and bottom rows */
-    padding: 0 5%; /* Adds some space on the sides */
-}
-
-#rw-part1 .main-content-row {
-    display: flex;
-    gap: 20px; /* This creates the space between the word columns and the center box */
-}
-
-#rw-part1 .word-column {
-    flex-basis: 130px; /* Give the side columns a fixed base width */
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around; /* Distributes words evenly down the column */
-}
-
-#rw-part1 .word-column.right {
-    align-items: flex-end; /* Aligns words to the right side of their column */
-}
-
-#rw-part1 .definitions-column {
-    flex-grow: 1; /* Allow middle column to take up all remaining space */
-    border: 1px solid #ccc; /* This creates the visual box around the definitions */
-    padding: 20px;
-    border-radius: 8px;
-}
-
-#rw-part1 .vocab-word {
-    font-size: 1.1em;
-    font-weight: 600;
-}
-
-#rw-part1 .vocab-word.red { color: #d9534f; }
-#rw-part1 .vocab-word.green { color: #5cb85c; }
-#rw-part1 .vocab-word.blue { color: #428bca; }
-
-#rw-part1 .definition-row {
-    display: flex;
-    align-items: baseline;
-    gap: 10px;
-    margin-bottom: 22px; /* Adjusted for better vertical spacing */
-    font-size: 1.1em;
-}
-#rw-part1 .definition-row:last-child {
-    margin-bottom: 0;
-}
-
-#rw-part1 .definition-row .label {
-    flex-grow: 1;
-}
-
-#rw-part1 .definition-row .input-wrapper {
-    flex-basis: 30%; /* Base width for the answer area */
-    flex-shrink: 0;
-}
-
-#rw-part1 .definition-row .text-answer {
-    border: none;
-    border-bottom: 2px dotted #555;
-    background: transparent;
-    outline: none;
-    width: 100%;
-}
-
-/* Varying widths for the input lines to match the original */
-#rw-part1 .definition-row:nth-child(4) .input-wrapper,
-#rw-part1 .definition-row:nth-child(8) .input-wrapper {
-    flex-basis: 25%;
-}
-#rw-part1 .definition-row:nth-child(2) .input-wrapper,
-#rw-part1 .definition-row:nth-child(10) .input-wrapper {
-    flex-basis: 40%;
-}
-
-#rw-part1 .definition-row.example .text-answer {
-    color: #333;
-}
-
-/* --- Part 3 Example Box FINAL Fix --- */
-#listening-part3 .match-item .letter-box[readonly] {
-    color: #333 !important;
-    background-color: #f0f0f0;
-    cursor: default;
-}
-
 /* --- Animated Mascot Styles --- */
 
 /* 1. Define the "slide in from right" animation */
@@ -1138,24 +1006,7 @@ body.page-flyers::before {
     text-decoration: underline;
 }
 
-/* ===================================================================== */
-/* --- FINAL SPECIFICITY OVERRIDES --- */
-/* ===================================================================== */
-
-/* --- 1. Fix ALL "Start" buttons --- */
-/* This targets the start button on BOTH the listening and R&W intro pages */
-#listening-intro .nav-btn,
-#rw-intro .nav-btn {
-    background-color: #8723ff !important;
-    color: white !important;
-}
-#listening-intro .nav-btn:hover,
-#rw-intro .nav-btn:hover {
-    background-color: #6a1ce8 !important;
-}
-
 /* --- 2. Fix Part 1 Draggable Name Pills --- */
-/* This forces the height and removes conflicting padding for the pills */
 #listening-part1 .draggable-name {
     padding-top: 1 !important;
     padding-bottom: 1 !important;
