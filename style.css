@@ -792,6 +792,7 @@ header p {
     font-size: 1.2em;
 }
 
+/* --- This is the new, combined rule --- */
 .letter-box {
     width: 45px;
     height: 45px;
@@ -800,8 +801,17 @@ header p {
     font-weight: bold;
     border: 2px solid #777;
     border-radius: 5px;
-    text-transform: uppercase; /* Automatically makes typed letter uppercase */
-    color: #0056b3;
+    text-transform: uppercase;
+    color: #0056b3; /* Color for student's answer */
+    background-color: #fff; /* White background for active boxes */
+    transition: background-color 0.2s, color 0.2s; /* Smooth transition */
+}
+
+/* This new rule specifically targets the read-only example box */
+.letter-box[readonly] {
+    color: #333; /* Visible dark grey color for the 'H' */
+    background-color: #f0f0f0; /* Light grey background for example */
+    cursor: default; /* Show a normal cursor, not a text cursor */
 }
 
 .location-card {
@@ -1151,11 +1161,4 @@ body.page-flyers::before {
     padding-bottom: 1 !important;
     height: 30px; /* A fixed height is the most robust solution */
     box-sizing: border-box;
-}
-
-/* --- 3. Fix Part 3 Invisible "H" --- */
-/* This forces the color and background for the readonly example box */
-#listening-part3 .match-item .letter-box[readonly] {
-    color: #333 !important;
-    background-color: #f0f0f0 !important;
 }
