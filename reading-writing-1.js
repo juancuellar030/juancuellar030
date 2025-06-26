@@ -17,13 +17,26 @@ document.addEventListener('DOMContentLoaded', () => {
     };
     const totalQuestions = Object.keys(correctAnswers).length;
 
-    // --- Simple Navigation ---
-    document.querySelector('.start-rw-btn').addEventListener('click', () => {
-        document.getElementById('rw-intro').classList.add('hidden');
-        document.getElementById('rw-part1').classList.remove('hidden');
-        // A placeholder for now, to show the results section later
-        document.getElementById('rw-results').classList.remove('hidden');
+    // --- Core Navigation ---
+    const testSections = document.querySelectorAll('.test-section');
+    
+    function showSection(sectionId) {
+        testSections.forEach(section => {
+            section.classList.toggle('active', section.id === sectionId);
+            section.classList.toggle('hidden', section.id !== sectionId);
+        });
+        document.querySelector('.test-container')?.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    document.body.addEventListener('click', (event) => {
+        const button = event.target.closest('.nav-btn');
+        if (button && button.dataset.target) {
+            showSection(button.dataset.target);
+        }
     });
+
+    // Initial setup to show the intro first
+    showSection('rw-intro');
 
     // --- Answer Saving ---
     document.querySelectorAll('.text-answer').forEach(input => {
