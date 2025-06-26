@@ -1017,14 +1017,16 @@ body.page-flyers::before {
 
 /* This is the base style for ALL input fields in this section */
 .rw-part1-container input {
-    position: absolute; /* Allows us to place it anywhere on the container */
-    background-color: transparent; /* Makes the input see-through */
-    border: none; /* Removes the default input border */
+    position: absolute; 
     font-family: 'Poppins', sans-serif;
-    font-size: 18px; /* Adjust as needed */
-    color: #0056b3; /* A blue color for the typed text */
+    font-size: 18px; 
+    color: #0056b3; 
     padding: 2px 5px;
     box-sizing: border-box;
+    
+    /* --- TEMPORARY STYLES FOR POSITIONING --- */
+    background-color: rgba(0, 119, 255, 0.2); /* A semi-transparent blue fill */
+    border: 1px dashed #0077ff; /* A thin dashed blue border */
 }
 
 /* --- Positioning for EACH individual input box --- */
