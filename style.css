@@ -151,13 +151,10 @@ header p {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* In style.css */
-
 /* --- Universal Button Styles --- */
-
 .navigation-buttons {
     display: flex;
-    justify-content: space-between; /* This correctly aligns buttons to the edges */
+    justify-content: space-between;
     align-items: center;
     gap: 15px;
     margin-top: 30px;
@@ -165,53 +162,53 @@ header p {
     border-top: 1px solid #e0e0e0;
 }
 
-/* Base style for ALL buttons to share */
-.nav-btn {
+/* Base style for ALL buttons */
+.nav-btn,
+#check-all-listening-answers-btn,
+#check-all-rw-answers-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 8px; /* Space between icon and text, if you add icons later */
-    font-family: 'Mulish', sans-serif; /* NEW FONT */
+    gap: 8px;
+    font-family: 'Mulish', sans-serif;
     font-size: 1.1em;
-    font-weight: 700; /* Bolder font weight */
-    padding: 12px 30px; /* More horizontal padding */
-    border-radius: 50px; /* This creates the "pill" shape */
-    border: 2px solid transparent; /* The border will be used for the secondary style */
+    font-weight: 700;
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: 2px solid transparent;
     cursor: pointer;
-    text-decoration: none; /* For cases where we use <a> tags as buttons */
+    text-decoration: none;
     transition: all 0.2s ease-in-out;
 }
 
 /* Style for Primary Buttons (Purple) */
-/* This will apply to .nav-btn.next-btn, .start-test-btn, and the Check Answers button */
-.nav-btn, 
+.nav-btn:not(.prev-btn), /* Target all nav buttons EXCEPT the 'prev-btn' */
 #check-all-listening-answers-btn,
 #check-all-rw-answers-btn {
-    background-color: #8723ff; /* NEW purple color */
+    background-color: #8723ff;
     color: white;
 }
-.nav-btn:hover,
+.nav-btn:not(.prev-btn):hover,
 #check-all-listening-answers-btn:hover,
 #check-all-rw-answers-btn:hover {
-    background-color: #6a1ce8; /* A slightly darker purple for hover */
+    background-color: #6a1ce8;
     transform: translateY(-2px);
     box-shadow: 0 4px 15px rgba(135, 35, 255, 0.3);
 }
 
-/* Style for Secondary Buttons (White with Purple Outline) */
-/* This will apply to the "Back" buttons */
+/* Style for Secondary Buttons (White Outline) */
 .nav-btn.prev-btn {
     background-color: #ffffff;
     color: #8723ff;
     border-color: #8723ff;
 }
 .nav-btn.prev-btn:hover {
-    background-color: #f5f0ff; /* A very light purple tint for hover */
+    background-color: #f5f0ff;
     color: #6a1ce8;
     border-color: #6a1ce8;
 }
 
-/* Disabled state remains the same */
+/* Disabled state */
 .nav-btn:disabled {
     background-color: #bdc3c7;
     border-color: #bdc3c7;
@@ -304,6 +301,8 @@ header p {
     align-items: center;
     justify-content: center;
     white-space: nowrap;
+    height: 28px; /* ADD a fixed height to prevent overrides */
+    box-sizing: border-box; /* ADD this to include padding in the height calculation */
 }
 
 .draggable-name:hover {
@@ -361,6 +360,8 @@ header p {
     box-shadow: none;
     transform: none;
     background-color: #3f51b5;
+    height: 28px; /* ADD the same fixed height */
+    box-sizing: border-box; /* ADD this as well */
 }
 
 /* Remove placeholder styling (not needed as actual draggable is moved) */
@@ -496,8 +497,6 @@ header p {
 .part4-question-block:last-of-type {
     border-bottom: none; /* Removes the line after the very last question */
 }
-
-/* In style.css */
 
 /* --- Part 5: Interactive Canvas Styles --- */
 .part5-controls {
@@ -1032,9 +1031,9 @@ body.page-flyers::before {
 
 /* --- Part 3 Example Box FINAL Fix --- */
 #listening-part3 .match-item .letter-box[readonly] {
-    color: #333 !important; /* Makes the example "H" dark grey and visible */
+    color: #333 !important;
+    background-color: #f0f0f0;
     cursor: default;
-    background-color: #f0f0f0; /* We can keep the grey background here */
 }
 
 /* --- Animated Mascot Styles --- */
