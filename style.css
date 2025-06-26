@@ -1147,8 +1147,8 @@ body.page-flyers::before {
 /* --- 2. Fix Part 1 Draggable Name Pills --- */
 /* This forces the height and removes conflicting padding for the pills */
 #listening-part1 .draggable-name {
-    padding-top: 0 !important;
-    padding-bottom: 0 !important;
+    padding-top: 1 !important;
+    padding-bottom: 1 !important;
     height: 30px; /* A fixed height is the most robust solution */
     box-sizing: border-box;
 }
