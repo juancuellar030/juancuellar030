@@ -75,6 +75,15 @@ body.page-flyers::before { background-image: url('images/flyers_background.svg')
 /* --- HEADERS & GENERAL STYLING --- */
 /* ===================================================================== */
 
+#listening-intro h2, #rw-intro h2 {
+    text-align: left;
+    font-size: 1.6em;
+    font-weight: 600;
+    margin-bottom: 20px;
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
 header {
     text-align: center; border-bottom: 1px solid #e0e0e0;
     padding-bottom: 20px; margin-bottom: 30px;
@@ -157,17 +166,38 @@ header p { font-size: 1.1em; color: #555; }
 #listening-part1 .draggable-name:hover { background-color: #2980b9; transform: translateY(-2px); }
 #listening-part1 .draggable-name.dragging { opacity: 0.6; }
 #listening-part1 .drop-target { position: absolute; border: 2px dashed #ffffff; border-radius: 8px; display: flex; align-items: center; justify-content: center; }
-#listening-part1 .drop-target .draggable-name { background-color: #3f51b5; box-shadow: none; width: 95%; }
+#listening-part1 .drop-target .draggable-name {
+    background-color: #3f51b5;
+    padding: 0 !important;
+    height: 30px;
+    box-sizing: border-box;
+    font-size: 1em;
+    font-weight: 600;
+    width: 95%;
+    margin: 0;
+    box-shadow: none;
+}
 
 /* ===================================================================== */
 /* --- LISTENING PART 2, 3, R&W PART 1: TEXT INPUTS --- */
 /* ===================================================================== */
 
-.form-row, .definition-row, .match-item { display: flex; align-items: baseline; margin-bottom: 25px; font-size: 1.1em; gap: 10px; }
+.form-row {
+    display: flex;
+    align-items: baseline; /* This keeps text and inputs aligned */
+    margin-bottom: 25px;
+    font-size: 1.1em;
+    gap: 10px; /* Use gap for consistent spacing */
+}
+
 .form-row .number, .definition-row .number { font-weight: bold; }
 .form-row .label, .definition-row .label, .match-item span { flex-shrink: 0; }
 .input-wrapper, .letter-box { flex-grow: 1; }
-.input-wrapper .pre-text { margin-right: 5px; }
+.input-wrapper .pre-text {
+    margin-right: 5px;
+    color: #333;
+    font-family: 'Poppins', sans-serif; /* Use the main body font */
+}
 
 /* Dotted Line Style */
 .text-answer, .letter-box {
@@ -185,7 +215,13 @@ header p { font-size: 1.1em; color: #555; }
 /* --- LISTENING PART 3 & 4: IMAGES & GRIDS --- */
 /* ===================================================================== */
 
-#listening-part3 .part3-wrapper { display: flex; flex-direction: row; flex-wrap: wrap; gap: 30px; align-items: flex-start; }
+#listening-part3 .part3-wrapper {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+    align-items: flex-start;
+}
 #listening-part3 .part3-objects { flex: 1; min-width: 300px; }
 #listening-part3 .part3-locations { flex-basis: 250px; flex-shrink: 0; display: grid; grid-template-columns: 1fr; gap: 10px; }
 #listening-part3 .match-item img { width: 120px; height: 80px; object-fit: cover; border: 1px solid #ddd; }
@@ -219,20 +255,91 @@ header p { font-size: 1.1em; color: #555; }
 /* --- READING & WRITING PART 1 --- */
 /* ===================================================================== */
 
-#rw-part1 .rw-part1-wrapper { display: flex; flex-direction: column; gap: 15px; }
-#rw-part1 .word-row { display: flex; justify-content: space-around; padding: 0 5%; }
-#rw-part1 .main-content-row { display: flex; gap: 20px; }
-#rw-part1 .word-column { flex-basis: 130px; flex-shrink: 0; display: flex; flex-direction: column; justify-content: space-around; }
-#rw-part1 .word-column.right { align-items: flex-end; }
-#rw-part1 .definitions-column { flex-grow: 1; border: 1px solid #ccc; padding: 20px; border-radius: 8px; }
-#rw-part1 .vocab-word { font-weight: 600; }
+#rw-part1 .rw-part1-wrapper {
+    display: flex;
+    flex-direction: column; /* This is the key: stacks top, middle, bottom vertically */
+    gap: 15px;
+}
+
+#rw-part1 .word-row {
+    display: flex;
+    justify-content: space-around; /* Spreads words out evenly */
+    padding: 0 5%;
+}
+
+#rw-part1 .main-content-row {
+    display: flex;
+    gap: 20px; /* Space between side columns and center box */
+}
+
+#rw-part1 .word-column {
+    flex-basis: 130px; /* Fixed width for side columns */
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around; /* Evenly space words vertically */
+}
+
+#rw-part1 .word-column.right {
+    align-items: flex-end; /* Align right-side words to the right */
+}
+
+#rw-part1 .definitions-column {
+    flex-grow: 1; /* Allow center box to take all available space */
+    border: 1px solid #ccc; /* The visible box */
+    padding: 25px;
+    border-radius: 8px;
+}
+
+#rw-part1 .vocab-word {
+    font-size: 1.1em;
+    font-weight: 600;
+}
 #rw-part1 .vocab-word.red { color: #d9534f; }
 #rw-part1 .vocab-word.green { color: #5cb85c; }
 #rw-part1 .vocab-word.blue { color: #428bca; }
-#rw-part1 .definition-row .input-wrapper { flex-basis: 30%; flex-shrink: 0; }
-#rw-part1 .definition-row:nth-child(4) .input-wrapper, #rw-part1 .definition-row:nth-child(8) .input-wrapper { flex-basis: 25%; }
-#rw-part1 .definition-row:nth-child(2) .input-wrapper, #rw-part1 .definition-row:nth-child(10) .input-wrapper { flex-basis: 40%; }
-#rw-part1 .definition-row.example .text-answer { color: #333; }
+
+#rw-part1 .definition-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 22px;
+    font-size: 1.1em;
+}
+#rw-part1 .definition-row:last-child {
+    margin-bottom: 0;
+}
+
+#rw-part1 .definition-row .label {
+    flex-grow: 1;
+}
+
+#rw-part1 .definition-row .input-wrapper {
+    flex-basis: 30%;
+    flex-shrink: 0;
+}
+
+#rw-part1 .definition-row .text-answer {
+    border: none;
+    border-bottom: 2px dotted #555;
+    background: transparent;
+    outline: none;
+    width: 100%;
+}
+
+/* Varying widths for the input lines */
+#rw-part1 .definition-row:nth-child(4) .input-wrapper,
+#rw-part1 .definition-row:nth-child(8) .input-wrapper {
+    flex-basis: 25%;
+}
+#rw-part1 .definition-row:nth-child(2) .input-wrapper,
+#rw-part1 .definition-row:nth-child(10) .input-wrapper {
+    flex-basis: 40%;
+}
+
+#rw-part1 .definition-row.example .text-answer {
+    color: #333;
+}
 
 /* ===================================================================== */
 /* --- FEEDBACK & RESULTS --- */
