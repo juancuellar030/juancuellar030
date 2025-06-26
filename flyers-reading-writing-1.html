@@ -20,7 +20,7 @@
             <section id="rw-intro" class="test-section active">
                 <h2>Reading & Writing Test</h2>
                 <p>This test has 7 parts. Read the instructions for each part carefully.</p>
-                <button class="start-rw-btn" data-target="rw-part1">Start Part 1</button>
+                <button class="nav-btn" data-target="rw-part1">Start Part 1</button>
             </section>
 
             <!-- Reading & Writing Part 1 -->
@@ -28,28 +28,25 @@
                 <h3>Part 1 (10 Questions)</h3>
                 <p class="part-instructions">Look and read. Choose the correct words and write them on the lines. There is one example.</p>
                 
-                <div class="question-content">
-                    <div class="rw-part1-wrapper">
-                        
-                        <!-- Left Column of Words -->
-                        <div class="word-column-left">
+                <div class="rw-part1-wrapper">
+                    
+                    <!-- Top Row of Words -->
+                    <div class="word-row top">
+                        <div class="vocab-word red">a cave</div>
+                        <div class="vocab-word blue">a waiter</div>
+                        <div class="vocab-word green">a meal</div>
+                        <div class="vocab-word red">a cook</div>
+                    </div>
+
+                    <div class="main-content-row">
+                        <!-- Left Column -->
+                        <div class="word-column left">
                             <div class="vocab-word green">a mechanic</div>
                             <div class="vocab-word red">yoghurt</div>
                             <div class="vocab-word red">a bridge</div>
                             <div class="vocab-word green">an artist</div>
-                            <div class="vocab-word blue">air</div>
                         </div>
-
-                        <!-- Center Column with Definitions -->
-                        <div class="definitions-column">
-                            <!-- Example -->
-                            <div class="definition-row example">
-                                <span class="number"></span>
-                                <span class="label">This place is dark and cold. Bats often live here.</span>
-                                <div class="input-wrapper">
-                                    <input type="text" class="text-answer" value="a cave" readonly>
-                                </div>
-                            </div>
+                        
                             <!-- Questions 1-10 -->
                             <div class="definition-row"><span class="number">1</span><span class="label">People use milk to make this white food. Many people like to eat it for breakfast with honey.</span><div class="input-wrapper"><input type="text" id="rw_q1" class="text-answer" autocomplete="off"></div></div>
                             <div class="definition-row"><span class="number">2</span><span class="label">This person can fly a rocket into space.</span><div class="input-wrapper"><input type="text" id="rw_q2" class="text-answer" autocomplete="off"></div></div>
@@ -63,16 +60,21 @@
                             <div class="definition-row"><span class="number">10</span><span class="label">This is sweet and people use it when they make chocolate and cakes.</span><div class="input-wrapper"><input type="text" id="rw_q10" class="text-answer" autocomplete="off"></div></div>
                         </div>
 
-                        <!-- Right Column of Words -->
-                        <div class="word-column-right">
-                            <div class="vocab-word red">a cook</div>
+                        <!-- Right Column -->
+                        <div class="word-column right">
                             <div class="vocab-word red">sugar</div>
                             <div class="vocab-word green">a planet</div>
                             <div class="vocab-word green">an astronaut</div>
                             <div class="vocab-word green">a desert</div>
-                            <div class="vocab-word red">an anorak</div>
                             <div class="vocab-word red">a fork</div>
                         </div>
+                    </div>
+
+                    <!-- Bottom Row of Words -->
+                    <div class="word-row bottom">
+                        <div class="vocab-word blue">air</div>
+                        <div class="vocab-word red">a gate</div>
+                        <div class="vocab-word blue">a fork</div> <!-- Note: Fork is here again as per original -->
                     </div>
                 </div>
                 <!-- Navigation can be added later when you have more R&W parts -->
