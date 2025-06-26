@@ -290,7 +290,7 @@ header p {
 #listening-part1 .draggable-name {
     background-color: #3498db;
     color: white;
-    padding: 4px 15px !important; /* Force the flat padding */
+    padding: 6px 15px !important; /* Force the flat padding */
     border-radius: 20px;
     cursor: grab;
     font-weight: 600;
