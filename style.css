@@ -1023,11 +1023,7 @@ body.page-flyers::before {
     color: #0056b3; 
     padding: 2px 5px;
     box-sizing: border-box;
-    text-align: center;
-    
-    /* --- TEMPORARY STYLES FOR POSITIONING --- */
-    background-color: rgba(0, 119, 255, 0.2); /* A semi-transparent blue fill */
-    border: 1px dashed #0077ff; /* A thin dashed blue border */
+    text-align: center;  
 }
 
 /* --- Positioning for EACH individual input box --- */
