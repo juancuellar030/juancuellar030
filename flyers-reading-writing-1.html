@@ -25,58 +25,32 @@
             <!-- Reading & Writing Part 1 -->
             <section id="rw-part1" class="test-section hidden">
                 <h3>Part 1 (10 Questions)</h3>
-                <p class="part-instructions">Look and read. Choose the correct words and write them on the lines. There is one example.</p>
+                <p class="part-instructions">Look and read. Choose the correct words and write them on the lines.</p>
                 
-                <div class="rw-part1-wrapper">
-                    
-                    <!-- Top Row of Words -->
-                    <div class="word-row top">
-                        <div class="vocab-word red">a cave</div>
-                        <div class="vocab-word blue">a waiter</div>
-                        <div class="vocab-word green">a meal</div>
-                        <div class="vocab-word red">a cook</div>
-                    </div>
-
-                    <div class="main-content-row">
-                        <!-- Left Column -->
-                        <div class="word-column left">
-                            <div class="vocab-word green">a mechanic</div>
-                            <div class="vocab-word red">yoghurt</div>
-                            <div class="vocab-word red">a bridge</div>
-                            <div class="vocab-word green">an artist</div>
-                        </div>
+                <div class="question-content">
+                    <!-- This is the container for your SVG and the inputs -->
+                    <div class="rw-part1-container">
+                        <!-- 1. The SVG background image -->
+                        <img src="images/reading-and-writing-part1.svg" alt="Reading and Writing Part 1 exercise sheet">
                         
-                            <!-- Questions 1-10 -->
-                            <div class="definition-row"><span class="number">1</span><span class="label">People use milk to make this white food. Many people like to eat it for breakfast with honey.</span><div class="input-wrapper"><input type="text" id="rw_q1" class="text-answer" autocomplete="off"></div></div>
-                            <div class="definition-row"><span class="number">2</span><span class="label">This person can fly a rocket into space.</span><div class="input-wrapper"><input type="text" id="rw_q2" class="text-answer" autocomplete="off"></div></div>
-                            <div class="definition-row"><span class="number">3</span><span class="label">Camels often live in this hot dry place, where there is only a little water.</span><div class="input-wrapper"><input type="text" id="rw_q3" class="text-answer" autocomplete="off"></div></div>
-                            <div class="definition-row"><span class="number">4</span><span class="label">Farmers close this when they want to keep their animals inside the fields.</span><div class="input-wrapper"><input type="text" id="rw_q4" class="text-answer" autocomplete="off"></div></div>
-                            <div class="definition-row"><span class="number">5</span><span class="label">This person is good at drawing and might have paintings in a museum.</span><div class="input-wrapper"><input type="text" id="rw_q5" class="text-answer" autocomplete="off"></div></div>
-                            <div class="definition-row"><span class="number">6</span><span class="label">People usually use metal to make this. We hold it in our hand to eat our food.</span><div class="input-wrapper"><input type="text" id="rw_q6" class="text-answer" autocomplete="off"></div></div>
-                            <div class="definition-row"><span class="number">7</span><span class="label">If you have problems with your car, you take it to this person.</span><div class="input-wrapper"><input type="text" id="rw_q7" class="text-answer" autocomplete="off"></div></div>
-                            <div class="definition-row"><span class="number">8</span><span class="label">This person can work in a restaurant or a hotel. They bring food to people.</span><div class="input-wrapper"><input type="text" id="rw_q8" class="text-answer" autocomplete="off"></div></div>
-                            <div class="definition-row"><span class="number">9</span><span class="label">If you want to go over a river you have to walk across this.</span><div class="input-wrapper"><input type="text" id="rw_q9" class="text-answer" autocomplete="off"></div></div>
-                            <div class="definition-row"><span class="number">10</span><span class="label">This is sweet and people use it when they make chocolate and cakes.</span><div class="input-wrapper"><input type="text" id="rw_q10" class="text-answer" autocomplete="off"></div></div>
-                        </div>
-
-                        <!-- Right Column -->
-                        <div class="word-column right">
-                            <div class="vocab-word red">sugar</div>
-                            <div class="vocab-word green">a planet</div>
-                            <div class="vocab-word green">an astronaut</div>
-                            <div class="vocab-word green">a desert</div>
-                            <div class="vocab-word red">a fork</div>
-                        </div>
-                    </div>
-
-                    <!-- Bottom Row of Words -->
-                    <div class="word-row bottom">
-                        <div class="vocab-word blue">air</div>
-                        <div class="vocab-word red">a gate</div>
-                        <div class="vocab-word blue">a fork</div> <!-- Note: Fork is here again as per original -->
+                        <!-- 2. The input fields that will be placed on top -->
+                        <input type="text" id="rw1-q1" autocomplete="off">
+                        <input type="text" id="rw1-q2" autocomplete="off">
+                        <input type="text" id="rw1-q3" autocomplete="off">
+                        <input type="text" id="rw1-q4" autocomplete="off">
+                        <input type="text" id="rw1-q5" autocomplete="off">
+                        <input type="text" id="rw1-q6" autocomplete="off">
+                        <input type="text" id="rw1-q7" autocomplete="off">
+                        <input type="text" id="rw1-q8" autocomplete="off">
+                        <input type="text" id="rw1-q9" autocomplete="off">
+                        <input type="text" id="rw1-q10" autocomplete="off">
                     </div>
                 </div>
-                <!-- Navigation can be added later when you have more R&W parts -->
+            
+                <div class="navigation-buttons">
+                    <button class="nav-btn prev-btn" data-target="rw-intro">Back</button>
+                    <button class="nav-btn next-btn" data-target="rw-part2">Next Part</button>
+                </div>
             </section>
 
             <!-- Future R&W parts will go here -->
