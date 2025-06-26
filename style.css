@@ -934,24 +934,24 @@ body.page-flyers::before {
 
 /* --- Reading & Writing Part 1 Styles --- */
 
-.rw-part1-wrapper {
+#rw-part1 .rw-part1-wrapper {
     display: flex;
-    flex-direction: column; /* UPDATE: This is the key fix. It stacks the top, middle, and bottom rows vertically. */
+    flex-direction: column; /* This is the key fix. It stacks the top, middle, and bottom rows vertically. */
     gap: 15px;
 }
 
-.word-row {
+#rw-part1 .word-row {
     display: flex;
     justify-content: space-around; /* This spreads the words out evenly in the top and bottom rows */
-    padding: 0 10%; /* Adds some space on the sides */
+    padding: 0 5%; /* Adds some space on the sides */
 }
 
-.main-content-row {
+#rw-part1 .main-content-row {
     display: flex;
     gap: 20px; /* This creates the space between the word columns and the center box */
 }
 
-.word-column {
+#rw-part1 .word-column {
     flex-basis: 130px; /* Give the side columns a fixed base width */
     flex-shrink: 0;
     display: flex;
@@ -959,47 +959,47 @@ body.page-flyers::before {
     justify-content: space-around; /* Distributes words evenly down the column */
 }
 
-.word-column.right {
+#rw-part1 .word-column.right {
     align-items: flex-end; /* Aligns words to the right side of their column */
 }
 
-.definitions-column {
+#rw-part1 .definitions-column {
     flex-grow: 1; /* Allow middle column to take up all remaining space */
     border: 1px solid #ccc; /* This creates the visual box around the definitions */
     padding: 20px;
     border-radius: 8px;
 }
 
-.vocab-word {
+#rw-part1 .vocab-word {
     font-size: 1.1em;
     font-weight: 600;
 }
 
-.vocab-word.red { color: #d9534f; }
-.vocab-word.green { color: #5cb85c; }
-.vocab-word.blue { color: #428bca; }
+#rw-part1 .vocab-word.red { color: #d9534f; }
+#rw-part1 .vocab-word.green { color: #5cb85c; }
+#rw-part1 .vocab-word.blue { color: #428bca; }
 
-.definition-row {
+#rw-part1 .definition-row {
     display: flex;
     align-items: baseline;
     gap: 10px;
     margin-bottom: 22px; /* Adjusted for better vertical spacing */
     font-size: 1.1em;
 }
-.definition-row:last-child {
+#rw-part1 .definition-row:last-child {
     margin-bottom: 0;
 }
 
-.definition-row .label {
+#rw-part1 .definition-row .label {
     flex-grow: 1;
 }
 
-.definition-row .input-wrapper {
+#rw-part1 .definition-row .input-wrapper {
     flex-basis: 30%; /* Base width for the answer area */
     flex-shrink: 0;
 }
 
-.definition-row .text-answer {
+#rw-part1 .definition-row .text-answer {
     border: none;
     border-bottom: 2px dotted #555;
     background: transparent;
@@ -1008,16 +1008,16 @@ body.page-flyers::before {
 }
 
 /* Varying widths for the input lines to match the original */
-.definition-row:nth-child(4) .input-wrapper,
-.definition-row:nth-child(8) .input-wrapper {
+#rw-part1 .definition-row:nth-child(4) .input-wrapper,
+#rw-part1 .definition-row:nth-child(8) .input-wrapper {
     flex-basis: 25%;
 }
-.definition-row:nth-child(2) .input-wrapper,
-.definition-row:nth-child(10) .input-wrapper {
+#rw-part1 .definition-row:nth-child(2) .input-wrapper,
+#rw-part1 .definition-row:nth-child(10) .input-wrapper {
     flex-basis: 40%;
 }
 
-.definition-row.example .text-answer {
+#rw-part1 .definition-row.example .text-answer {
     color: #333;
 }
 
