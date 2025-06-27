@@ -2,6 +2,12 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+    // ==========================================================
+    //                 CHANGE 1: GET NAME FROM URL
+    // ==========================================================
+    const params = new URLSearchParams(window.location.search);
+    const userName = params.get('name') || 'Anonymous R&W User'; // Reads name from URL
+
     // --- State and Answers for R&W Test 1 ---
     const userAnswers = {};
     const correctAnswers = {
@@ -56,15 +62,13 @@ document.addEventListener('DOMContentLoaded', () => {
     //        (NEW) GOOGLE FORMS SUBMISSION VIA WEB APP
     // ==========================================================
     function submitResultsToGoogle(name, score, timeSpent) {
-        // <<< PASTE THE WEB APP URL YOU COPIED FROM THE DEPLOYMENT WINDOW HERE >>>
-        const googleFormURL = 'https://script.google.com/macros/s/AKfycbyP5Y0Sh5JJ-gDjP0X_-kKj_V0y0TcIqeL0Ku2VGKXFp7rk64RyZKWKeeX_BJSihUPU/exec'; 
+        const googleFormURL = 'https://script.google.com/macros/s/AKfycbyP5Y0Sh5JJ-gDjP0X_-kKj_V0y0TcIqeL0Ku2VGKXFp7rk64RyZKwKeeX_BJSihUPU/exec'; 
 
         const formData = new FormData();
-        // These names ('name', 'score', 'timeSpent') must match the e.parameter names in your Code.gs script
         formData.append('name', name);
         formData.append('score', score);
         formData.append('timeSpent', timeSpent);
-        formData.append('testType', 'Reading & Writing'); // To distinguish from the Listening test
+        formData.append('testType', 'Reading & Writing');
 
         fetch(googleFormURL, {
             method: 'POST',
@@ -79,8 +83,6 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         })
         .catch(error => {
-            // A "catch" block is needed because 'no-cors' from the old method hid errors.
-            // This is more robust.
             console.error('Error submitting results:', error);
         });
     }
@@ -115,8 +117,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const finalResultsDisplay = document.getElementById('final-rw-results-display');
         finalResultsDisplay.innerHTML = `<p>You scored ${correctCount} out of ${totalQuestions}.</p><p>Time Taken: ${formattedTimeSpent}</p>`;
 
-        // --- Send to Google ---
-        submitResultsToGoogle('Anonymous R&W User', `${correctCount}/${totalQuestions}`, formattedTimeSpent);
+        // ==========================================================
+        //               CHANGE 2: USE THE REAL NAME
+        // ==========================================================
+        // This now sends the name we got from the URL instead of a hardcoded value.
+        submitResultsToGoogle(userName, `${correctCount}/${totalQuestions}`, formattedTimeSpent);
     }
 
 
@@ -148,12 +153,19 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Start timer on "Start Part 1" button click
-    document.querySelector('#rw-intro .nav-btn').addEventListener('click', startTimer);
+    // Start timer when the user starts the test from the menu
+    // NOTE: This assumes the R&W intro page is removed and the user lands on Part 1.
+    // If you have an intro page specific to R&W, the selector should be '#rw-intro .nav-btn'
+    const firstStartButton = document.querySelector('.nav-btn[data-target="rw-part1"]');
+    if(firstStartButton) {
+        firstStartButton.addEventListener('click', startTimer);
+    }
     
     // Check answers on "Check My Answers" button click
     document.getElementById('check-all-rw-answers-btn').addEventListener('click', checkAndSubmitAnswers);
 
-    // Initial setup to show the intro first
-    showSection('rw-intro');
+    // Show the first section of the test automatically
+    showSection('rw-part1'); 
+    startTimer(); // Start the timer as soon as the page loads with the name
+
 });
