@@ -1231,3 +1231,19 @@ body.page-flyers::before {
 #rw6-q9 { top: 78.3%; left: 25%; width: 17.5%; }
 #rw6-q10 { top: 84.3%; left: 2.3%; width: 17.5%; }
 
+/* --- Timer Display Styles --- */
+#timer-display {
+    position: absolute;
+    top: 25px; /* Adjust vertical position as needed */
+    right: 30px; /* Adjust horizontal position as needed */
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-family: 'Mulish', sans-serif;
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    z-index: 100; /* Ensures it stays on top */
+}
