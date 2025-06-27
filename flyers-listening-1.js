@@ -1,11 +1,14 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // --- Get User Name from URL ---
+    const params = new URLSearchParams(window.location.search);
+    const userName = params.get('name') || 'Anonymous'; // Reads name from URL
+
     // --- Select all necessary elements ---
-    const nameInput = document.getElementById('user-name-input');
+    // const nameInput = document.getElementById('user-name-input'); // No longer needed
     const startButton = document.querySelector('.start-test-btn');
     const testSections = document.querySelectorAll('.test-section');
     
     // --- State variables ---
-    let userName = ''; 
     let userAnswers = {}; 
 
     const correctAnswers = {
@@ -17,12 +20,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'glove-shape': 'orange', 'butterfly-shape': 'red', 'drum-text-area': 'frank',
         'poster-text-area': 'sleep', 'flag-shape': 'purple',
     };
-    
-    // --- Enable start button ---
-    nameInput.addEventListener('input', () => {
-        startButton.disabled = nameInput.value.trim() === '';
-    });
-
+   
     // --- Core navigation logic ---
     function showSection(sectionId) {
         testSections.forEach(section => {
@@ -54,9 +52,7 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener('click', (event) => {
         const button = event.target.closest('.nav-btn, .start-test-btn, .restart-btn');
         if (button) {
-            if (button.classList.contains('start-test-btn')) {
-                userName = nameInput.value.trim();
-            }
+            // The userName is already set, so we just show the section
             showSection(button.dataset.target);
         }
     });
@@ -243,20 +239,32 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // --- Google Forms Submission ---
-    function submitResultsToGoogle(name, score) {
-        const formId = "1FAIpQLSclDo1YYLOKZR_dgKFNqSNi_UZiqOCGZQsXsoRwTPyDzTiNnw";
-        const nameEntryId = "entry.2134521223";
-        const scoreEntryId = "entry.5411094";
+        // --- Google Forms Submission ---
+    function submitResultsToGoogle(score) { // 'name' parameter is no longer needed
+        // This is the SAME URL from your R&W test script
+        const googleFormURL = 'https://script.google.com/macros/s/AKfycbyP5Y0Sh5JJ-gDjP0X_-kKj_V0y0TcIqeL0Ku2VGKXFp7rk64RyZKwKeeX_BJSihUPU/exec'; 
+
         const formData = new FormData();
-        formData.append(nameEntryId, name);
-        formData.append(scoreEntryId, score);
-        const url = `https://docs.google.com/forms/d/e/${formId}/formResponse`;
-        fetch(url, {
+        // These names must match the e.parameter names in your Code.gs script
+        formData.append('name', userName); // Uses the userName variable from the top of the script
+        formData.append('score', score);
+        formData.append('testType', 'Listening'); // To distinguish it from the R&W test
+
+        fetch(googleFormURL, {
             method: 'POST',
             body: formData,
-            mode: 'no-cors'
-        }).catch(error => console.error("Error submitting results:", error));
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.result === 'success') {
+                console.log('Listening test submission successful.');
+            } else {
+                console.error('Submission failed:', data);
+            }
+        })
+        .catch(error => {
+            console.error('Error submitting results:', error);
+        });
     }
 
     // --- Final Grading Logic ---
@@ -358,7 +366,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         finalResultsDisplay.innerHTML = resultsHTML;
         finalResultsDisplay.className = percentage === 100 ? 'correct' : (percentage >= 50 ? 'partial' : 'incorrect');
-        submitResultsToGoogle(userName, correctCount);
+        submitResultsToGoogle(correctCount);
     });
     
     // Initial page setup
