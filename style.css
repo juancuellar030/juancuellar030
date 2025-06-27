@@ -1003,8 +1003,8 @@ body.page-flyers::before {
 /* This container holds the SVG and the inputs, and creates the coordinate system */
 .rw-part1-container {
     position: relative; /* This is essential for positioning the inputs */
-    width: 90%;
-    max-width: 800px; /* Or whatever max-width your test uses */
+    width: 100%;
+    max-width: 900px; /* Or whatever max-width your test uses */
     margin: 20px auto; /* Centers the container */
 }
 
@@ -1155,8 +1155,8 @@ body.page-flyers::before {
 /* The container for the SVG and dropdowns */
 .rw-part6-container {
     position: relative; /* Essential for positioning the dropdowns */
-    width: 100%;
-    max-width: 900px; 
+    width: 90%;
+    max-width: 800px; 
     margin: 20px auto;
 }
 
