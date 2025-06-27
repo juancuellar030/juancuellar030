@@ -1156,14 +1156,15 @@ body.page-flyers::before {
     text-align: center;
     font-size: 1.6em;
     color: #333;
+    margin-top: -10px
     margin-bottom: 15px;
     font-family: 'Poppins', sans-serif;
 }
 
 #rw-part6 .question-image {
     display: block;
-    max-width: 400px; /* Adjust size as needed */
-    width: 60%; /* Adjust size as needed */
+    max-width: 550px; /* Adjust size as needed */
+    width: 80%; /* Adjust size as needed */
     margin: 0 auto 25px auto; /* Centers the image and adds space below */
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
