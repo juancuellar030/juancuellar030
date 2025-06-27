@@ -66,3 +66,79 @@ document.addEventListener('DOMContentLoaded', () => {
         finalResultsDisplay.innerHTML = `<p>You scored ${correctCount} out of ${totalQuestions}.</p>`;
     });
 });
+
+// ==========================================================
+//                 COUNTDOWN TIMER LOGIC
+// ==========================================================
+
+// --- Timer Variables ---
+let timerInterval = null;
+const startingMinutes = 40; // The duration of the test
+let totalSeconds = startingMinutes * 60;
+
+// --- DOM Elements ---
+const timerDisplay = document.getElementById('timer-display');
+const startButton = document.querySelector('#rw-intro .nav-btn');
+const checkAnswersButton = document.getElementById('check-all-rw-answers-btn');
+
+// --- Timer Functions ---
+
+/**
+ * Updates the timer display every second.
+ */
+function updateTimerDisplay() {
+    // Calculate remaining minutes and seconds
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+
+    // Format time to always have two digits (e.g., 01:05)
+    const formattedMinutes = String(minutes).padStart(2, '0');
+    const formattedSeconds = String(seconds).padStart(2, '0');
+
+    // Update the HTML
+    timerDisplay.textContent = `${formattedMinutes}:${formattedSeconds}`;
+
+    // Check if the timer has run out
+    if (totalSeconds <= 0) {
+        stopTimer();
+        alert("Time's up!");
+        // You could automatically trigger the answer check here if you want
+        // checkAndSubmitAnswers(); 
+    } else {
+        // Decrement the time
+        totalSeconds--;
+    }
+}
+
+/**
+ * Starts the countdown timer.
+ */
+function startTimer() {
+    if (timerInterval) return; // Prevent multiple timers
+
+    // Reset the timer to the starting time
+    totalSeconds = startingMinutes * 60; 
+    
+    // Update the display immediately so it shows "40:00" right away
+    const formattedMinutes = String(startingMinutes).padStart(2, '0');
+    timerDisplay.textContent = `${formattedMinutes}:00`;
+    
+    // Start the interval
+    timerInterval = setInterval(updateTimerDisplay, 1000);
+}
+
+/**
+ * Stops the countdown timer.
+ */
+function stopTimer() {
+    clearInterval(timerInterval);
+    timerInterval = null;
+}
+
+// --- Event Listeners ---
+if (startButton) {
+    startButton.addEventListener('click', startTimer);
+}
+if (checkAnswersButton) {
+    checkAnswersButton.addEventListener('click', stopTimer);
+}
