@@ -1,14 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // --- Get User Name from URL ---
-    const params = new URLSearchParams(window.location.search);
-    const userName = params.get('name') || 'Anonymous'; // Reads name from URL
-
-    // --- Select all necessary elements ---
-    // const nameInput = document.getElementById('user-name-input'); // No longer needed
+    // --- Select all necessary elements (reverting changes) ---
+    const nameInput = document.getElementById('user-name-input');
     const startButton = document.querySelector('.start-test-btn');
     const testSections = document.querySelectorAll('.test-section');
     
-    // --- State variables ---
+    // --- State variables (reverting changes) ---
+    let userName = ''; 
     let userAnswers = {}; 
 
     const correctAnswers = {
@@ -20,7 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
         'glove-shape': 'orange', 'butterfly-shape': 'red', 'drum-text-area': 'frank',
         'poster-text-area': 'sleep', 'flag-shape': 'purple',
     };
-   
+
+    // --- Enable start button ---
+        nameInput.addEventListener('input', () => {
+            startButton.disabled = nameInput.value.trim() === '';
+        });
+    
     // --- Core navigation logic ---
     function showSection(sectionId) {
         testSections.forEach(section => {
@@ -52,7 +54,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.body.addEventListener('click', (event) => {
         const button = event.target.closest('.nav-btn, .start-test-btn, .restart-btn');
         if (button) {
-            // The userName is already set, so we just show the section
+            // This 'if' block is the part that gets restored
+            if (button.classList.contains('start-test-btn')) {
+                userName = nameInput.value.trim();
+            }
             showSection(button.dataset.target);
         }
     });
@@ -366,7 +371,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         finalResultsDisplay.innerHTML = resultsHTML;
         finalResultsDisplay.className = percentage === 100 ? 'correct' : (percentage >= 50 ? 'partial' : 'incorrect');
-        submitResultsToGoogle(correctCount);
+        submitResultsToGoogle(userName, correctCount);
     });
     
     // Initial page setup
