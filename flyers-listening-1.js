@@ -151,45 +151,44 @@ document.addEventListener('DOMContentLoaded', () => {
     const totalRealQuestions = questionsToGrade.length;
 
     // --- Start of Grading Loop ---
+    // --- Final Grading Logic (COMPLETE AND CORRECTED) ---
+document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
+    let correctCount = 0;
+    const questionsToGrade = Object.keys(correctAnswers).filter(qId => !qId.includes('example') && qId !== 'boy_on_rock_magazine');
+    const totalRealQuestions = questionsToGrade.length;
+
     questionsToGrade.forEach(qId => {
         const userAnswer = (userAnswers[qId] || 'No Answer').trim().toLowerCase();
+        const correctAnswer = correctAnswers[qId];
 
         // Part 1: Drag and Drop
         if (qId.endsWith('_shoes') || qId.endsWith('_torch') || qId.endsWith('_fire') || qId.endsWith('_helmet') || qId.endsWith('_stream')) {
-            const targetZone = document.querySelector(`.drop-target[data-description="${qId}"]`);
-            if (targetZone) {
-                const droppedItem = targetZone.querySelector('.draggable-name');
-                const droppedAnswer = droppedItem ? droppedItem.dataset.name : 'no answer';
-                if (droppedAnswer === correctAnswers[qId]) correctCount++;
-            }
+            if (userAnswer === correctAnswer) correctCount++;
         }
         // Part 2: Text Input
         else if (qId.startsWith('q2_')) {
-            if (userAnswer === correctAnswers[qId] || (qId === 'q2_q3' && userAnswer === 'twenty-four')) correctCount++;
+            if (userAnswer === correctAnswer || (qId === 'q2_q3' && userAnswer === 'twenty-four')) correctCount++;
         }
         // Part 3: Letter Matching
         else if (qId.startsWith('q3_')) {
-            if (userAnswer.toUpperCase() === correctAnswers[qId]) correctCount++;
+            if (userAnswer.toUpperCase() === correctAnswer) correctCount++;
         }
         // Part 4: Multiple Choice
         else if (qId.startsWith('q4_')) {
-            if (userAnswer.toUpperCase() === correctAnswers[qId].toUpperCase()) correctCount++;
+            if (userAnswer.toUpperCase() === correctAnswer.toUpperCase()) correctCount++;
         }
         // Part 5: Interactive
         else if (qId.endsWith('-shape') || qId.endsWith('-area')) {
-            if (userAnswer === correctAnswers[qId]) correctCount++;
+            if (userAnswer === correctAnswer) correctCount++;
         }
     });
-    // --- End of Grading Loop ---
 
     // --- Display Results ---
     const finalResultsDisplay = document.getElementById('final-results-display');
     const percentage = (totalRealQuestions > 0) ? (correctCount / totalRealQuestions) * 100 : 0;
-    
     let resultsHTML = '';
     if (userName) resultsHTML += `<h3>Results for: ${userName}</h3>`;
     resultsHTML += `<p>You scored ${correctCount} out of ${totalRealQuestions} (${percentage.toFixed(0)}%).</p>`;
-    
     finalResultsDisplay.innerHTML = resultsHTML;
     finalResultsDisplay.className = percentage === 100 ? 'correct' : (percentage >= 50 ? 'partial' : 'incorrect');
     
