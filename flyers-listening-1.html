@@ -101,10 +101,36 @@
             <section id="listening-part2" class="test-section hidden">
                 <h3>Part 2 (5 Questions)</h3>
                 <p class="part-instructions">Write the missing information in the lines. There is one example.</p>
-                <div class="audio-player-container">
-                    <audio controls src="audio/flyers_listening_part2.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                <div class="custom-audio-player">
+                    <audio id="audio-source-part2" src="audio/flyers_listening_part2.mp3"></audio>
+                
+                    <!-- 1. Progress Bar and Time Display -->
+                    <div class="progress-and-time-wrapper">
+                        <span class="time-display current-time" id="current-time-part2">00:00</span>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <span class="time-display total-duration" id="total-duration-part2">00:00</span>
+                    </div>
+                
+                    <!-- 2. Main Controls -->
+                    <div class="controls">
+                        <button class="control-btn seek-btn" id="seek-backward-btn-part2">
+                            <i class="fas fa-rotate-left"></i>
+                        </button>
+                        <button class="control-btn play-pause-btn" id="play-pause-btn-part2">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-btn seek-btn" id="seek-forward-btn-part2">
+                            <i class="fas fa-rotate-right"></i>
+                        </button>
+                
+                        <!-- 3. Volume Control -->
+                        <div class="volume-control">
+                            <i class="fas fa-volume-high"></i>
+                            <input type="range" class="volume-slider" id="volume-slider-part2" min="0" max="100" value="100">
+                        </div>
+                    </div>
                 </div>
                 <div class="question-content">
                     <!-- New image for this part -->
@@ -179,10 +205,36 @@
             <section id="listening-part3" class="test-section hidden">
                 <h3>Part 3 (5 Questions)</h3>
                 <p class="part-instructions">Listen and write a letter in each box. There is one example.</p>
-                <div class="audio-player-container">
-                    <audio controls src="audio/flyers_listening_part3.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                <div class="custom-audio-player">
+                    <audio id="audio-source-part3" src="audio/flyers_listening_part3.mp3"></audio>
+                
+                    <!-- 1. Progress Bar and Time Display -->
+                    <div class="progress-and-time-wrapper">
+                        <span class="time-display current-time" id="current-time-part3">00:00</span>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <span class="time-display total-duration" id="total-duration-part3">00:00</span>
+                    </div>
+                
+                    <!-- 2. Main Controls -->
+                    <div class="controls">
+                        <button class="control-btn seek-btn" id="seek-backward-btn-part3">
+                            <i class="fas fa-rotate-left"></i>
+                        </button>
+                        <button class="control-btn play-pause-btn" id="play-pause-btn-part3">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-btn seek-btn" id="seek-forward-btn-part3">
+                            <i class="fas fa-rotate-right"></i>
+                        </button>
+                
+                        <!-- 3. Volume Control -->
+                        <div class="volume-control">
+                            <i class="fas fa-volume-high"></i>
+                            <input type="range" class="volume-slider" id="volume-slider-part1" min="0" max="100" value="100">
+                        </div>
+                    </div>
                 </div>
                 <div class="question-content">
                     <p>Listen and write a letter in each box. There is one example.</p>
@@ -278,10 +330,36 @@
             <section id="listening-part4" class="test-section hidden">
                 <h3>Part 4 (5 Questions)</h3>
                 <p class="part-instructions">Listen and select a box. There is one example.</p>
-                <div class="audio-player-container">
-                    <audio controls src="audio/flyers_listening_part4.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                <div class="custom-audio-player">
+                    <audio id="audio-source-part4" src="audio/flyers_listening_part4.mp3"></audio>
+                
+                    <!-- 1. Progress Bar and Time Display -->
+                    <div class="progress-and-time-wrapper">
+                        <span class="time-display current-time" id="current-time-part4">00:00</span>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <span class="time-display total-duration" id="total-duration-part4">00:00</span>
+                    </div>
+                
+                    <!-- 2. Main Controls -->
+                    <div class="controls">
+                        <button class="control-btn seek-btn" id="seek-backward-btn-part4">
+                            <i class="fas fa-rotate-left"></i>
+                        </button>
+                        <button class="control-btn play-pause-btn" id="play-pause-btn-part4">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-btn seek-btn" id="seek-forward-btn-part4">
+                            <i class="fas fa-rotate-right"></i>
+                        </button>
+                
+                        <!-- 3. Volume Control -->
+                        <div class="volume-control">
+                            <i class="fas fa-volume-high"></i>
+                            <input type="range" class="volume-slider" id="volume-slider-part1" min="0" max="100" value="100">
+                        </div>
+                    </div>
                 </div>
                 <div class="question-content">
                     
@@ -411,10 +489,36 @@
             <section id="listening-part5" class="test-section hidden">
                 <h3>Part 5 (5 Questions)</h3>
                 <p class="part-instructions">Listen, then click a tool and select an object in the picture. There is one example.</p>
-                <div class="audio-player-container">
-                    <audio controls src="audio/flyers_listening_part5.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
+                <div class="custom-audio-player">
+                    <audio id="audio-source-part5" src="audio/flyers_listening_part5.mp3"></audio>
+                
+                    <!-- 1. Progress Bar and Time Display -->
+                    <div class="progress-and-time-wrapper">
+                        <span class="time-display current-time" id="current-time-part5">00:00</span>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <span class="time-display total-duration" id="total-duration-part5">00:00</span>
+                    </div>
+                
+                    <!-- 2. Main Controls -->
+                    <div class="controls">
+                        <button class="control-btn seek-btn" id="seek-backward-btn-part5">
+                            <i class="fas fa-rotate-left"></i>
+                        </button>
+                        <button class="control-btn play-pause-btn" id="play-pause-btn-part5">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-btn seek-btn" id="seek-forward-btn-part5">
+                            <i class="fas fa-rotate-right"></i>
+                        </button>
+                
+                        <!-- 3. Volume Control -->
+                        <div class="volume-control">
+                            <i class="fas fa-volume-high"></i>
+                            <input type="range" class="volume-slider" id="volume-slider-part5" min="0" max="100" value="100">
+                        </div>
+                    </div>
                 </div>
                 <div class="question-content">
                     <p>Listen, then click a color or the "Write" button and select an object in the picture.</p>
