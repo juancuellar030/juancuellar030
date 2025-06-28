@@ -1258,16 +1258,16 @@ body.page-flyers::before {
     align-items: center;
     justify-content: center;  /* This centers the text by default */
     
-    width: 75%;               /* Make buttons wider */
+    width: 65%;               /* Make buttons wider */
     max-width: 400px;
-    padding: 32px 80px;       /* <-- INCREASED FROM 20px TO MAKE TALLER */
+    padding: 36px 80px;       /* <-- INCREASED FROM 20px TO MAKE TALLER */
     font-size: 1.8em;         /* Make text bigger */
     
     position: relative;       /* CRITICAL: This is the anchor for the icon */
     overflow: hidden;         /* Hides the icon when it's outside the button */
     transition: all 0.4s ease-out; /* Smooth transition for all changes */
     
-    border-radius: 15px;      /* <<< ADD THIS LINE FOR LESS ROUNDED CORNERS */
+    border-radius: 20px;      /* <<< ADD THIS LINE FOR LESS ROUNDED CORNERS */
 }
 
 /* --- 2. The text inside the button --- */
@@ -1280,7 +1280,7 @@ body.page-flyers::before {
 .animated-btn .btn-icon {
     position: absolute;       /* Takes the icon out of the normal flow */
     right: 25px;              /* Positions it on the right side */
-    height: 90px;             /* Set a fixed height for the icon */
+    height: 110px;             /* Set a fixed height for the icon */
     
     opacity: 0;               /* Hide the icon by default */
     transform: translateX(20px); /* Move it slightly off-screen to the right */
