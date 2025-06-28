@@ -1383,42 +1383,58 @@ body.page-flyers::before {
 }
 
 /* ========================================================== */
-/*           CUSTOM AUDIO PLAYER STYLES                     */
+/*           UPGRADED CUSTOM AUDIO PLAYER STYLES              */
 /* ========================================================== */
 
 .custom-audio-player {
-    background-color: #111; /* Dark background */
+    background-color: #111;
     width: 100%;
-    max-width: 550px;       /* Set a max-width */
-    margin: 30px auto;      /* Center the player */
-    padding: 15px 25px;
-    border-radius: 15px;      /* Rounded corners */
+    max-width: 550px;
+    margin: 30px auto;
+    padding: 20px 30px; /* Increased padding */
+    border-radius: 15px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     box-sizing: border-box;
+    color: #ccc; /* Set default text color for the player */
+}
+
+/* --- Wrapper for Progress Bar and Time --- */
+.progress-and-time-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.time-display {
+    font-family: 'Mulish', sans-serif;
+    font-size: 0.9em;
+    font-weight: 700;
 }
 
 /* --- Progress Bar --- */
 .progress-bar-wrapper {
-    background-color: #444; /* The track of the bar */
+    background-color: #444;
     height: 6px;
     border-radius: 3px;
     cursor: pointer;
-    margin-bottom: 20px;
+    flex-grow: 1; /* Allows it to fill the available space */
 }
 
 .progress-bar {
-    background-color: #fff; /* The white progress indicator */
-    width: 0%;              /* Starts at 0, updated by JS */
+    background-color: #fff;
+    width: 0%;
     height: 100%;
     border-radius: 3px;
     position: relative;
+    transition: width 0.1s linear; /* Smoother progress updates */
 }
 
-/* The little circle on the progress bar */
 .progress-bar::after {
     content: '';
     position: absolute;
-    right: -8px; /* Position it at the end of the bar */
+    right: -8px;
     top: -5px;
     width: 16px;
     height: 16px;
@@ -1426,35 +1442,37 @@ body.page-flyers::before {
     border-radius: 50%;
 }
 
-/* --- Controls --- */
+/* --- Main Controls --- */
 .controls {
     display: flex;
-    justify-content: space-between;
+    justify-content: center; /* Center the main buttons */
     align-items: center;
+    gap: 25px; /* Space between buttons */
+    position: relative; /* For positioning the volume control */
 }
 
 .control-btn {
     background: none;
     border: none;
     color: #ccc;
-    font-size: 1.1em;
+    font-size: 1.3em; /* Slightly larger icons */
     cursor: pointer;
-    padding: 5px;
-    transition: color 0.2s ease;
+    padding: 10px;
+    transition: color 0.2s ease, transform 0.2s ease;
 }
 
 .control-btn:hover {
     color: #fff;
+    transform: scale(1.1);
 }
 
-/* The main play/pause button */
 .play-pause-btn {
     background-color: #fff;
     color: #111;
-    width: 50px;
-    height: 50px;
+    width: 60px; /* Bigger main button */
+    height: 60px;
     border-radius: 50%;
-    font-size: 1.5em;
+    font-size: 1.8em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -1464,6 +1482,43 @@ body.page-flyers::before {
     background-color: #f0f0f0;
     color: #111;
 }
+
+/* --- Volume Control --- */
+.volume-control {
+    position: absolute; /* Position it on the right side */
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.volume-slider {
+    -webkit-appearance: none; /* Required to style sliders */
+    appearance: none;
+    width: 80px; /* Width of the slider */
+    height: 5px;
+    background: #555;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+/* Style for the slider thumb (the circle) */
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+}
+.volume-slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+}
+
 
 /* Hide the original audio player completely */
 .custom-audio-player audio {
