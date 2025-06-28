@@ -1260,13 +1260,14 @@ body.page-flyers::before {
     
     width: 75%;               /* Make buttons wider */
     max-width: 400px;
-    padding: 28px 80px;       /* Make buttons taller */
+    padding: 32px 80px;       /* <-- INCREASED FROM 20px TO MAKE TALLER */
     font-size: 1.8em;         /* Make text bigger */
     
     position: relative;       /* CRITICAL: This is the anchor for the icon */
     overflow: hidden;         /* Hides the icon when it's outside the button */
-    transition: all 0.4s ease-out; /* Smooth transition for all changes */}
-    border-radius: 20px;
+    transition: all 0.4s ease-out; /* Smooth transition for all changes */
+    
+    border-radius: 15px;      /* <<< ADD THIS LINE FOR LESS ROUNDED CORNERS */
 }
 
 /* --- 2. The text inside the button --- */
@@ -1279,7 +1280,7 @@ body.page-flyers::before {
 .animated-btn .btn-icon {
     position: absolute;       /* Takes the icon out of the normal flow */
     right: 25px;              /* Positions it on the right side */
-    height: 80px;             /* Set a fixed height for the icon */
+    height: 90px;             /* Set a fixed height for the icon */
     
     opacity: 0;               /* Hide the icon by default */
     transform: translateX(20px); /* Move it slightly off-screen to the right */
