@@ -1292,7 +1292,7 @@ body.page-flyers::before {
 /* --- 4. The "on hover" animation state --- */
 .animated-btn:hover .btn-text {
     /* Move the text to the left to make room for the icon */
-    transform: translateX(-40px);
+    transform: translateX(-60px);
 }
 
 .animated-btn:hover .btn-icon {
