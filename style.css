@@ -277,8 +277,8 @@ header p {
     flex-wrap: wrap;
     gap: 10px;
     justify-content: center;
-    margin: 20px 0; /* Add margin to top and bottom */
-    min-height: 50px; /* Adjusted height */
+    margin: 15px 0; /* Add margin to top and bottom */
+    min-height: 40px; /* Adjusted height */
     position: relative;
     z-index: 10;
 }
@@ -293,11 +293,11 @@ header p {
 #listening-part1 .draggable-name {
     background-color: #3498db;
     color: white;
-    padding: 8px 15px !important; /* Force the flat padding */
-    border-radius: 20px;
+    padding: 10px 15px !important; /* Force the flat padding */
+    border-radius: 15px;
     cursor: grab;
     font-weight: 600;
-    font-size: 1.3em;
+    font-size: 1.2em;
     margin: 2px auto;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
     transition: all 0.2s ease;
