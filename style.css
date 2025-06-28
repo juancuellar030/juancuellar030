@@ -1381,3 +1381,91 @@ body.page-flyers::before {
     background-color: #fdfdfd;
     opacity: 0.6;
 }
+
+/* ========================================================== */
+/*           CUSTOM AUDIO PLAYER STYLES                     */
+/* ========================================================== */
+
+.custom-audio-player {
+    background-color: #111; /* Dark background */
+    width: 100%;
+    max-width: 550px;       /* Set a max-width */
+    margin: 30px auto;      /* Center the player */
+    padding: 15px 25px;
+    border-radius: 15px;      /* Rounded corners */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+}
+
+/* --- Progress Bar --- */
+.progress-bar-wrapper {
+    background-color: #444; /* The track of the bar */
+    height: 6px;
+    border-radius: 3px;
+    cursor: pointer;
+    margin-bottom: 20px;
+}
+
+.progress-bar {
+    background-color: #fff; /* The white progress indicator */
+    width: 0%;              /* Starts at 0, updated by JS */
+    height: 100%;
+    border-radius: 3px;
+    position: relative;
+}
+
+/* The little circle on the progress bar */
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    right: -8px; /* Position it at the end of the bar */
+    top: -5px;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+/* --- Controls --- */
+.controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 1.1em;
+    cursor: pointer;
+    padding: 5px;
+    transition: color 0.2s ease;
+}
+
+.control-btn:hover {
+    color: #fff;
+}
+
+/* The main play/pause button */
+.play-pause-btn {
+    background-color: #fff;
+    color: #111;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-pause-btn:hover {
+    background-color: #f0f0f0;
+    color: #111;
+}
+
+/* Hide the original audio player completely */
+.custom-audio-player audio {
+    display: none;
+}
