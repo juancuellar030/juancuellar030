@@ -1321,3 +1321,31 @@ body.page-flyers::before {
 .disabled-btn:hover .btn-text {
     opacity: 1; /* Keep text visible on hover for disabled button */
 }
+
+/* ========================================================== */
+/*           CUSTOM BUTTON COLORS FOR MAIN MENU             */
+/* ========================================================== */
+
+/* --- Flyers Button (Orange) --- */
+.flyers-btn {
+    background-color: #F1900D; /* The orange color you provided */
+}
+.flyers-btn:hover {
+    background-color: #d97e0b; /* A slightly darker orange for the hover effect */
+}
+
+/* --- Movers Button (Purple) --- */
+.movers-btn {
+    background-color: #AC74B1; /* The purple/mauve color you provided */
+}
+.movers-btn:hover {
+    background-color: #935f98; /* A slightly darker version for the hover effect */
+}
+
+/* --- Starters Button (Green) --- */
+.starters-btn {
+    background-color: #5DB94C; /* The green color you provided */
+}
+.starters-btn:hover {
+    background-color: #4aa23c; /* A slightly darker green for the hover effect */
+}
