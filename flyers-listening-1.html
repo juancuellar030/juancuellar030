@@ -35,22 +35,34 @@
                 <h3>Part 1 (5 Questions)</h3>
                 <p class="part-instructions">Drag each name to the correct person in the picture. There is one example.</p>
                 <div class="custom-audio-player">
-                    <!-- The actual audio element is now hidden -->
                     <audio id="audio-source-part1" src="audio/flyers_listening_part1.mp3"></audio>
                 
-                    <!-- 1. The Progress Bar -->
-                    <div class="progress-bar-wrapper">
-                        <div class="progress-bar"></div>
+                    <!-- 1. Progress Bar and Time Display -->
+                    <div class="progress-and-time-wrapper">
+                        <span class="time-display current-time" id="current-time-part1">00:00</span>
+                        <div class="progress-bar-wrapper">
+                            <div class="progress-bar"></div>
+                        </div>
+                        <span class="time-display total-duration" id="total-duration-part1">00:00</span>
                     </div>
                 
-                    <!-- 2. The Controls -->
+                    <!-- 2. Main Controls -->
                     <div class="controls">
-                        <button class="control-btn"><i class="fas fa-bars"></i></button>
-                        <button class="control-btn"><i class="fas fa-backward-step"></i></button>
+                        <button class="control-btn seek-btn" id="seek-backward-btn-part1">
+                            <i class="fas fa-rotate-left"></i>
+                        </button>
                         <button class="control-btn play-pause-btn" id="play-pause-btn-part1">
                             <i class="fas fa-play"></i>
                         </button>
-                        <button class="control-btn"><i class="fas fa-forward-step"></i></button>
+                        <button class="control-btn seek-btn" id="seek-forward-btn-part1">
+                            <i class="fas fa-rotate-right"></i>
+                        </button>
+                
+                        <!-- 3. Volume Control -->
+                        <div class="volume-control">
+                            <i class="fas fa-volume-high"></i>
+                            <input type="range" class="volume-slider" id="volume-slider-part1" min="0" max="100" value="100">
+                        </div>
                     </div>
                 </div>
                 <div class="question-content">
