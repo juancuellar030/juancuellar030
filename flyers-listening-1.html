@@ -20,10 +20,14 @@
                 <h2>Listening Test</h2>
                 <p>The A2 Flyers Listening test has 5 parts. You will hear each audio recording twice.</p>
                 
-                <!-- This is the NEW, simpler button -->
-                <button class="nav-btn" data-target="listening-part1" style="margin-top: 20px;">Start Listening Test</button>
-            
-            </section> <!-- The intro section closes here -->
+                <!-- The name input field is back! -->
+                <div class="name-input-container" style="margin:20px 0; text-align:center;">
+                    <label for="user-name-input" style="display:block; margin-bottom:10px;">Please enter your name to begin:</label>
+                    <input type="text" id="user-name-input" placeholder="Your Name Here" autocomplete="off">
+                </div>
+                
+                <button class="start-test-btn" data-target="listening-part1" disabled>Start Listening Test</button>
+            </section>
 
             <!-- Listening Part 1: Listen and draw lines (Drag and Drop) -->
             <section id="listening-part1" class="test-section hidden">
