@@ -1389,10 +1389,10 @@ body.page-flyers::before {
 .custom-audio-player {
     background-color: #111;
     width: 110%;
-    max-width: 550px;
+    max-width: 560px;
     margin: 30px auto;
-    padding: 14px 30px; /* Increased padding */
-    border-radius: 30px;
+    padding: 12px 30px; /* Increased padding */
+    border-radius: 20px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     box-sizing: border-box;
     color: #ccc; /* Set default text color for the player */
