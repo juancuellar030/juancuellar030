@@ -1391,7 +1391,7 @@ body.page-flyers::before {
     width: 100%;
     max-width: 550px;
     margin: 30px auto;
-    padding: 18px 30px; /* Increased padding */
+    padding: 16px 30px; /* Increased padding */
     border-radius: 25px;
     box-shadow: 0 5px 15px rgba(0,0,0,0.2);
     box-sizing: border-box;
@@ -1469,8 +1469,8 @@ body.page-flyers::before {
 .play-pause-btn {
     background-color: #fff;
     color: #111;
-    width: 50px; /* Bigger main button */
-    height: 50px;
+    width: 45px; /* Bigger main button */
+    height: 45px;
     border-radius: 50%;
     font-size: 1.5em;
     display: flex;
@@ -1483,24 +1483,46 @@ body.page-flyers::before {
     color: #111;
 }
 
-/* --- Volume Control --- */
+/* --- Volume Control (with Hover Effect) --- */
 .volume-control {
-    position: absolute; /* Position it on the right side */
+    position: absolute; 
     right: 0;
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: 0; /* The initial gap is 0, it will be added on hover */
+    
+    /* This makes sure the slider doesn't suddenly appear and push things around */
+    /* It will smoothly transition its own container width if needed */
+    transition: gap 0.4s ease-out; 
 }
 
 .volume-slider {
-    -webkit-appearance: none; /* Required to style sliders */
+    -webkit-appearance: none; 
     appearance: none;
-    width: 80px; /* Width of the slider */
     height: 5px;
     background: #555;
     border-radius: 3px;
     outline: none;
     cursor: pointer;
+
+    /* --- 1. HIDE THE SLIDER BY DEFAULT --- */
+    width: 0; /* Start with zero width */
+    opacity: 0; /* Make it fully transparent */
+    
+    /* This is the key to the smooth animation */
+    transition: all 0.4s ease-out;
+}
+
+/* --- 2. SHOW THE SLIDER ON HOVER --- */
+/* When the user hovers over the PARENT container... */
+.volume-control:hover {
+    gap: 8px; /* Create space between the icon and the slider */
+}
+
+/* ...the SLIDER itself will transition to these new properties */
+.volume-control:hover .volume-slider {
+    width: 80px; /* Expand to its full width */
+    opacity: 1; /* Fade it in to be fully visible */
 }
 
 /* Style for the slider thumb (the circle) */
@@ -1518,7 +1540,6 @@ body.page-flyers::before {
     background: #fff;
     border-radius: 50%;
 }
-
 
 /* Hide the original audio player completely */
 .custom-audio-player audio {
