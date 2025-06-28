@@ -1327,25 +1327,25 @@ body.page-flyers::before {
 /* ========================================================== */
 
 /* --- Flyers Button (Orange) --- */
-.flyers-btn {
-    background-color: #F1900D; /* The orange color you provided */
+.nav-btn.flyers-btn { /* <-- Notice there is NO space between the classes */
+    background-color: #F1900D; 
 }
-.flyers-btn:hover {
-    background-color: #d97e0b; /* A slightly darker orange for the hover effect */
+.nav-btn.flyers-btn:hover {
+    background-color: #d97e0b;
 }
 
 /* --- Movers Button (Purple) --- */
-.movers-btn {
-    background-color: #AC74B1; /* The purple/mauve color you provided */
+.nav-btn.movers-btn {
+    background-color: #AC74B1;
 }
-.movers-btn:hover {
-    background-color: #935f98; /* A slightly darker version for the hover effect */
+.nav-btn.movers-btn:hover {
+    background-color: #935f98;
 }
 
 /* --- Starters Button (Green) --- */
-.starters-btn {
-    background-color: #5DB94C; /* The green color you provided */
+.nav-btn.starters-btn {
+    background-color: #5DB94C;
 }
-.starters-btn:hover {
-    background-color: #4aa23c; /* A slightly darker green for the hover effect */
+.nav-btn.starters-btn:hover {
+    background-color: #4aa23c;
 }
