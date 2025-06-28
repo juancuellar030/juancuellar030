@@ -1545,3 +1545,51 @@ body.page-flyers::before {
 .custom-audio-player audio {
     display: none;
 }
+
+/* ========================================================== */
+/*           READING & WRITING PART 2 STYLES                */
+/* ========================================================== */
+
+/* The main wrapper for the two columns */
+.rw-part2-wrapper {
+    display: flex;
+    flex-wrap: wrap; /* Allows stacking on smaller screens */
+    gap: 40px; /* Space between the two columns */
+    align-items: flex-start;
+}
+
+/* Column 1: The conversation */
+.rw-part2-conversation {
+    position: relative; /* This is essential for positioning the inputs */
+    flex: 2; /* Allows this column to take up more space */
+    min-width: 350px;
+}
+
+/* Column 2: The responses */
+.rw-part2-responses {
+    flex: 1; /* Takes up less space */
+    min-width: 250px;
+}
+
+/* Ensure images are responsive within their columns */
+.rw-part2-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* Position the letter boxes on top of the conversation SVG */
+.rw-part2-conversation .letter-box {
+    position: absolute;
+    /* It will inherit its size and look from the rule in Listening Part 3 */
+}
+
+/* --- Positioning for EACH individual input box --- */
+/* You will need to fine-tune these values! */
+
+#rw2-example { top: 22.5%; left: 33%; }
+#rw2-q1      { top: 34.5%; left: 24%; }
+#rw2-q2      { top: 46%;   left: 24%; }
+#rw2-q3      { top: 58%;   left: 24%; }
+#rw2-q4      { top: 69.5%; left: 24%; }
+#rw2-q5      { top: 81%;   left: 24%; }
