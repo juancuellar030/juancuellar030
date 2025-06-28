@@ -2,11 +2,9 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ==========================================================
-    //                 CHANGE 1: GET NAME FROM URL
-    // ==========================================================
+    // --- Get User Name from URL ---
     const params = new URLSearchParams(window.location.search);
-    const userName = params.get('name') || 'Anonymous R&W User'; // Reads name from URL
+    const userName = params.get('name') || 'Anonymous R&W User';
 
     // --- State and Answers for R&W Test 1 ---
     const userAnswers = {};
@@ -20,16 +18,16 @@ document.addEventListener('DOMContentLoaded', () => {
         'rw1-q7': 'an astronaut',
         'rw1-q8': 'a bridge',
         'rw1-q9': 'a waiter',
-        'rw1-q10': 'an artist'
-    
-     // <<< 1. ADD THE NEW ANSWERS FOR PART 2 HERE >>>
+        'rw1-q10': 'an artist', // <<< FIX: Added a comma here
+
         'rw2-q1': 'g',
         'rw2-q2': 'a',
         'rw2-q3': 'e',
         'rw2-q4': 'b',
         'rw2-q5': 'f'
     };
-    const totalQuestions = 10;
+    // <<< FIX: totalQuestions is now calculated automatically >>>
+    const totalQuestions = Object.keys(correctAnswers).length;
 
     // ==========================================================
     //                 COUNTDOWN TIMER LOGIC
@@ -66,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ==========================================================
-    //        (NEW) GOOGLE FORMS SUBMISSION VIA WEB APP
+    //        GOOGLE FORMS SUBMISSION
     // ==========================================================
     function submitResultsToGoogle(name, score, timeSpent) {
         const googleFormURL = 'https://script.google.com/macros/s/AKfycbyP5Y0Sh5JJ-gDjP0X_-kKj_V0y0TcIqeL0Ku2VGKXFp7rk64RyZKwKeeX_BJSihUPU/exec'; 
@@ -124,10 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const finalResultsDisplay = document.getElementById('final-rw-results-display');
         finalResultsDisplay.innerHTML = `<p>You scored ${correctCount} out of ${totalQuestions}.</p><p>Time Taken: ${formattedTimeSpent}</p>`;
 
-        // ==========================================================
-        //               CHANGE 2: USE THE REAL NAME
-        // ==========================================================
-        // This now sends the name we got from the URL instead of a hardcoded value.
+        // --- Send to Google ---
         submitResultsToGoogle(userName, `${correctCount}/${totalQuestions}`, formattedTimeSpent);
     }
 
@@ -154,29 +149,24 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // --- Answer Saving ---
+    // <<< FIX: The two listeners are now separate and correct >>>
     document.querySelectorAll('.rw-part1-container input').forEach(input => {
         input.addEventListener('input', (event) => {
             userAnswers[event.target.id] = event.target.value;
+        });
+    });
 
-     document.querySelectorAll('#rw-part2 .letter-box').forEach(input => {
+    document.querySelectorAll('#rw-part2 .letter-box').forEach(input => {
         input.addEventListener('input', (event) => {
             userAnswers[event.target.id] = event.target.value.trim().toLowerCase();
         });
     });
     
-    // Start timer when the user starts the test from the menu
-    // NOTE: This assumes the R&W intro page is removed and the user lands on Part 1.
-    // If you have an intro page specific to R&W, the selector should be '#rw-intro .nav-btn'
-    const firstStartButton = document.querySelector('.nav-btn[data-target="rw-part1"]');
-    if(firstStartButton) {
-        firstStartButton.addEventListener('click', startTimer);
-    }
-    
     // Check answers on "Check My Answers" button click
     document.getElementById('check-all-rw-answers-btn').addEventListener('click', checkAndSubmitAnswers);
 
-    // Show the first section of the test automatically
+    // Initial page setup
     showSection('rw-part1'); 
-    startTimer(); // Start the timer as soon as the page loads with the name
+    startTimer();
 
 });
