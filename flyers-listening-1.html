@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A2 Flyers Listening Test</title>
     <link rel="stylesheet" href="style.css?v=5">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="page-flyers">
     
@@ -33,11 +34,25 @@
             <section id="listening-part1" class="test-section hidden">
                 <h3>Part 1 (5 Questions)</h3>
                 <p class="part-instructions">Drag each name to the correct person in the picture. There is one example.</p>
-                <div class="audio-player-container"> <!-- This container was opened but never closed -->
-                    <audio controls src="audio/flyers_listening_part1.mp3" type="audio/mpeg">
-                        Your browser does not support the audio element.
-                    </audio>
-                </div> <!-- The missing closing div is now added -->
+                <div class="custom-audio-player">
+                    <!-- The actual audio element is now hidden -->
+                    <audio id="audio-source-part1" src="audio/flyers_listening_part1.mp3"></audio>
+                
+                    <!-- 1. The Progress Bar -->
+                    <div class="progress-bar-wrapper">
+                        <div class="progress-bar"></div>
+                    </div>
+                
+                    <!-- 2. The Controls -->
+                    <div class="controls">
+                        <button class="control-btn"><i class="fas fa-bars"></i></button>
+                        <button class="control-btn"><i class="fas fa-backward-step"></i></button>
+                        <button class="control-btn play-pause-btn" id="play-pause-btn-part1">
+                            <i class="fas fa-play"></i>
+                        </button>
+                        <button class="control-btn"><i class="fas fa-forward-step"></i></button>
+                    </div>
+                </div>
                 <div class="question-content">
                     
                     <div class="names-pool" id="names-pool-top">
