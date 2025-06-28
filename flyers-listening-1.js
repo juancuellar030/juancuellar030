@@ -136,7 +136,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (sectionId === 'listening-part5') {
             loadPart5Svg();
         }
-        if (sectionId === 'listening-intro') {
+        if (sectionId === 'listening-part1') {
             resetAllAnswers();
         }
         
@@ -468,7 +468,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     
     // Initial page setup
-    showSection('listening-intro');
+    showSection('listening-part1');
 
     // Set up the player for each part
     setupCustomPlayer('part1');
