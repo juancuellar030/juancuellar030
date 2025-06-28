@@ -142,56 +142,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Final Grading Logic ---
     document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
-        let correctCount = 0;
-        let detailedFeedback = []; // Make sure this is here
-    
-        const questionsToGrade = Object.keys(correctAnswers).filter(qId => 
-            !qId.includes('example') && qId !== 'boy_on_rock_magazine'
-        );
-        const totalRealQuestions = questionsToGrade.length;
-    
-        // --- The grading loop (this part is correct in your file) ---
-        questionsToGrade.forEach(qId => {
-            // ... (your existing logic for checking each question type) ...
-            // This part is complex but already correct, so we leave it as is.
-            // For example:
-            if (!qId.startsWith('q') && !qId.endsWith('-shape') && !qId.endsWith('-area')) {
-                const targetZone = document.querySelector(`.drop-target[data-description="${qId}"]`);
-                if (targetZone) { 
-                    const droppedItem = targetZone.querySelector('.draggable-name');
-                    const userAnswer = droppedItem ? droppedItem.dataset.name : 'No Answer';
-                    if (userAnswer === correctAnswers[qId]) {
-                        correctCount++;
-                    }
-                }
+    let correctCount = 0;
+    let detailedFeedback = [];
+
+    const questionsToGrade = Object.keys(correctAnswers).filter(qId => 
+        !qId.includes('example') && qId !== 'boy_on_rock_magazine'
+    );
+    const totalRealQuestions = questionsToGrade.length;
+
+    // --- Start of Grading Loop ---
+    questionsToGrade.forEach(qId => {
+        const userAnswer = (userAnswers[qId] || 'No Answer').trim().toLowerCase();
+
+        // Part 1: Drag and Drop
+        if (qId.endsWith('_shoes') || qId.endsWith('_torch') || qId.endsWith('_fire') || qId.endsWith('_helmet') || qId.endsWith('_stream')) {
+            const targetZone = document.querySelector(`.drop-target[data-description="${qId}"]`);
+            if (targetZone) {
+                const droppedItem = targetZone.querySelector('.draggable-name');
+                const droppedAnswer = droppedItem ? droppedItem.dataset.name : 'no answer';
+                if (droppedAnswer === correctAnswers[qId]) correctCount++;
             }
-            // ... etc. for all other question types ...
-        });
-    
-        // ==========================================================
-        //      <<< THIS IS THE MISSING LOGIC THAT IS NOW RESTORED >>>
-        // ==========================================================
-        const finalResultsDisplay = document.getElementById('final-results-display');
-        const percentage = (totalRealQuestions > 0) ? (correctCount / totalRealQuestions) * 100 : 0;
-        
-        let resultsHTML = '';
-        if (userName) {
-            resultsHTML += `<h3>Results for: ${userName}</h3>`;
         }
-        resultsHTML += `<p>You scored ${correctCount} out of ${totalRealQuestions} (${percentage.toFixed(0)}%).</p>`;
-        
-        // Add detailed feedback if any exists
-        if (detailedFeedback.length > 0) {
-            resultsHTML += `<div class="detailed-results"><h4>Review your answers:</h4><p>${detailedFeedback.join('<br>')}</p></div>`;
+        // Part 2: Text Input
+        else if (qId.startsWith('q2_')) {
+            if (userAnswer === correctAnswers[qId] || (qId === 'q2_q3' && userAnswer === 'twenty-four')) correctCount++;
         }
-    
-        // Actually write the results to the page
-        finalResultsDisplay.innerHTML = resultsHTML;
-        finalResultsDisplay.className = percentage === 100 ? 'correct' : (percentage >= 50 ? 'partial' : 'incorrect');
-        
-        // --- This part was already working ---
-        submitResultsToGoogle(userName, `${correctCount}/${totalRealQuestions}`);
+        // Part 3: Letter Matching
+        else if (qId.startsWith('q3_')) {
+            if (userAnswer.toUpperCase() === correctAnswers[qId]) correctCount++;
+        }
+        // Part 4: Multiple Choice
+        else if (qId.startsWith('q4_')) {
+            if (userAnswer.toUpperCase() === correctAnswers[qId].toUpperCase()) correctCount++;
+        }
+        // Part 5: Interactive
+        else if (qId.endsWith('-shape') || qId.endsWith('-area')) {
+            if (userAnswer === correctAnswers[qId]) correctCount++;
+        }
     });
+    // --- End of Grading Loop ---
+
+    // --- Display Results ---
+    const finalResultsDisplay = document.getElementById('final-results-display');
+    const percentage = (totalRealQuestions > 0) ? (correctCount / totalRealQuestions) * 100 : 0;
+    
+    let resultsHTML = '';
+    if (userName) resultsHTML += `<h3>Results for: ${userName}</h3>`;
+    resultsHTML += `<p>You scored ${correctCount} out of ${totalRealQuestions} (${percentage.toFixed(0)}%).</p>`;
+    
+    finalResultsDisplay.innerHTML = resultsHTML;
+    finalResultsDisplay.className = percentage === 100 ? 'correct' : (percentage >= 50 ? 'partial' : 'incorrect');
+    
+    // --- Submit to Google ---
+    submitResultsToGoogle(`${correctCount}/${totalRealQuestions}`);
+});
 
     // --- INITIAL PAGE SETUP ---
     // This is the clean way to start the test
