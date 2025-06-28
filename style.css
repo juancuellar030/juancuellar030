@@ -1260,12 +1260,13 @@ body.page-flyers::before {
     
     width: 75%;               /* Make buttons wider */
     max-width: 400px;
-    padding: 20px 80px;       /* Make buttons taller */
+    padding: 28px 80px;       /* Make buttons taller */
     font-size: 1.8em;         /* Make text bigger */
     
     position: relative;       /* CRITICAL: This is the anchor for the icon */
     overflow: hidden;         /* Hides the icon when it's outside the button */
-    transition: all 0.4s ease-out; /* Smooth transition for all changes */
+    transition: all 0.4s ease-out; /* Smooth transition for all changes */}
+    border-radius: 20px;
 }
 
 /* --- 2. The text inside the button --- */
