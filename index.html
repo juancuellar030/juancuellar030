@@ -3,31 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <title>Online Cambridge Practice Tests</title>
-    <link rel="stylesheet" href="style.css"> <!-- Your stylesheet is preserved -->
+    <!-- Add this to your style.css link to ensure the browser gets the latest version -->
+    <link rel="stylesheet" href="style.css?v=7"> 
 </head>
-<body class="page-menu"> <!-- Your special menu background is preserved -->
+<body class="page-menu">
 
     <!-- Your animated mascots are preserved -->
     <img src="images/mascot-monkey.svg" alt="A friendly monkey mascot" class="animated-mascot">
     <img src="images/student-girl.png" alt="A student girl" class="animated-girl">
     
-    <!-- Your main layout wrappers are preserved -->
     <div class="content-wrapper">
         <div class="test-container">
             
-            <!-- This is the only part that really changes -->
             <h1>Cambridge YLE Practice Tests</h1>
             <p>Choose a level to start practicing.</p>
         
-            <!-- NEW, CLEANER NAVIGATION USING YOUR EXISTING BUTTON STYLE -->
+            <!-- This is the new, animated button navigation -->
             <div class="test-links" style="margin-top: 30px; display: flex; flex-direction: column; align-items: center; gap: 20px;">
                 
-                <!-- This styled button now links to your new Flyers menu page -->
-                <a href="flyers-menu.html" class="nav-btn">A2 Flyers Test</a>
+                <!-- Flyers Button -->
+                <a href="flyers-menu.html" class="nav-btn animated-btn">
+                    <span class="btn-text">A2 Flyers Test</span>
+                    <img src="images/mascot-monkey-icon.svg" alt="Flyers icon" class="btn-icon">
+                </a>
                 
-                <!-- Placeholder for future tests -->
-                <a href="#" class="nav-btn" style="background-color: #bdc3c7; cursor: not-allowed;" onclick="return false;">A1 Movers Test (Coming Soon)</a>
-                <a href="#" class="nav-btn" style="background-color: #bdc3c7; cursor: not-allowed;" onclick="return false;">Pre-A1 Starters Test (Coming Soon)</a>
+                <!-- Movers Button (Coming Soon) -->
+                <a href="#" class="nav-btn animated-btn disabled-btn" onclick="return false;">
+                    <span class="btn-text">A1 Movers Test</span>
+                    <img src="images/mascot-monkey-icon.svg" alt="Movers icon" class="btn-icon">
+                </a>
+                
+                <!-- Starters Button (Coming Soon) -->
+                <a href="#" class="nav-btn animated-btn disabled-btn" onclick="return false;">
+                    <span class="btn-text">Pre-A1 Starters Test</span>
+                    <img src="images/mascot-monkey-icon.svg" alt="Starters icon" class="btn-icon">
+                </a>
 
             </div>
             
