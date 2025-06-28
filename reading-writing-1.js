@@ -21,6 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
         'rw1-q8': 'a bridge',
         'rw1-q9': 'a waiter',
         'rw1-q10': 'an artist'
+    
+     // <<< 1. ADD THE NEW ANSWERS FOR PART 2 HERE >>>
+        'rw2-q1': 'g',
+        'rw2-q2': 'a',
+        'rw2-q3': 'e',
+        'rw2-q4': 'b',
+        'rw2-q5': 'f'
     };
     const totalQuestions = 10;
 
@@ -150,9 +157,13 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('.rw-part1-container input').forEach(input => {
         input.addEventListener('input', (event) => {
             userAnswers[event.target.id] = event.target.value;
+
+     document.querySelectorAll('#rw-part2 .letter-box').forEach(input => {
+        input.addEventListener('input', (event) => {
+            userAnswers[event.target.id] = event.target.value.trim().toLowerCase();
         });
     });
-
+    
     // Start timer when the user starts the test from the menu
     // NOTE: This assumes the R&W intro page is removed and the user lands on Part 1.
     // If you have an intro page specific to R&W, the selector should be '#rw-intro .nav-btn'
