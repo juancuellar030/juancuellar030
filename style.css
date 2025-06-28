@@ -1259,9 +1259,9 @@ body.page-flyers::before {
     justify-content: center;  /* This centers the text by default */
     
     width: 75%;               /* Make buttons wider */
-    max-width: 500px;
-    padding: 20px 70px;       /* Make buttons taller */
-    font-size: 2em;         /* Make text bigger */
+    max-width: 400px;
+    padding: 20px 80px;       /* Make buttons taller */
+    font-size: 1.8em;         /* Make text bigger */
     
     position: relative;       /* CRITICAL: This is the anchor for the icon */
     overflow: hidden;         /* Hides the icon when it's outside the button */
@@ -1278,7 +1278,7 @@ body.page-flyers::before {
 .animated-btn .btn-icon {
     position: absolute;       /* Takes the icon out of the normal flow */
     right: 25px;              /* Positions it on the right side */
-    height: 70px;             /* Set a fixed height for the icon */
+    height: 80px;             /* Set a fixed height for the icon */
     
     opacity: 0;               /* Hide the icon by default */
     transform: translateX(20px); /* Move it slightly off-screen to the right */
