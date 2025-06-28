@@ -1,3 +1,51 @@
+// --- CUSTOM AUDIO PLAYER LOGIC ---
+function setupCustomPlayer(playerId) {
+    const audio = document.getElementById(`audio-source-${playerId}`);
+    const playPauseBtn = document.getElementById(`play-pause-btn-${playerId}`);
+    const playIcon = playPauseBtn.querySelector('.fa-play');
+    const pauseIcon = document.createElement('i');
+    pauseIcon.className = 'fas fa-pause';
+
+    const progressBarWrapper = playPauseBtn.closest('.custom-audio-player').querySelector('.progress-bar-wrapper');
+    const progressBar = progressBarWrapper.querySelector('.progress-bar');
+
+    if (!audio || !playPauseBtn) return; // Exit if elements don't exist
+
+    // Play/Pause functionality
+    playPauseBtn.addEventListener('click', () => {
+        if (audio.paused) {
+            audio.play();
+            playPauseBtn.innerHTML = ''; // Clear icon
+            playPauseBtn.appendChild(pauseIcon);
+        } else {
+            audio.pause();
+            playPauseBtn.innerHTML = ''; // Clear icon
+            playPauseBtn.appendChild(playIcon);
+        }
+    });
+
+    // Update progress bar as audio plays
+    audio.addEventListener('timeupdate', () => {
+        const progressPercent = (audio.currentTime / audio.duration) * 100;
+        progressBar.style.width = `${progressPercent}%`;
+    });
+
+    // Allow user to click on progress bar to seek
+    progressBarWrapper.addEventListener('click', (e) => {
+        const wrapperWidth = progressBarWrapper.offsetWidth;
+        const clickPosition = e.offsetX;
+        const seekTime = (clickPosition / wrapperWidth) * audio.duration;
+        audio.currentTime = seekTime;
+    });
+
+    // When audio ends, reset button to 'play'
+    audio.addEventListener('ended', () => {
+        playPauseBtn.innerHTML = '';
+        playPauseBtn.appendChild(playIcon);
+        progressBar.style.width = '0%';
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
     // --- Select all necessary elements (reverting changes) ---
     const nameInput = document.getElementById('user-name-input');
@@ -21,6 +69,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Enable start button ---
         nameInput.addEventListener('input', () => {
             startButton.disabled = nameInput.value.trim() === '';
+            
         });
     
     // --- Core navigation logic ---
@@ -376,4 +425,11 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Initial page setup
     showSection('listening-intro');
+
+    // Set up the player for each part
+    setupCustomPlayer('part1');
+    setupCustomPlayer('part2');
+    setupCustomPlayer('part3');
+    setupCustomPlayer('part4');
+    setupCustomPlayer('part5');
 });
