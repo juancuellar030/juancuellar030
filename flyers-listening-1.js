@@ -1,48 +1,92 @@
-// --- CUSTOM AUDIO PLAYER LOGIC ---
+// --- UPGRADED CUSTOM AUDIO PLAYER LOGIC ---
+
+// Helper function to format time from seconds to MM:SS
+function formatTime(seconds) {
+    const minutes = Math.floor(seconds / 60);
+    const remainingSeconds = Math.floor(seconds % 60);
+    return `${String(minutes).padStart(2, '0')}:${String(remainingSeconds).padStart(2, '0')}`;
+}
+
 function setupCustomPlayer(playerId) {
+    // Get all the new elements
     const audio = document.getElementById(`audio-source-${playerId}`);
     const playPauseBtn = document.getElementById(`play-pause-btn-${playerId}`);
+    const seekForwardBtn = document.getElementById(`seek-forward-btn-${playerId}`);
+    const seekBackwardBtn = document.getElementById(`seek-backward-btn-${playerId}`);
+    const volumeSlider = document.getElementById(`volume-slider-${playerId}`);
+    const currentTimeEl = document.getElementById(`current-time-${playerId}`);
+    const totalDurationEl = document.getElementById(`total-duration-${playerId}`);
+    
+    // Check if essential elements exist before proceeding
+    if (!audio || !playPauseBtn || !currentTimeEl || !totalDurationEl) return;
+
     const playIcon = playPauseBtn.querySelector('.fa-play');
     const pauseIcon = document.createElement('i');
     pauseIcon.className = 'fas fa-pause';
 
     const progressBarWrapper = playPauseBtn.closest('.custom-audio-player').querySelector('.progress-bar-wrapper');
     const progressBar = progressBarWrapper.querySelector('.progress-bar');
+    
+    // --- Event Listeners ---
 
-    if (!audio || !playPauseBtn) return; // Exit if elements don't exist
-
-    // Play/Pause functionality
+    // Play/Pause button
     playPauseBtn.addEventListener('click', () => {
         if (audio.paused) {
             audio.play();
-            playPauseBtn.innerHTML = ''; // Clear icon
-            playPauseBtn.appendChild(pauseIcon);
         } else {
             audio.pause();
-            playPauseBtn.innerHTML = ''; // Clear icon
-            playPauseBtn.appendChild(playIcon);
+        }
+    });
+    
+    // Event listener for when the audio starts/stops playing
+    audio.addEventListener('play', () => {
+        playPauseBtn.innerHTML = '';
+        playPauseBtn.appendChild(pauseIcon);
+    });
+    audio.addEventListener('pause', () => {
+        playPauseBtn.innerHTML = '';
+        playPauseBtn.appendChild(playIcon);
+    });
+
+    // Seek buttons
+    if (seekForwardBtn && seekBackwardBtn) {
+        seekForwardBtn.addEventListener('click', () => {
+            audio.currentTime += 15;
+        });
+        seekBackwardBtn.addEventListener('click', () => {
+            audio.currentTime -= 15;
+        });
+    }
+
+    // Volume slider
+    if (volumeSlider) {
+        volumeSlider.addEventListener('input', (e) => {
+            audio.volume = e.target.value / 100;
+        });
+    }
+
+    // Update time displays and progress bar
+    audio.addEventListener('timeupdate', () => {
+        if (audio.duration) { // Check if duration is available
+            const progressPercent = (audio.currentTime / audio.duration) * 100;
+            progressBar.style.width = `${progressPercent}%`;
+            currentTimeEl.textContent = formatTime(audio.currentTime);
         }
     });
 
-    // Update progress bar as audio plays
-    audio.addEventListener('timeupdate', () => {
-        const progressPercent = (audio.currentTime / audio.duration) * 100;
-        progressBar.style.width = `${progressPercent}%`;
+    // Set total duration once audio metadata is loaded
+    audio.addEventListener('loadedmetadata', () => {
+        totalDurationEl.textContent = formatTime(audio.duration);
     });
 
     // Allow user to click on progress bar to seek
     progressBarWrapper.addEventListener('click', (e) => {
-        const wrapperWidth = progressBarWrapper.offsetWidth;
-        const clickPosition = e.offsetX;
-        const seekTime = (clickPosition / wrapperWidth) * audio.duration;
-        audio.currentTime = seekTime;
-    });
-
-    // When audio ends, reset button to 'play'
-    audio.addEventListener('ended', () => {
-        playPauseBtn.innerHTML = '';
-        playPauseBtn.appendChild(playIcon);
-        progressBar.style.width = '0%';
+        if (audio.duration) { // Check if duration is available
+            const wrapperWidth = progressBarWrapper.offsetWidth;
+            const clickPosition = e.offsetX;
+            const seekTime = (clickPosition / wrapperWidth) * audio.duration;
+            audio.currentTime = seekTime;
+        }
     });
 }
 
