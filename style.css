@@ -1586,7 +1586,7 @@ body.page-flyers-hub::before {
 /* --- Styling for the bottom responses section --- */
 .rw-part2-responses {
     width: 100%;
-    max-width: 600px; /* Make it a bit wider than before */
+    max-width: 750px; /* Make it a bit wider than before */
     margin: 50px auto 0; /* Add more space above it */
     
     /* These properties create the white box effect */
@@ -1608,8 +1608,8 @@ body.page-flyers-hub::before {
 /* You will need to fine-tune these top/left values! */
 
 #rw2-example { top: 98%; left: 34%; }
-#rw2-q1      { top: 122.5%; left: 34%; }
-#rw2-q2      { top: 139.8%;   left: 34%; }
-#rw2-q3      { top: 157.1%;   left: 34%; }
-#rw2-q4      { top: 174.4%; left: 34%; }
-#rw2-q5      { top: 191.7%;   left: 34%; }
+#rw2-q1      { top: 122.4%; left: 34%; }
+#rw2-q2      { top: 139.7%;   left: 34%; }
+#rw2-q3      { top: 157%;   left: 34%; }
+#rw2-q4      { top: 174.3%; left: 34%; }
+#rw2-q5      { top: 191.6%;   left: 34%; }
