@@ -1571,7 +1571,28 @@ body.page-flyers::before {
     height: 45px; /* Set a fixed height */
 }
 
-/* --- Positioning for EACH individual input box --- */
+/* --- Styling for the bottom responses section --- */
+.rw-part2-responses {
+    width: 100%;
+    max-width: 700px; /* Make it a bit wider than before */
+    margin: 40px auto 0; /* Add more space above it */
+    
+    /* These properties create the white box effect */
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+}
+
+/* This makes the image inside the new white box smaller */
+.response-list-image {
+    width: 100%;
+    max-width: 550px; /* Control the size of the answers SVG */
+    display: block;
+    margin: 0 auto; /* Center the image within the white box */
+}
+
 /* You will need to fine-tune these top/left values! */
 
 #rw2-example { top: 22.5%; left: 33%; }
