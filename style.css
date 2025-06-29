@@ -1105,17 +1105,23 @@ body.page-flyers::before {
     font-size: 1.2em;
 }
 
-#listening-part3 .letter-box {
-    width: 45px;
-    height: 45px;
+.letter-box {
+    width: 45px;                /* Fixed width for a perfect square */
+    height: 45px;               /* Fixed height for a perfect square */
     text-align: center;
+    
+    font-family: 'Mulish', sans-serif; /* <<< FIX: Adds the correct font */
     font-size: 1.6em;
     font-weight: bold;
+
     border: 2px solid #777;
     border-radius: 5px;
     text-transform: uppercase;
-    color: #0056b3; /* Blue color for student answers */
-    background-color: #fff; /* White background */
+    color: #0056b3; 
+    background-color: #fff;
+    
+    /* Ensures consistent positioning */
+    position: absolute; 
 }
 
 /* THIS RULE MAKES THE 'H' VISIBLE */
@@ -1549,14 +1555,6 @@ body.page-flyers::before {
 /* ========================================================== */
 /*           READING & WRITING PART 2 STYLES (NEW)          */
 /* ========================================================== */
-
-/* The conversation container still needs to be relative for positioning */
-.rw-part2-conversation {
-    position: relative;
-    width: 100%;
-    max-width: 600px; /* Adjust as needed */
-    margin: 0 auto; /* Center the conversation block */
-}
 
 /* The responses container can now have some top margin for spacing */
 .rw-part2-responses {
