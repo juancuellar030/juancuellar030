@@ -1547,45 +1547,41 @@ body.page-flyers::before {
 }
 
 /* ========================================================== */
-/*           READING & WRITING PART 2 STYLES                */
+/*           READING & WRITING PART 2 STYLES (NEW)          */
 /* ========================================================== */
 
-/* The main wrapper for the two columns */
-.rw-part2-wrapper {
-    display: flex;
-    flex-wrap: wrap; /* Allows stacking on smaller screens */
-    gap: 40px; /* Space between the two columns */
-    align-items: flex-start;
-}
-
-/* Column 1: The conversation */
+/* The conversation container still needs to be relative for positioning */
 .rw-part2-conversation {
-    position: relative; /* This is essential for positioning the inputs */
-    flex: 2; /* Allows this column to take up more space */
-    min-width: 350px;
+    position: relative;
+    width: 100%;
+    max-width: 600px; /* Adjust as needed */
+    margin: 0 auto; /* Center the conversation block */
 }
 
-/* Column 2: The responses */
+/* The responses container can now have some top margin for spacing */
 .rw-part2-responses {
-    flex: 1; /* Takes up less space */
-    min-width: 250px;
+    width: 100%;
+    max-width: 600px; /* Match the width of the conversation */
+    margin: 20px auto 0; /* Add space above it */
 }
 
-/* Ensure images are responsive within their columns */
-.rw-part2-wrapper img {
+/* Ensure the SVGs are responsive */
+.rw-part2-conversation img,
+.rw-part2-responses img {
     width: 100%;
     height: auto;
-    display: block;
 }
 
 /* Position the letter boxes on top of the conversation SVG */
 .rw-part2-conversation .letter-box {
     position: absolute;
-    /* It will inherit its size and look from the rule in Listening Part 3 */
+    /* This makes the input boxes perfectly square */
+    width: 45px;  /* Set a fixed width */
+    height: 45px; /* Set a fixed height */
 }
 
 /* --- Positioning for EACH individual input box --- */
-/* You will need to fine-tune these values! */
+/* You will need to fine-tune these top/left values! */
 
 #rw2-example { top: 22.5%; left: 33%; }
 #rw2-q1      { top: 34.5%; left: 24%; }
