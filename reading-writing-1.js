@@ -26,6 +26,13 @@ document.addEventListener('DOMContentLoaded', () => {
         'rw2-q3': 'E',
         'rw2-q4': 'B',
         'rw2-q5': 'F'
+
+        'rw3-q1': 'traffic',
+        'rw3-q2': 'somewhere',
+        'rw3-q3': 'late',
+        'rw3-q4': 'worst',
+        'rw3-q5': 'surprise',
+        'rw3-q6': 'hollys_journey' // This is the 'value' from the radio button
     };
     // <<< FIX: totalQuestions is now calculated automatically >>>
     const totalQuestions = Object.keys(correctAnswers).length;
@@ -162,7 +169,21 @@ document.addEventListener('DOMContentLoaded', () => {
             userAnswers[event.target.id] = event.target.value.trim().toLowerCase();
         });
     });
-    
+
+    document.querySelectorAll('.rw-part3-story-container .story-input').forEach(input => {
+        input.addEventListener('input', (event) => {
+            userAnswers[event.target.id] = event.target.value.trim().toLowerCase();
+        });
+    });
+
+    // For the radio buttons
+    document.querySelectorAll('.rw-part3-title-question input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', (event) => {
+            // The 'name' attribute groups the radio buttons (e.g., 'rw3-q6')
+            userAnswers[event.target.name] = event.target.value;
+        });
+    });
+
     // Check answers on "Check My Answers" button click
     document.getElementById('check-all-rw-answers-btn').addEventListener('click', checkAndSubmitAnswers);
 
