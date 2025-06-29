@@ -20,11 +20,12 @@ document.addEventListener('DOMContentLoaded', () => {
         'rw1-q9': 'a waiter',
         'rw1-q10': 'an artist', // <<< FIX: Added a comma here
 
-        'rw2-q1': 'g',
-        'rw2-q2': 'a',
-        'rw2-q3': 'e',
-        'rw2-q4': 'b',
-        'rw2-q5': 'f'
+        'rw2-example': 'C', // This is now correct
+        'rw2-q1': 'G',
+        'rw2-q2': 'A',
+        'rw2-q3': 'E',
+        'rw2-q4': 'B',
+        'rw2-q5': 'F'
     };
     // <<< FIX: totalQuestions is now calculated automatically >>>
     const totalQuestions = Object.keys(correctAnswers).length;
