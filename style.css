@@ -1603,9 +1603,9 @@ body.page-flyers::before {
 
 /* You will need to fine-tune these top/left values! */
 
-#rw2-example { top: 74%; left: 33.5%; }
-#rw2-q1      { top: 34.5%; left: 33.5%; }
-#rw2-q2      { top: 46%;   left: 33.5%; }
-#rw2-q3      { top: 58%;   left: 33.5%; }
-#rw2-q4      { top: 69.5%; left: 33.5%; }
-#rw2-q5      { top: 187%;   left: 33.5%; }
+#rw2-example { top: 82%; left: 34%; }
+#rw2-q1      { top: 89%; left: 34%; }
+#rw2-q2      { top: 46%;   left: 34%; }
+#rw2-q3      { top: 58%;   left: 34%; }
+#rw2-q4      { top: 69.5%; left: 34%; }
+#rw2-q5      { top: 186.5%;   left: 34%; }
