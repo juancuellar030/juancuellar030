@@ -1558,7 +1558,7 @@ body.page-flyers::before {
 
 #rw-part2 .question-image {
     display: block;
-    max-width: 560px; /* <<< You can manually change this value */
+    max-width: 545px; /* <<< You can manually change this value */
     margin: 0 auto 25px; /* <<< You can adjust the space below it */
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
@@ -1596,7 +1596,7 @@ body.page-flyers::before {
 /* This makes the image inside the new white box smaller */
 .response-list-image {
     width: 80%;
-    max-width: 470px; /* Control the size of the answers SVG */
+    max-width: 450px; /* Control the size of the answers SVG */
     display: block;
     margin: 0 auto; /* Center the image within the white box */
 }
@@ -1608,4 +1608,4 @@ body.page-flyers::before {
 #rw2-q2      { top: 46%;   left: 34%; }
 #rw2-q3      { top: 58%;   left: 34%; }
 #rw2-q4      { top: 69.5%; left: 34%; }
-#rw2-q5      { top: 81%;   left: 34%; }
+#rw2-q5      { top: 130%;   left: 34%; }
