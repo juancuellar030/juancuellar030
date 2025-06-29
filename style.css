@@ -1556,13 +1556,6 @@ body.page-flyers::before {
 /*           READING & WRITING PART 2 STYLES (NEW)          */
 /* ========================================================== */
 
-/* The responses container can now have some top margin for spacing */
-.rw-part2-responses {
-    width: 100%;
-    max-width: 600px; /* Match the width of the conversation */
-    margin: 20px auto 0; /* Add space above it */
-}
-
 /* Ensure the SVGs are responsive */
 .rw-part2-conversation img,
 .rw-part2-responses img {
