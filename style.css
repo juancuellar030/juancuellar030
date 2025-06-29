@@ -1600,16 +1600,16 @@ body.page-flyers-hub::before {
 /* This makes the image inside the new white box smaller */
 .response-list-image {
     width: 100%;
-    max-width: 670px; /* Control the size of the answers SVG */
+    max-width: 720px; /* Control the size of the answers SVG */
     display: block;
     margin: 0 auto; /* Center the image within the white box */
 }
 
 /* You will need to fine-tune these top/left values! */
 
-#rw2-example { top: 91%; left: 34%; }
-#rw2-q1      { top: 115.5%; left: 34%; }
-#rw2-q2      { top: 132.8%;   left: 34%; }
-#rw2-q3      { top: 150.1%;   left: 34%; }
-#rw2-q4      { top: 167.4%; left: 34%; }
-#rw2-q5      { top: 184.7%;   left: 34%; }
+#rw2-example { top: 101%; left: 34%; }
+#rw2-q1      { top: 125.5%; left: 34%; }
+#rw2-q2      { top: 142.8%;   left: 34%; }
+#rw2-q3      { top: 160.1%;   left: 34%; }
+#rw2-q4      { top: 177.4%; left: 34%; }
+#rw2-q5      { top: 194.7%;   left: 34%; }
