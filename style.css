@@ -824,6 +824,10 @@ body.page-flyers::before {
     background-image: url('images/flyers_background.svg'); /* This is the monkey background */
 }
 
+body.page-flyers-hub::before {
+    background-image: url('images/flyers-tests-background.svg'); /* Your new background */
+}
+
 /* --- Animated Mascot Styles --- */
 
 /* 1. Define the "slide in from right" animation */
