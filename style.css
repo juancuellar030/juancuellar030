@@ -1559,7 +1559,7 @@ body.page-flyers::before {
 #rw-part2 .question-image {
     display: block;
     max-width: 545px; /* <<< You can manually change this value */
-    margin: 0 auto 25px; /* <<< You can adjust the space below it */
+    margin: 0 auto 28px; /* <<< You can adjust the space below it */
     border-radius: 12px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
@@ -1582,7 +1582,7 @@ body.page-flyers::before {
 /* --- Styling for the bottom responses section --- */
 .rw-part2-responses {
     width: 70%;
-    max-width: 560px; /* Make it a bit wider than before */
+    max-width: 550px; /* Make it a bit wider than before */
     margin: 45px auto 0; /* Add more space above it */
     
     /* These properties create the white box effect */
@@ -1608,4 +1608,4 @@ body.page-flyers::before {
 #rw2-q2      { top: 46%;   left: 34%; }
 #rw2-q3      { top: 58%;   left: 34%; }
 #rw2-q4      { top: 69.5%; left: 34%; }
-#rw2-q5      { top: 130%;   left: 34%; }
+#rw2-q5      { top: 160%;   left: 34%; }
