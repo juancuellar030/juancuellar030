@@ -1586,7 +1586,7 @@ body.page-flyers-hub::before {
 /* --- Styling for the bottom responses section --- */
 .rw-part2-responses {
     width: 100%;
-    max-width: 750px; /* Make it a bit wider than before */
+    max-width: 740px; /* Make it a bit wider than before */
     margin: 50px auto 0; /* Add more space above it */
     
     /* These properties create the white box effect */
