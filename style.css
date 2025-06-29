@@ -816,7 +816,7 @@ body::before {
 
 /* Background for the main menu homepage */
 body.page-menu::before {
-    background-image: url('images/-menu-background.svg'); /* <-- PROVIDE YOUR  BACKGROUND IMAGE HERE */
+    background-image: url('images/new-menu-background.svg'); /* <-- PROVIDE YOUR  BACKGROUND IMAGE HERE */
 }
 
 /* Background for all Flyers tests */
