@@ -723,7 +723,7 @@ header p {
     margin-bottom: 10px;
 }
 
-/* This is the new style for our consistent instruction lines */
+/* This is the  style for our consistent instruction lines */
 .part-instructions {
     text-align: center;
     font-size: 1.1em;
@@ -816,7 +816,7 @@ body::before {
 
 /* Background for the main menu homepage */
 body.page-menu::before {
-    background-image: url('images/new-menu-background.svg'); /* <-- PROVIDE YOUR NEW BACKGROUND IMAGE HERE */
+    background-image: url('images/-menu-background.svg'); /* <-- PROVIDE YOUR  BACKGROUND IMAGE HERE */
 }
 
 /* Background for all Flyers tests */
@@ -897,7 +897,7 @@ body.page-flyers::before {
     /* Make her transparent initially */
     opacity: 0;
 
-    /* 3. Apply the NEW animation! */
+    /* 3. Apply the  animation! */
     animation: slideInFromRight 1.5s ease-out forwards;
     animation-delay: 0.5s; /* Use the same delay so they slide in together */
 }
@@ -1258,7 +1258,7 @@ body.page-flyers::before {
 /*           MAIN MENU ANIMATED BUTTONS                       */
 /* ========================================================== */
 
-/* --- 1. Base style for the new animated button --- */
+/* --- 1. Base style for the  animated button --- */
 .animated-btn {
     display: flex;
     align-items: center;
@@ -1525,7 +1525,7 @@ body.page-flyers::before {
     gap: 8px; /* Create space between the icon and the slider */
 }
 
-/* ...the SLIDER itself will transition to these new properties */
+/* ...the SLIDER itself will transition to these  properties */
 .volume-control:hover .volume-slider {
     width: 80px; /* Expand to its full width */
     opacity: 1; /* Fade it in to be fully visible */
@@ -1557,10 +1557,11 @@ body.page-flyers::before {
 /* ========================================================== */
 
 #rw-part2 .question-image {
-    max-width: 580px; /* <<< You can manually change this value */
-    margin-bottom: 20px; /* <<< You can adjust the space below it */
+    display: block;
+    max-width: 560px; /* <<< You can manually change this value */
+    margin: 0 auto 25px; /* <<< You can adjust the space below it */
     border-radius: 12px;
-    position: 0;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Ensure the SVGs are responsive */
@@ -1581,7 +1582,7 @@ body.page-flyers::before {
 /* --- Styling for the bottom responses section --- */
 .rw-part2-responses {
     width: 70%;
-    max-width: 580px; /* Make it a bit wider than before */
+    max-width: 560px; /* Make it a bit wider than before */
     margin: 45px auto 0; /* Add more space above it */
     
     /* These properties create the white box effect */
@@ -1595,7 +1596,7 @@ body.page-flyers::before {
 /* This makes the image inside the new white box smaller */
 .response-list-image {
     width: 80%;
-    max-width: 480px; /* Control the size of the answers SVG */
+    max-width: 470px; /* Control the size of the answers SVG */
     display: block;
     margin: 0 auto; /* Center the image within the white box */
 }
