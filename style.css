@@ -1560,6 +1560,7 @@ body.page-flyers::before {
     max-width: 650px; /* <<< You can manually change this value */
     margin-bottom: 20px; /* <<< You can adjust the space below it */
     border-radius: 12px;
+    position: relative;
 }
 
 /* Ensure the SVGs are responsive */
@@ -1579,8 +1580,8 @@ body.page-flyers::before {
 
 /* --- Styling for the bottom responses section --- */
 .rw-part2-responses {
-    width: 90%;
-    max-width: 700px; /* Make it a bit wider than before */
+    width: 70%;
+    max-width: 600px; /* Make it a bit wider than before */
     margin: 45px auto 0; /* Add more space above it */
     
     /* These properties create the white box effect */
@@ -1594,16 +1595,16 @@ body.page-flyers::before {
 /* This makes the image inside the new white box smaller */
 .response-list-image {
     width: 90%;
-    max-width: 540px; /* Control the size of the answers SVG */
+    max-width: 520px; /* Control the size of the answers SVG */
     display: block;
     margin: 0 auto; /* Center the image within the white box */
 }
 
 /* You will need to fine-tune these top/left values! */
 
-#rw2-example { top: 22.5%; left: 33%; }
-#rw2-q1      { top: 34.5%; left: 24%; }
-#rw2-q2      { top: 46%;   left: 24%; }
-#rw2-q3      { top: 58%;   left: 24%; }
-#rw2-q4      { top: 69.5%; left: 24%; }
-#rw2-q5      { top: 81%;   left: 24%; }
+#rw2-example { top: 22.5%; left: 37%; }
+#rw2-q1      { top: 34.5%; left: 37%; }
+#rw2-q2      { top: 46%;   left: 37%; }
+#rw2-q3      { top: 58%;   left: 37%; }
+#rw2-q4      { top: 69.5%; left: 37%; }
+#rw2-q5      { top: 81%;   left: 37%; }
