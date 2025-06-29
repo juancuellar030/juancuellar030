@@ -1613,3 +1613,136 @@ body.page-flyers-hub::before {
 #rw2-q3      { top: 157%;   left: 34%; }
 #rw2-q4      { top: 174.3%; left: 34%; }
 #rw2-q5      { top: 191.6%;   left: 34%; }
+
+/* ========================================================== */
+/*           READING & WRITING PART 3 STYLES                */
+/* ========================================================== */
+
+/* --- 1. The Word Box --- */
+.rw-part3-word-box {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 30px;
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+.rw-part3-word-box span {
+    background-color: #ecf0f1;
+    color: #34495e;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-weight: 600;
+}
+
+/* --- 2. The Story Container --- */
+.rw-part3-story-container {
+    position: relative; /* Essential for positioning the inputs */
+}
+.rw-part3-story-container img {
+    width: 100%;
+    height: auto;
+}
+
+/* The input fields that go on the dotted lines */
+.story-input {
+    position: absolute;
+    background: transparent;
+    border: none;
+    border-bottom: 2px dotted #555; /* Dotted line effect */
+    color: #0056b3;
+    font-size: 1em;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+.story-input[readonly] {
+    color: #333;
+    font-weight: 600;
+}
+
+/* --- Positioning for EACH individual input field --- */
+/* You will need to fine-tune these values! */
+#rw3-example { top: 9.2%; left: 13.5%; width: 12%; }
+#rw3-q1 { top: 19%; left: 39%; width: 55%; }
+#rw3-q2 { top: 28.5%; left: 16%; width: 33%; }
+#rw3-q3 { top: 35.8%; left: 33%; width: 28%; }
+#rw3-q4 { top: 43%; left: 24%; width: 45%; }
+#rw3-q5 { top: 73.5%; left: 54.5%; width: 38%; }
+
+
+/* --- 3. The "Best Title" Question --- */
+.rw-part3-title-question {
+    margin-top: 40px;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
+}
+.rw-part3-title-question h4 {
+    font-size: 1.2em;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Custom Checkbox/Radio Button Styles */
+.radio-options-list {
+    list-style: none;
+    padding: 0;
+}
+.radio-options-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+.radio-options-list input[type="radio"] {
+    appearance: none; /* Hide default radio button */
+    -webkit-appearance: none;
+    margin: 0;
+}
+.radio-options-list label {
+    cursor: pointer;
+    padding-left: 35px; /* Space for our custom box */
+    position: relative;
+}
+
+/* Create the custom box */
+.radio-options-list label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    width: 22px;
+    height: 22px;
+    border: 2px solid #777;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+/* Create the checkmark */
+.radio-options-list label::after {
+    content: '✔';
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%) scale(0); /* Hide by default */
+    font-size: 18px;
+    color: white;
+    transition: all 0.2s ease;
+}
+
+/* Style the box when the hidden radio is checked */
+.radio-options-list input[type="radio"]:checked + label::before {
+    background-color: #8723ff; /* Use your main purple color */
+    border-color: #8723ff;
+}
+
+/* Show the checkmark when the hidden radio is checked */
+.radio-options-list input[type="radio"]:checked + label::after {
+    transform: translateY(-50%) scale(1);
+}
+
