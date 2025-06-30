@@ -1557,62 +1557,88 @@ body.page-flyers-hub::before {
 }
 
 /* ========================================================== */
-/*           READING & WRITING PART 2 STYLES (NEW)          */
+/*           READING & WRITING PART 2 (HTML TEXT METHOD)    */
 /* ========================================================== */
 
-/* --- This is the new, definitive rule for the top image in Part 2 --- */
-#rw-part2 .question-image {
-    display: block; /* Necessary for centering to work */
-    
-    /* <<< You can now control the size here >>> */
-    max-width: 800px; 
-    
-    /* This rule correctly centers the image and adds space below it */
-    margin: 0 auto 30px; 
-    
-    /* These add the polished look */
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-}
-
-/* Position the letter boxes on top of the conversation SVG */
-.rw-part2-conversation .letter-box {
-    position: absolute;
-    /* This makes the input boxes perfectly square */
-    width: 42px;  /* Set a fixed width */
-    height: 42px; /* Set a fixed height */
-}
-
-/* --- Styling for the bottom responses section --- */
-.rw-part2-responses {
-    width: 100%;
-    max-width: 730px; /* Make it a bit wider than before */
-    margin: 50px auto 0; /* Add more space above it */
-    
-    /* These properties create the white box effect */
-    background-color: #ffffff;
+/* --- Container for the Conversation --- */
+.rw-part2-conversation-text {
+    background-color: #fff;
     border: 1px solid #e0e0e0;
-    padding: 20px;
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    padding: 20px 30px;
+    border-radius: 10px;
+    max-width: 750px;
+    margin: 0 auto;
 }
 
-/* This makes the image inside the new white box smaller */
-.response-list-image {
-    width: 100%;
-    max-width: 800px; /* Control the size of the answers SVG */
-    display: block;
-    margin: 0 auto; /* Center the image within the white box */
+.convo-turn {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 1.2em; /* Spacing between lines */
+    font-size: 1.1em;
 }
 
-/* You will need to fine-tune these top/left values! */
+.speaker {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    width: 120px; /* Aligns all the text nicely */
+    font-weight: 600;
+}
+.speaker img {
+    width: 35px;
+    height: 35px;
+}
+.speaker .q-number {
+    font-weight: bold;
+    color: #555;
+    width: 20px;
+}
 
-#rw2-example { top: 98%; left: 34%; }
-#rw2-q1      { top: 122.4%; left: 34%; }
-#rw2-q2      { top: 139.7%;   left: 34%; }
-#rw2-q3      { top: 157%;   left: 34%; }
-#rw2-q4      { top: 174.3%; left: 34%; }
-#rw2-q5      { top: 191.6%;   left: 34%; }
+.line {
+    padding-top: 5px;
+}
+
+/* Make the letter-box inline with the text */
+.line .letter-box {
+    position: static; /* Removes absolute positioning */
+    display: inline-block;
+    vertical-align: middle;
+    width: 45px;
+    height: 45px;
+    /* The other styles from .letter-box will apply automatically */
+}
+
+.convo-header {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 25px 0 15px 45px;
+}
+
+/* --- Container for the Responses --- */
+.rw-part2-responses-text {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 25px 30px;
+    border-radius: 10px;
+    max-width: 750px;
+    margin: 30px auto 0;
+}
+.rw-part2-responses-text ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.rw-part2-responses-text li {
+    display: flex;
+    gap: 20px;
+    font-size: 1.1em;
+    margin-bottom: 1em;
+}
+.rw-part2-responses-text li span {
+    font-weight: bold;
+}
 
 /* ========================================================== */
 /*           READING & WRITING PART 3 STYLES                */
@@ -1791,3 +1817,13 @@ body.page-flyers-hub::before {
 #rw6-q3      { top: 35.5%;  left: 4.5%;  width: 14%; }
 #rw6-q4      { top: 43%;    left: 47.5%; width: 23%; }
 #rw6-q5      { top: 54%;    left: 4.5%;  width: 25%; }
+
+/* ========================================================== */
+/*           UTILITY CLASSES (e.g., for text selection)     */
+/* ========================================================== */
+.non-selectable {
+  -webkit-user-select: none; /* For Safari and older Chrome */
+  -moz-user-select: none;    /* For Firefox */
+  -ms-user-select: none;     /* For older IE/Edge */
+  user-select: none;         /* The standard property */
+}
