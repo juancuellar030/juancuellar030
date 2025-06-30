@@ -1587,7 +1587,7 @@ body.page-flyers-hub::before {
 
 .convo-turn {
     display: flex;
-    align-items: flex-start;
+    align-items: center;
     gap: 15px;
     margin-bottom: 1.2em; /* Spacing between lines */
     font-size: 1.2em;
