@@ -1681,12 +1681,12 @@ body.page-flyers-hub::before {
 
 /* --- Positioning for EACH individual input field --- */
 /* You will need to fine-tune these values! */
-#rw3-example { top: 9.2%; left: 13.5%; width: 12%; }
-#rw3-q1 { top: 19%; left: 39%; width: 55%; }
-#rw3-q2 { top: 28.5%; left: 16%; width: 33%; }
-#rw3-q3 { top: 35.8%; left: 33%; width: 28%; }
-#rw3-q4 { top: 43%; left: 24%; width: 45%; }
-#rw3-q5 { top: 86.5%; left: 76%; width: 17%; }
+#rw3-example { top: 9.2%; left: 13.5%; width: 17%; }
+#rw3-q1 { top: 19%; left: 39%; width: 17%; }
+#rw3-q2 { top: 28.5%; left: 16%; width: 17%; }
+#rw3-q3 { top: 38.8%; left: 33%; width: 17%; }
+#rw3-q4 { top: 47%; left: 22%; width: 17%; }
+#rw3-q5 { top: 86.6%; left: 77.2%; width: 17%; }
 
 
 /* --- 3. The "Best Title" Question --- */
