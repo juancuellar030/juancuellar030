@@ -1619,6 +1619,8 @@ body.page-flyers-hub::before {
 /* ========================================================== */
 
 #rw-part3 .question-image {
+    display: block;
+    margin: 0 auto 28px;
     max-width: 700px; /* <<< You can change this value to make it bigger or smaller */
     margin-bottom: 30px; /* Adjust the space below the image */
     border-radius: 12px;
