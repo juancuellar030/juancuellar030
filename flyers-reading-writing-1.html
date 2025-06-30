@@ -48,36 +48,97 @@
                 </div>
             </section>
 
-            <!-- Reading & Writing Part 2 (New Single-Column Layout) -->
+            <!--     Reading & Writing Part 2 (HTML Text Method) - FINAL    -->
             <section id="rw-part2" class="test-section hidden">
                 <h3>Part 2 (5 Questions)</h3>
-                <p class="part-instructions">Michael is talking to Emma. What does Emma say? Read the conversation and choose the best answer. Write a letter (A—H) for each answer. You do not need to use all the letters. There is one example.</p>
+                <p class="part-instructions">Read the conversation and choose the best answer. Write a letter (A-H) for each answer.</p>
             
                 <div class="question-content">
                     
                     <!-- The Main Image -->
                     <img src="images/rw-flyers-part2-michael-and-emma.svg" alt="Michael and Emma talking on the phone" class="question-image">
             
-                    <!-- The Conversation with Input Boxes -->
-                    <div class="rw-part2-conversation">
-                    <!-- NEW: This is the "fixed frame" that maintains the aspect ratio -->
-                    <div class="rw-part2-conversation svg-input-container">
-                        <!-- The conversation SVG is now INSIDE this new container -->
-                        <img src="images/rw-part2-michael.svg" alt="Conversation between Michael and Emma">
-                        <input type="text" class="letter-box" id="rw2-example" value="C" readonly>
-                        <input type="text" class="letter-box" id="rw2-q1" maxlength="1" autocomplete="off">
-                        <input type="text" class="letter-box" id="rw2-q2" maxlength="1" autocomplete="off">
-                        <input type="text" class="letter-box" id="rw2-q3" maxlength="1" autocomplete="off">
-                        <input type="text" class="letter-box" id="rw2-q4" maxlength="1" autocomplete="off">
-                        <input type="text" class="letter-box" id="rw2-q5" maxlength="1" autocomplete="off">
-                    </div>
-                </div>
+                    <!-- The Conversation Block -->
+                    <div class="rw-part2-conversation-text">
+                        
+                        <!-- Example Turn -->
+                        <div class="convo-turn">
+                            <div class="speaker"><img src="images/michael-avatar.svg" alt="Michael"><span>Michael:</span></div>
+                            <div class="line">Did you do anything special for your birthday, Emma?</div>
+                        </div>
+                        <div class="convo-turn">
+                            <div class="speaker"><img src="images/emma-avatar.svg" alt="Emma"><span>Emma:</span></div>
+                            <div class="line"><input type="text" class="letter-box" id="rw2-example" value="D" readonly></div>
+                        </div>
             
-                    <!-- The List of Responses (Now at the bottom) -->
-                    <div class="rw-part2-responses">
-                        <img src="images/rw-part2-emma.svg" alt="List of possible responses from A to H" class="response-list-image">
+                        <!-- Questions Header -->
+                        <h4 class="convo-header">Questions</h4>
+            
+                        <!-- Question 1 -->
+                        <div class="convo-turn">
+                            <div class="speaker"><span class="q-number">1</span><img src="images/michael-avatar.png" alt="Michael"><span>Michael:</span></div>
+                            <div class="line">Cool! Pizza's my favourite food!</div>
+                        </div>
+                        <div class="convo-turn">
+                            <div class="speaker"><img src="images/emma-avatar.png" alt="Emma"><span>Emma:</span></div>
+                            <div class="line"><input type="text" class="letter-box" id="rw2-q1" maxlength="1" autocomplete="off"></div>
+                        </div>
+                        
+                        <!-- Question 2 -->
+                        <div class="convo-turn">
+                            <div class="speaker"><span class="q-number">2</span><img src="images/michael-avatar.png" alt="Michael"><span>Michael:</span></div>
+                            <div class="line">What do you like on top of your pizza?</div>
+                        </div>
+                        <div class="convo-turn">
+                            <div class="speaker"><img src="images/emma-avatar.png" alt="Emma"><span>Emma:</span></div>
+                            <div class="line"><input type="text" class="letter-box" id="rw2-q2" maxlength="1" autocomplete="off"></div>
+                        </div>
+            
+                        <!-- Question 3 -->
+                        <div class="convo-turn">
+                            <div class="speaker"><span class="q-number">3</span><img src="images/michael-avatar.png" alt="Michael"><span>Michael:</span></div>
+                            <div class="line">I like different things on my pizza, like pineapple!</div>
+                        </div>
+                        <div class="convo-turn">
+                            <div class="speaker"><img src="images/emma-avatar.png" alt="Emma"><span>Emma:</span></div>
+                            <div class="line"><input type="text" class="letter-box" id="rw2-q3" maxlength="1" autocomplete="off"></div>
+                        </div>
+            
+                        <!-- Question 4 -->
+                        <div class="convo-turn">
+                            <div class="speaker"><span class="q-number">4</span><img src="images/michael-avatar.png" alt="Michael"><span>Michael:</span></div>
+                            <div class="line">So, do you often have pizza?</div>
+                        </div>
+                        <div class="convo-turn">
+                            <div class="speaker"><img src="images/emma-avatar.png" alt="Emma"><span>Emma:</span></div>
+                            <div class="line"><input type="text" class="letter-box" id="rw2-q4" maxlength="1" autocomplete="off"></div>
+                        </div>
+            
+                        <!-- Question 5 -->
+                        <div class="convo-turn">
+                            <div class="speaker"><span class="q-number">5</span><img src="images/michael-avatar.png" alt="Michael"><span>Michael:</span></div>
+                            <div class="line">Mum says we can make pizza tomorrow. Come to our house after school if you're not busy.</div>
+                        </div>
+                        <div class="convo-turn">
+                            <div class="speaker"><img src="images/emma-avatar.png" alt="Emma"><span>Emma:</span></div>
+                            <div class="line"><input type="text" class="letter-box" id="rw2-q5" maxlength="1" autocomplete="off"></div>
+                        </div>
+            
                     </div>
             
+                    <!-- The List of Responses (as real text) -->
+                    <div class="rw-part2-responses-text">
+                        <ul>
+                            <li><span>A</span> Nothing much. Usually just some tomato and olives.</li>
+                            <li><span>B</span> No. Only once a month because my little brother hates it.</li>
+                            <li><span>C</span> I'm sorry, I can't. We're having dinner at the moment.</li>
+                            <li><span>D</span> My grandparents took me to my favourite pizza restaurant, actually. <strong>(Example)</strong></li>
+                            <li><span>E</span> Really? That's strange! I hate fruit on my pizza.</li>
+                            <li><span>F</span> That would be brilliant, but I'll have to speak to my mum first.</li>
+                            <li><span>G</span> It's mine, too. I prefer it to everything else.</li>
+                            <li><span>H</span> Yes, we did. We found out about it yesterday.</li>
+                        </ul>
+                    </div>
                 </div>
             
                 <div class="navigation-buttons">
