@@ -1618,6 +1618,13 @@ body.page-flyers-hub::before {
 /*           READING & WRITING PART 3 STYLES                */
 /* ========================================================== */
 
+#rw-part3 .question-image {
+    max-width: 700px; /* <<< You can change this value to make it bigger or smaller */
+    margin-bottom: 30px; /* Adjust the space below the image */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
 /* --- 1. The Word Box --- */
 .rw-part3-word-box {
     background-color: #fff;
