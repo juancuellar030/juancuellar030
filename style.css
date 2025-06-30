@@ -1560,29 +1560,22 @@ body.page-flyers-hub::before {
 /*           READING & WRITING PART 2 STYLES (NEW)          */
 /* ========================================================== */
 
-/* --- The container for the conversation and inputs --- */
+/* --- The Container for the Conversation and Inputs (Combined) --- */
 .rw-part2-conversation {
+    /* Layout properties */
     width: 100%;
-    max-width: 600px;
+    max-width: 700px; /* <<< You can now control the size here */
     margin: 0 auto;
+    
+    /* "Fixed Frame" properties */
+    position: relative; 
+    padding-bottom: 75%; /* The aspect ratio (adjust if needed) */
+    background-color: #f0f0f0; /* Optional: for debugging */
 }
 
-/* --- The "Fixed Frame" (Aspect Ratio Box) --- */
-.svg-input-container {
-    position: relative; /* This is the anchor for all absolute children */
-    width: 100%;
-    
-    /* THE MAGIC: This sets a 4:3 aspect ratio (height is 75% of width) */
-    /* To calculate: (SVG Height / SVG Width) * 100 */
-    /* You may need to adjust this value to match your SVG's true aspect ratio */
-    padding-bottom: 75%; 
-    
-    background-color: #f0f0f0; /* Optional: helps with debugging alignment */
-}
-
-/* --- The SVG background image --- */
+/* --- The SVG background image (this rule is now correct) --- */
 .svg-input-container img {
-    position: absolute; /* Place it at the top-left of the container */
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
