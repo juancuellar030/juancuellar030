@@ -60,18 +60,20 @@
             
                     <!-- The Conversation with Input Boxes -->
                     <div class="rw-part2-conversation">
+                    <!-- NEW: This is the "fixed frame" that maintains the aspect ratio -->
+                    <div class="svg-input-container">
+                        <!-- The conversation SVG is now INSIDE this new container -->
                         <img src="images/rw-part2-michael.svg" alt="Conversation between Michael and Emma">
-            
-                        <!-- Example (Now corrected to 'C' and still read-only) -->
+                
+                        <!-- All the input boxes are also INSIDE -->
                         <input type="text" class="letter-box" id="rw2-example" value="C" readonly>
-                        
-                        <!-- Questions (Inputs remain the same) -->
                         <input type="text" class="letter-box" id="rw2-q1" maxlength="1" autocomplete="off">
                         <input type="text" class="letter-box" id="rw2-q2" maxlength="1" autocomplete="off">
                         <input type="text" class="letter-box" id="rw2-q3" maxlength="1" autocomplete="off">
                         <input type="text" class="letter-box" id="rw2-q4" maxlength="1" autocomplete="off">
                         <input type="text" class="letter-box" id="rw2-q5" maxlength="1" autocomplete="off">
                     </div>
+                </div>
             
                     <!-- The List of Responses (Now at the bottom) -->
                     <div class="rw-part2-responses">
