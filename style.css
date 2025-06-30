@@ -1560,26 +1560,19 @@ body.page-flyers-hub::before {
 /*           READING & WRITING PART 2 STYLES (NEW)          */
 /* ========================================================== */
 
-/* --- The Container for the Conversation and Inputs (Combined) --- */
-.rw-part2-conversation {
-    /* Layout properties */
-    width: 100%;
-    max-width: 700px; /* <<< You can now control the size here */
-    margin: 0 auto;
+/* --- This is the new, definitive rule for the top image in Part 2 --- */
+#rw-part2 .question-image {
+    display: block; /* Necessary for centering to work */
     
-    /* "Fixed Frame" properties */
-    position: relative; 
-    padding-bottom: 75%; /* The aspect ratio (adjust if needed) */
-    background-color: #f0f0f0; /* Optional: for debugging */
-}
-
-/* --- The SVG background image (this rule is now correct) --- */
-.rw-part2-conversation > img {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    /* <<< You can now control the size here >>> */
+    max-width: 700px; 
+    
+    /* This rule correctly centers the image and adds space below it */
+    margin: 0 auto 30px; 
+    
+    /* These add the polished look */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Position the letter boxes on top of the conversation SVG */
