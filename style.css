@@ -1565,7 +1565,7 @@ body.page-flyers-hub::before {
     display: block; /* Necessary for centering to work */
     
     /* <<< You can now control the size here >>> */
-    max-width: 700px; 
+    max-width: 760px; 
     
     /* This rule correctly centers the image and adds space below it */
     margin: 0 auto 30px; 
