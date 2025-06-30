@@ -1705,6 +1705,7 @@ body.page-flyers-hub::before {
 .radio-options-list {
     list-style: none;
     padding: 0;
+     padding-left: 5px;
 }
 .radio-options-list li {
     display: flex;
