@@ -1560,19 +1560,33 @@ body.page-flyers-hub::before {
 /*           READING & WRITING PART 2 STYLES (NEW)          */
 /* ========================================================== */
 
-#rw-part2 .question-image {
-    display: block;
-    max-width: 545px; /* <<< You can manually change this value */
-    margin: 0 auto 28px; /* <<< You can adjust the space below it */
-    border-radius: 12px;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+/* --- The container for the conversation and inputs --- */
+.rw-part2-conversation {
+    width: 100%;
+    max-width: 600px;
+    margin: 0 auto;
 }
 
-/* Ensure the SVGs are responsive */
-.rw-part2-conversation img,
-.rw-part2-responses img {
+/* --- The "Fixed Frame" (Aspect Ratio Box) --- */
+.svg-input-container {
+    position: relative; /* This is the anchor for all absolute children */
     width: 100%;
-    height: auto;
+    
+    /* THE MAGIC: This sets a 4:3 aspect ratio (height is 75% of width) */
+    /* To calculate: (SVG Height / SVG Width) * 100 */
+    /* You may need to adjust this value to match your SVG's true aspect ratio */
+    padding-bottom: 75%; 
+    
+    background-color: #f0f0f0; /* Optional: helps with debugging alignment */
+}
+
+/* --- The SVG background image --- */
+.svg-input-container img {
+    position: absolute; /* Place it at the top-left of the container */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
 }
 
 /* Position the letter boxes on top of the conversation SVG */
