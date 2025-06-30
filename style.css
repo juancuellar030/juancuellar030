@@ -1575,7 +1575,7 @@ body.page-flyers-hub::before {
     align-items: flex-start;
     gap: 15px;
     margin-bottom: 1.2em; /* Spacing between lines */
-    font-size: 1.1em;
+    font-size: 1.2em;
 }
 
 .speaker {
@@ -1605,8 +1605,8 @@ body.page-flyers-hub::before {
     position: static; /* Removes absolute positioning */
     display: inline-block;
     vertical-align: middle;
-    width: 45px;
-    height: 45px;
+    width: 43px;
+    height: 43px;
     /* The other styles from .letter-box will apply automatically */
 }
 
@@ -1633,7 +1633,7 @@ body.page-flyers-hub::before {
 .rw-part2-responses-text li {
     display: flex;
     gap: 20px;
-    font-size: 1.1em;
+    font-size: 1.2em;
     margin-bottom: 1em;
 }
 .rw-part2-responses-text li span {
