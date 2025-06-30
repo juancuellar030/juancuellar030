@@ -1635,8 +1635,8 @@ body.page-flyers-hub::before {
     background-color: #ecf0f1;
     color: #34495e;
     padding: 8px 15px;
-    border-radius: 20px;
-    font-size: 1.2em;
+    border-radius: 25px;
+    font-size: 1.3em;
     font-weight: 600;
 }
 
@@ -1661,7 +1661,7 @@ body.page-flyers-hub::before {
     border: none;
     border-bottom: 2px dotted #555; /* Dotted line effect */
     color: #0056b3;
-    font-size: 1.3em;
+    font-size: 1.4em;
     font-family: 'Poppins', sans-serif;
     text-align: center;
 }
@@ -1687,7 +1687,7 @@ body.page-flyers-hub::before {
     border-top: 1px solid #eee;
 }
 .rw-part3-title-question h4 {
-    font-size: 1.2em;
+    font-size: 1.4em;
     margin-bottom: 20px;
     font-weight: 600;
 }
@@ -1701,7 +1701,7 @@ body.page-flyers-hub::before {
     display: flex;
     align-items: center;
     margin-bottom: 15px;
-    font-size: 1.3em;
+    font-size: 1.4em;
 }
 .radio-options-list input[type="radio"] {
     appearance: none; /* Hide default radio button */
