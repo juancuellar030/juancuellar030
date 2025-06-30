@@ -1686,7 +1686,7 @@ body.page-flyers-hub::before {
 #rw3-q2 { top: 28.5%; left: 16%; width: 33%; }
 #rw3-q3 { top: 35.8%; left: 33%; width: 28%; }
 #rw3-q4 { top: 43%; left: 24%; width: 45%; }
-#rw3-q5 { top: 73.5%; left: 54.5%; width: 38%; }
+#rw3-q5 { top: 89%; left: 65%; width: 17%; }
 
 
 /* --- 3. The "Best Title" Question --- */
@@ -1705,7 +1705,7 @@ body.page-flyers-hub::before {
 .radio-options-list {
     list-style: none;
     padding: 0;
-     padding-left: 5px;
+    padding-left: 8px;
 }
 .radio-options-list li {
     display: flex;
