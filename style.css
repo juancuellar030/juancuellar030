@@ -1560,6 +1560,21 @@ body.page-flyers-hub::before {
 /*           READING & WRITING PART 2 (HTML TEXT METHOD)    */
 /* ========================================================== */
 
+/* --- This is the new, definitive rule for the top image in Part 2 --- */
+#rw-part2 .question-image {
+    display: block; /* Ensures centering works */
+    
+    /* <<< You can now control the size here >>> */
+    max-width: 650px; 
+    
+    /* This rule correctly centers the image and adds space below it */
+    margin: 0 auto 30px; 
+    
+    /* These add the polished look */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
 /* --- Container for the Conversation --- */
 .rw-part2-conversation-text {
     background-color: #fff;
