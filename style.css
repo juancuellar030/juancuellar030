@@ -1574,7 +1574,7 @@ body.page-flyers-hub::before {
 }
 
 /* --- The SVG background image (this rule is now correct) --- */
-.svg-input-container img {
+.rw-part2-conversation > img {
     position: absolute;
     top: 0;
     left: 0;
