@@ -1969,9 +1969,9 @@ body.page-flyers-hub::before {
     color: #0056b3;
 
     /* Sizing for the blank */
-    width: 250px; /* Give it a good base width */
+    width: 240px; /* Give it a good base width */
     margin: 0 5px; /* A little space around it */
-    padding-bottom: 2px;
+    padding-bottom: 1px;
 }
 
 /* Styling for the read-only examples */
