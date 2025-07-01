@@ -1981,3 +1981,38 @@ body.page-flyers-hub::before {
     font-weight: 600;
     width: auto; /* Allow it to size to its content */
 }
+
+/* ========================================================== */
+/*           READING & WRITING PART 6 STYLES (NEW)          */
+/* ========================================================== */
+
+/* The container for the story text */
+.rw-part6-story-text {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+.rw-part6-story-text h4 {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 25px;
+    text-decoration: underline;
+}
+.rw-part6-story-text p {
+    font-size: 1.15em;
+    line-height: 2.5; /* Increased space for inputs */
+    text-align: justify; /* Justified text for a clean diary look */
+}
+
+/* We can reuse the .story-input style, but we might want to adjust the width for this part */
+#rw-part6 .story-input {
+    width: 150px; /* A smaller, consistent width for the single words */
+}
+#rw-part6 .story-input[readonly] {
+    width: auto; /* Allow readonly example to size to its content */
+}
