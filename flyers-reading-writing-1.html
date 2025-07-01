@@ -212,106 +212,115 @@
                 </div>
             </section>
             
-            <!-- Reading & Writing Part 4 -->
+            <!-- Reading & Writing Part 4 (HTML Text Method) -->
             <section id="rw-part4" class="test-section hidden">
                 <h3>Part 4 (10 Questions)</h3>
-                <p class="part-instructions">Read the text below and choose the best word for each space.</p>
-                
+                <p class="part-instructions">Read the story and choose the best word for each space.</p>
+            
                 <div class="question-content">
-                    <h4>Tortoises</h4>
-                    <img src="images/tortoise_picture.svg" alt="A picture of tortoises" class="question-image">
-                    <div class="rw-part6-container">
-                        <!-- 1. The SVG background image -->
-                        <img src="images/rw-part6-tortoises.svg" alt="Text about tortoises with blank spaces">
-                        
-                        <!-- 2. The dropdown menus that will be placed on top -->
+                    
+                    <!-- The Top Image - Uses the class for consistent styling -->
+                    <img src="images/rw-part4-tortoises.svg" alt="A picture of two tortoises" class="question-image">
             
-                        <!-- Example: Disabled with the answer pre-selected -->
-                        <select id="rw6-example" disabled>
-                            <option value="on" selected>on</option>
-                            <option value="up">up</option>
-                            <option value="out">out</option>
-                        </select>
-            
-                        <!-- Question 1 -->
-                        <select id="rw6-q1">
-                            <option value="" disabled selected>Choose...</option>
-                            <option value="each">each</option>
-                            <option value="another">another</option>
-                            <option value="both">both</option>
-                        </select>
-            
-                        <!-- Question 2 -->
-                        <select id="rw6-q2">
-                            <option value="" disabled selected>Choose...</option>
-                            <option value="every">every</option>
-                            <option value="any">any</option>
-                            <option value="no">no</option>
-                        </select>
-            
-                        <!-- Question 3 -->
-                        <select id="rw6-q3">
-                            <option value="" disabled selected>Choose...</option>
-                            <option value="feel">feel</option>
-                            <option value="feels">feels</option>
-                            <option value="felt">felt</option>
-                        </select>
-            
-                        <!-- Question 4 -->
-                        <select id="rw6-q4">
-                            <option value="" disabled selected>Choose...</option>
-                            <option value="which">which</option>
-                            <option value="what">what</option>
-                            <option value="where">where</option>
-                        </select>
-            
-                        <!-- Question 5 -->
-                        <select id="rw6-q5">
-                            <option value="" disabled selected>Choose...</option>
-                            <option value="many">many</option>
-                            <option value="such">such</option>
-                            <option value="most">most</option>
-                        </select>
-            
-                        <!-- Question 6 -->
-                        <select id="rw6-q6">
-                            <option value="" disabled selected>Choose...</option>
-                            <option value="during">during</option>
-                            <option value="until">until</option>
-                            <option value="through">through</option>
-                        </select>
-                        
-                        <!-- Question 7 -->
-                        <select id="rw6-q7">
-                            <option value="" disabled selected>Choose...</option>
-                            <option value="long">long</option>
-                            <option value="longer">longer</option>
-                            <option value="longest">longest</option>
-                        </select>
-            
-                        <!-- Question 8 -->
-                        <select id="rw6-q8">
-                            <option value="" disabled selected>Choose...</option>
-                            <option value="These">These</option>
-                            <option value="Them">Them</option>
-                            <option value="This">This</option>
-                        </select>
-            
-                        <!-- Question 9 -->
-                        <select id="rw6-q9">
-                            <option value="" disabled selected>Choose...</option>
-                            <option value="because">because</option>
-                            <option value="so">so</option>
-                            <option value="or">or</option>
-                        </select>
-            
-                        <!-- Question 10 -->
-                        <select id="rw6-q10">
-                            <option value="" disabled selected>Choose...</option>
-                            <option value="Soon">Soon</option>
-                            <option value="When">When</option>
-                            <option value="Perhaps">Perhaps</option>
-                        </select>
+                    <!-- The Story Container (as real text) -->
+                    <div class="rw-part4-story-text non-selectable">
+                        <p>
+                            Tortoises are animals that have four legs and a hard shell
+                            <!-- Example Dropdown -->
+                            <select class="inline-select" id="rw4-example" disabled>
+                                <option value="on" selected>on</option>
+                            </select>
+                            their backs. There isn’t only one kind of tortoise and
+                            <!-- Question 1 -->
+                            <select class="inline-select" id="rw4-q1">
+                                <option value="" disabled selected>...</option>
+                                <option value="each">each</option>
+                                <option value="another">another</option>
+                                <option value="both">both</option>
+                            </select>
+                            tortoise’s shell is a different shape. They have short legs and toes, and they do not have
+                            <!-- Question 2 -->
+                            <select class="inline-select" id="rw4-q2">
+                                <option value="" disabled selected>...</option>
+                                <option value="every">every</option>
+                                <option value="any">any</option>
+                                <option value="no">no</option>
+                            </select>
+                            teeth.
+                        </p>
+                        <p>
+                            They pull their heads and necks inside their shells when they
+                            <!-- Question 3 -->
+                            <select class="inline-select" id="rw4-q3">
+                                <option value="" disabled selected>...</option>
+                                <option value="feel">feel</option>
+                                <option value="feels">feels</option>
+                                <option value="felt">felt</option>
+                            </select>
+                            afraid of something.
+                        </p>
+                        <p>
+                            Tortoises eat plants, but there are some tortoises
+                            <!-- Question 4 -->
+                            <select class="inline-select" id="rw4-q4">
+                                <option value="" disabled selected>...</option>
+                                <option value="which">which</option>
+                                <option value="what">what</option>
+                                <option value="where">where</option>
+                            </select>
+                            eat snails and birds. Tortoises like to sleep for
+                            <!-- Question 5 -->
+                            <select class="inline-select" id="rw4-q5">
+                                <option value="" disabled selected>...</option>
+                                <option value="many">many</option>
+                                <option value="such">such</option>
+                                <option value="most">most</option>
+                            </select>
+                            of the day.
+                        </p>
+                        <p>
+                            Some tortoises live
+                            <!-- Question 6 -->
+                            <select class="inline-select" id="rw4-q6">
+                                <option value="" disabled selected>...</option>
+                                <option value="during">during</option>
+                                <option value="until">until</option>
+                                <option value="through">through</option>
+                            </select>
+                            they are very old. A few live
+                            <!-- Question 7 -->
+                            <select class="inline-select" id="rw4-q7">
+                                <option value="" disabled selected>...</option>
+                                <option value="long">long</option>
+                                <option value="longer">longer</option>
+                                <option value="longest">longest</option>
+                            </select>
+                            than 100 years! And on some islands, there are very large tortoises.
+                            <!-- Question 8 -->
+                            <select class="inline-select" id="rw4-q8">
+                                <option value="" disabled selected>...</option>
+                                <option value="These">These</option>
+                                <option value="Them">Them</option>
+                                <option value="This">This</option>
+                            </select>
+                            tortoises have lots of food to eat,
+                            <!-- Question 9 -->
+                            <select class="inline-select" id="rw4-q9">
+                                <option value="" disabled selected>...</option>
+                                <option value="because">because</option>
+                                <option value="so">so</option>
+                                <option value="or">or</option>
+                            </select>
+                            the animals grow big.
+                            <!-- Question 10 -->
+                            <select class="inline-select" id="rw4-q10">
+                                <option value="" disabled selected>...</option>
+                                <option value="Soon">Soon</option>
+                                <option value="When">When</option>
+                                <option value="Perhaps">Perhaps</option>
+                            </select>
+                            the weather gets cold, tortoises go to sleep for months.
+                        </p>
                     </div>
                 </div>
             
