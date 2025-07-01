@@ -1869,7 +1869,7 @@ body.page-flyers-hub::before {
 /* Style for the inline dropdowns */
 .inline-select {
     font-family: 'Poppins', sans-serif;
-    font-size: 1em;
+    font-size: 0.9em;
     border: 1px solid #ccc;
     border-radius: 6px;
     padding: 4px 8px;
