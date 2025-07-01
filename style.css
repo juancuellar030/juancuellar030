@@ -1854,6 +1854,20 @@ body.page-flyers-hub::before {
 /*           READING & WRITING PART 4 STYLES                */
 /* ========================================================== */
 
+#rw-part4 .question-image {
+    display: block; /* Ensures centering works */
+    
+    /* <<< You can now control the size here >>> */
+    max-width: 700px; 
+    
+    /* This rule correctly centers the image and adds space below it */
+    margin: 0 auto 30px; 
+    
+    /* These add the polished look */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
 /* The container for the story text */
 .rw-part4-story-text {
     background-color: #fff;
