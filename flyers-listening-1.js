@@ -63,6 +63,18 @@ document.addEventListener('DOMContentLoaded', () => {
             section.classList.toggle('hidden', section.id !== sectionId);
         });
         document.querySelectorAll('audio').forEach(p => p.pause());
+    
+        // --- ADD THIS LOGIC BLOCK BACK ---
+        if (sectionId === 'listening-part1') {
+            const michaelElement = document.querySelector('.draggable-name[data-name="michael"]');
+            const michaelTargetZone = document.querySelector('.drop-target[data-description="boy_on_rock_magazine"]');
+            if (michaelElement && michaelTargetZone && michaelTargetZone.children.length === 0) {
+                michaelTargetZone.appendChild(michaelElement);
+                userAnswers['boy_on_rock_magazine'] = 'michael';
+            }
+        }
+        // --- END OF ADDED BLOCK ---
+    
         if (sectionId === 'listening-part5') {
             loadPart5Svg();
         }
@@ -71,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Main click handler (Simplified) ---
     document.body.addEventListener('click', (event) => {
-        const button = event.target.closest('.nav-btn, .restart-btn');
+        const button = event.target.closest('.nav-btn, .start-test-btn, .restart-btn');
         if (button && button.dataset.target) {
             showSection(button.dataset.target);
         }
@@ -128,7 +140,63 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelector('.color-palette')?.addEventListener('click', (e) => { if (e.target.classList.contains('palette-color')) { document.querySelectorAll('.palette-color, .write-tool, .eraser-tool').forEach(el => el.classList.remove('selected')); e.target.classList.add('selected'); activeTool = { type: 'color', value: e.target.dataset.color }; } });
     document.getElementById('write-tool-btn')?.addEventListener('click', (e) => { document.querySelectorAll('.palette-color, .write-tool, .eraser-tool').forEach(el => el.classList.remove('selected')); e.currentTarget.classList.add('selected'); activeTool = { type: 'write', value: null }; });
     document.getElementById('eraser-tool-btn')?.addEventListener('click', (e) => { document.querySelectorAll('.palette-color, .write-tool, .eraser-tool').forEach(el => el.classList.remove('selected')); e.currentTarget.classList.add('selected'); activeTool = { type: 'eraser', value: null }; });
-    function handleSvgClick(e) { /* ... your handleSvgClick function is unchanged ... */ }
+    function handleSvgClick(e) {
+        const targetShape = e.target.closest('path, rect, polygon');
+        if (!targetShape) return;
+    
+        // This is the RGB for your dark outline color #3A282D
+        const OUTLINE_COLOR_RGB = 'rgb(58, 40, 45)'; 
+        const style = window.getComputedStyle(targetShape);
+        const fillColor = style.fill;
+    
+        // If the clicked shape's fill is the outline color, do nothing.
+        if (fillColor === OUTLINE_COLOR_RGB) {
+            return;
+        }
+        
+        const shapeId = targetShape.id;
+    
+        if (!activeTool.type) {
+            alert("Please select a color or the 'Write' tool first!");
+            return;
+        }
+    
+        if (activeTool.type === 'eraser') {
+            // This removes the inline style, reverting to the original appearance.
+            targetShape.style.fill = ''; 
+            if (shapeId) {
+                const existingText = document.getElementById(`text-for-${shapeId}`);
+                if (existingText) existingText.remove();
+                delete userAnswers[shapeId];
+            }
+        } else if (activeTool.type === 'color') {
+            targetShape.style.fill = activeTool.value;
+            if (shapeId) userAnswers[shapeId] = activeTool.value;
+        } else if (activeTool.type === 'write') {
+            if (shapeId) { // Can only write on shapes with a designated ID
+                const textToWrite = prompt("What word do you want to write?");
+                if (textToWrite && textToWrite.trim() !== '') {
+                    userAnswers[shapeId] = textToWrite.trim().toLowerCase();
+                    const oldText = document.getElementById(`text-for-${shapeId}`);
+                    if (oldText) oldText.remove();
+                    const bbox = targetShape.getBBox();
+                    const textElement = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                    textElement.id = `text-for-${shapeId}`;
+                    textElement.setAttribute("x", bbox.x + bbox.width / 2);
+                    textElement.setAttribute("y", bbox.y + bbox.height / 2);
+                    textElement.setAttribute("font-size", "16");
+                    textElement.setAttribute("fill", "black");
+                    textElement.setAttribute("text-anchor", "middle");
+                    textElement.setAttribute("alignment-baseline", "middle");
+                    textElement.style.pointerEvents = 'none';
+                    textElement.textContent = textToWrite.toUpperCase();
+                    targetShape.parentNode.appendChild(textElement);
+                }
+            } else {
+                alert("You can't write text on this object.");
+            }
+        }
+    }
 
     // --- Google Forms Submission ---
     function submitResultsToGoogle(score) {
@@ -194,28 +262,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- INITIAL PAGE SETUP ---
     // This is the clean way to start the test
-    function initializeTest() {
-        // Reset everything to a clean state
-        userAnswers = {};
-        document.querySelectorAll('.correct, .incorrect, .selected').forEach(el => el.classList.remove('correct', 'incorrect', 'selected'));
-        document.querySelectorAll('input, select').forEach(input => input.style.borderColor = '');
-        document.querySelectorAll('.draggable-name').forEach(nameEl => {
-            const poolId = ['katy', 'robert', 'oliver'].includes(nameEl.dataset.name) ? 'names-pool-top' : 'names-pool-bottom';
-            document.getElementById(poolId).appendChild(nameEl);
-        });
-
-        // Set up the example for Part 1
-        const michaelElement = document.querySelector('.draggable-name[data-name="michael"]');
-        const michaelTargetZone = document.querySelector('.drop-target[data-description="boy_on_rock_magazine"]');
-        if (michaelElement && michaelTargetZone) {
-            michaelTargetZone.appendChild(michaelElement);
-        }
-        
-        // Make Part 1 the visible section
-        showSection('listening-part1');
-    }
-
-    initializeTest(); // Run the setup function when the page loads
+    showSection('listening-intro');
 
     // Set up all audio players
     setupCustomPlayer('part1');
