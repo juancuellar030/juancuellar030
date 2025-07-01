@@ -12,66 +12,66 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     function setupCustomPlayer(playerId) {
-    // Find all the elements for this specific player
-    const playerWrapper = document.getElementById(`player-${playerId}`);
-    if (!playerWrapper) return; // If this player doesn't exist on the page, stop.
-
-    const audio = playerWrapper.querySelector(`#audio-source-${playerId}`);
-    const playPauseBtn = playerWrapper.querySelector(`#play-pause-btn-${playerId}`);
-    const currentTimeEl = playerWrapper.querySelector(`#current-time-${playerId}`);
-    const totalDurationEl = playerWrapper.querySelector(`#total-duration-${playerId}`);
-    const progressBarWrapper = playerWrapper.querySelector('.progress-bar-wrapper');
-    const progressBar = playerWrapper.querySelector('.progress-bar');
+        // Find all the elements for this specific player
+        const playerWrapper = document.getElementById(`player-${playerId}`);
+        if (!playerWrapper) return; // If this player doesn't exist on the page, stop.
     
-    // If any essential element is missing, stop to prevent errors
-    if (!audio || !playPauseBtn || !currentTimeEl || !totalDurationEl || !progressBarWrapper) {
-        return;
+        const audio = playerWrapper.querySelector(`#audio-source-${playerId}`);
+        const playPauseBtn = playerWrapper.querySelector(`#play-pause-btn-${playerId}`);
+        const currentTimeEl = playerWrapper.querySelector(`#current-time-${playerId}`);
+        const totalDurationEl = playerWrapper.querySelector(`#total-duration-${playerId}`);
+        const progressBarWrapper = playerWrapper.querySelector('.progress-bar-wrapper');
+        const progressBar = playerWrapper.querySelector('.progress-bar');
+        
+        // If any essential element is missing, stop to prevent errors
+        if (!audio || !playPauseBtn || !currentTimeEl || !totalDurationEl || !progressBarWrapper) {
+            return;
+        }
+    
+        const playIcon = playPauseBtn.querySelector('.fa-play');
+        const pauseIcon = playPauseBtn.querySelector('.fa-pause');
+    
+        // --- Main Play/Pause Button Functionality ---
+        playPauseBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        });
+    
+        // --- Icon Swapping ---
+        audio.addEventListener('play', () => {
+            if (playIcon) playIcon.style.display = 'none';
+            if (pauseIcon) pauseIcon.style.display = 'block';
+        });
+    
+        audio.addEventListener('pause', () => {
+            if (pauseIcon) pauseIcon.style.display = 'none';
+            if (playIcon) playIcon.style.display = 'block';
+        });
+    
+        // --- Time and Progress Bar Updates ---
+        audio.addEventListener('loadedmetadata', () => {
+            totalDurationEl.textContent = formatTime(audio.duration);
+        });
+    
+        audio.addEventListener('timeupdate', () => {
+            if (audio.duration) {
+                progressBar.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
+                currentTimeEl.textContent = formatTime(audio.currentTime);
+            }
+        });
+    
+        // --- Seek Functionality ---
+        progressBarWrapper.addEventListener('click', (e) => {
+            if (audio.duration) {
+                const wrapperWidth = progressBarWrapper.offsetWidth;
+                const clickPosition = e.offsetX;
+                audio.currentTime = (clickPosition / wrapperWidth) * audio.duration;
+            }
+        });
     }
-
-    const playIcon = playPauseBtn.querySelector('.fa-play');
-    const pauseIcon = playPauseBtn.querySelector('.fa-pause');
-
-    // --- Main Play/Pause Button Functionality ---
-    playPauseBtn.addEventListener('click', () => {
-        if (audio.paused) {
-            audio.play();
-        } else {
-            audio.pause();
-        }
-    });
-
-    // --- Icon Swapping ---
-    audio.addEventListener('play', () => {
-        if (playIcon) playIcon.style.display = 'none';
-        if (pauseIcon) pauseIcon.style.display = 'block';
-    });
-
-    audio.addEventListener('pause', () => {
-        if (pauseIcon) pauseIcon.style.display = 'none';
-        if (playIcon) playIcon.style.display = 'block';
-    });
-
-    // --- Time and Progress Bar Updates ---
-    audio.addEventListener('loadedmetadata', () => {
-        totalDurationEl.textContent = formatTime(audio.duration);
-    });
-
-    audio.addEventListener('timeupdate', () => {
-        if (audio.duration) {
-            progressBar.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
-            currentTimeEl.textContent = formatTime(audio.currentTime);
-        }
-    });
-
-    // --- Seek Functionality ---
-    progressBarWrapper.addEventListener('click', (e) => {
-        if (audio.duration) {
-            const wrapperWidth = progressBarWrapper.offsetWidth;
-            const clickPosition = e.offsetX;
-            audio.currentTime = (clickPosition / wrapperWidth) * audio.duration;
-        }
-    });
-}
     // --- Core navigation logic ---
     function showSection(sectionId) {
         document.querySelectorAll('.test-section').forEach(section => {
