@@ -1587,7 +1587,7 @@ body.page-flyers-hub::before {
 
 .convo-turn {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     gap: 15px;
     margin-bottom: 1.2em; /* Spacing between lines */
     font-size: 1.2em;
@@ -1598,8 +1598,9 @@ body.page-flyers-hub::before {
     align-items: center;
     gap: 8px;
     flex-shrink: 0;
-    width: 120px; /* Aligns all the text nicely */
+    width: 140px; /* Aligns all the text nicely */
     font-weight: 600;
+    margin-right: 15px;
 }
 .speaker img {
     width: 35px;
@@ -1620,8 +1621,9 @@ body.page-flyers-hub::before {
     position: static; /* Removes absolute positioning */
     display: inline-block;
     vertical-align: middle;
-    width: 43px;
-    height: 43px;
+    width: 42px;
+    height: 42px;
+    margin-top: 5px;
     /* The other styles from .letter-box will apply automatically */
 }
 
