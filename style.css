@@ -1849,3 +1849,42 @@ body.page-flyers-hub::before {
   -ms-user-select: none;     /* For older IE/Edge */
   user-select: none;         /* The standard property */
 }
+
+/* ========================================================== */
+/*           READING & WRITING PART 4 STYLES                */
+/* ========================================================== */
+
+/* The container for the story text */
+.rw-part4-story-text {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 30px;
+    border-radius: 10px;
+    font-size: 1.2em; /* Makes the story text a bit bigger */
+    line-height: 2.2; /* Increases space between lines to fit dropdowns */
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Style for the inline dropdowns */
+.inline-select {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 4px 8px;
+    background-color: #f9f9f9;
+    color: #0056b3;
+    margin: 0 5px; /* Adds a little space around the dropdown */
+}
+
+/* Style for the disabled example dropdown to make it look like text */
+.inline-select:disabled {
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    background: transparent;
+    color: #333; /* Dark text color */
+    font-weight: 600;
+    padding: 0 5px;
+}
