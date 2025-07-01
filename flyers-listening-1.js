@@ -13,31 +13,75 @@ document.addEventListener('DOMContentLoaded', () => {
     function setupCustomPlayer(playerId) {
         const playerWrapper = document.getElementById(`player-${playerId}`);
         if (!playerWrapper) return;
-
+    
+        // Find all elements for this specific player
         const audio = playerWrapper.querySelector(`#audio-source-${playerId}`);
         const playPauseBtn = playerWrapper.querySelector(`#play-pause-btn-${playerId}`);
+        const seekForwardBtn = playerWrapper.querySelector(`#seek-forward-btn-${playerId}`);
+        const seekBackwardBtn = playerWrapper.querySelector(`#seek-backward-btn-${playerId}`);
+        const volumeSlider = playerWrapper.querySelector(`#volume-slider-${playerId}`);
         const currentTimeEl = playerWrapper.querySelector(`#current-time-${playerId}`);
         const totalDurationEl = playerWrapper.querySelector(`#total-duration-${playerId}`);
         const progressBarWrapper = playerWrapper.querySelector('.progress-bar-wrapper');
         const progressBar = playerWrapper.querySelector('.progress-bar');
-        
-        if (!audio || !playPauseBtn || !currentTimeEl || !totalDurationEl || !progressBarWrapper) return;
-
+    
+        if (!audio || !playPauseBtn || !currentTimeEl || !totalDurationEl || !progressBarWrapper) {
+            return;
+        }
+    
         const playIcon = playPauseBtn.querySelector('.fa-play');
         const pauseIcon = playPauseBtn.querySelector('.fa-pause');
-
-        playPauseBtn.addEventListener('click', () => { audio.paused ? audio.play() : audio.pause(); });
-        audio.addEventListener('play', () => { if(playIcon) playIcon.style.display = 'none'; if(pauseIcon) pauseIcon.style.display = 'block'; });
-        audio.addEventListener('pause', () => { if(pauseIcon) pauseIcon.style.display = 'none'; if(playIcon) playIcon.style.display = 'block'; });
-        audio.addEventListener('loadedmetadata', () => { totalDurationEl.textContent = formatTime(audio.duration); });
+    
+        // --- Main Play/Pause Button Functionality ---
+        playPauseBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+            } else {
+                audio.pause();
+            }
+        });
+    
+        // --- Icon Swapping ---
+        audio.addEventListener('play', () => {
+            if (playIcon) playIcon.style.display = 'none';
+            if (pauseIcon) pauseIcon.style.display = 'block';
+        });
+    
+        audio.addEventListener('pause', () => {
+            if (pauseIcon) pauseIcon.style.display = 'none';
+            if (playIcon) playIcon.style.display = 'block';
+        });
+    
+        // --- NEW/RESTORED: Seek Button Functionality ---
+        if (seekForwardBtn && seekBackwardBtn) {
+            seekForwardBtn.addEventListener('click', () => { audio.currentTime += 15; });
+            seekBackwardBtn.addEventListener('click', () => { audio.currentTime -= 15; });
+        }
+    
+        // --- NEW/RESTORED: Volume Slider Functionality ---
+        if (volumeSlider) {
+            volumeSlider.addEventListener('input', (e) => { audio.volume = e.target.value / 100; });
+        }
+    
+        // --- Time and Progress Bar Updates ---
+        audio.addEventListener('loadedmetadata', () => {
+            totalDurationEl.textContent = formatTime(audio.duration);
+        });
+    
         audio.addEventListener('timeupdate', () => {
             if (audio.duration) {
                 progressBar.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
                 currentTimeEl.textContent = formatTime(audio.currentTime);
             }
         });
+    
+        // --- Seek by Clicking Progress Bar ---
         progressBarWrapper.addEventListener('click', (e) => {
-            if (audio.duration) audio.currentTime = (e.offsetX / progressBarWrapper.offsetWidth) * audio.duration;
+            if (audio.duration) {
+                const wrapperWidth = progressBarWrapper.offsetWidth;
+                const clickPosition = e.offsetX;
+                audio.currentTime = (clickPosition / wrapperWidth) * audio.duration;
+            }
         });
     }
 
