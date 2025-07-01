@@ -1937,19 +1937,38 @@ body.page-flyers-hub::before {
     font-size: 1.2em;
     color: #1a237e;
     margin-top: 0;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
-.rw-part5-questions-block .question-item {
+.rw-part5-questions-block h4:not(:first-of-type) {
+    margin-top: 25px;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
+}
+
+/* This is the key Flexbox layout for each question */
+.question-item {
+    display: flex;
+    justify-content: space-between; /* Pushes items to opposite ends */
+    align-items: baseline; /* Aligns text and input on their baseline */
     font-size: 1.1em;
-    line-height: 2.5; /* Adds space for the inputs */
-    margin-bottom: 5px;
+    margin-bottom: 15px; /* Space between each question line */
 }
+
+/* The text part of the question */
+.question-item span {
+    padding-right: 15px; /* Add some space before the input */
+}
+
+/* The input field */
 .rw-part5-questions-block .story-input {
-    width: 35%; /* Give the inputs a good default width */
-    margin: 0 5px;
+    flex-shrink: 0; /* Prevents the input from shrinking */
+    width: 40%; /* Give the input a consistent width */
+    border-bottom: 2px dotted #777; /* Restore the dotted line look */
+    /* Remove old positioning properties */
+    position: static;
+    margin: 0;
 }
 .rw-part5-questions-block .story-input[readonly] {
-    width: auto; /* Allow readonly inputs to size to their content */
-    border-bottom: 2px dotted #777;
-    margin: 0;
+    border-bottom: 2px dotted #aaa; /* Lighter dots for examples */
+    text-align: left; /* Align example text to the left */
 }
