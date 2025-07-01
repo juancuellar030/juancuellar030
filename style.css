@@ -1589,8 +1589,8 @@ body.page-flyers-hub::before {
     display: flex;
     align-items: flex-start;
     gap: 15px;
-    margin-bottom: 1.2em; /* Spacing between lines */
-    font-size: 1.2em;
+    margin-bottom: 1.3em; /* Spacing between lines */
+    font-size: 1.3em;
 }
 
 .speaker {
@@ -1601,7 +1601,6 @@ body.page-flyers-hub::before {
     flex-shrink: 0;
     width: 140px;
     font-weight: 600;
-    font-size: 1.2em;
     padding-left: 25px; 
 }
 .speaker img {
@@ -1619,7 +1618,7 @@ body.page-flyers-hub::before {
 }
 
 .line {
-    padding-top: 5px;
+    padding-top: 3px;
 }
 
 /* Make the letter-box inline with the text */
@@ -1629,7 +1628,6 @@ body.page-flyers-hub::before {
     vertical-align: middle;
     width: 42px;
     height: 42px;
-    margin-top: 1px;
     /* The other styles from .letter-box will apply automatically */
 }
 
