@@ -1618,7 +1618,7 @@ body.page-flyers-hub::before {
 }
 
 .line {
-    padding-top: 3px;
+    padding-top: 1px;
 }
 
 /* Make the letter-box inline with the text */
@@ -1628,6 +1628,7 @@ body.page-flyers-hub::before {
     vertical-align: middle;
     width: 42px;
     height: 42px;
+    margin-top: -2px;
     /* The other styles from .letter-box will apply automatically */
 }
 
