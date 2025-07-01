@@ -392,7 +392,7 @@
                 </div>
             </section>           
 
-            <!-- Reading & Writing Part 6 -->
+            <!-- Reading & Writing Part 6 (HTML Text Method) -->
             <section id="rw-part6" class="test-section hidden">
                 <h3>Part 6 (5 Questions)</h3>
                 <p class="part-instructions">Read the diary page and write the missing words. Write one word on each line.</p>
@@ -402,18 +402,29 @@
                     <!-- The Top Image -->
                     <img src="images/rw-part6-shopping-centre.svg" alt="People at a shopping centre" class="question-image">
             
-                    <!-- The Story Container -->
-                    <div class="rw-part6-story-container">
-                        <!-- The SVG with the text and dotted lines -->
-                        <img src="images/your-part6-story.svg" alt="Diary entry about a shopping trip">
-                        
-                        <!-- Input fields placed on top of the SVG -->
-                        <input type="text" class="story-input" id="rw6-example" value="with" readonly>
-                        <input type="text" class="story-input" id="rw6-q1" autocomplete="off">
-                        <input type="text" class="story-input" id="rw6-q2" autocomplete="off">
-                        <input type="text" class="story-input" id="rw6-q3" autocomplete="off">
-                        <input type="text" class="story-input" id="rw6-q4" autocomplete="off">
-                        <input type="text" class="story-input" id="rw6-q5" autocomplete="off">
+                    <!-- The Story Container (as real text) -->
+                    <div class="rw-part6-story-text non-selectable">
+                        <h4>Saturday 10th March</h4>
+                        <p>
+                            Today I went to the shopping centre
+                            <input type="text" class="story-input" value="with" readonly>
+                            my parents. I wanted to use the money that Grandpa gave
+                            <input type="text" class="story-input" id="rw6-q1" autocomplete="off">
+                            to buy some new clothes for my school trip. I needed a new
+                            <input type="text" class="story-input" id="rw6-q2" autocomplete="off">
+                            of trainers and some T-shirts. We went into lots of shops and I spent all the money
+                            <input type="text" class="story-input" id="rw6-q3" autocomplete="off">
+                            some expensive trainers.
+                        </p>
+                        <p>
+                            In the evening, I took the dog for a
+                            <input type="text" class="story-input" id="rw6-q4" autocomplete="off">
+                            in the park.
+                        </p>
+                        <p>
+                            <input type="text" class="story-input" id="rw6-q5" autocomplete="off">
+                            that, we went home again and I watched a film on TV.
+                        </p>
                     </div>
             
                 </div>
@@ -423,7 +434,6 @@
                     <button class="nav-btn next-btn" data-target="rw-part7">Next Part</button>
                 </div>
             </section>
-
             <!-- Test Results Section -->
             <section id="rw-results" class="test-section hidden">
                 <h2>Reading & Writing Test Complete!</h2>
