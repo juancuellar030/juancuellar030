@@ -1940,35 +1940,44 @@ body.page-flyers-hub::before {
     margin-bottom: 20px;
 }
 .rw-part5-questions-block h4:not(:first-of-type) {
-    margin-top: 25px;
+    margin-top: 30px;
     padding-top: 25px;
     border-top: 1px solid #eee;
 }
 
-/* This is the key Flexbox layout for each question */
 .question-item {
-    display: flex;
-    justify-content: space-between; /* Pushes items to opposite ends */
-    align-items: baseline; /* Aligns text and input on their baseline */
     font-size: 1.1em;
-    margin-bottom: 15px; /* Space between each question line */
+    line-height: 2.8; /* Increased line height for more vertical space */
+    margin-bottom: 8px;
 }
 
-/* The text part of the question */
-.question-item span {
-    padding-right: 15px; /* Add some space before the input */
-}
-
-/* The input field */
+/* --- This is the key fix for the inline inputs --- */
 .rw-part5-questions-block .story-input {
-    flex-shrink: 0; /* Prevents the input from shrinking */
-    width: 40%; /* Give the input a consistent width */
-    border-bottom: 2px dotted #777; /* Restore the dotted line look */
-    /* Remove old positioning properties */
+    /* Reset all old positioning and flex properties */
     position: static;
-    margin: 0;
+    flex-shrink: 1;
+
+    /* Styling for the blank line */
+    background: transparent;
+    border: none;
+    border-bottom: 2px dotted #999; /* The dotted line */
+    
+    /* Font and text styles */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em; /* Inherits font size from the parent <p> */
+    text-align: center;
+    color: #0056b3;
+
+    /* Sizing for the blank */
+    width: 250px; /* Give it a good base width */
+    margin: 0 5px; /* A little space around it */
+    padding-bottom: 2px;
 }
+
+/* Styling for the read-only examples */
 .rw-part5-questions-block .story-input[readonly] {
-    border-bottom: 2px dotted #aaa; /* Lighter dots for examples */
-    text-align: left; /* Align example text to the left */
+    border-bottom-color: #ccc; /* Lighter dots */
+    color: #333;
+    font-weight: 600;
+    width: auto; /* Allow it to size to its content */
 }
