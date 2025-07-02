@@ -50,7 +50,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'girl_by_fire': 'emma', 'boy_in_cave_torch': 'robert', 'girl_on_tablet_no_shoes': 'katy',
         'q2_q1': 'badger', 'q2_q2': 'telephone', 'q2_q3': '24', 'q2_q4': 'wednesday', 'q2_q5': 'glue',
         'q3_bracelet': 'A', 'q3_soap': 'G', 'q3_belt': 'B', 'q3_scissors': 'F', 'q3_letter': 'D',
-        'q4_q1': 'c', 'q4_q2': 'b', 'q4_q3': 'c', 'q4_q4': 'a', 'q4_q5': 'b',
+        'q4_q1': 'C', 'q4_q2': 'B', 'q4_q3': 'C', 'q4_q4': 'A', 'q4_q5': 'B',
         'glove-shape': 'orange', 'butterfly-shape': 'red', 'drum-text-area': 'frank',
         'poster-text-area': 'sleep', 'flag-shape': 'purple',
     };
