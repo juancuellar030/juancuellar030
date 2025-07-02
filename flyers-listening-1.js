@@ -291,6 +291,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const michaelTargetZone = document.querySelector('.drop-target[data-description="boy_on_rock_magazine"]');
         if (michaelElement && michaelTargetZone) {
             michaelTargetZone.appendChild(michaelElement);
+            michaelElement.draggable = false; // <<< ADD THIS LINE to disable dragging
+            michaelElement.classList.add('locked-example'); // <<< ADD THIS LINE for styling
         }
         
         // Make Part 1 the visible section
