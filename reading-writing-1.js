@@ -17,7 +17,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'rw2-q1': 'g', 'rw2-q2': 'a', 'rw2-q3': 'e', 'rw2-q4': 'b', 'rw2-q5': 'f',
         // Part 3
         'rw3-q1': 'traffic', 'rw3-q2': 'somewhere', 'rw3-q3': 'late',
-        'rw3-q4': 'worst', 'rw3-q5': 'surprise', 'rw3-q6': 'hollys_journey'
+        'rw3-q4': 'worst', 'rw3-q5': 'surprise', 'rw3-q6': 'hollys_journey',
         // Part 4 (Tortoises)
         'rw4-q1': 'another', 'rw4-q2': 'no', 'rw4-q3': 'feel', 'rw4-q4': 'which',
         'rw4-q5': 'most', 'rw4-q6': 'until', 'rw4-q7': 'longer', 'rw4-q8': 'these',
