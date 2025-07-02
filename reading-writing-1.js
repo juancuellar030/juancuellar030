@@ -163,6 +163,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Part 3 (Radio Buttons)
     document.querySelectorAll('.rw-part3-title-question input[type="radio"]').forEach(radio => {
         radio.addEventListener('change', e => { userAnswers[e.target.name] = e.target.value; });
+    });
     // Part 4
     document.querySelectorAll('#rw-part4 select').forEach(select => {
         select.addEventListener('change', e => { userAnswers[e.target.id] = e.target.value; });
