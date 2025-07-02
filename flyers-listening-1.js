@@ -90,7 +90,13 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
     document.querySelectorAll('.drop-target, .names-pool').forEach(target => {
-        target.addEventListener('dragover', e => e.preventDefault());
+    
+        // <<< This is the new, expanded dragover listener >>>
+        target.addEventListener('dragover', e => {
+            e.preventDefault(); // This line was already there
+            target.classList.add('drag-over'); // This is the new line you are adding
+        });
+    
         target.addEventListener('drop', e => {
             e.preventDefault();
             if (!draggedItem) return;
