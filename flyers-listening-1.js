@@ -214,7 +214,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Google Forms Submission ---
     function submitResultsToGoogle(score) {
-        const googleFormURL = 'https://script.google.com/macros/s/AKfycbyP5Y0Sh5JJ-gDjP0X_-kKj_V0y0TcIqeL0Ku2VGKXFp7rk64RyZKwKeeX_BJSihUPU/exec'; 
+        const googleFormURL = 'https://script.google.com/macros/s/AKfycbz6pQLL3HfqhZVLnOlivAob2GM3961XOnxRcgCPdHaCJTYTjUBe-ShR-6pITWnHQoU/exec'; 
         const formData = new FormData();
         formData.append('name', userName);
         formData.append('score', score);
