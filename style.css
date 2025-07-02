@@ -381,6 +381,16 @@ header p {
     justify-content: center;
 }
 
+/* Style for the locked drag-and-drop example */
+.draggable-name.locked-example {
+    cursor: default;
+    opacity: 0.85; /* Make it look slightly faded */
+    background-color: #7f8c8d !important; /* A neutral grey color */
+}
+.draggable-name.locked-example:hover {
+    transform: none; /* Remove the hover lift effect */
+}
+
 /* --- Part 2: Form inputs --- */
 .form-question p {
     margin-bottom: 15px;
