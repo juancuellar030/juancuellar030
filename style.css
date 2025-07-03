@@ -645,6 +645,44 @@ header p {
 /*           IN-CONTEXT ANSWER FEEDBACK STYLES              */
 /* ========================================================== */
 
+/* ========================================================== */
+/*     VISUAL FEEDBACK FOR LISTENING TEST (ALL PARTS)       */
+/* ========================================================== */
+
+/* --- Part 1: Drag & Drop Feedback --- */
+.drop-target.correct-answer {
+    border: 2px solid #28a745 !important;
+    background-color: rgba(40, 167, 69, 0.2) !important;
+}
+.drop-target.incorrect-answer {
+    border: 2px solid #dc3545 !important;
+    background-color: rgba(220, 53, 69, 0.2) !important;
+}
+.draggable-name.correct-answer {
+    background-color: #28a745 !important;
+}
+.draggable-name.incorrect-answer {
+    background-color: #dc3545 !important;
+}
+
+/* --- Part 4: Multiple Choice Card Feedback --- */
+.option-card.feedback-correct {
+    border-color: #28a745;
+    background-color: #e8f5e9;
+}
+.option-card.feedback-incorrect {
+    border-color: #dc3545;
+    background-color: #ffebee;
+}
+
+/* --- Part 5: SVG Coloring Feedback --- */
+#part5-interactive-container .correct-answer {
+    fill: #28a745 !important; /* Green for correct shape fills */
+}
+#part5-interactive-container .incorrect-answer {
+    fill: #dc3545 !important; /* Red for incorrect shape fills */
+}
+
 /* --- General styles for all input types --- */
 .correct-answer {
     background-color: rgba(40, 167, 69, 0.15) !important; /* Semi-transparent green */
