@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Answer Saving ---
     // Part 1
     document.querySelectorAll('.rw-part1-container input').forEach(input => {
-        input.addEventListener('input', e => { userAnswers[e.target.id] = e.target.value; });
+        input.addEventListener('input', e => { userAnswers[e.target.id] = e.target.value.trim().toLowerCase(); });
     });
     // Part 2
     document.querySelectorAll('#rw-part2 .letter-box').forEach(input => {
