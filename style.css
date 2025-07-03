@@ -1839,37 +1839,6 @@ body.page-flyers-hub::before {
 }
 
 /* ========================================================== */
-/*           READING & WRITING PART 6 STYLES                */
-/* ========================================================== */
-
-/* --- Control the size of the top image --- */
-#rw-part6 .question-image {
-    max-width: 700px; /* You can adjust this value */
-}
-
-/* --- The container for the story SVG and inputs --- */
-.rw-part6-story-container {
-    position: relative; /* Essential for positioning the inputs */
-    width: 100%;
-    max-width: 800px; /* Adjust as needed */
-    margin: 0 auto;   /* Center the story block */
-}
-
-.rw-part6-story-container img {
-    width: 100%;
-    height: auto;
-}
-
-/* --- Positioning for EACH individual input field --- */
-/* You will need to fine-tune these values! */
-#rw6-example { top: 9.5%;   left: 58.5%; width: 14%; }
-#rw6-q1      { top: 17%;    left: 21%;   width: 12%; }
-#rw6-q2      { top: 24.5%;  left: 31%;   width: 14%; }
-#rw6-q3      { top: 35.5%;  left: 4.5%;  width: 14%; }
-#rw6-q4      { top: 43%;    left: 47.5%; width: 23%; }
-#rw6-q5      { top: 54%;    left: 4.5%;  width: 25%; }
-
-/* ========================================================== */
 /*           UTILITY CLASSES (e.g., for text selection)     */
 /* ========================================================== */
 .non-selectable {
