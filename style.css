@@ -1169,23 +1169,41 @@ body.page-flyers-hub::before {
     font-size: 1.2em;
 }
 
-.letter-box {
-    width: 45px;                /* Fixed width for a perfect square */
-    height: 45px;               /* Fixed height for a perfect square */
-    text-align: center;
-    
-    font-family: 'Poppins', sans-serif; /* <<< FIX: Adds the correct font */
-    font-size: 1.6em;
-    font-weight: bold;
+/* ========================================================== */
+/*           UNIVERSAL IN-TEXT INPUT STYLES                 */
+/* ========================================================== */
 
+/* This is the new base style for ALL inline inputs */
+.story-input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px dotted #999;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em; /* This will be inherited from the parent <p> */
+    text-align: center;
+    color: #0056b3;
+    padding-bottom: 2px;
+    margin: 0 5px;
+}
+.story-input[readonly] {
+    border-bottom-color: #ccc;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Specific styling for the square letter boxes in Part 2 */
+#rw-part2 .letter-box {
+    width: 45px;
+    height: 45px;
     border: 2px solid #777;
     border-radius: 5px;
+    font-family: 'Mulish', sans-serif;
+    font-size: 1.6em;
+    font-weight: bold;
     text-transform: uppercase;
-    color: #0056b3; 
-    background-color: #fff;
-    
-    /* Ensures consistent positioning */
-    position: absolute; 
+    position: static; /* Important: overrides any stray absolute positioning */
+    display: inline-block;
+    vertical-align: middle;
 }
 
 /* THIS RULE MAKES THE 'H' VISIBLE */
@@ -1970,14 +1988,6 @@ body.page-flyers-hub::before {
     width: 220px; /* Give it a good base width */
     margin: 0 5px; /* A little space around it */
     padding-bottom: 1px;
-}
-
-/* Styling for the read-only examples */
-.rw-part5-questions-block .story-input[readonly] {
-    border-bottom-color: #ccc; /* Lighter dots */
-    color: #333;
-    font-weight: 600;
-    width: auto; /* Allow it to size to its content */
 }
 
 /* ========================================================== */
