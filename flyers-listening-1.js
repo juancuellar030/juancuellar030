@@ -228,56 +228,98 @@ document.addEventListener('DOMContentLoaded', () => {
         fetch(googleFormURL, { method: 'POST', body: formData }).then(r => r.json()).then(d => console.log(d)).catch(e => console.error(e));
     }
 
-    // --- Final Grading Logic ---
+    // ==========================================================
+    //          FINAL GRADING & REVIEW MODE LOGIC (LISTENING)
+    // ==========================================================
     document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
+        
+        // --- 1. Grade all answers ---
         let correctCount = 0;
-        const questionsToGrade = Object.keys(correctAnswers).filter(qId => 
-            !qId.includes('example') && qId !== 'boy_on_rock_magazine'
-        );
+        const questionsToGrade = Object.keys(correctAnswers).filter(qId => !qId.includes('example'));
         const totalRealQuestions = questionsToGrade.length;
     
-        // --- Start of Grading Loop ---
         questionsToGrade.forEach(qId => {
-            const userAnswer = (userAnswers[qId] || 'No Answer').trim().toLowerCase();
+            const userAnswer = (userAnswers[qId] || '').trim().toLowerCase();
             const correctAnswer = correctAnswers[qId];
+            let isCorrect = false;
     
-            // Part 1: Drag and Drop
-            if (qId.endsWith('_shoes') || qId.endsWith('_torch') || qId.endsWith('_fire') || qId.endsWith('_helmet') || qId.endsWith('_stream')) {
-                if (userAnswer === correctAnswer) correctCount++;
+            // A. Check if the answer is correct
+            if (Array.isArray(correctAnswer)) {
+                isCorrect = correctAnswer.includes(userAnswer);
+            } else {
+                isCorrect = (userAnswer.toLowerCase() === correctAnswer.toLowerCase());
             }
-            // Part 2: Text Input
-            else if (qId.startsWith('q2_')) {
-                if (userAnswer === correctAnswer || (qId === 'q2_q3' && userAnswer === 'twenty-four')) correctCount++;
+            
+            if (isCorrect) {
+                correctCount++;
             }
-            // Part 3: Letter Matching
-            else if (qId.startsWith('q3_')) {
-                if (userAnswer.toUpperCase() === correctAnswer) correctCount++;
+    
+            // B. Apply visual feedback based on question type
+            // Part 1: Drag & Drop
+            if (qId.includes('_')) { // A simple way to identify Part 1 questions
+                const dropTarget = document.querySelector(`.drop-target[data-description="${qId}"]`);
+                if (dropTarget) {
+                    dropTarget.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+                    const nameInZone = dropTarget.querySelector('.draggable-name');
+                    if (nameInZone) nameInZone.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+                }
+            }
+            // Part 2 & 3: Text & Letter Inputs
+            else if (qId.startsWith('q2_') || qId.startsWith('q3_')) {
+                const inputElement = document.getElementById(qId);
+                if (inputElement) inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
             }
             // Part 4: Multiple Choice
             else if (qId.startsWith('q4_')) {
-                // Case-insensitive comparison for Part 4
-                if (userAnswer.toUpperCase() === correctAnswer.toUpperCase()) correctCount++;
+                const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer.toUpperCase()}"]`);
+                if (selectedOption) {
+                    selectedOption.classList.add(isCorrect ? 'feedback-correct' : 'feedback-incorrect');
+                }
+                // Always highlight the correct answer
+                const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswer.toUpperCase()}"]`);
+                if (correctOption) correctOption.classList.add('feedback-correct');
             }
-            // Part 5: Interactive
+            // Part 5: Interactive SVG
             else if (qId.endsWith('-shape') || qId.endsWith('-area')) {
-                if (userAnswer === correctAnswer) correctCount++;
+                const shapeElement = document.getElementById(qId);
+                if (shapeElement) {
+                    shapeElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+                }
             }
         });
-        // --- End of Grading Loop ---
     
-        // --- Display Results ---
+        // --- 2. Display Final Score ---
         const finalResultsDisplay = document.getElementById('final-results-display');
         const percentage = (totalRealQuestions > 0) ? (correctCount / totalRealQuestions) * 100 : 0;
-        
         let resultsHTML = '';
         if (userName) resultsHTML += `<h3>Results for: ${userName}</h3>`;
         resultsHTML += `<p>You scored ${correctCount} out of ${totalRealQuestions} (${percentage.toFixed(0)}%).</p>`;
-        
         finalResultsDisplay.innerHTML = resultsHTML;
         finalResultsDisplay.className = percentage === 100 ? 'correct' : (percentage >= 50 ? 'partial' : 'incorrect');
         
-        // --- Submit to Google ---
-        submitResultsToGoogle(`${correctCount}/${totalRealQuestions}`);
+        // --- 3. Enter "Review Mode" ---
+        // Hide the "Check My Answers" button
+        document.getElementById('check-all-listening-answers-btn').style.display = 'none';
+        
+        // Loop through ALL test sections
+        document.querySelectorAll('.test-section').forEach(section => {
+            if (section.id.startsWith('listening-part')) {
+                section.classList.remove('hidden');
+                section.classList.add('active');
+            }
+            const nav = section.querySelector('.navigation-buttons');
+            if (nav) nav.style.display = 'none'; // Hide all old nav buttons
+        });
+    
+        // Find the restart button container in the results section and show it
+        const restartContainer = document.querySelector('#listening-results .navigation-buttons');
+        if (restartContainer) restartContainer.style.display = 'flex';
+    
+        // --- 4. Scroll User to the Top for Review ---
+        document.querySelector('.test-container')?.scrollTo({ top: 0, behavior: 'smooth' });
+    
+        // --- 5. Submit to Google ---
+        submitResultsToGoogle(userName, `${correctCount}/${totalRealQuestions}`);
     });
 
     // --- INITIAL PAGE SETUP ---
