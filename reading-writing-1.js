@@ -151,6 +151,8 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         // And also hide the "Check My Answers" button itself
         document.getElementById('check-all-rw-answers-btn').style.display = 'none';
+
+        document.getElementById('restart-btn-container').style.display = 'flex';
     
         // --- Submit to Google (unchanged) ---
         submitResultsToGoogle(userName, `${correctCount}/${totalQuestions}`, formattedTimeSpent);
