@@ -1981,7 +1981,7 @@ body.page-flyers-hub::before {
 }
 
 /* --- This is the key fix for the inline inputs --- */
-.rw-part5-questions-block .story-input {
+#rw-part5 .story-input {
     /* Reset all old positioning and flex properties */
     position: static;
     flex-shrink: 1;
