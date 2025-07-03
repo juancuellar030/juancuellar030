@@ -1741,7 +1741,7 @@ body.page-flyers-hub::before {
 }
 
 /* The input fields that go on the dotted lines */
-.story-input {
+#rw-part3 .story-input {
     position: absolute;
     background: transparent;
     border: none;
