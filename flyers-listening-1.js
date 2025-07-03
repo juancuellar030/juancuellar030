@@ -116,7 +116,7 @@ document.addEventListener('DOMContentLoaded', () => {
             userAnswers[event.target.id] = event.target.value.trim().toLowerCase();
         });
     });
-    document.querySelectorAll('#listening-part4 .option-card').forEach(card => {
+    document.querySelectorAll('#listening-part4 .option-card:not(.is-example)').forEach(card => {
         card.addEventListener('click', () => {
             const questionId = card.dataset.question;
             const answer = card.dataset.answer;
