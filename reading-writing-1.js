@@ -98,11 +98,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function checkAndSubmitAnswers() {
         stopTimer();
     
+        // --- Time Calculation (unchanged) ---
         const timeSpentInSeconds = (startingMinutes * 60) - (totalSeconds < 0 ? 0 : totalSeconds) - 1;
         const minutesSpent = Math.floor(timeSpentInSeconds / 60);
         const secondsSpent = timeSpentInSeconds % 60;
         const formattedTimeSpent = `${String(minutesSpent).padStart(2, '0')}:${String(secondsSpent).padStart(2, '0')}`;
     
+        // --- Score Calculation AND Applying Feedback ---
         let correctCount = 0;
         Object.keys(correctAnswers).forEach(qId => {
             const userAnswer = (userAnswers[qId] || '').trim().toLowerCase();
@@ -118,11 +120,39 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isCorrect) {
                 correctCount++;
             }
+    
+            // --- THIS IS THE NEW PART: APPLYING THE CLASSES ---
+            const inputElement = document.getElementById(qId);
+            if (inputElement) {
+                // Remove any previous feedback classes
+                inputElement.classList.remove('correct-answer', 'incorrect-answer');
+                
+                // Add the new class based on the result
+                inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+    
+                // For radio buttons, we also want to highlight the *actual* correct answer
+                if (inputElement.type === 'radio' && !isCorrect) {
+                    const correctRadioId = Object.keys(userAnswers).find(key => userAnswers[key] === correctAnswer);
+                    const correctRadio = document.querySelector(`input[value="${correctAnswer}"]`);
+                    if (correctRadio) {
+                        correctRadio.classList.add('correct-answer');
+                    }
+                }
+            }
         });
     
+        // --- Display Score (unchanged) ---
         const finalResultsDisplay = document.getElementById('final-rw-results-display');
-        finalResultsDisplay.innerHTML = `<p>You scored ${correctCount} out of ${totalQuestions}.</p><p>Time Taken: ${formattedTimeSpent}</p>`;
+        finalResultsDisplay.innerHTML = `<h3>Results for: ${userName}</h3><p>You scored ${correctCount} out of ${totalQuestions}.</p><p>Time Taken: ${formattedTimeSpent}</p>`;
     
+        // --- Hide Navigation Buttons ---
+        document.querySelectorAll('.navigation-buttons').forEach(nav => {
+            nav.style.display = 'none';
+        });
+        // And also hide the "Check My Answers" button itself
+        document.getElementById('check-all-rw-answers-btn').style.display = 'none';
+    
+        // --- Submit to Google (unchanged) ---
         submitResultsToGoogle(userName, `${correctCount}/${totalQuestions}`, formattedTimeSpent);
     }
 
