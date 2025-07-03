@@ -641,6 +641,46 @@ header p {
     background-color: #f44336;
 }
 
+/* ========================================================== */
+/*           IN-CONTEXT ANSWER FEEDBACK STYLES              */
+/* ========================================================== */
+
+/* --- General styles for all input types --- */
+.correct-answer {
+    background-color: rgba(40, 167, 69, 0.15) !important; /* Semi-transparent green */
+    color: #1c6b2e !important; /* Darker green text */
+    border-bottom-color: #28a745 !important; /* Green underline */
+}
+
+.incorrect-answer {
+    background-color: rgba(220, 53, 69, 0.15) !important; /* Semi-transparent red */
+    color: #a9232e !important; /* Darker red text */
+    border-bottom-color: #dc3545 !important; /* Red underline */
+}
+
+/* --- Specific styles for dropdowns (Part 4) --- */
+select.correct-answer {
+    border-color: #28a745 !important;
+}
+select.incorrect-answer {
+    border-color: #dc3545 !important;
+}
+
+/* --- Specific styles for radio buttons (Part 3) --- */
+/* Highlight the label of the chosen answer */
+input[type="radio"].incorrect-answer + label {
+    color: #c62828;
+    font-weight: bold;
+}
+/* Always highlight the label of the correct answer */
+input[type="radio"].correct-answer + label {
+    color: #2e7d32;
+    font-weight: bold;
+}
+input[type="radio"].correct-answer + label::after {
+    transform: translateY(-50%) scale(1); /* Show the checkmark */
+}
+
 /* --- Part 2: Homework Form Styles --- */
 .homework-form {
     background-color: #fff;
