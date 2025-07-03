@@ -10,9 +10,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const userAnswers = {};
     const correctAnswers = {
         // Part 1
-        'rw1-q1': 'a hotel', 'rw1-q2': 'a desert', 'rw1-q3': 'an island',
-        'rw1-q4': 'a mechanic', 'rw1-q5': 'a fork', 'rw1-q6': 'sugar',
-        'rw1-q7': 'an astronaut', 'rw1-q8': 'a bridge', 'rw1-q9': 'a waiter', 'rw1-q10': 'an artist',
+        'rw1-q1': 'yoghurt',
+        'rw1-q2': 'an astronaut',
+        'rw1-q3': 'a desert',
+        'rw1-q4': 'a gate',
+        'rw1-q5': 'an artist',
+        'rw1-q6': 'a fork',
+        'rw1-q7': 'a mechanic',
+        'rw1-q8': 'a waiter',
+        'rw1-q9': 'a bridge',
+        'rw1-q10': 'sugar',
         // Part 2
         'rw2-q1': 'g', 'rw2-q2': 'a', 'rw2-q3': 'e', 'rw2-q4': 'b', 'rw2-q5': 'f',
         // Part 3
