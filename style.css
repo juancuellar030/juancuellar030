@@ -1222,7 +1222,7 @@ body.page-flyers-hub::before {
 /* --- END OF REBUILT SECTION --- */
 /* ===================================================================== */
 
-/* --- Reading & Writing Part 6 - Title & Image --- */
+/* --- Reading & Writing Part 4 - Title & Image --- */
 
 #rw-part6 .question-content h4 {
     text-align: center;
@@ -1981,7 +1981,7 @@ body.page-flyers-hub::before {
 }
 
 /* ========================================================== */
-/*           READING & WRITING PART 6 STYLES                */
+/*           READING & WRITING PART 6 STYLES (CORRECTED)    */
 /* ========================================================== */
 
 /* Control the size of the top image specifically for Part 6 */
@@ -2012,7 +2012,7 @@ body.page-flyers-hub::before {
     text-align: justify;
 }
 
-/* Reuse the .story-input style, but override the width for this part */
+/* We reuse the .story-input class, but override its width here */
 #rw-part6 .story-input {
     width: 150px; /* A smaller, consistent width for single words */
 }
