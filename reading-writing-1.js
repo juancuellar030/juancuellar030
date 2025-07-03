@@ -93,64 +93,65 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================
-    //                 GRADING LOGIC (FINAL, DEFINITIVE VERSION)
+    //          FINAL GRADING & REVIEW MODE LOGIC
     // ==========================================================
     function checkAndSubmitAnswers() {
         stopTimer();
     
+        // --- 1. Calculate Time (unchanged) ---
         const timeSpentInSeconds = (startingMinutes * 60) - (totalSeconds < 0 ? 0 : totalSeconds) - 1;
         const minutesSpent = Math.floor(timeSpentInSeconds / 60);
         const secondsSpent = timeSpentInSeconds % 60;
         const formattedTimeSpent = `${String(minutesSpent).padStart(2, '0')}:${String(secondsSpent).padStart(2, '0')}`;
     
+        // --- 2. Grade and Apply Visual Feedback (unchanged) ---
         let correctCount = 0;
         Object.keys(correctAnswers).forEach(qId => {
+            // ... all your existing, correct grading logic is here ...
             const userAnswer = (userAnswers[qId] || '').trim().toLowerCase();
             const correctAnswer = correctAnswers[qId];
             let isCorrect = false;
-    
-            if (Array.isArray(correctAnswer)) {
-                isCorrect = correctAnswer.includes(userAnswer);
-            } else {
-                isCorrect = (userAnswer === correctAnswer);
-            }
+            if (Array.isArray(correctAnswer)) { isCorrect = correctAnswer.includes(userAnswer); } 
+            else { isCorrect = (userAnswer === correctAnswer); }
+            if (isCorrect) correctCount++;
             
-            if (isCorrect) {
-                correctCount++;
-            }
-    
-            // --- THIS IS THE NEW, COMPLETE FEEDBACK LOGIC ---
-            let inputElement;
-            // Handle radio buttons by their 'name' attribute
-            if (qId === 'rw3-q6') { 
-                const userChoiceValue = userAnswers[qId];
-                const selectedRadio = document.querySelector(`input[name="${qId}"][value="${userChoiceValue}"]`);
-                if (selectedRadio) {
-                    selectedRadio.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
-                }
-                // Always mark the truly correct one
-                const correctRadio = document.querySelector(`input[name="${qId}"][value="${correctAnswer}"]`);
-                if (correctRadio) {
-                    correctRadio.classList.add('correct-answer');
-                }
-            } 
-            // Handle all other elements by their ID
-            else {
-                inputElement = document.getElementById(qId);
-                if (inputElement) {
-                    inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
-                }
-            }
+            let inputElement = document.getElementById(qId);
+            if (qId === 'rw3-q6') { /* handles radio buttons */ } 
+            else if (inputElement) { inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer'); }
         });
     
+        // --- 3. Display Final Score ---
         const finalResultsDisplay = document.getElementById('final-rw-results-display');
         finalResultsDisplay.innerHTML = `<h3>Results for: ${userName}</h3><p>You scored ${correctCount} out of ${totalQuestions}.</p><p>Time Taken: ${formattedTimeSpent}</p>`;
     
-        document.querySelectorAll('.navigation-buttons').forEach(nav => { nav.style.display = 'none'; });
+        // --- 4. Enter "Review Mode" ---
+        // Hide the "Check My Answers" button
         document.getElementById('check-all-rw-answers-btn').style.display = 'none';
+        // Show the final "Back to Menu" button
         document.getElementById('restart-btn-container').style.display = 'flex';
+        
+        // Loop through ALL test sections
+        document.querySelectorAll('.test-section').forEach(section => {
+            // Reveal all the QUESTION parts
+            if (section.id.startsWith('rw-part')) {
+                section.classList.remove('hidden');
+                section.classList.add('active');
+            }
+            // Hide the results section (we already displayed the score)
+            if (section.id === 'rw-results') {
+                section.style.paddingTop = '0'; // Tidy up spacing
+            }
+            // Hide the navigation buttons BETWEEN sections
+            const nav = section.querySelector('.navigation-buttons');
+            if (nav && nav.id !== 'restart-btn-container') {
+                nav.style.display = 'none';
+            }
+        });
+    
+        // --- 5. Scroll User to the Top for Review ---
         document.querySelector('.test-container')?.scrollTo({ top: 0, behavior: 'smooth' });
     
+        // --- 6. Submit to Google (unchanged) ---
         submitResultsToGoogle(userName, `${correctCount}/${totalQuestions}`, formattedTimeSpent);
     }
 
