@@ -1242,37 +1242,6 @@ body.page-flyers-hub::before {
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
 
-/* --- Reading & Writing Part 6 (Dropdowns on SVG) --- */
-
-/* The container for the SVG and dropdowns */
-.rw-part6-container {
-    position: relative; /* Essential for positioning the dropdowns */
-    width: 90%;
-    max-width: 800px; 
-    margin: 20px auto;
-}
-
-/* Makes the SVG image responsive */
-.rw-part6-container img {
-    width: 100%;
-    height: auto;
-    display: block;
-}
-
-/* Base style for ALL dropdowns in this section */
-.rw-part6-container select {
-    position: absolute;
-    background-color: #f9f9f9;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    font-family: 'Poppins', sans-serif;
-    font-size: 19px; /* Adjust as needed */
-    color: #0056b3;
-    text-align: center;
-    cursor: pointer;
-    height: 28px; /* A consistent height */
-}
-
 /* Style for the disabled example dropdown */
 .rw-part6-container select:disabled {
     background-color: transparent;
