@@ -481,6 +481,16 @@ header p {
     border-bottom: none; /* Removes the line after the very last question */
 }
 
+/* Make the Part 4 example cards non-interactive */
+.option-card.is-example {
+    cursor: default;
+}
+.option-card.is-example:hover {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Revert to default shadow */
+    border-color: #ddd; /* Revert to default border */
+}
+
 /* --- Part 5: Interactive Canvas Styles --- */
 .part5-controls {
     display: flex;
