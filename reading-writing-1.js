@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================
-    //                 GRADING LOGIC
+    //                 GRADING LOGIC (FINAL, DEFINITIVE VERSION)
     // ==========================================================
     function checkAndSubmitAnswers() {
         stopTimer();
@@ -119,27 +119,27 @@ document.addEventListener('DOMContentLoaded', () => {
                 correctCount++;
             }
     
-            // --- VISUAL FEEDBACK LOGIC ---
-            // This query finds text inputs, select dropdowns, etc.
-            let inputElement = document.getElementById(qId);
-            
-            // --- Special Handling for Radio Buttons ---
-            if (!inputElement && qId.startsWith('rw3-q6')) {
+            // --- THIS IS THE NEW, COMPLETE FEEDBACK LOGIC ---
+            let inputElement;
+            // Handle radio buttons by their 'name' attribute
+            if (qId === 'rw3-q6') { 
                 const userChoiceValue = userAnswers[qId];
-                // Find the radio button the user actually clicked
                 const selectedRadio = document.querySelector(`input[name="${qId}"][value="${userChoiceValue}"]`);
                 if (selectedRadio) {
                     selectedRadio.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
                 }
-                // Always find and mark the truly correct answer
+                // Always mark the truly correct one
                 const correctRadio = document.querySelector(`input[name="${qId}"][value="${correctAnswer}"]`);
                 if (correctRadio) {
                     correctRadio.classList.add('correct-answer');
                 }
             } 
-            // --- Handling for all other input types ---
-            else if (inputElement) {
-                inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+            // Handle all other elements by their ID
+            else {
+                inputElement = document.getElementById(qId);
+                if (inputElement) {
+                    inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+                }
             }
         });
     
