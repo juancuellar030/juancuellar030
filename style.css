@@ -1224,7 +1224,7 @@ body.page-flyers-hub::before {
 
 /* --- Reading & Writing Part 4 - Title & Image --- */
 
-#rw-part6 .question-content h4 {
+#rw-part4 .question-content h4 {
     text-align: center;
     font-size: 1.6em;
     color: #333;
@@ -1233,7 +1233,7 @@ body.page-flyers-hub::before {
     font-family: 'Poppins', sans-serif;
 }
 
-#rw-part6 .question-image {
+#rw-part4 .question-image {
     display: block;
     max-width: 550px; /* Adjust size as needed */
     width: 80%; /* Adjust size as needed */
@@ -1243,7 +1243,7 @@ body.page-flyers-hub::before {
 }
 
 /* Style for the disabled example dropdown */
-.rw-part6-container select:disabled {
+.rw-part4-container select:disabled {
     background-color: transparent;
     border: none;
     font-weight: bold;
