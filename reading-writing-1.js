@@ -149,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.navigation-buttons').forEach(nav => { nav.style.display = 'none'; });
         document.getElementById('check-all-rw-answers-btn').style.display = 'none';
         document.getElementById('restart-btn-container').style.display = 'flex';
+        document.querySelector('.test-container')?.scrollTo({ top: 0, behavior: 'smooth' });
     
         submitResultsToGoogle(userName, `${correctCount}/${totalQuestions}`, formattedTimeSpent);
     }
