@@ -332,7 +332,7 @@ header p {
     align-items: center;
     justify-content: center;
     overflow: hidden;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
+    transition: all 0.2s ease;
     cursor: default; /* Indicate not directly clickable */
     z-index: 5; /* Retained user's z-index */
     box-sizing: border-box;
@@ -2003,8 +2003,13 @@ body.page-flyers-hub::before {
 }
 
 /* ========================================================== */
-/*           READING & WRITING PART 6 STYLES (NEW)          */
+/*           READING & WRITING PART 6 STYLES                */
 /* ========================================================== */
+
+/* Control the size of the top image specifically for Part 6 */
+#rw-part6 .question-image {
+    max-width: 700px; /* You can adjust this value */
+}
 
 /* The container for the story text */
 .rw-part6-story-text {
@@ -2013,7 +2018,7 @@ body.page-flyers-hub::before {
     padding: 30px;
     border-radius: 10px;
     max-width: 800px;
-    margin: 0 auto;
+    margin: 30px auto 0;
 }
 .rw-part6-story-text h4 {
     text-align: center;
@@ -2025,13 +2030,13 @@ body.page-flyers-hub::before {
 }
 .rw-part6-story-text p {
     font-size: 1.15em;
-    line-height: 2.5; /* Increased space for inputs */
-    text-align: justify; /* Justified text for a clean diary look */
+    line-height: 2.8; /* Increased space for inputs */
+    text-align: justify;
 }
 
-/* We can reuse the .story-input style, but we might want to adjust the width for this part */
+/* Reuse the .story-input style, but override the width for this part */
 #rw-part6 .story-input {
-    width: 150px; /* A smaller, consistent width for the single words */
+    width: 150px; /* A smaller, consistent width for single words */
 }
 #rw-part6 .story-input[readonly] {
     width: auto; /* Allow readonly example to size to its content */
