@@ -233,17 +233,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================
     document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
         
-        // Corrected and more robust grading logic
+        // <<< THIS IS THE CORRECTED LOGIC >>>
         const questionsToGrade = Object.keys(correctAnswers).filter(qId => {
             const el = document.querySelector(`[data-description="${qId}"], #${qId}`);
-            // Exclude any question that is part of an element with the 'is-example' or 'locked-example' class.
-            if (el && (el.closest('.is-example') || el.classList.contains('locked-example') || el.closest('.locked-example'))) {
+            if (!el) return true; // Keep questions where the element might not be in the DOM yet
+
+            // This is the key change: Check if the element CONTAINS a locked example.
+            // This correctly identifies the "Michael" drop zone and excludes it.
+            const isPart1Example = el.querySelector('.locked-example');
+            
+            // This handles examples in other parts, like multiple-choice cards.
+            const isOtherExample = el.closest('.is-example');
+
+            // If it's any kind of example, filter it out.
+            if (isPart1Example || isOtherExample) {
                 return false;
             }
+            
             return true;
         });
-
-        const totalRealQuestions = questionsToGrade.length; // Calculate total dynamically
+    
+        const totalRealQuestions = questionsToGrade.length; // This will now correctly be 25
         let correctCount = 0;
     
         questionsToGrade.forEach(qId => {
