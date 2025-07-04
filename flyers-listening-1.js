@@ -321,7 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (restartContainer) restartContainer.style.display = 'flex';
         document.querySelector('.test-container')?.scrollTo({ top: 0, behavior: 'smooth' });
     
-        submitResultsToGoogle(userName, `${correctCount}/${totalRealQuestions}`);
+        submitResultsToGoogle(`${correctCount}/${totalRealQuestions}`);
     });
 
     // --- INITIAL PAGE SETUP ---
