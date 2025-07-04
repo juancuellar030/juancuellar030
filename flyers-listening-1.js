@@ -219,25 +219,32 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('eraser-tool-btn')?.addEventListener('click', (e) => { document.querySelectorAll('.palette-color, .write-tool, .eraser-tool').forEach(el => el.classList.remove('selected')); e.currentTarget.classList.add('selected'); activeTool = { type: 'eraser', value: null }; });
 
     // --- Google Forms Submission ---
-    function submitResultsToGoogle(score) {
-        const googleFormURL = 'https://script.google.com/macros/s/AKfycbz6pQLL3HfqhZVLnOlivAob2GM3961XOnxRcgCPdHaCJTYTjUBe-ShR-6pITWnHQoU/exec'; 
-        const formData = new FormData();
-        formData.append('name', userName);
-        formData.append('score', score);
-        formData.append('testType', 'Listening');
-        fetch(googleFormURL, { method: 'POST', body: formData }).then(r => r.json()).then(d => console.log(d)).catch(e => console.error(e));
-    }
+        function submitResultsToGoogle(name, score) { // <-- Fix: Accept both 'name' and 'score'
+            const googleFormURL = 'https://script.google.com/macros/s/AKfycbz6pQLL3HfqhZVLnOlivAob2GM3961XOnxRcgCPdHaCJTYTjUBe-ShR-6pITWnHQoU/exec'; 
+            const formData = new FormData();
+            formData.append('name', name); // <-- Fix: Use the 'name' parameter
+            formData.append('score', score);
+            formData.append('testType', 'Listening');
+            fetch(googleFormURL, { method: 'POST', body: formData }).then(r => r.json()).then(d => console.log(d)).catch(e => console.error(e));
+        }
 
     // ==========================================================
     //          FINAL GRADING & REVIEW MODE LOGIC (DEFINITIVE)
     // ==========================================================
     document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
         
+        // Corrected and more robust grading logic
+        const questionsToGrade = Object.keys(correctAnswers).filter(qId => {
+            const el = document.querySelector(`[data-description="${qId}"], #${qId}`);
+            // Exclude any question that is part of an element with the 'is-example' or 'locked-example' class.
+            if (el && (el.closest('.is-example') || el.classList.contains('locked-example') || el.closest('.locked-example'))) {
+                return false;
+            }
+            return true;
+        });
+
+        const totalRealQuestions = questionsToGrade.length; // Calculate total dynamically
         let correctCount = 0;
-        const questionsToGrade = Object.keys(correctAnswers).filter(qId => 
-            !qId.includes('example') && qId !== 'boy_on_rock_magazine'
-        );
-        const totalRealQuestions = 25;
     
         questionsToGrade.forEach(qId => {
             const userAnswer = (userAnswers[qId] || '').trim();
