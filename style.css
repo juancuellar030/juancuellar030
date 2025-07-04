@@ -1231,19 +1231,27 @@ body.page-flyers-hub::before {
     font-weight: 600;
 }
 
-/* Specific styling for the square letter boxes in Part 2 */
+/* Specific styling for the square letter boxes */
 #listening-part3 .letter-box,
 #rw-part2 .letter-box {
     width: 45px;
     height: 45px;
     border: 2px solid #777;
     border-radius: 5px;
+    
+    /* Font and text properties */
     font-family: 'Mulish', sans-serif;
     font-size: 1.6em;
     font-weight: bold;
-    text-transform: uppercase; /* This brings back the automatic uppercase */
+    text-transform: uppercase;
+    
+    /* --- THIS IS THE FIX FOR CENTERING --- */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* These are no longer needed with Flexbox, but are kept for consistency if you revert */
     position: static;
-    display: inline-block;
     vertical-align: middle;
 }
 
