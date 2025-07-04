@@ -229,22 +229,17 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // ==========================================================
-    //          FINAL GRADING & REVIEW MODE LOGIC (LISTENING)
+    //          FINAL GRADING & REVIEW MODE LOGIC (DEFINITIVE)
     // ==========================================================
     document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
-    
+        
         let correctCount = 0;
-        // --- THIS IS THE KEY FIX FOR THE TOTAL ---
-        // We get ALL questions first, and then check them.
-        const questionsToGrade = Object.keys(correctAnswers);
-        const totalRealQuestions = 25; // Hardcode the correct total for accuracy
+        const questionsToGrade = Object.keys(correctAnswers).filter(qId => 
+            !qId.includes('example') && qId !== 'boy_on_rock_magazine'
+        );
+        const totalRealQuestions = questionsToGrade.length;
     
         questionsToGrade.forEach(qId => {
-            // Skip all examples from grading
-            if (qId.includes('example')) {
-                return; // Go to the next question
-            }
-    
             const userAnswer = (userAnswers[qId] || '').trim().toLowerCase();
             const correctAnswer = correctAnswers[qId];
             let isCorrect = false;
@@ -259,9 +254,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 correctCount++;
             }
     
-            // --- VISUAL FEEDBACK LOGIC (EXPANDED) ---
-            let inputElement = document.getElementById(qId);
-    
+            // --- THIS IS THE COMPLETE VISUAL FEEDBACK LOGIC ---
             // Part 1: Drag & Drop
             if (qId.includes('_')) {
                 const dropTarget = document.querySelector(`.drop-target[data-description="${qId}"]`);
@@ -269,28 +262,28 @@ document.addEventListener('DOMContentLoaded', () => {
                     dropTarget.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
                 }
             }
-            // Part 2 & 3: Text & Letter Inputs
+            // Parts 2 & 3: Text & Letter Inputs
             else if (qId.startsWith('q2_') || qId.startsWith('q3_')) {
+                const inputElement = document.getElementById(qId);
                 if (inputElement) {
                     inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
                 }
             }
-            // Part 4: Multiple Choice
+            // Part 4: Multiple Choice Cards
             else if (qId.startsWith('q4_')) {
                 const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer.toUpperCase()}"]`);
                 if (selectedOption) selectedOption.classList.add(isCorrect ? 'feedback-correct' : 'feedback-incorrect');
                 const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswer.toUpperCase()}"]`);
                 if (correctOption) correctOption.classList.add('feedback-correct');
             }
-            // Part 5: Interactive SVG
+            // Part 5: SVG Coloring
             else if (qId.endsWith('-shape') || qId.endsWith('-area')) {
-                if (inputElement) {
-                    inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
-                }
+                const shapeElement = document.getElementById(qId);
+                if (shapeElement) shapeElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
             }
         });
     
-        // --- 2. Display Final Score ---
+        // --- Display Score and Enter Review Mode ---
         const finalResultsDisplay = document.getElementById('final-results-display');
         const percentage = (totalRealQuestions > 0) ? (correctCount / totalRealQuestions) * 100 : 0;
         let resultsHTML = '';
@@ -299,28 +292,19 @@ document.addEventListener('DOMContentLoaded', () => {
         finalResultsDisplay.innerHTML = resultsHTML;
         finalResultsDisplay.className = percentage === 100 ? 'correct' : (percentage >= 50 ? 'partial' : 'incorrect');
         
-        // --- 3. Enter "Review Mode" ---
-        // Hide the "Check My Answers" button
         document.getElementById('check-all-listening-answers-btn').style.display = 'none';
-        
-        // Loop through ALL test sections
         document.querySelectorAll('.test-section').forEach(section => {
             if (section.id.startsWith('listening-part')) {
                 section.classList.remove('hidden');
                 section.classList.add('active');
             }
             const nav = section.querySelector('.navigation-buttons');
-            if (nav) nav.style.display = 'none'; // Hide all old nav buttons
+            if (nav) nav.style.display = 'none';
         });
-    
-        // Find the restart button container in the results section and show it
         const restartContainer = document.querySelector('#listening-results .navigation-buttons');
         if (restartContainer) restartContainer.style.display = 'flex';
-    
-        // --- 4. Scroll User to the Top for Review ---
         document.querySelector('.test-container')?.scrollTo({ top: 0, behavior: 'smooth' });
     
-        // --- 5. Submit to Google ---
         submitResultsToGoogle(userName, `${correctCount}/${totalRealQuestions}`);
     });
 
