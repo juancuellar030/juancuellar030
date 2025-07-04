@@ -652,7 +652,9 @@ header p {
 /* --- Part 1: Drag & Drop Feedback --- */
 .drop-target.correct-answer {
     border: 2px solid #28a745 !important;
-    background-color: rgba(40, 167, 69, 0.2) !important;
+    /* This creates a layered background: a semi-transparent white topped with semi-transparent green */
+    background: linear-gradient(rgba(40, 167, 69, 0.2), rgba(40, 167, 69, 0.2)),
+                linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)) !important;
 }
 .drop-target.incorrect-answer {
     border: 2px solid #dc3545 !important;
