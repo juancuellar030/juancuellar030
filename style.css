@@ -1230,6 +1230,7 @@ body.page-flyers-hub::before {
 }
 
 /* Specific styling for the square letter boxes in Part 2 */
+#listening-part3 .letter-box,
 #rw-part2 .letter-box {
     width: 45px;
     height: 45px;
@@ -1238,8 +1239,8 @@ body.page-flyers-hub::before {
     font-family: 'Mulish', sans-serif;
     font-size: 1.6em;
     font-weight: bold;
-    text-transform: uppercase;
-    position: static; /* Important: overrides any stray absolute positioning */
+    text-transform: uppercase; /* This brings back the automatic uppercase */
+    position: static;
     display: inline-block;
     vertical-align: middle;
 }
