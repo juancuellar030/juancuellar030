@@ -228,105 +228,90 @@ document.addEventListener('DOMContentLoaded', () => {
             fetch(googleFormURL, { method: 'POST', body: formData }).then(r => r.json()).then(d => console.log(d)).catch(e => console.error(e));
         }
 
-    // ==========================================================
-    //          FINAL GRADING & REVIEW MODE LOGIC (DEFINITIVE)
-    // ==========================================================
-    document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
-        
-        // <<< THIS IS THE CORRECTED LOGIC >>>
-        const questionsToGrade = Object.keys(correctAnswers).filter(qId => {
-            const el = document.querySelector(`[data-description="${qId}"], #${qId}`);
-            if (!el) return true; // Keep questions where the element might not be in the DOM yet
-
-            // This is the key change: Check if the element CONTAINS a locked example.
-            // This correctly identifies the "Michael" drop zone and excludes it.
-            const isPart1Example = el.querySelector('.locked-example');
+        // ==========================================================
+        //          FINAL GRADING & REVIEW MODE LOGIC (DEFINITIVE)
+        // ==========================================================
+        document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
             
-            // This handles examples in other parts, like multiple-choice cards.
-            const isOtherExample = el.closest('.is-example');
-
-            // If it's any kind of example, filter it out.
-            if (isPart1Example || isOtherExample) {
-                return false;
-            }
-            
-            return true;
-        });
+            let correctCount = 0;
+            const totalRealQuestions = 25; // We can confidently set this back to 25
     
-        const totalRealQuestions = questionsToGrade.length; // This will now correctly be 25
-        let correctCount = 0;
-    
-        questionsToGrade.forEach(qId => {
-            const userAnswer = (userAnswers[qId] || '').trim();
-            const correctAnswer = correctAnswers[qId];
-            let isCorrect = false;
-    
-            // Step 1: Check if the answer is correct (case-insensitive)
-            if (Array.isArray(correctAnswer)) {
-                isCorrect = correctAnswer.map(a => a.toLowerCase()).includes(userAnswer.toLowerCase());
-            } else {
-                isCorrect = (userAnswer.toLowerCase() === correctAnswer.toLowerCase());
-            }
-            
-            if (isCorrect) {
-                correctCount++;
-            }
-    
-            // --- Step 2: Apply visual feedback with the CORRECT logic ---
-            
-            // <<< THIS IS THE KEY FIX >>>
-            // This now checks for an underscore AND that the ID does NOT start with 'q'.
-            if (qId.includes('_') && !qId.startsWith('q')) {
-                const dropTarget = document.querySelector(`.drop-target[data-description="${qId}"]`);
-                if (dropTarget) {
-                    dropTarget.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
-                    const nameInZone = dropTarget.querySelector('.draggable-name');
-                    if (nameInZone) nameInZone.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+            // We will loop over ALL questions now
+            Object.keys(correctAnswers).forEach(qId => {
+                
+                // --- The New, Simpler Fix ---
+                // If the question ID is the specific example we want to ignore,
+                // just skip this iteration entirely. This prevents it from being
+                // scored or colored, solving all issues at once.
+                if (qId === 'boy_on_rock_magazine') {
+                    return; 
                 }
-            }
-            // Parts 2 & 3: Text & Letter Inputs
-            else if (qId.startsWith('q2_') || qId.startsWith('q3_')) {
-                const inputElement = document.getElementById(qId);
-                if (inputElement) inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
-            }
-            // Part 4: Multiple Choice Cards
-            else if (qId.startsWith('q4_')) {
-                const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer.toUpperCase()}"]`);
-                if (selectedOption) selectedOption.classList.add(isCorrect ? 'feedback-correct' : 'feedback-incorrect');
-                const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswer.toUpperCase()}"]`);
-                if (correctOption) correctOption.classList.add('feedback-correct');
-            }
-            // Part 5: Interactive SVG
-            else if (qId.endsWith('-shape') || qId.endsWith('-area')) {
-                const shapeElement = document.getElementById(qId);
-                if (shapeElement) shapeElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
-            }
-        });
-    
-        // --- Display Score and Enter Review Mode (This part is correct) ---
-        const finalResultsDisplay = document.getElementById('final-results-display');
-        const percentage = (totalRealQuestions > 0) ? (correctCount / totalRealQuestions) * 100 : 0;
-        let resultsHTML = '';
-        if (userName) resultsHTML += `<h3>Results for: ${userName}</h3>`;
-        resultsHTML += `<p>You scored ${correctCount} out of ${totalRealQuestions} (${percentage.toFixed(0)}%).</p>`;
-        finalResultsDisplay.innerHTML = resultsHTML;
-        finalResultsDisplay.className = percentage === 100 ? 'correct' : (percentage >= 50 ? 'partial' : 'incorrect');
         
-        document.getElementById('check-all-listening-answers-btn').style.display = 'none';
-        document.querySelectorAll('.test-section').forEach(section => {
-            if (section.id.startsWith('listening-part')) {
-                section.classList.remove('hidden');
-                section.classList.add('active');
-            }
-            const nav = section.querySelector('.navigation-buttons');
-            if (nav) nav.style.display = 'none';
+                // --- The rest of the logic proceeds as normal for the other 25 questions ---
+                const userAnswer = (userAnswers[qId] || '').trim();
+                const correctAnswer = correctAnswers[qId];
+                let isCorrect = false;
+        
+                // Step 1: Check if the answer is correct (case-insensitive)
+                if (Array.isArray(correctAnswer)) {
+                    isCorrect = correctAnswer.map(a => a.toLowerCase()).includes(userAnswer.toLowerCase());
+                } else {
+                    isCorrect = (userAnswer.toLowerCase() === correctAnswer.toLowerCase());
+                }
+                
+                if (isCorrect) {
+                    correctCount++; // Part 1 answers will now be counted!
+                }
+        
+                // --- Step 2: Apply visual feedback (This part was already working correctly) ---
+                if (qId.includes('_') && !qId.startsWith('q')) {
+                    const dropTarget = document.querySelector(`.drop-target[data-description="${qId}"]`);
+                    if (dropTarget) {
+                        dropTarget.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+                        const nameInZone = dropTarget.querySelector('.draggable-name');
+                        if (nameInZone) nameInZone.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+                    }
+                }
+                else if (qId.startsWith('q2_') || qId.startsWith('q3_')) {
+                    const inputElement = document.getElementById(qId);
+                    if (inputElement) inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+                }
+                else if (qId.startsWith('q4_')) {
+                    const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer.toUpperCase()}"]`);
+                    if (selectedOption) selectedOption.classList.add(isCorrect ? 'feedback-correct' : 'feedback-incorrect');
+                    const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswer.toUpperCase()}"]`);
+                    if (correctOption) correctOption.classList.add('feedback-correct');
+                }
+                else if (qId.endsWith('-shape') || qId.endsWith('-area')) {
+                    const shapeElement = document.getElementById(qId);
+                    if (shapeElement) shapeElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+                }
+            });
+        
+            // --- Display Score and Enter Review Mode (This remains the same) ---
+            const finalResultsDisplay = document.getElementById('final-results-display');
+            const percentage = (totalRealQuestions > 0) ? (correctCount / totalRealQuestions) * 100 : 0;
+            let resultsHTML = '';
+            if (userName) resultsHTML += `<h3>Results for: ${userName}</h3>`;
+            resultsHTML += `<p>You scored ${correctCount} out of ${totalRealQuestions} (${percentage.toFixed(0)}%).</p>`;
+            finalResultsDisplay.innerHTML = resultsHTML;
+            finalResultsDisplay.className = percentage === 100 ? 'correct' : (percentage >= 50 ? 'partial' : 'incorrect');
+            
+            document.getElementById('check-all-listening-answers-btn').style.display = 'none';
+            document.querySelectorAll('.test-section').forEach(section => {
+                if (section.id.startsWith('listening-part')) {
+                    section.classList.remove('hidden');
+                    section.classList.add('active');
+                }
+                const nav = section.querySelector('.navigation-buttons');
+                if (nav) nav.style.display = 'none';
+            });
+            const restartContainer = document.querySelector('#listening-results .navigation-buttons');
+            if (restartContainer) restartContainer.style.display = 'flex';
+            document.querySelector('.test-container')?.scrollTo({ top: 0, behavior: 'smooth' });
+        
+            submitResultsToGoogle(userName, `${correctCount}/${totalRealQuestions}`);
         });
-        const restartContainer = document.querySelector('#listening-results .navigation-buttons');
-        if (restartContainer) restartContainer.style.display = 'flex';
-        document.querySelector('.test-container')?.scrollTo({ top: 0, behavior: 'smooth' });
-    
-        submitResultsToGoogle(userName, `${correctCount}/${totalRealQuestions}`);
-    });
 
     // --- INITIAL PAGE SETUP ---
     // This is the clean way to start the test
