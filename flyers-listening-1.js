@@ -234,19 +234,25 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
         
         let correctCount = 0;
-        const questionsToGrade = Object.keys(correctAnswers).filter(qId => 
-            !qId.includes('example') && qId !== 'boy_on_rock_magazine'
-        );
-        const totalRealQuestions = questionsToGrade.length;
+        const questionsToGrade = Object.keys(correctAnswers);
+        const totalRealQuestions = 25;
     
         questionsToGrade.forEach(qId => {
-            const userAnswer = (userAnswers[qId] || '').trim().toLowerCase();
+            // Skip all examples from the grading process
+            if (qId.includes('example') || qId === 'boy_on_rock_magazine') {
+                return; 
+            }
+    
+            const userAnswer = (userAnswers[qId] || '').trim();
             const correctAnswer = correctAnswers[qId];
             let isCorrect = false;
     
-            if (Array.isArray(correctAnswer)) {
-                isCorrect = correctAnswer.includes(userAnswer);
+            // --- Step 1: Check if the answer is correct ---
+            if (qId.startsWith('q3_') || qId.startsWith('q4_')) {
+                // For Parts 3 & 4, compare in UPPERCASE
+                isCorrect = (userAnswer.toUpperCase() === correctAnswer.toUpperCase());
             } else {
+                // For all other parts, compare in lowercase
                 isCorrect = (userAnswer.toLowerCase() === correctAnswer.toLowerCase());
             }
             
@@ -254,32 +260,24 @@ document.addEventListener('DOMContentLoaded', () => {
                 correctCount++;
             }
     
-            // --- THIS IS THE COMPLETE VISUAL FEEDBACK LOGIC ---
-            // Part 1: Drag & Drop
-            if (qId.includes('_')) {
-                const dropTarget = document.querySelector(`.drop-target[data-description="${qId}"]`);
-                if (dropTarget) {
-                    dropTarget.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
-                }
+            // --- Step 2: Apply visual feedback based on question type ---
+            const inputElement = document.getElementById(qId);
+    
+            // Parts 1, 2, 3 (text/letter inputs), and 5
+            if (inputElement) {
+                inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
             }
-            // Parts 2 & 3: Text & Letter Inputs
-            else if (qId.startsWith('q2_') || qId.startsWith('q3_')) {
-                const inputElement = document.getElementById(qId);
-                if (inputElement) {
-                    inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
-                }
-            }
-            // Part 4: Multiple Choice Cards
+            // Special handling for Part 4 option cards
             else if (qId.startsWith('q4_')) {
                 const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer.toUpperCase()}"]`);
-                if (selectedOption) selectedOption.classList.add(isCorrect ? 'feedback-correct' : 'feedback-incorrect');
+                if (selectedOption) {
+                    selectedOption.classList.add(isCorrect ? 'feedback-correct' : 'feedback-incorrect');
+                }
+                // Always highlight the truly correct answer so the user can learn
                 const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswer.toUpperCase()}"]`);
-                if (correctOption) correctOption.classList.add('feedback-correct');
-            }
-            // Part 5: SVG Coloring
-            else if (qId.endsWith('-shape') || qId.endsWith('-area')) {
-                const shapeElement = document.getElementById(qId);
-                if (shapeElement) shapeElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+                if (correctOption) {
+                    correctOption.classList.add('feedback-correct');
+                }
             }
         });
     
