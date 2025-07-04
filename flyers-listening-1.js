@@ -234,25 +234,23 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
         
         let correctCount = 0;
-        const questionsToGrade = Object.keys(correctAnswers);
-        const totalRealQuestions = 25;
+        // This filter now correctly excludes all example types.
+        const questionsToGrade = Object.keys(correctAnswers).filter(qId => 
+            !qId.includes('example') && qId !== 'boy_on_rock_magazine'
+        );
+        const totalRealQuestions = 25; // Hardcode to 25 to ensure accuracy
     
+        // --- Start of The Master Grading & Feedback Loop ---
         questionsToGrade.forEach(qId => {
-            // Skip all examples from the grading process
-            if (qId.includes('example') || qId === 'boy_on_rock_magazine') {
-                return; 
-            }
-    
             const userAnswer = (userAnswers[qId] || '').trim();
             const correctAnswer = correctAnswers[qId];
             let isCorrect = false;
     
             // --- Step 1: Check if the answer is correct ---
-            if (qId.startsWith('q3_') || qId.startsWith('q4_')) {
-                // For Parts 3 & 4, compare in UPPERCASE
-                isCorrect = (userAnswer.toUpperCase() === correctAnswer.toUpperCase());
+            // This handles case-insensitivity for all text-based answers.
+            if (Array.isArray(correctAnswer)) {
+                isCorrect = correctAnswer.includes(userAnswer.toLowerCase());
             } else {
-                // For all other parts, compare in lowercase
                 isCorrect = (userAnswer.toLowerCase() === correctAnswer.toLowerCase());
             }
             
@@ -260,28 +258,48 @@ document.addEventListener('DOMContentLoaded', () => {
                 correctCount++;
             }
     
-            // --- Step 2: Apply visual feedback based on question type ---
-            const inputElement = document.getElementById(qId);
-    
-            // Parts 1, 2, 3 (text/letter inputs), and 5
-            if (inputElement) {
-                inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+            // --- Step 2: Apply visual feedback to the correct element ---
+            // Part 1: Drag & Drop
+            if (qId.includes('_')) {
+                const dropTarget = document.querySelector(`.drop-target[data-description="${qId}"]`);
+                if (dropTarget) {
+                    dropTarget.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+                    // THIS IS THE FIX: Also style the name element inside the drop zone.
+                    const nameInZone = dropTarget.querySelector('.draggable-name');
+                    if (nameInZone) {
+                        nameInZone.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+                    }
+                }
             }
-            // Special handling for Part 4 option cards
+            // Part 2 & 3: Text & Letter Inputs
+            else if (qId.startsWith('q2_') || qId.startsWith('q3_')) {
+                const inputElement = document.getElementById(qId);
+                if (inputElement) {
+                    inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+                }
+            }
+            // Part 4: Multiple Choice Cards
             else if (qId.startsWith('q4_')) {
                 const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer.toUpperCase()}"]`);
                 if (selectedOption) {
                     selectedOption.classList.add(isCorrect ? 'feedback-correct' : 'feedback-incorrect');
                 }
-                // Always highlight the truly correct answer so the user can learn
                 const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswer.toUpperCase()}"]`);
                 if (correctOption) {
                     correctOption.classList.add('feedback-correct');
                 }
             }
+            // Part 5: SVG Coloring
+            else if (qId.endsWith('-shape') || qId.endsWith('-area')) {
+                const shapeElement = document.getElementById(qId);
+                if (shapeElement) {
+                    shapeElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+                }
+            }
         });
+        // --- End of Loop ---
     
-        // --- Display Score and Enter Review Mode ---
+        // --- Display Score and Enter Review Mode (This part is already correct) ---
         const finalResultsDisplay = document.getElementById('final-results-display');
         const percentage = (totalRealQuestions > 0) ? (correctCount / totalRealQuestions) * 100 : 0;
         let resultsHTML = '';
