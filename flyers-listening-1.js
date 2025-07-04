@@ -232,18 +232,23 @@ document.addEventListener('DOMContentLoaded', () => {
     //          FINAL GRADING & REVIEW MODE LOGIC (LISTENING)
     // ==========================================================
     document.getElementById('check-all-listening-answers-btn').addEventListener('click', () => {
-        
-        // --- 1. Grade all answers ---
+    
         let correctCount = 0;
-        const questionsToGrade = Object.keys(correctAnswers).filter(qId => !qId.includes('example'));
-        const totalRealQuestions = questionsToGrade.length;
+        // --- THIS IS THE KEY FIX FOR THE TOTAL ---
+        // We get ALL questions first, and then check them.
+        const questionsToGrade = Object.keys(correctAnswers);
+        const totalRealQuestions = 25; // Hardcode the correct total for accuracy
     
         questionsToGrade.forEach(qId => {
+            // Skip all examples from grading
+            if (qId.includes('example')) {
+                return; // Go to the next question
+            }
+    
             const userAnswer = (userAnswers[qId] || '').trim().toLowerCase();
             const correctAnswer = correctAnswers[qId];
             let isCorrect = false;
     
-            // A. Check if the answer is correct
             if (Array.isArray(correctAnswer)) {
                 isCorrect = correctAnswer.includes(userAnswer);
             } else {
@@ -254,36 +259,33 @@ document.addEventListener('DOMContentLoaded', () => {
                 correctCount++;
             }
     
-            // B. Apply visual feedback based on question type
+            // --- VISUAL FEEDBACK LOGIC (EXPANDED) ---
+            let inputElement = document.getElementById(qId);
+    
             // Part 1: Drag & Drop
-            if (qId.includes('_')) { // A simple way to identify Part 1 questions
+            if (qId.includes('_')) {
                 const dropTarget = document.querySelector(`.drop-target[data-description="${qId}"]`);
                 if (dropTarget) {
                     dropTarget.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
-                    const nameInZone = dropTarget.querySelector('.draggable-name');
-                    if (nameInZone) nameInZone.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
                 }
             }
             // Part 2 & 3: Text & Letter Inputs
             else if (qId.startsWith('q2_') || qId.startsWith('q3_')) {
-                const inputElement = document.getElementById(qId);
-                if (inputElement) inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+                if (inputElement) {
+                    inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+                }
             }
             // Part 4: Multiple Choice
             else if (qId.startsWith('q4_')) {
                 const selectedOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${userAnswer.toUpperCase()}"]`);
-                if (selectedOption) {
-                    selectedOption.classList.add(isCorrect ? 'feedback-correct' : 'feedback-incorrect');
-                }
-                // Always highlight the correct answer
+                if (selectedOption) selectedOption.classList.add(isCorrect ? 'feedback-correct' : 'feedback-incorrect');
                 const correctOption = document.querySelector(`.option-card[data-question="${qId}"][data-answer="${correctAnswer.toUpperCase()}"]`);
                 if (correctOption) correctOption.classList.add('feedback-correct');
             }
             // Part 5: Interactive SVG
             else if (qId.endsWith('-shape') || qId.endsWith('-area')) {
-                const shapeElement = document.getElementById(qId);
-                if (shapeElement) {
-                    shapeElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+                if (inputElement) {
+                    inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
                 }
             }
         });
