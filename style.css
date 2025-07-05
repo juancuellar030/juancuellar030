@@ -938,6 +938,16 @@ body.page-movers::before {
     background-image: url('images/movers-background.svg');
 }
 
+/* --- NEW: Background for the Starters test list hub --- */
+body.page-movers-hub::before {
+    background-image: url('images/starters-tests-background.svg');
+}
+
+/* --- NEW: Background for all general Starters tests --- */
+body.page-movers::before {
+    background-image: url('images/starters-background.svg');
+}
+
 /* --- Animated Mascot Styles --- */
 
 /* 1. Define the "slide in from right" animation */
