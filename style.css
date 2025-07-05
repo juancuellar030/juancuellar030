@@ -2114,3 +2114,44 @@ body.page-flyers-hub::before {
     /* Optional: Add custom styling for disabled inputs if you want */
     background-color: #f0f0f0; /* Example: a light grey background */
 }
+
+/* ========================================================== */
+/*           STAGGERED BUTTON FADE-IN ANIMATION             */
+/* ========================================================== */
+
+/* 1. Define the keyframe animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Start 20px lower */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);   /* End at its final position */
+    }
+}
+
+/* 2. Prepare the buttons for animation */
+.test-grid-container .nav-btn {
+    /* Hide the buttons by default so they can be faded in */
+    opacity: 0; 
+    
+    /* Apply the animation */
+    animation-name: fadeInUp;
+    animation-duration: 0.5s;       /* How long the animation runs */
+    animation-timing-function: ease-out; /* Makes it feel natural */
+    
+    /* CRITICAL: This keeps the button visible after the animation ends */
+    animation-fill-mode: forwards;  
+}
+
+/* 3. Set a different delay for each button to create the stagger effect */
+.test-grid-container .nav-btn:nth-child(1) { animation-delay: 0.1s; }
+.test-grid-container .nav-btn:nth-child(2) { animation-delay: 0.2s; }
+.test-grid-container .nav-btn:nth-child(3) { animation-delay: 0.3s; }
+.test-grid-container .nav-btn:nth-child(4) { animation-delay: 0.4s; }
+.test-grid-container .nav-btn:nth-child(5) { animation-delay: 0.5s; }
+.test-grid-container .nav-btn:nth-child(6) { animation-delay: 0.6s; }
+.test-grid-container .nav-btn:nth-child(7) { animation-delay: 0.7s; }
+.test-grid-container .nav-btn:nth-child(8) { animation-delay: 0.8s; }
+/* Add more lines here if you add more buttons */
