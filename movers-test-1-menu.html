@@ -3,26 +3,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A2 Flyers - Test 1</title>
+    <!-- Changed Title -->
+    <title>A1 Movers - Test 1</title>
     <link rel="stylesheet" href="style.css?v=8"> 
 </head>
-<body class="page-flyers">
+<!-- Changed body class for future styling -->
+<body class="page-movers">
 
     <div class="content-wrapper">
         <div class="test-container">
             <header>
-                <h1>A2 Flyers - Test 1</h1>
-                <!-- This now links back to the list of Flyers tests -->
-                <a href="flyers-tests.html" class="back-to-menu-link">← Back to Test List</a>
+                <!-- Changed Header -->
+                <h1>A1 Movers - Test 1</h1>
+                <!-- Changed Back Link -->
+                <a href="movers-tests-list.html" class="back-to-menu-link">← Back to Test List</a>
             </header>
 
-            <!-- The name input field lives here -->
             <div class="name-input-container" style="margin-top: 30px; text-align: center;">
                 <label for="test1-user-name" style="display: block; margin-bottom: 10px;">Please enter your name to begin:</label>
                 <input type="text" id="test1-user-name" placeholder="Your Name Here" autocomplete="off" style="padding: 10px; font-size: 1.1em; border-radius: 8px; border: 1px solid #ccc;">
             </div>
 
-            <!-- Links to the actual tests, which become enabled after name entry -->
             <div class="test-links" style="margin-top: 30px; display: flex; justify-content: center; gap: 20px;">
                 <button id="start-listening-btn" class="nav-btn" disabled>Start Listening</button>
                 <button id="start-rw-btn" class="nav-btn" disabled>Start Reading & Writing</button>
@@ -30,7 +31,6 @@
         </div>
     </div>
 
-    <!-- JavaScript to pass the name to the next page -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const nameInput = document.getElementById('test1-user-name');
@@ -45,12 +45,14 @@
 
             listeningBtn.addEventListener('click', () => {
                 const userName = encodeURIComponent(nameInput.value.trim());
-                window.location.href = `flyers-listening-1.html?name=${userName}`;
+                // --- THIS LINK IS NOW CORRECT FOR MOVERS ---
+                window.location.href = `movers-listening-1.html?name=${userName}`;
             });
 
             rwBtn.addEventListener('click', () => {
                 const userName = encodeURIComponent(nameInput.value.trim());
-                window.location.href = `flyers-reading-writing-1.html?name=${userName}`;
+                // --- THIS LINK IS NOW CORRECT FOR MOVERS ---
+                window.location.href = `movers-reading-writing-1.html?name=${userName}`;
             });
         });
     </script>
