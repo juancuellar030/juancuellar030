@@ -939,12 +939,12 @@ body.page-movers::before {
 }
 
 /* --- NEW: Background for the Starters test list hub --- */
-body.page-movers-hub::before {
+body.page-starters-hub::before {
     background-image: url('images/starters-tests-background.svg');
 }
 
 /* --- NEW: Background for all general Starters tests --- */
-body.page-movers::before {
+body.page-starters::before {
     background-image: url('images/starters-background.svg');
 }
 
