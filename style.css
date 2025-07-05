@@ -1020,6 +1020,7 @@ body.page-flyers-hub::before {
 .back-to-menu-link {
     font-size: 1em;
     font-weight: 600;
+    top: 35px;
     color: #3f51b5;
     text-decoration: none;
     transition: color 0.2s ease;
