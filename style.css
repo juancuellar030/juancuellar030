@@ -1015,7 +1015,7 @@ body.page-flyers-hub::before {
     left: 0;
     
     /* Position it from the BOTTOM of the header, just above the border */
-    bottom: 25px; /* You can adjust this value (e.g., 20px, 30px) */
+    bottom: 35px; /* You can adjust this value (e.g., 20px, 30px) */
 
     /* Your original styling */
     font-size: 1em;
