@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>A2 Flyers Practice Tests</title>
-    <link rel="stylesheet" href="style.css?v=8">
+    <link rel="stylesheet" href="style.css?v=9"> <!-- I've incremented the version number for you -->
 </head>
 <body class="page-flyers page-flyers-hub">
 
@@ -15,26 +15,27 @@
                 <a href="index.html" class="back-to-menu-link">← Back to All Levels</a>
             </header>
 
-            <div class="test-list-container">
-                <!-- Test 1 -->
-                <div class="test-list-item">
-                    <h3>Flyers Test 1</h3>
-                    <p>A complete practice test including Listening and Reading & Writing sections.</p>
-                    <div class="test-list-buttons">
-                        <!-- This is the single button that now points to the new menu -->
-                        <a href="flyers-test-1-menu.html" class="nav-btn">Start Test</a>
-                    </div>
-                </div>
-            
+            <!-- This is the new grid container that replaces the old list -->
+            <div class="test-grid-container">
+                <!-- Test 1 (Active) -->
+                <a href="flyers-test-1-menu.html" class="nav-btn">Test 1</a>
+
                 <!-- Test 2 (Coming Soon) -->
-                <div class="test-list-item disabled">
-                    <h3>Flyers Test 2 (Coming Soon)</h3>
-                    <p>A complete practice test including Listening and Reading & Writing sections.</p>
-                    <div class="test-list-buttons">
-                        <a href="#" class="nav-btn" disabled>Start Test</a>
-                    </div>
-                </div>
+                <a href="#" class="nav-btn disabled-btn">Test 2</a>
+
+                <!-- Test 3 (Coming Soon) -->
+                <a href="#" class="nav-btn disabled-btn">Test 3</a>
+
+                <!-- Test 4 (Coming Soon) -->
+                <a href="#" class="nav-btn disabled-btn">Test 4</a>
+                
+                <!-- Add as many more disabled buttons as you like -->
+                <a href="#" class="nav-btn disabled-btn">Test 5</a>
+                <a href="#" class="nav-btn disabled-btn">Test 6</a>
+                <a href="#" class="nav-btn disabled-btn">Test 7</a>
+                <a href="#" class="nav-btn disabled-btn">Test 8</a>
             </div>
+
         </div>
     </div>
 </body>
