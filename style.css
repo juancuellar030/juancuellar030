@@ -1011,9 +1011,7 @@ body.page-flyers-hub::before {
 .back-to-menu-link {
     position: absolute;
     left: 0;
-    top: 50%;
-    transform: translateY(-50%); /* This vertically centers the link */
-
+    top: 35px; 
     font-size: 1em;
     font-weight: 600;
     color: #3f51b5;
