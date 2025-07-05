@@ -104,10 +104,9 @@ header {
 
 header h1 {
     position: relative;
-    top: 25px; /* You can adjust this value (e.g., 10px, 20px) to get the perfect spacing */
     font-size: 2.2em; /* Larger font size */
     color: #1a237e;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
 }
 
 header p {
