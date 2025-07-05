@@ -95,16 +95,25 @@ body {
 
 /* --- Header --- */
 header {
-    text-align: center;
+    /* These three lines are the new Flexbox layout */
+    display: flex;
+    justify-content: space-between; /* Pushes items to opposite ends */
+    align-items: center;          /* Vertically aligns them */
+
+    /* These are your original styles, kept for consistency */
     border-bottom: 1px solid #e0e0e0;
-    padding-bottom: 20px; /* Adjusted padding */
-    margin-bottom: 30px; /* Adjusted margin */
+    padding-bottom: 20px;
+    margin-bottom: 30px;
     position: relative;
 }
 
 header h1 {
-    position: relative;
-    font-size: 2.2em; /* Larger font size */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+
+    /* --- Your existing styles below remain unchanged --- */
+    font-size: 2.2em;
     color: #1a237e;
     margin-bottom: 15px;
 }
@@ -1009,9 +1018,6 @@ body.page-flyers-hub::before {
 
 /* --- Back to Menu Link Style --- */
 .back-to-menu-link {
-    position: absolute;
-    left: 0;
-    top: 35px; 
     font-size: 1em;
     font-weight: 600;
     color: #3f51b5;
