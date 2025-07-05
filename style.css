@@ -1456,31 +1456,30 @@ body.page-flyers-hub::before {
     background-color: #4aa23c;
 }
 
-/* --- Test List Hub Page Styles --- */
-.test-list-container {
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
+/* ========================================================== */
+/*           TEST SELECTION GRID (e.g., Flyers Hub)         */
+/* ========================================================== */
+
+.test-grid-container {
+    display: grid;
+    /* This creates a responsive grid. It will fit as many columns as possible
+       with a minimum width of 150px each, perfect for different screen sizes. */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px; /* Sets the space between the buttons */
+    padding-top: 20px; /* Adds some space below the header */
 }
 
-.test-list-item {
-    background-color: #f9f9f9;
-    border: 1px solid #e0e0e0;
-    border-radius: 10px;
-    padding: 25px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+/* We can use the existing .nav-btn class for our buttons.
+   This rule just adjusts the padding to make them look more uniform in the grid. */
+.test-grid-container .nav-btn {
+    padding: 20px;
+    font-size: 1.2em;
+    /* The primary purple color and hover effects will be inherited automatically! */
 }
 
 .test-list-item h3 {
     margin-top: 0;
     color: #1a237e;
-}
-
-.test-list-buttons {
-    margin-top: 20px;
-    display: flex;
-    gap: 15px;
-    flex-wrap: wrap; /* Allows buttons to stack on small screens */
 }
 
 .test-list-item.disabled {
