@@ -297,6 +297,14 @@ document.addEventListener('DOMContentLoaded', () => {
             finalResultsDisplay.innerHTML = resultsHTML;
             finalResultsDisplay.className = percentage === 100 ? 'correct' : (percentage >= 50 ? 'partial' : 'incorrect');
             
+            // <<< ADD THIS LINE AND THE LOOP BELOW >>>
+            document.querySelector('.test-container').classList.add('in-review-mode');
+            
+            // Also, explicitly disable all text inputs for good measure
+            document.querySelectorAll('input.text-answer, input.letter-box').forEach(input => {
+                input.disabled = true;
+            });
+            
             document.getElementById('check-all-listening-answers-btn').style.display = 'none';
             document.querySelectorAll('.test-section').forEach(section => {
                 if (section.id.startsWith('listening-part')) {
