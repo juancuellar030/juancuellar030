@@ -2078,3 +2078,38 @@ body.page-flyers-hub::before {
 #rw-part6 .story-input[readonly] {
     width: auto; /* Allow readonly example to size to its content */
 }
+
+/* ============================================= */
+/*          REVIEW MODE LOCKDOWN STYLES          */
+/* ============================================= */
+
+/*
+ This is the key property. It makes elements ignore mouse clicks,
+ drags, and hover events, effectively "freezing" them.
+*/
+.in-review-mode .draggable-name,
+.in-review-mode .option-card,
+.in-review-mode #part5-interactive-container,
+.in-review-mode .color-palette,
+.in-review-mode .write-tool,
+.in-review-mode .eraser-tool {
+    pointer-events: none;
+}
+
+/* 
+ For drag and drop, also remove the "grab" cursor to show
+ that the items are no longer interactive.
+*/
+.in-review-mode .draggable-name {
+    cursor: default;
+}
+
+/* 
+ When inputs are disabled, they often get a default faded look.
+ You can style them to match your feedback colors if needed,
+ but disabling them is the most important part.
+*/
+.in-review-mode input:disabled {
+    /* Optional: Add custom styling for disabled inputs if you want */
+    background-color: #f0f0f0; /* Example: a light grey background */
+}
