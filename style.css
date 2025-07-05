@@ -928,6 +928,16 @@ body.page-flyers-hub::before {
     background-image: url('images/flyers-tests-background.svg'); /* Your new background */
 }
 
+/* --- NEW: Background for the Movers test list hub --- */
+body.page-movers-hub::before {
+    background-image: url('images/movers-tests-background.svg');
+}
+
+/* --- NEW: Background for all general Movers tests --- */
+body.page-movers::before {
+    background-image: url('images/movers-background.svg');
+}
+
 /* --- Animated Mascot Styles --- */
 
 /* 1. Define the "slide in from right" animation */
