@@ -83,10 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
         draggable.addEventListener('dragstart', (e) => {
             draggedItem = e.target;
             setTimeout(() => e.target.classList.add('dragging'), 0);
+            
+            document.body.classList.add('is-dragging');
         });
         draggable.addEventListener('dragend', () => {
             draggedItem?.classList.remove('dragging');
             draggedItem = null;
+
+            document.body.classList.remove('is-dragging');
         });
     });
     document.querySelectorAll('.drop-target, .names-pool').forEach(target => {
