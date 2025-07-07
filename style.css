@@ -2170,3 +2170,61 @@ body.page-starters::before {
 .test-grid-container .nav-btn:nth-child(7) { animation-delay: 0.7s; }
 .test-grid-container .nav-btn:nth-child(8) { animation-delay: 0.8s; }
 /* Add more lines here if you add more buttons */
+
+/* ========================================================== */
+/*           CUSTOM MOUSE CURSORS                             */
+/* ========================================================== */
+
+/* --- 1. The Default (Arrow) Cursor --- */
+/* Applies to the general page background and non-interactive elements. */
+body {
+    /* Hotspot for a standard arrow is the top-left corner */
+    cursor: url('images/cursor.svg') 0 0, auto;
+}
+
+/* --- 2. The Pointer (Hand) Cursor --- */
+/* Applies to all links, buttons, and clickable elements. */
+a,
+button,
+.nav-btn,
+.animated-btn,
+.option-card,
+.palette-color,
+.write-tool,
+.eraser-tool,
+.control-btn,
+.back-to-menu-link,
+.progress-bar-wrapper {
+    /* IMPORTANT: Adjust '4 4' to the hotspot of your pointer image! */
+    cursor: url('images/pointer.svg') 4 4, pointer;
+}
+
+/* --- 3. The Text (I-Beam) Cursor --- */
+/* Applies to text inputs where the user can type. */
+input[type="text"],
+input[type="number"],
+textarea {
+    /* An I-beam's hotspot is usually in the center. For a 32x32 image, 16 16 is a good start. */
+    cursor: url('images/text.svg') 16 16, text;
+}
+
+/* --- 4. The Grabbing Cursor --- */
+/* Applies when actively dragging an item. */
+.draggable-name.dragging {
+    /* A grabbing hand's hotspot is usually the center. */
+    cursor: url('images/grabbing.svg') 16 16, grabbing;
+}
+
+/* --- 5. The Not-Allowed Cursor --- */
+/* Applies to disabled buttons and elements. */
+[disabled],
+.disabled-btn {
+    cursor: url('images/not-allowed.svg'), not-allowed;
+}
+
+/* --- 6. The Wait/Loading Cursor --- */
+/* This is a utility. Add class="is-loading" to the <body> with JS when something is loading. */
+.is-loading {
+    /* A spinner's hotspot is the center. */
+    cursor: url('images/wait.svg') 16 16, wait;
+}
