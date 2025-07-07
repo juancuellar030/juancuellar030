@@ -2208,11 +2208,11 @@ textarea {
     cursor: url('images/text.svg') 16 16, text;
 }
 
-/* --- 4. The Grabbing Cursor --- */
-/* Applies when actively dragging an item. */
-.draggable-name.dragging {
-    /* A grabbing hand's hotspot is usually the center. */
-    cursor: url('images/grabbing.svg') 16 16, grabbing;
+/* --- 4. The Grabbing Cursor (Correct Method) --- */
+/* When the body has the 'is-dragging' class, change the cursor EVERYWHERE. */
+/* This overrides the browser's default drag-and-drop cursor. */
+body.is-dragging {
+    cursor: url('images/grabbing.svg') 16 16, grabbing !important;
 }
 
 /* --- 5. The Not-Allowed Cursor --- */
