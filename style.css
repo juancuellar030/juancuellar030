@@ -2223,3 +2223,28 @@ body.is-dragging * {
 .is-loading {
     cursor: url('images/wait.svg') 16 16, wait;
 }
+
+/* ========================================================== */
+/*           MAIN MENU BUTTON ENTRANCE ANIMATION              */
+/* ========================================================== */
+
+/* 1. Target the buttons specifically on the main menu page */
+/* This won't interfere with any other buttons on other pages. */
+.page-menu .animated-btn {
+    /* Make the buttons transparent by default so they can be faded in */
+    opacity: 0;
+
+    /* Apply the animation we already created */
+    animation-name: fadeInUp;
+    animation-duration: 0.6s; /* A slightly longer duration feels better for big buttons */
+    animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1); /* A smooth easing curve */
+    
+    /* This makes sure the buttons stay visible after the animation is done */
+    animation-fill-mode: forwards;
+}
+
+/* 2. Set a different animation delay for each button */
+/* This creates the cool, staggered entrance effect. */
+.page-menu .animated-btn:nth-child(1) { animation-delay: 0.2s; } /* Starters button */
+.page-menu .animated-btn:nth-child(2) { animation-delay: 0.4s; } /* Movers button */
+.page-menu .animated-btn:n-child(3) { animation-delay: 0.6s; } /* Flyers button */
