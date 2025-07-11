@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('score', score);
         formData.append('timeSpent', timeSpent);
         formData.append('testType', 'Reading & Writing');
-        formData.append('story', story);
+        formData.append('story', story); // <<< This line will now work correctly
     
         fetch(googleFormURL, {
             method: 'POST',
