@@ -194,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ==========================================================
-    //          NEW - AI STORY CHECKER LOGIC (FRONTEND)
+    //          AI STORY CHECKER LOGIC (UPGRADED FOR SCORING)
     // ==========================================================
     const checkStoryBtn = document.getElementById('check-story-btn');
     const storyInputForAI = document.getElementById('rw-part7-story-input');
@@ -205,34 +205,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const storyText = storyInputForAI.value.trim();
     
             if (storyText.length < 10) {
-                aiFeedbackDisplay.textContent = "Please write a little more before checking the story.";
+                aiFeedbackDisplay.innerHTML = "Please write a little more before checking the story.";
                 return;
             }
     
             checkStoryBtn.disabled = true;
             checkStoryBtn.textContent = 'The AI is thinking...';
-            aiFeedbackDisplay.innerHTML = '<em>Getting feedback...</em>';
+            aiFeedbackDisplay.innerHTML = '<em>Getting feedback and score...</em>';
     
             try {
-                // --- THIS IS THE CORRECTED LINE ---
                 const response = await fetch('/.netlify/functions/check-story', {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
+                    headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ storyText: storyText }),
                 });
     
-                if (!response.ok) {
-                    // Now we can try to get a more specific error message
-                    const errorData = await response.json().catch(() => null); // Gracefully handle non-JSON responses
-                    throw new Error(errorData?.error || 'The AI checker returned an error.');
-                }
+                if (!response.ok) throw new Error('The AI checker returned an error.');
     
                 const data = await response.json();
                 const aiFeedback = data.feedback;
+                const aiScore = data.score; // <<< We now get the score!
     
-                aiFeedbackDisplay.textContent = aiFeedback;
+                // Display both the score and the feedback
+                aiFeedbackDisplay.innerHTML = `<strong>Score: ${aiScore} / 5</strong><br>${aiFeedback}`;
     
             } catch (error) {
                 aiFeedbackDisplay.textContent = `Sorry, an error occurred: ${error.message}`;
