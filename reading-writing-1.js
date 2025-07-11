@@ -193,6 +193,57 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // ==========================================================
+    //          NEW - AI STORY CHECKER LOGIC (FRONTEND)
+    // ==========================================================
+    const checkStoryBtn = document.getElementById('check-story-btn');
+    const storyInputForAI = document.getElementById('rw-part7-story-input');
+    const aiFeedbackDisplay = document.getElementById('ai-feedback-display'); // We will add this div in the HTML
+    
+    if (checkStoryBtn && storyInputForAI && aiFeedbackDisplay) {
+        checkStoryBtn.addEventListener('click', async () => {
+            const storyText = storyInputForAI.value.trim();
+    
+            if (storyText.length < 10) {
+                aiFeedbackDisplay.textContent = "Please write a little more before checking the story.";
+                return;
+            }
+    
+            // --- Provide instant feedback to the user ---
+            checkStoryBtn.disabled = true;
+            checkStoryBtn.textContent = 'The AI is thinking...';
+            aiFeedbackDisplay.innerHTML = '<em>Getting feedback...</em>';
+    
+            try {
+                // This is the API call to our own secure backend function
+                const response = await fetch('/api/check-story', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ storyText: storyText }),
+                });
+    
+                if (!response.ok) {
+                    throw new Error('Something went wrong with the AI checker.');
+                }
+    
+                const data = await response.json();
+                const aiFeedback = data.feedback;
+    
+                // Display the AI's feedback
+                aiFeedbackDisplay.textContent = aiFeedback;
+    
+            } catch (error) {
+                aiFeedbackDisplay.textContent = `Sorry, an error occurred: ${error.message}`;
+            } finally {
+                // --- Re-enable the button when done ---
+                checkStoryBtn.disabled = false;
+                checkStoryBtn.textContent = 'Check My Story (AI)';
+            }
+        });
+    }
+    
     // --- Answer Saving ---
     // Part 1
     document.querySelectorAll('.rw-part1-container input').forEach(input => {
