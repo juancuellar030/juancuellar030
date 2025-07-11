@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================
     const checkStoryBtn = document.getElementById('check-story-btn');
     const storyInputForAI = document.getElementById('rw-part7-story-input');
-    const aiFeedbackDisplay = document.getElementById('ai-feedback-display'); // We will add this div in the HTML
+    const aiFeedbackDisplay = document.getElementById('ai-feedback-display');
     
     if (checkStoryBtn && storyInputForAI && aiFeedbackDisplay) {
         checkStoryBtn.addEventListener('click', async () => {
@@ -209,14 +209,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 return;
             }
     
-            // --- Provide instant feedback to the user ---
             checkStoryBtn.disabled = true;
             checkStoryBtn.textContent = 'The AI is thinking...';
             aiFeedbackDisplay.innerHTML = '<em>Getting feedback...</em>';
     
             try {
-                // This is the API call to our own secure backend function
-                const response = await fetch('/api/check-story', {
+                // --- THIS IS THE CORRECTED LINE ---
+                const response = await fetch('/.netlify/functions/check-story', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -225,19 +224,19 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
     
                 if (!response.ok) {
-                    throw new Error('Something went wrong with the AI checker.');
+                    // Now we can try to get a more specific error message
+                    const errorData = await response.json().catch(() => null); // Gracefully handle non-JSON responses
+                    throw new Error(errorData?.error || 'The AI checker returned an error.');
                 }
     
                 const data = await response.json();
                 const aiFeedback = data.feedback;
     
-                // Display the AI's feedback
                 aiFeedbackDisplay.textContent = aiFeedback;
     
             } catch (error) {
                 aiFeedbackDisplay.textContent = `Sorry, an error occurred: ${error.message}`;
             } finally {
-                // --- Re-enable the button when done ---
                 checkStoryBtn.disabled = false;
                 checkStoryBtn.textContent = 'Check My Story (AI)';
             }
