@@ -81,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         formData.append('score', score);
         formData.append('timeSpent', timeSpent);
         formData.append('testType', 'Reading & Writing');
+        formData.append('story', story);
     
         fetch(googleFormURL, {
             method: 'POST',
@@ -168,8 +169,9 @@ document.addEventListener('DOMContentLoaded', () => {
         });
         document.querySelector('.test-container')?.scrollTo({ top: 0, behavior: 'smooth' });
     
-        // --- 5. Submit to Google ---
-        submitResultsToGoogle(userName, `${correctCount}/${totalQuestions}`, formattedTimeSpent);
+         // --- 5. Submit to Google (UPDATED) ---
+        const storyText = document.getElementById('rw-part7-story-input').value.trim(); // <<< Get the story text
+        submitResultsToGoogle(userName, `${correctCount}/${totalQuestions}`, formattedTimeSpent, storyText); // <<< Pass it here
     }
 
     // ==========================================================
