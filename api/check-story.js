@@ -1,30 +1,36 @@
-// This is the corrected code for: /api/check-story.js
+// This is the new, upgraded code for: /api/check-story.js
 
 import ModelClient, { isUnexpected } from "@azure-rest/ai-inference";
 import { AzureKeyCredential } from "@azure/core-auth";
 
-// This securely uses the Environment Variable you set in Netlify
 const token = process.env.GITHUB_TOKEN;
 const endpoint = "https://models.github.ai/inference";
 const model = "xai/grok-3-mini";
 
-// The handler now only needs the 'request' object
+// This is the main function that runs when your frontend calls '/.netlify/functions/check-story'
 export default async function handler(request) {
     try {
-        // Get the student's story from the request body
         const { storyText } = await request.json();
 
-        const client = ModelClient(
-            endpoint,
-            new AzureKeyCredential(token),
-        );
+        const client = ModelClient(endpoint, new AzureKeyCredential(token));
 
-        const systemPrompt = `You are a friendly and encouraging English teacher for a 10-year-old student. 
-        A student has written the following story. Your task is to:
-        1. Check for spelling and grammar mistakes.
-        2. Give one simple, positive suggestion for how to make the story more exciting or detailed.
-        3. Keep your entire feedback under 50 words.
-        Start your feedback with a positive comment like "Great job!" or "Nice story!".`;
+        const systemPrompt = `You are an expert Cambridge English examiner providing feedback on a story written by a 10-year-old student for the A2 Flyers test.
+        
+        First, evaluate the student's story based on the following official scoring rubric:
+        - Score 5: Describes a progression of events AND is based on all three pictures AND is easy to understand.
+        - Score 4: Describes a progression of events AND is based on all three pictures BUT requires some effort to understand.
+        - Score 3: Describes a progression of events AND addresses at least one picture OR addresses all three pictures but is very difficult to understand.
+        - Score 2: Includes at least one comprehensible phrase related to the pictures.
+        - Score 1: Includes some discernible English words.
+        - Score 0: Question unattempted or totally incomprehensible.
+
+        Second, provide brief, helpful, and encouraging feedback (under 50 words) for the student. The feedback should start with a positive comment, then mention one spelling/grammar correction, and one idea to make the story more exciting.
+
+        Your response MUST be a valid JSON object with exactly two keys:
+        1. "score": an integer from 0 to 5.
+        2. "feedback": a string containing your helpful feedback.
+        
+        Example response format: {"score": 4, "feedback": "Great start! Remember 'firefighter' is one word. Try describing how the children felt to make it more exciting."}`;
 
         const aiResponse = await client.path("/chat/completions").post({
             body: {
@@ -32,9 +38,11 @@ export default async function handler(request) {
                     { role: "system", content: systemPrompt },
                     { role: "user", content: storyText }
                 ],
-                temperature: 0.7,
+                temperature: 0.5, // Lower temperature for more consistent scoring
                 top_p: 1,
-                model: model
+                model: model,
+                // Tell the model we want a JSON response
+                response_format: { type: "json_object" } 
             }
         });
 
@@ -42,18 +50,15 @@ export default async function handler(request) {
             throw new Error(aiResponse.body.error?.message || "The AI model returned an unexpected response.");
         }
 
-        const feedback = aiResponse.body.choices[0].message.content;
+        const feedbackJson = aiResponse.body.choices[0].message.content;
 
-        // --- THIS IS THE CORRECTED SUCCESS RESPONSE ---
-        // We create a new Response object, stringify the JSON, and set the status and headers.
-        return new Response(JSON.stringify({ feedback: feedback }), {
+        return new Response(feedbackJson, {
             status: 200,
             headers: { 'Content-Type': 'application/json' },
         });
 
     } catch (error) {
-        // --- THIS IS THE CORRECTED ERROR RESPONSE ---
-        return new Response(JSON.stringify({ error: error.message }), {
+        return new Response(JSON.stringify({ score: 0, feedback: `An error occurred: ${error.message}` }), {
             status: 500,
             headers: { 'Content-Type': 'application/json' },
         });
