@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flyers Reading & Writing Test 1</title>
+    <link rel="stylesheet" href="style.css?v=5">
+</head>
+<body class="page-flyers">
+    
+    <div class="content-wrapper">
+        <div class="test-container">
+            <header>
+                <h1>A2 Flyers</h1>
+                <a href="flyers-menu.html" class="back-to-menu-link">← Back to Flyers Menu</a>
+            </header>
+            
+            <div id="timer-display">00:00</div>
+            
+            <!-- Reading & Writing Part 1 -->
+            <section id="rw-part1" class="test-section active">
+                <h3>Part 1 (10 Questions)</h3>
+                <p class="part-instructions">Look and read. Choose the correct words and write them on the lines.</p>
+                
+                <div class="question-content">
+                    <!-- This is the container for your SVG and the inputs -->
+                    <div class="rw-part1-container">
+                        <!-- 1. The SVG background image -->
+                        <img src="images/reading-and-writing-part1.svg" alt="Reading and Writing Part 1 exercise sheet">
+                        
+                        <!-- 2. The input fields that will be placed on top -->
+                        <input type="text" id="rw1-q1" autocomplete="off">
+                        <input type="text" id="rw1-q2" autocomplete="off">
+                        <input type="text" id="rw1-q3" autocomplete="off">
+                        <input type="text" id="rw1-q4" autocomplete="off">
+                        <input type="text" id="rw1-q5" autocomplete="off">
+                        <input type="text" id="rw1-q6" autocomplete="off">
+                        <input type="text" id="rw1-q7" autocomplete="off">
+                        <input type="text" id="rw1-q8" autocomplete="off">
+                        <input type="text" id="rw1-q9" autocomplete="off">
+                        <input type="text" id="rw1-q10" autocomplete="off">
+                    </div>
+            
+                <div class="navigation-buttons">
+                    <a href="flyers-test-1-menu.html" class="nav-btn prev-btn">Back to Menu</a>
+                    <button class="nav-btn next-btn" data-target="rw-part2">Next Part</button>
+                </div>
+            </section>
+
+            <!--     Reading & Writing Part 2 (HTML Text Method) - FINAL    -->
+            <section id="rw-part2" class="test-section hidden">
+                <h3>Part 2 (5 Questions)</h3>
+                <p class="part-instructions">Read the conversation and choose the best answer. Write a letter (A-H) for each answer.</p>
+            
+                <div class="question-content">
+                    
+                    <!-- The Main Image -->
+                    <img src="images/rw-flyers-part2-michael-and-emma.svg" alt="Michael and Emma talking on the phone" class="question-image">
+            
+                    <!-- The Conversation Block -->
+                    <div class="rw-part2-conversation-text">
+                    <div class="rw-part2-conversation-text non-selectable">
+                        
+                        <!-- Example Turn -->
+                        <div class="convo-turn">
+                            <div class="speaker"><img src="images/michael-avatar.svg" alt="Michael"><span>Michael:</span></div>
+                            <div class="line">Did you do anything special for your birthday, Emma?</div>
+                        </div>
+                        <div class="convo-turn">
+                            <div class="speaker"><img src="images/emma-avatar.svg" alt="Emma"><span>Emma:</span></div>
+                            <div class="line"><input type="text" class="letter-box" id="rw2-example" value="D" readonly></div>
+                        </div>
+                        
+                        <!-- Question 1 -->
+                        <div class="convo-turn">
+                            <div class="speaker"><span class="q-number">1</span><img src="images/michael-avatar.svg" alt="Michael"><span>Michael:</span></div>
+                            <div class="line">Cool! Pizza's my favourite food!</div>
+                        </div>
+                        <div class="convo-turn">
+                            <div class="speaker"><img src="images/emma-avatar.svg" alt="Emma"><span>Emma:</span></div>
+                            <div class="line"><input type="text" class="letter-box" id="rw2-q1" maxlength="1" autocomplete="off"></div>
+                        </div>
+                        
+                        <!-- Question 2 -->
+                        <div class="convo-turn">
+                            <div class="speaker"><span class="q-number">2</span><img src="images/michael-avatar.svg" alt="Michael"><span>Michael:</span></div>
+                            <div class="line">What do you like on top of your pizza?</div>
+                        </div>
+                        <div class="convo-turn">
+                            <div class="speaker"><img src="images/emma-avatar.svg" alt="Emma"><span>Emma:</span></div>
+                            <div class="line"><input type="text" class="letter-box" id="rw2-q2" maxlength="1" autocomplete="off"></div>
+                        </div>
+            
+                        <!-- Question 3 -->
+                        <div class="convo-turn">
+                            <div class="speaker"><span class="q-number">3</span><img src="images/michael-avatar.svg" alt="Michael"><span>Michael:</span></div>
+                            <div class="line">I like different things on my pizza, like pineapple!</div>
+                        </div>
+                        <div class="convo-turn">
+                            <div class="speaker"><img src="images/emma-avatar.svg" alt="Emma"><span>Emma:</span></div>
+                            <div class="line"><input type="text" class="letter-box" id="rw2-q3" maxlength="1" autocomplete="off"></div>
+                        </div>
+            
+                        <!-- Question 4 -->
+                        <div class="convo-turn">
+                            <div class="speaker"><span class="q-number">4</span><img src="images/michael-avatar.svg" alt="Michael"><span>Michael:</span></div>
+                            <div class="line">So, do you often have pizza?</div>
+                        </div>
+                        <div class="convo-turn">
+                            <div class="speaker"><img src="images/emma-avatar.svg" alt="Emma"><span>Emma:</span></div>
+                            <div class="line"><input type="text" class="letter-box" id="rw2-q4" maxlength="1" autocomplete="off"></div>
+                        </div>
+            
+                        <!-- Question 5 -->
+                        <div class="convo-turn">
+                            <div class="speaker"><span class="q-number">5</span><img src="images/michael-avatar.svg" alt="Michael"><span>Michael:</span></div>
+                            <div class="line">Mum says we can make pizza tomorrow. Come to our house after school if you're not busy.</div>
+                        </div>
+                        <div class="convo-turn">
+                            <div class="speaker"><img src="images/emma-avatar.svg" alt="Emma"><span>Emma:</span></div>
+                            <div class="line"><input type="text" class="letter-box" id="rw2-q5" maxlength="1" autocomplete="off"></div>
+                        </div>
+            
+                    </div>
+            
+                    <!-- The List of Responses (as real text) -->
+                    <div class="rw-part2-responses-text">
+                    <div class="rw-part2-responses-text non-selectable">
+                        <ul>
+                            <li><span>A</span> Nothing much. Usually just some tomato and olives.</li>
+                            <li><span>B</span> No. Only once a month because my little brother hates it.</li>
+                            <li><span>C</span> I'm sorry, I can't. We're having dinner at the moment.</li>
+                            <li><span>D</span> My grandparents took me to my favourite pizza restaurant, actually. <strong>(Example)</strong></li>
+                            <li><span>E</span> Really? That's strange! I hate fruit on my pizza.</li>
+                            <li><span>F</span> That would be brilliant, but I'll have to speak to my mum first.</li>
+                            <li><span>G</span> It's mine, too. I prefer it to everything else.</li>
+                            <li><span>H</span> Yes, we did. We found out about it yesterday.</li>
+                        </ul>
+                    </div>
+                </div>
+            
+                <div class="navigation-buttons">
+                    <button class="nav-btn prev-btn" data-target="rw-part1">Back</button>
+                    <button class="nav-btn next-btn" data-target="rw-part3">Next Part</button>
+                </div>
+            </section>
+
+            <!-- Reading & Writing Part 3 -->
+            <section id="rw-part3" class="test-section hidden">
+                <h3>Part 3 (6 Questions)</h3>
+                <p class="part-instructions">Read the story. Choose a word from the box. Write the correct word in the lines.</p>
+            
+                <div class="question-content">
+                    
+                    <img src="images/rw-holly-beach.svg" alt="Holly at the beach" class="question-image">
+                    
+                    <!-- 1. The Word Box -->
+                    <div class="rw-part3-word-box">
+                        <span>excited</span>
+                        <span>surprise</span>
+                        <span>late</span>
+                        <span>bored</span>
+                        <span>deepest</span>
+                        <span>somewhere</span>
+                        <span>worst</span>
+                        <span>ago</span>
+                        <span>explored</span>
+                        <span>traffic</span>
+                    </div>
+            
+                    <!-- 2. The Story Container -->
+                    <div class="rw-part3-story-container">
+                        <img src="images/rw-holly-story.svg" alt="Story about Holly's journey to the beach">
+                        
+                        <!-- Input fields placed over the SVG -->
+                        <input type="text" class="story-input" id="rw3-example" value="excited" readonly>
+                        <input type="text" class="story-input" id="rw3-q1" autocomplete="off">
+                        <input type="text" class="story-input" id="rw3-q2" autocomplete="off">
+                        <input type="text" class="story-input" id="rw3-q3" autocomplete="off">
+                        <input type="text" class="story-input" id="rw3-q4" autocomplete="off">
+                        <input type="text" class="story-input" id="rw3-q5" autocomplete="off">
+                    </div>
+            
+                    <!-- 3. The Final "Best Title" Question -->
+                    <div class="rw-part3-title-question">
+                        <h4>Now choose the best name for the story.</h4>
+                        <ul class="radio-options-list">
+                            <li>
+                                <input type="radio" id="rw3-q6-a" name="rw3-q6" value="grandmas_house">
+                                <label for="rw3-q6-a">Grandma's new house</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="rw3-q6-b" name="rw3-q6" value="hollys_journey">
+                                <label for="rw3-q6-b">Holly's long journey</label>
+                            </li>
+                            <li>
+                                <input type="radio" id="rw3-q6-c" name="rw3-q6" value="dads_car">
+                                <label for="rw3-q6-c">Dad's fast car</label>
+                            </li>
+                        </ul>
+                    </div>
+            
+                </div>
+            
+                <div class="navigation-buttons">
+                    <button class="nav-btn prev-btn" data-target="rw-part2">Back</button>
+                    <button class="nav-btn next-btn" data-target="rw-part4">Next Part</button>
+                </div>
+            </section>
+            
+            <!-- Reading & Writing Part 4 (HTML Text Method) -->
+            <section id="rw-part4" class="test-section hidden">
+                <h3>Part 4 (10 Questions)</h3>
+                <p class="part-instructions">Read the story and choose the best word for each space.</p>
+            
+                <div class="question-content">
+                    
+                    <!-- The Top Image - Uses the class for consistent styling -->
+                    <img src="images/rw-tortoises-picture.svg" alt="A picture of two tortoises" class="question-image">
+            
+                    <!-- The Story Container (as real text) -->
+                    <div class="rw-part4-story-text non-selectable">
+                        <p>
+                            Tortoises are animals that have four legs and a hard shell
+                            <!-- Example Dropdown -->
+                            <select class="inline-select" id="rw4-example" disabled>
+                                <option value="on" selected>on</option>
+                            </select>
+                            their backs. There isn’t only one kind of tortoise and
+                            <!-- Question 1 -->
+                            <select class="inline-select" id="rw4-q1">
+                                <option value="" disabled selected>...</option>
+                                <option value="each">each</option>
+                                <option value="another">another</option>
+                                <option value="both">both</option>
+                            </select>
+                            tortoise’s shell is a different shape. They have short legs and toes, and they do not have
+                            <!-- Question 2 -->
+                            <select class="inline-select" id="rw4-q2">
+                                <option value="" disabled selected>...</option>
+                                <option value="every">every</option>
+                                <option value="any">any</option>
+                                <option value="no">no</option>
+                            </select>
+                            teeth.
+                        </p>
+                        <p>
+                            They pull their heads and necks inside their shells when they
+                            <!-- Question 3 -->
+                            <select class="inline-select" id="rw4-q3">
+                                <option value="" disabled selected>...</option>
+                                <option value="feel">feel</option>
+                                <option value="feels">feels</option>
+                                <option value="felt">felt</option>
+                            </select>
+                            afraid of something.
+                        </p>
+                        <p>
+                            Tortoises eat plants, but there are some tortoises
+                            <!-- Question 4 -->
+                            <select class="inline-select" id="rw4-q4">
+                                <option value="" disabled selected>...</option>
+                                <option value="which">which</option>
+                                <option value="what">what</option>
+                                <option value="where">where</option>
+                            </select>
+                            eat snails and birds. Tortoises like to sleep for
+                            <!-- Question 5 -->
+                            <select class="inline-select" id="rw4-q5">
+                                <option value="" disabled selected>...</option>
+                                <option value="many">many</option>
+                                <option value="such">such</option>
+                                <option value="most">most</option>
+                            </select>
+                            of the day.
+                        </p>
+                        <p>
+                            Some tortoises live
+                            <!-- Question 6 -->
+                            <select class="inline-select" id="rw4-q6">
+                                <option value="" disabled selected>...</option>
+                                <option value="during">during</option>
+                                <option value="until">until</option>
+                                <option value="through">through</option>
+                            </select>
+                            they are very old. A few live
+                            <!-- Question 7 -->
+                            <select class="inline-select" id="rw4-q7">
+                                <option value="" disabled selected>...</option>
+                                <option value="long">long</option>
+                                <option value="longer">longer</option>
+                                <option value="longest">longest</option>
+                            </select>
+                            than 100 years! And on some islands, there are very large tortoises.
+                            <!-- Question 8 -->
+                            <select class="inline-select" id="rw4-q8">
+                                <option value="" disabled selected>...</option>
+                                <option value="These">These</option>
+                                <option value="Them">Them</option>
+                                <option value="This">This</option>
+                            </select>
+                            tortoises have lots of food to eat,
+                            <!-- Question 9 -->
+                            <select class="inline-select" id="rw4-q9">
+                                <option value="" disabled selected>...</option>
+                                <option value="because">because</option>
+                                <option value="so">so</option>
+                                <option value="or">or</option>
+                            </select>
+                            the animals grow big.
+                            <!-- Question 10 -->
+                            <select class="inline-select" id="rw4-q10">
+                                <option value="" disabled selected>...</option>
+                                <option value="Soon">Soon</option>
+                                <option value="When">When</option>
+                                <option value="Perhaps">Perhaps</option>
+                            </select>
+                            the weather gets cold, tortoises go to sleep for months.
+                        </p>
+                    </div>
+                </div>
+            
+                <div class="navigation-buttons">
+                    <button class="nav-btn prev-btn" data-target="rw-part3">Back</button>
+                    <button class="nav-btn next-btn" data-target="rw-part5">Next Part</button>
+                </div>
+            </section>
+
+            <!-- Reading & Writing Part 5 -->
+            <section id="rw-part5" class="test-section hidden">
+                <h3>Part 5 (7 Questions)</h3>
+                <p class="part-instructions">Look at the picture and read the story. Write some words to complete the sentences about the story. You can use 1, 2, 3 or 4 words.</p>
+            
+                <div class="question-content">
+            
+                    <!-- The Top Image -->
+                    <img src="images/rw-part5-castle.svg" alt="Richard and his family at a castle" class="question-image">
+            
+                    <!-- The Story Text -->
+                    <div class="rw-part5-story-text non-selectable">
+                        <h4>The castle</h4>
+                        <p>Last weekend, Richard and his parents decided to visit a famous castle. They wanted to spend the day there, so Richard's dad prepared a picnic and Richard's mum put some umbrellas, a camera and all the other things they needed in their rucksacks. Then they went to the station to catch the train.</p>
+                        <p>The castle was enormous. 'I think this castle's very popular,' said Richard. 'How do you know?' asked Mum. 'Well, there are so many cars here,' answered Richard.</p>
+                        <p>Dad bought three tickets. A woman was waiting at the entrance to take them on a tour of the castle. 'There has been a castle here for more than six centuries,' the woman told them. They learned about the famous people who once lived in the castle and about the secret room there. Richard was really interested in that.</p>
+                        <p>'Has anyone ever found the room?' asked Richard.</p>
+                        <p>'Not yet,' laughed the woman.</p>
+                        <p>After that, they went outside to sit on the grass and have their picnic. But then it started to rain. 'Oh no!' said Mum.</p>
+                        <p>'It's OK, Mum. We can eat later. Let's go into the castle again and find the secret room. Come on – it'll be exciting!' said Richard.</p>
+                        <p>'OK,' laughed Mum. 'We can eat our picnic in the secret room!'</p>
+                    </div>
+            
+                        <!-- The Questions Block (Corrected HTML) -->
+                        <div class="rw-part5-questions-block">
+                            <h4>Examples</h4>
+                            <div class="question-item">
+                                <p>Richard went to visit a castle with his parents last <input type="text" class="story-input" value="weekend" readonly>.</p>
+                            </div>
+                            <div class="question-item">
+                                <p>Before they left, Richard's dad <input type="text" class="story-input" value="prepared a picnic" readonly> for everyone to eat.</p>
+                            </div>
+                        
+                            <h4>Questions</h4>
+                            <div class="question-item">
+                                <p>1. Richard and his parents carried all their things in their <input type="text" class="story-input" id="rw5-q1" autocomplete="off">.</p>
+                            </div>
+                            <div class="question-item">
+                                <p>2. The family travelled by <input type="text" class="story-input" id="rw5-q2" autocomplete="off"> to the castle.</p>
+                            </div>
+                            <div class="question-item">
+                                <p>3. When Richard saw lots of cars in the car park, he knew the castle was <input type="text" class="story-input" id="rw5-q3" autocomplete="off">.</p>
+                            </div>
+                            <div class="question-item">
+                                <p>4. They went <input type="text" class="story-input" id="rw5-q4" autocomplete="off"> of the castle and visited many of the old rooms.</p>
+                            </div>
+                            <div class="question-item">
+                                <p>5. A <input type="text" class="story-input" id="rw5-q5" autocomplete="off"> gave them some interesting information about the history of the castle.</p>
+                            </div>
+                            <div class="question-item">
+                                <p>6. While they were sitting on the <input type="text" class="story-input" id="rw5-q6" autocomplete="off"> outside, it began to rain.</p>
+                            </div>
+                            <div class="question-item">
+                                <p>7. Richard wanted to go into the castle again to look for the <input type="text" class="story-input" id="rw5-q7" autocomplete="off">.</p>
+                            </div>
+                        </div>
+            
+                </div>
+            
+                <div class="navigation-buttons">
+                    <button class="nav-btn prev-btn" data-target="rw-part4">Back</button>
+                    <button class="nav-btn next-btn" data-target="rw-part6">Next Part</button>
+                </div>
+            </section>           
+
+            <!-- Reading & Writing Part 6 (HTML Text Method) -->
+            <section id="rw-part6" class="test-section hidden">
+                <h3>Part 6 (5 Questions)</h3>
+                <p class="part-instructions">Read the diary page and write the missing words. Write one word on each line.</p>
+            
+                <div class="question-content">
+                    
+                    <!-- The Top Image -->
+                    <img src="images/rw-part6-shopping-centre.svg" alt="People at a shopping centre" class="question-image">
+            
+                    <!-- The Story Container (as real text) -->
+                    <div class="rw-part6-story-text non-selectable">
+                        <h4>Saturday 10th March</h4>
+                        <p>
+                            Today I went to the shopping centre <input type="text" class="story-input" value="with" readonly> my parents. I wanted to use the money that Grandpa gave <input type="text" class="story-input" id="rw6-q1" autocomplete="off"> to buy some new clothes for my school trip. I needed a new <input type="text" class="story-input" id="rw6-q2" autocomplete="off"> of trainers and some T-shirts. We went into lots of shops and I spent all the money <input type="text" class="story-input" id="rw6-q3" autocomplete="off"> some expensive trainers.
+                        </p>
+                        <p>
+                            In the evening, I took the dog for a <input type="text" class="story-input" id="rw6-q4" autocomplete="off"> in the park.
+                        </p>
+                        <p>
+                            <input type="text" class="story-input" id="rw6-q5" autocomplete="off"> that, we went home again and I watched a film on TV.
+                        </p>
+                    </div>
+            
+                </div>
+            
+                <div class="navigation-buttons">
+                    <button class="nav-btn prev-btn" data-target="rw-part5">Back</button>
+                    <!-- This now points to the final results page -->
+                    <button class="nav-btn next-btn" data-target="rw-part7">Next Part</button>
+                </div>
+            </section>
+            <!-- ========================================================== -->
+            <!--           START OF READING & WRITING PART 7 (CORRECTED)    -->
+            <!-- ========================================================== -->
+            
+            <section class="test-section hidden" id="rw-part7">
+                <h3>Part 7</h3>
+                <p class="part-instructions">
+                    Look at the three pictures. Write about this story. Write 20 or more words.
+                </p>
+            
+                <!-- The container for the three story pictures -->
+                <div class="rw-part7-pictures-container">
+                    <div class="story-picture-wrapper">
+                        <img src="images/part7_pic1.jpg" alt="Two children looking up at a cat stuck in a tree.">
+                    </div>
+                    <div class="story-picture-wrapper">
+                        <img src="images/part7_pic2.jpg" alt="The children see a fire engine arriving.">
+                    </div>
+                    <div class="story-picture-wrapper">
+                        <img src="images/part7_pic3.jpg" alt="A firefighter on a ladder rescues the cat from the tree.">
+                    </div>
+                </div>
+            
+                <!-- The main writing area for the student -->
+                <div class="writing-area">
+                    <textarea id="rw-part7-story-input" rows="8" placeholder="Write your story here..."></textarea>
+                    <div id="word-count-display">Words: 0 / 20</div>
+                </div>
+                
+                <!-- This button is for your future AI checker! -->
+                <div class="submission-area" style="text-align: center; margin-top: 20px;">
+                    <button id="check-story-btn" class="nav-btn">Check My Story (AI)</button>
+                </div>
+            
+                <!-- THIS IS THE NEW DIV FOR THE AI FEEDBACK -->
+                <div id="ai-feedback-display" style="margin-top: 20px; padding: 15px; border-radius: 8px; background-color: #f0f8ff; border: 1px solid #d1e7fd; min-height: 50px;">
+                    <!-- The AI's feedback will appear here -->
+                </div>
+                
+                <!-- The main navigation buttons for the section -->
+                <div class="navigation-buttons">
+                    <button class="nav-btn prev-btn" data-target="rw-part6">Back</button>
+                    <button class="nav-btn next-btn" data-target="rw-final-submission">Finish Test</button>
+                </div>
+            </section>
+            
+            <!-- ========================================================== -->
+            <!--            NEW FINAL SUBMISSION SECTION                  -->
+            <!-- ========================================================== -->
+            <section id="rw-final-submission" class="test-section hidden">
+                <h2>Reading & Writing Test Complete!</h2>
+                <p style="text-align:center; font-size: 1.1em;">You have finished all parts of the test. Click the button below to check your answers.</p>
+                
+                <div class="submission-area">
+                    <button id="check-all-rw-answers-btn">Check My Answers</button>
+                </div>
+                
+                <div id="final-rw-results-display"></div>
+            
+                <div class="navigation-buttons" style="justify-content: center; display: none;" id="restart-btn-container">
+                    <a href="flyers-test-1-menu.html" class="nav-btn">Back to Test Menu</a>
+                </div>
+            </section>
+        </div>
+    </div>
+    <!-- We will create a NEW script file for this test -->
+    <script src="reading-writing-1.js"></script>
+</body>
+</html>

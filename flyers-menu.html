@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>A2 Flyers Test Menu</title>
+    <link rel="stylesheet" href="style.css?v=6"> <!-- Use a new version number -->
+</head>
+<body class="page-flyers">
+
+    <div class="content-wrapper">
+        <div class="test-container">
+            <header>
+                <h1>A2 Flyers Test</h1>
+                <a href="index.html" class="back-to-menu-link">← Back to Main Menu</a>
+            </header>
+
+            <!-- The name input field now lives HERE -->
+            <div class="name-input-container" style="margin-top: 30px; text-align: center;">
+                <label for="flyers-user-name" style="display: block; margin-bottom: 10px;">Please enter your name to begin:</label>
+                <input type="text" id="flyers-user-name" placeholder="Your Name Here" autocomplete="off" style="padding: 10px; font-size: 1.1em; border-radius: 8px; border: 1px solid #ccc;">
+            </div>
+
+            <!-- Links to the actual tests -->
+            <div class="test-links" style="margin-top: 30px; display: flex; justify-content: center; gap: 20px;">
+                <button id="start-listening-btn" class="nav-btn" disabled>Start Listening Test</button>
+                <button id="start-rw-btn" class="nav-btn" disabled>Start Reading & Writing Test</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript to pass the name to the next page -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const nameInput = document.getElementById('flyers-user-name');
+            const listeningBtn = document.getElementById('start-listening-btn');
+            const rwBtn = document.getElementById('start-rw-btn');
+
+            nameInput.addEventListener('input', () => {
+                const hasName = nameInput.value.trim() !== '';
+                listeningBtn.disabled = !hasName;
+                rwBtn.disabled = !hasName;
+            });
+
+            listeningBtn.addEventListener('click', () => {
+                const userName = encodeURIComponent(nameInput.value.trim());
+                window.location.href = `flyers-listening-test-1.html?name=${userName}`;
+            });
+
+            rwBtn.addEventListener('click', () => {
+                const userName = encodeURIComponent(nameInput.value.trim());
+                window.location.href = `flyers-reading-writing-1.html?name=${userName}`;
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,2319 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Mulish:wght@700&display=swap');
+
+/* --- HTML Styles for Full Background --- */
+html {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-attachment: fixed;
+    background-color: #133743; /* Retained user's background color fallback */
+    overflow: hidden; /* Prevents main page scroll */
+}
+
+/* --- Body Styles --- */
+body {
+    font-family: 'Poppins', sans-serif; /* Retained user's font */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Prevents main body scroll */
+    box-sizing: border-box;
+    line-height: 1.6; /* Improved readability */
+    position: relative; /* ADD this line */
+}
+
+/* --- Content Wrapper for Scrolling --- */
+.content-wrapper {
+    flex-grow: 1;
+    width: 100%;
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.name-input-er {
+    margin: 30px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.name-input-er label {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: #333;
+}
+
+#user-name-input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 1.1em;
+    text-align: center;
+    width: 100%;
+    max-width: 300px;
+    box-sizing: border-box;
+}
+
+/* Style for the disabled button state */
+.start-test-btn:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* --- Main Container --- */
+.test-container {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Enhanced shadow */
+    padding: 30px; /* Increased padding */
+    margin: 20px 0;
+    width: 100%;
+    max-width: 900px; /* Adjusted max-width */
+    overflow-y: auto; /* Enable scrolling for content that exceeds er height */
+    max-height: calc(100vh - 40px); /* Adjust max-height to fit viewport */
+    box-sizing: border-box;
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+/* --- Header --- */
+header {
+    text-align: center; /* This is the most important part to keep */
+    border-bottom: 1px solid #e0e0e0;
+    padding-bottom: 20px;
+    margin-bottom: 30px;
+    position: relative; /* This is still needed! */
+}
+
+header h1 {
+    font-size: 2.2em;
+    color: #1a237e;
+    margin-bottom: 15px;
+}
+
+header p {
+    font-size: 1.1em; /* Larger font size */
+    text-align: center;
+    color: #555;
+}
+
+/* --- Audio Player er --- */
+.audio-player-er {
+    margin: 25px 0; /* Adjusted margins */
+    text-align: center;
+}
+.audio-player-er audio {
+    width: 100%;
+    max-width: 500px; /* Larger max-width */
+    border-radius: 8px; /* Rounded corners */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Shadow */
+    outline: none;
+}
+
+/* --- Test Section Display --- */
+.test-section {
+    padding: 1rem 0; /* Original padding */
+    border-top: 1px solid #eee;
+    margin-top: 1rem;
+}
+.test-section:first-of-type {
+    border-top: none;
+    margin-top: 0;
+}
+
+.test-section.hidden {
+    display: none;
+}
+.test-section.active {
+    display: block;
+    animation: fadeIn 0.5s ease-out; /* Added fade-in animation */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Universal Button Styles --- */
+.navigation-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Base style for ALL buttons */
+.nav-btn,
+.start-test-btn,
+#check-all-listening-answers-btn,
+#check-all-rw-answers-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    font-family: 'Mulish', sans-serif;
+    font-size: 1.1em;
+    font-weight: 700;
+    padding: 12px 30px;
+    border-radius: 50px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.2s ease-in-out;
+}
+
+/* Style for Primary Buttons (Purple) */
+.nav-btn:not(.prev-btn), /* Target all nav buttons EXCEPT the 'prev-btn' */
+.start-test-btn,
+#check-all-listening-answers-btn,
+#check-all-rw-answers-btn {
+    background-color: #8723ff;
+    color: white;
+}
+.nav-btn:not(.prev-btn):hover,
+.start-test-btn:hover,
+#check-all-listening-answers-btn:hover,
+#check-all-rw-answers-btn:hover {
+    background-color: #6a1ce8;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(135, 35, 255, 0.3);
+}
+
+/* Style for Secondary Buttons (White Outline) */
+.nav-btn.prev-btn {
+    background-color: #ffffff;
+    color: #8723ff;
+    border-color: #8723ff;
+}
+.nav-btn.prev-btn:hover {
+    background-color: #f5f0ff;
+    color: #6a1ce8;
+    border-color: #6a1ce8;
+}
+
+/* Disabled state */
+.nav-btn:disabled {
+    background-color: #bdc3c7;
+    border-color: #bdc3c7;
+    color: white;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+/* --- Question Content --- */
+.question-content {
+    margin-top: 20px; /* Adjusted margin */
+    padding: 15px; /* Added padding */
+    background-color: #f9f9f9; /* Light background */
+    border-radius: 10px; /* Rounded corners */
+    border: 1px solid #e0e0e0; /* Border */
+}
+.question-content p {
+    font-size: 1.05em; /* Adjusted font size */
+    margin-bottom: 10px; /* Adjusted margin */
+    line-height: 1.5;
+}
+.instruction-note {
+    font-size: 1rem;
+    color: #7f8c8d; /* Muted color */
+    font-weight: 600;
+    font-style: italic;
+    margin-top: 15px; /* Adjusted margin */
+    padding: 10px; /* Adjusted padding */
+    border-left: 4px solid #3498db; /* Blue border */
+    background-color: #f5f5f5;
+    border-radius: 4px;
+}
+
+/* --- Part 1: Drag and Drop Styles --- */
+.image-with-dropzones-wrapper {
+    position: relative;
+    width: 100%; /* Make wrapper responsive */
+    padding-bottom: 125%; /* 4:3 aspect ratio (adjust if your image has different ratio) */
+    background-color: transparent; /* Placeholder background */
+    border-radius: 8px;
+    overflow: hidden; /* Ensure dropzones don't spill out */
+    margin-bottom: 10px;
+}
+
+.question-image-part1 {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: ; /* Ensures the image fits within the bounds without cropping */
+    border-radius: 8px;
+}
+
+/* Draggable names er */
+.names-pool {
+    border: 1px solid #dcdcdc;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #ecf0f1;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    margin: 15px 0; /* Add margin to top and bottom */
+    min-height: 40px; /* Adjusted height */
+    position: relative;
+    z-index: 10;
+}
+
+.draggable-names-er h4 {
+    width: 100%;
+    text-align: center;
+    margin: 0 0 10px 0;
+    color: #34495e;
+}
+
+#listening-part1 .draggable-name {
+    background-color: #3498db;
+    color: white;
+    padding: 10px 15px !important; /* Force the flat padding */
+    border-radius: 15px;
+    cursor: grab;
+    font-weight: 600;
+    font-size: 1.2em;
+    margin: 2px auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    height: 30px; /* ADD a fixed height to prevent overrides */
+    box-sizing: border-box; /* ADD this to include padding in the height calculation */
+}
+
+.draggable-name:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.draggable-name.dragging {
+    opacity: 0.6;
+    cursor: grabbing;
+    transform: scale(1.05);
+}
+
+/* Drop targets */
+.drop-target {
+    position: absolute;
+    width: 12%; /* Adjusted size as needed */
+    height: 5%; /* Adjusted size as needed */
+    border: 2px dashed #ffffff; /* White dashed border */
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    cursor: default; /* Indicate not directly clickable */
+    z-index: 5; /* Retained user's z-index */
+    box-sizing: border-box;
+    background-color: rgba(255, 255, 255, 0.5); /* Lighter background for empty targets */
+}
+
+.drop-target.drag-over {
+    border-color: #fafdff; /* Blue on drag over */
+    background-color: rgba(240, 240, 240, 0.4); /* White */
+    transform: scale(1.05);
+}
+
+.drop-target.filled {
+    border-style: solid;
+    border-color: #7f8c8d; /* Grey solid border when filled */
+    background-color: rgba(127, 140, 141, 0.1); /* Light grey tint */
+}
+
+/* Style for names in drop zones (actual draggable element now lives here) */
+#listening-part1 .drop-target .draggable-name {
+    pointer-events: auto;
+    cursor: move;
+    position: static;
+    margin: 2px auto;
+    text-align: center;
+    width: 95%;
+    font-size: 1em;
+    padding: 3px 12px !important; /* Force the flat padding */
+    box-shadow: none;
+    transform: none;
+    background-color: #3f51b5;
+    height: 28px; /* ADD the same fixed height */
+    box-sizing: border-box; /* ADD this as well */
+}
+
+/* Remove placeholder styling (not needed as actual draggable is moved) */
+.dropped-name-placeholder {
+    display: none !important;
+}
+
+/* Adjust drop targets to accommodate moved elements */
+.drop-target.filled {
+    padding: 0; /* Remove padding to fit elements */
+    display: flex; /* Center child elements */
+    align-items: center;
+    justify-content: center;
+}
+
+/* Style for the locked drag-and-drop example */
+.draggable-name.locked-example {
+    cursor: default;
+    opacity: 0.85; /* Make it look slightly faded */
+    background-color: #7f8c8d !important; /* A neutral grey color */
+}
+.draggable-name.locked-example:hover {
+    transform: none; /* Remove the hover lift effect */
+}
+
+/* --- Part 2: Form inputs --- */
+.form-question p {
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.form-question input[type="text"],
+.form-question input[type="number"],
+.color-select {
+    width: calc(100% - 20px); /* Adjust for padding/border */
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    box-sizing: border-box; /* Ensures consistent sizing */
+}
+
+.form-question input:focus,
+.color-select:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+    outline: none;
+}
+
+/* --- Part 4: Tick the box --- */
+.options-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 15px; /* Adjusted gap */
+    margin-top: 20px; /* Adjusted margin */
+    margin-bottom: 20px;
+    justify-content: center;
+}
+
+.option-card {
+    background-color: #fff;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    position: relative; /* For check/cross marks */
+    display: flex; /* UPDATE: Add flex display */
+    flex-direction: column; /* UPDATE: Stack items vertically */
+    aspect-ratio: 1 / 1; /* UPDATE: This forces the card to be a perfect square */
+}
+
+.option-card:hover {
+    border-color: #3498db; /* Blue border on hover */
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+.option-card.selected {
+    border-color: #3498db;
+    background-color: #e8f3fa; /* Light blue background when selected */
+    box-shadow: 0 4px 12px rgba(52, 152, 219, 0.2);
+}
+
+.option-card img {
+    max-width: 100%;
+    flex-grow: 1; 
+    object-fit: cover;
+    border-radius: 6px;
+    margin-bottom: 10px;
+    /* UPDATE: Add this to prevent image distortion on some browsers */
+    min-height: 0;
+}
+
+.option-card label {
+    font-weight: bold;
+    color: #555;
+    font-size: 1.1em;
+}
+
+/* --- Part 4: Question Spacing --- */
+.part4-question-block {
+    margin-bottom: 40px; /* Adds space between each question block */
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee; /* Adds a faint line between questions */
+}
+
+.part4-question-block:last-of-type {
+    border-bottom: none; /* Removes the line after the very last question */
+}
+
+/* Make the Part 4 example cards non-interactive */
+.option-card.is-example {
+    cursor: default;
+}
+.option-card.is-example:hover {
+    transform: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08); /* Revert to default shadow */
+    border-color: #ddd; /* Revert to default border */
+}
+
+/* --- Part 5: Interactive Canvas Styles --- */
+.part5-controls {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    margin: 20px 0;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
+
+.color-palette {
+    display: flex;
+    gap: 10px;
+}
+
+.palette-color {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    border: 3px solid transparent;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+.palette-color:hover {
+    transform: scale(1.1);
+}
+.palette-color.selected {
+    border-color: #007bff;
+    box-shadow: 0 0 10px rgba(0,123,255,0.5);
+}
+
+/* Set the background color for each palette option */
+.palette-color[data-color="orange"] { background-color: orange; }
+.palette-color[data-color="red"]    { background-color: red; }
+.palette-color[data-color="purple"] { background-color: purple; }
+.palette-color[data-color="blue"]   { background-color: blue; }
+.palette-color[data-color="green"]  { background-color: green; }
+.palette-color[data-color="yellow"]  { background-color: yellow; }
+.palette-color[data-color="pink"]  { background-color: pink; }
+.palette-color[data-color="grey"]  { background-color: grey; }
+.palette-color[data-color="black"] { background-color: black; }
+
+.write-tool,
+.eraser-tool {
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: 600;
+    color: #333;
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.write-tool:hover,
+.eraser-tool:hover {
+    background-color: #f8f8f8;
+    border-color: #aaa;
+}
+
+.write-tool.selected,
+.eraser-tool.selected {
+    border-color: #007bff;
+    color: #007bff;
+    box-shadow: 0 0 10px rgba(0,123,255,0.3);
+}
+
+.eraser-tool.selected {
+    border-color: #dc3545; /* Red border for eraser */
+    color: #dc3545;
+}
+
+#part5-interactive-container svg {
+    width: 100%;
+    height: auto;
+}
+
+/* Target the shapes inside the loaded SVG */
+#part5-interactive-container path,
+#part5-interactive-container rect,
+#part5-interactive-container polygon {
+    cursor: pointer;
+    transition: fill 0.3s ease;
+}
+
+/* --- Feedback Styles --- */
+/* General Correct/Incorrect Feedback */
+.correct {
+    border-color: #28a745 !important; /* Green for correct */
+    background-color: rgba(40, 167, 69, 0.1) !important;
+}
+
+.incorrect {
+    border-color: #dc3545 !important; /* Red for incorrect */
+    background-color: rgba(220, 53, 69, 0.1) !important;
+}
+
+/* Specific feedback for draggable names */
+.draggable-name.correct {
+    background-color: #28a745 !important;
+    color: white !important;
+}
+
+.draggable-name.incorrect {
+    background-color: #dc3545 !important;
+    color: white !important;
+}
+
+/* Feedback for Option Cards (Part 4) */
+.option-card.correct {
+    border-color: #4caf50;
+    background-color: #e8f5e9;
+}
+
+.option-card.incorrect {
+    border-color: #f44336;
+    background-color: #ffebee;
+}
+
+.option-card.correct::after, .option-card.incorrect::after {
+    content: '';
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background-size: ;
+    display: flex; /* Use flex to center text */
+    align-items: center;
+    justify-content: center;
+    font-size: 16px; /* Adjust size of check/cross */
+    font-weight: bold;
+}
+
+.option-card.correct::after {
+    content: '✔';
+    color: white;
+    background-color: #4caf50;
+}
+
+.option-card.incorrect::after {
+    content: '✖';
+    color: white;
+    background-color: #f44336;
+}
+
+/* ========================================================== */
+/*           IN-CONTEXT ANSWER FEEDBACK STYLES              */
+/* ========================================================== */
+
+/* ========================================================== */
+/*     VISUAL FEEDBACK FOR LISTENING TEST (ALL PARTS)       */
+/* ========================================================== */
+
+/* --- Part 1: Drag & Drop Feedback --- */
+.drop-target.correct-answer {
+    border: 2px solid #28a745 !important;
+    /* This creates a layered background: a semi-transparent white topped with semi-transparent green */
+    background: linear-gradient(rgba(40, 167, 69, 0.2), rgba(40, 167, 69, 0.2)),
+                linear-gradient(rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)) !important;
+}
+.drop-target.incorrect-answer {
+    border: 2px solid #dc3545 !important;
+    background-color: rgba(220, 53, 69, 0.2) !important;
+}
+.draggable-name.correct-answer {
+    background-color: #28a745 !important;
+}
+.draggable-name.incorrect-answer {
+    background-color: #dc3545 !important;
+}
+
+/* --- Part 4: Multiple Choice Card Feedback --- */
+.option-card.feedback-correct {
+    border-color: #28a745;
+    background-color: #e8f5e9;
+}
+.option-card.feedback-incorrect {
+    border-color: #dc3545;
+    background-color: #ffebee;
+}
+
+/* --- Part 5: SVG Coloring Feedback --- */
+#part5-interactive-container .correct-answer {
+    fill: #28a745 !important; /* Green for correct shape fills */
+}
+#part5-interactive-container .incorrect-answer {
+    fill: #dc3545 !important; /* Red for incorrect shape fills */
+}
+
+/* --- General styles for all input types --- */
+.correct-answer {
+    background-color: rgba(40, 167, 69, 0.15) !important; /* Semi-transparent green */
+    color: #1c6b2e !important; /* Darker green text */
+    border-bottom-color: #28a745 !important; /* Green underline */
+}
+
+.incorrect-answer {
+    background-color: rgba(220, 53, 69, 0.15) !important; /* Semi-transparent red */
+    color: #a9232e !important; /* Darker red text */
+    border-bottom-color: #dc3545 !important; /* Red underline */
+}
+
+/* --- Specific styles for dropdowns (Part 4) --- */
+select.correct-answer {
+    border-color: #28a745 !important;
+}
+select.incorrect-answer {
+    border-color: #dc3545 !important;
+}
+
+/* --- Specific styles for radio buttons (Part 3) --- */
+/* Highlight the label of the chosen answer */
+input[type="radio"].incorrect-answer + label {
+    color: #c62828;
+    font-weight: bold;
+}
+/* Always highlight the label of the correct answer */
+input[type="radio"].correct-answer + label {
+    color: #2e7d32;
+    font-weight: bold;
+}
+input[type="radio"].correct-answer + label::after {
+    transform: translateY(-50%) scale(1); /* Show the checkmark */
+}
+
+/* --- Part 2: Homework Form Styles --- */
+.homework-form {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+.homework-form h4 {
+    text-align: center;
+    font-size: 1.4em;
+    color: #333;
+    margin-bottom: 25px;
+    text-decoration: underline;
+}
+
+.form-row {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 25px;
+    font-size: 1.1em;
+}
+
+.form-row .number {
+    font-weight: bold;
+    margin-right: 15px;
+    color: #555;
+}
+
+.form-row .label {
+    flex-grow: 1; /* Pushes the input to the right */
+    padding-right: 15px;
+}
+
+.form-row .input-wrapper {
+    flex-basis: 45%; /* Allocates a consistent width for the input area */
+    display: flex;
+    align-items: baseline;
+}
+
+.input-wrapper .pre-text {
+    margin-right: 5px;
+    color: #333;
+}
+
+/* This creates the dotted line effect for inputs */
+.form-row .text-answer {
+    border: none;
+    background: transparent;
+    outline: none;
+    border-bottom: 2px dotted #555;
+    width: 100%;
+    font-size: 1em;
+    font-family: 'Poppins', sans-serif;
+    color: #0056b3; /* Color for user's typed text */
+    padding-bottom: 2px;
+}
+
+/* Styling for the example answer line */
+.form-row.example .answer-line {
+    flex-basis: 45%;
+    border-bottom: 2px dotted #ccc;
+    color: #555;
+    padding-left: 10px; /* Align text a bit */
+}
+
+/* --- Submission & Results Area --- */
+.submission-area {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+#results-display, #final-results-display {
+    margin-top: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 0.5rem;
+}
+
+#results-display.correct, #final-results-display.correct {
+    color: #2e7d32;
+}
+
+#results-display.partial, #final-results-display.partial {
+    color: #ef6c00;
+}
+
+#results-display.incorrect, #final-results-display.incorrect {
+    color: #c62828;
+}
+
+.test-section > h3 {
+    text-align: center;
+    font-size: 1.5em; /* A slightly larger font for the main part titles */
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* This is the  style for our consistent instruction lines */
+.part-instructions {
+    text-align: center;
+    font-size: 1.1em;
+    color: #555;
+    margin-bottom: 25px; /* Adds space between the instructions and the audio player */
+    font-style: italic;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .test-container {
+        padding: 20px;
+        margin: 10px 0;
+        max-height: calc(100vh - 20px); /* Adjust max-height for smaller screens */
+    }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    .nav-btn, .start-test-btn, #check-all-listening-answers-btn {
+        padding: 10px 20px;
+        font-size: 1em;
+    }
+
+    .options-grid {
+        grid-template-columns: 1fr; /* Stack options on small screens */
+    }
+
+    .image-with-dropzones-wrapper {
+        padding-bottom: 75%; /* Adjust aspect ratio for potentially taller images on mobile */
+    }
+
+    .drop-target {
+        width: 15%; /* Slightly larger touch target on mobile */
+        height: 20%;
+        font-size: 0.8em;
+    }
+}
+
+@media (max-width: 480px) {
+    .test-container {
+        padding: 15px;
+    }
+
+    header h1 {
+        font-size: 1.5em;
+    }
+
+    .nav-btn, .start-test-btn, #check-all-listening-answers-btn {
+        padding: 8px 15px;
+        font-size: 0.9em;
+    }
+
+    .navigation-buttons, .submission-area {
+        flex-direction: column;
+        gap: 10px;
+    }
+    .drop-target {
+        width: 20%; /* Even larger touch target on very small screens */
+        height: 25%;
+    }
+    .drop-target .draggable-name {
+        font-size: 10px; /* Smaller font for names in drop zones */
+    }
+}
+
+/* --- Background Fade-in Animation --- */
+@keyframes backgroundFadeIn {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    z-index: -1; 
+    animation: backgroundFadeIn 1.5s ease-out forwards;
+    /* The specific background-image is REMOVED from here */
+}
+
+/* --- Specific Backgrounds for Each Page Type --- */
+
+/* Background for the main menu homepage */
+body.page-menu::before {
+    background-image: url('images/new-menu-background.svg'); /* <-- PROVIDE YOUR  BACKGROUND IMAGE HERE */
+}
+
+/* Background for all Flyers tests */
+body.page-flyers::before {
+    background-image: url('images/flyers_background.svg'); /* This is the monkey background */
+}
+
+body.page-flyers-hub::before {
+    background-image: url('images/flyers-tests-background.svg'); /* Your new background */
+}
+
+/* --- NEW: Background for the Movers test list hub --- */
+body.page-movers-hub::before {
+    background-image: url('images/movers-tests-background.svg');
+}
+
+/* --- NEW: Background for all general Movers tests --- */
+body.page-movers::before {
+    background-image: url('images/movers-background.svg');
+}
+
+/* --- NEW: Background for the Starters test list hub --- */
+body.page-starters-hub::before {
+    background-image: url('images/starters-tests-background.svg');
+}
+
+/* --- NEW: Background for all general Starters tests --- */
+body.page-starters::before {
+    background-image: url('images/starters-background.svg');
+}
+
+/* --- Animated Mascot Styles --- */
+
+/* 1. Define the "slide in from right" animation */
+@keyframes slideInFromLeft {
+    from {
+        /* Start 100% off the left side of the screen and completely transparent */
+        transform: translateX(-100%);
+        opacity: 0;
+    }
+    to {
+        /* End at its natural position and fully visible */
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 2. Style the mascot image itself */
+.animated-mascot {
+    /* Position it fixed to the bottom right of the screen */
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    
+    /* Control its size - adjust as needed */
+    width: auto;
+    height: 60vh; /* 40% of the viewport height */
+    max-height: 600px; /* But don't let it get too big on large screens */
+    
+    /* Put it behind the main content but in front of the page background */
+    z-index: 0; 
+
+    /* Make it transparent initially so the animation can fade it in */
+    opacity: 0;
+
+    /* 3. Apply the animation! */
+    animation: slideInFromLeft 1.5s ease-out forwards;
+    animation-delay: 0.5s; /* Optional: Wait half a second before starting */
+}
+
+/* --- Animated Student Girl Styles --- */
+
+/* 1. Define the "slide in from left" animation */
+@keyframes slideInFromRight {
+    from {
+        /* Start 100% off the LEFT side of the screen and transparent */
+        transform: translateX(100%);
+        opacity: 0;
+    }
+    to {
+        /* End at its natural position and fully visible */
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 2. Style the girl image itself */
+.animated-girl {
+    /* Position her fixed to the bottom LEFT of the screen */
+    position: fixed;
+    bottom: 0;
+    right: 0%;
+    
+    /* Control her size - adjust as needed */
+    width: auto;
+    height: 71vh; /* Make her the same relative height as the monkey */
+    max-height: 600px; /* A slightly different max-height can add variety */
+    
+    /* Put her on the same background layer as the monkey */
+    z-index: 0; 
+
+    /* Make her transparent initially */
+    opacity: 0;
+
+    /* 3. Apply the  animation! */
+    animation: slideInFromRight 1.5s ease-out forwards;
+    animation-delay: 0.5s; /* Use the same delay so they slide in together */
+}
+
+/* --- Back to Menu Link Style (Final Version) --- */
+.back-to-menu-link {
+    /* Position it relative to the <header> block */
+    position: absolute;
+    
+    /* Stick it to the left edge */
+    left: 0;
+    
+    /* Position it from the BOTTOM of the header, just above the border */
+    bottom: 10px; /* You can adjust this value (e.g., 20px, 30px) */
+
+    /* Your original styling */
+    font-size: 1em;
+    font-weight: 600;
+    color: #3f51b5;
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.back-to-menu-link:hover {
+    color: #303f9f;
+    text-decoration: underline;
+}
+
+/* ===================================================================== */
+/* --- REBUILT SECTION: R&W Part 1 and Listening Part 3 --- */
+/* ===================================================================== */
+
+/* --- Reading & Writing Part 1: Correct Layout --- */
+
+#rw-part1 .rw-part1-wrapper {
+    display: flex;
+    flex-direction: column; /* This is the key: stacks word rows and definition box vertically */
+    gap: 15px;
+}
+
+#rw-part1 .main-content-row {
+    display: flex;
+    gap: 20px; /* Space between word columns and definition box */
+}
+
+#rw-part1 .word-row {
+    display: flex;
+    justify-content: space-around;
+    padding: 0 5%;
+}
+
+#rw-part1 .word-column {
+    flex-basis: 130px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+#rw-part1 .word-column.right {
+    align-items: flex-end;
+}
+
+#rw-part1 .definitions-column {
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+#rw-part1 .definition-row {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 22px;
+    font-size: 1.1em;
+}
+#rw-part1 .definition-row:last-child {
+    margin-bottom: 0;
+}
+
+#rw-part1 .definition-row .label {
+    flex-grow: 1;
+}
+
+#rw-part1 .definition-row .input-wrapper {
+    flex-basis: 30%;
+}
+
+#rw-part1 .definition-row .text-answer {
+    border: none;
+    border-bottom: 2px dotted #555;
+    background: transparent;
+    outline: none;
+    width: 100%;
+}
+
+/* --- Reading & Writing Part 1 (SVG Method) --- */
+
+/* This container holds the SVG and the inputs, and creates the coordinate system */
+.rw-part1-container {
+    position: relative; /* This is essential for positioning the inputs */
+    width: 100%;
+    max-width: 900px; /* Or whatever max-width your test uses */
+    margin: 20px auto; /* Centers the container */
+}
+
+/* This makes the SVG image responsive and the base of our layout */
+.rw-part1-container img {
+    width: 100%;
+    height: auto;
+    display: block; /* Removes any extra space below the image */
+}
+
+/* This is the base style for ALL input fields in this section */
+.rw-part1-container input {
+    position: absolute; 
+    background-color: transparent; /* Makes the input see-through */
+    border: none;                 /* Removes the default input border/outline */
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px; 
+    color: #0056b3; /* Color for the user's typed text */
+    padding: 2px 5px;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* --- Positioning for EACH individual input box --- */
+/* You will need to adjust these top/left/width values */
+
+#rw1-q1 {
+    top: 21%; left: 67%; width: 17%; height: 3.5%;
+}
+#rw1-q2 {
+    top: 28.3%; left: 67%; width: 17%; height: 3.5%;
+}
+#rw1-q3 {
+    top: 35.5%; left: 67%; width: 17%; height: 3.5%;
+}
+#rw1-q4 {
+    top: 42.8%; left: 67%; width: 17%; height: 3.5%;
+}
+#rw1-q5 {
+    top: 50%; left: 67%; width: 17%; height: 3.5%;
+}
+#rw1-q6 {
+    top: 57.3%; left: 67%; width: 17%; height: 3.5%;
+}
+#rw1-q7 {
+    top: 64.6%; left: 67%; width: 17%; height: 3.5%;
+}
+#rw1-q8 {
+    top: 71.9%; left: 67%; width: 17%; height: 3.5%;
+}
+#rw1-q9 {
+    top: 79.1%; left: 67%; width: 17%; height: 3.5%;
+}
+#rw1-q10 {
+    top: 86.4%; left: 67%; width: 17%; height: 3.5%;
+}
+
+/* --- Listening Part 3: Correct Layout & Visible "H" --- */
+
+#listening-part3 .part3-wrapper {
+    display: flex;
+    flex-direction: row; /* Arranges items and locations side-by-side */
+    gap: 30px;
+    margin-top: 20px;
+    align-items: flex-start;
+}
+
+#listening-part3 .part3-objects {
+    flex: 1; /* Takes up available space */
+    min-width: 300px;
+}
+
+#listening-part3 .part3-locations {
+    flex-basis: 250px; /* Fixed width for the location images */
+    flex-shrink: 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+#listening-part3 .match-item {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-bottom: 25px;
+}
+
+#listening-part3 .match-item img {
+    width: 120px;
+    height: 80px;
+    object-fit: cover;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+}
+
+#listening-part3 .match-item span {
+    width: 100px;
+    font-size: 1.2em;
+}
+
+/* ========================================================== */
+/*           UNIVERSAL IN-TEXT INPUT STYLES                 */
+/* ========================================================== */
+
+/* This is the new base style for ALL inline inputs */
+.story-input {
+    background: transparent;
+    border: none;
+    border-bottom: 2px dotted #999;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em; /* This will be inherited from the parent <p> */
+    text-align: center;
+    color: #0056b3;
+    padding-bottom: 2px;
+    margin: 0 5px;
+}
+.story-input[readonly] {
+    border-bottom-color: #ccc;
+    color: #333;
+    font-weight: 600;
+}
+
+/* Specific styling for the square letter boxes */
+#listening-part3 .letter-box,
+#rw-part2 .letter-box {
+    width: 45px;
+    height: 45px;
+    border: 2px solid #777;
+    border-radius: 5px;
+    
+    /* Font and text properties */
+    font-family: 'Mulish', sans-serif;
+    font-size: 1.6em;
+    font-weight: bold;
+    text-transform: uppercase;
+    
+    /* --- THIS IS THE FIX FOR CENTERING --- */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    /* These are no longer needed with Flexbox, but are kept for consistency if you revert */
+    position: static;
+    vertical-align: middle;
+}
+
+/* THIS RULE MAKES THE 'H' VISIBLE */
+#listening-part3 .letter-box[readonly] {
+    color: #333; /* Dark grey, visible color for the example 'H' */
+    background-color: #f0f0f0; /* Light grey background for the example */
+    cursor: default;
+}
+
+#listening-part3 .location-card {
+    position: relative;
+}
+
+#listening-part3 .location-card img {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+#listening-part3 .location-letter {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 5px 12px;
+    border-radius: 5px;
+    font-weight: bold;
+    font-size: 1.2em;
+    border: 1px solid #888;
+}
+
+/* ===================================================================== */
+/* --- END OF REBUILT SECTION --- */
+/* ===================================================================== */
+
+/* --- Reading & Writing Part 4 - Title & Image --- */
+
+#rw-part4 .question-content h4 {
+    text-align: center;
+    font-size: 1.6em;
+    color: #333;
+    margin-top: -15px
+    margin-bottom: 12px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#rw-part4 .question-image {
+    display: block;
+    max-width: 550px; /* Adjust size as needed */
+    width: 80%; /* Adjust size as needed */
+    margin: 0 auto 25px auto; /* Centers the image and adds space below */
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Style for the disabled example dropdown */
+.rw-part4-container select:disabled {
+    background-color: transparent;
+    border: none;
+    font-weight: bold;
+    color: #333;
+    cursor: default;
+    /* For Firefox and Safari, to show the text */
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+/* --- Positioning for EACH individual dropdown --- */
+/* You will need to adjust these top/left/width values! */
+
+#rw6-example { top: 8.4%; left: 3.3%; width: 17.5%; }
+#rw6-q1 { top: 14.5%; left: 9.8%; width: 17.5%; }
+#rw6-q2 { top: 20.2%; left: 76%; width: 17.5%; }
+#rw6-q3 { top: 37.5%; left: 2.3%; width: 17.5%; }
+#rw6-q4 { top: 43.3%; left: 78.8%; width: 17.5%; }
+#rw6-q5 { top: 49.3%; left: 72.9%; width: 17.5%; }
+#rw6-q6 { top: 61.1%; left: 32.1%; width: 17.5%; }
+#rw6-q7 { top: 66.6%; left: 17.9%; width: 17.5%; }
+#rw6-q8 { top: 72.6%; left: 49.2%; width: 17.5%; }
+#rw6-q9 { top: 78.3%; left: 25%; width: 17.5%; }
+#rw6-q10 { top: 84.3%; left: 2.3%; width: 17.5%; }
+
+/* --- Timer Display Styles --- */
+#timer-display {
+    position: absolute;
+    top: 25px; /* Adjust vertical position as needed */
+    right: 30px; /* Adjust horizontal position as needed */
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 8px 15px;
+    font-family: 'Mulish', sans-serif;
+    font-size: 1.4em;
+    font-weight: 700;
+    color: #333;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+    z-index: 100; /* Ensures it stays on top */
+}
+
+/* ========================================================== */
+/*           MAIN MENU ANIMATED BUTTONS                       */
+/* ========================================================== */
+
+/* --- 1. Base style for the  animated button --- */
+.animated-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;  /* This centers the text by default */
+    
+    width: 65%;               /* Make buttons wider */
+    max-width: 400px;
+    padding: 36px 80px;       /* <-- INCREASED FROM 20px TO MAKE TALLER */
+    font-size: 1.8em;         /* Make text bigger */
+    
+    position: relative;       /* CRITICAL: This is the anchor for the icon */
+    overflow: hidden;         /* Hides the icon when it's outside the button */
+    transition: all 0.4s ease-out; /* Smooth transition for all changes */
+    
+    border-radius: 20px;      /* <<< ADD THIS LINE FOR LESS ROUNDED CORNERS */
+}
+
+/* --- 2. The text inside the button --- */
+.animated-btn .btn-text {
+    /* This makes the text movement smooth */
+    transition: transform 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* --- 3. The monkey icon inside the button --- */
+.animated-btn .btn-icon {
+    position: absolute;       /* Takes the icon out of the normal flow */
+    right: 25px;              /* Positions it on the right side */
+    height: 110px;             /* Set a fixed height for the icon */
+    
+    opacity: 0;               /* Hide the icon by default */
+    transform: translateX(20px); /* Move it slightly off-screen to the right */
+    
+    /* This makes the icon's appearance smooth */
+    transition: all 0.4s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+/* --- 4. The "on hover" animation state --- */
+.animated-btn:hover .btn-text {
+    /* Move the text to the left to make room for the icon */
+    transform: translateX(-85px);
+}
+
+.animated-btn:hover .btn-icon {
+    /* Make the icon visible */
+    opacity: 1;
+    /* Slide the icon into its final position */
+    transform: translateX(0);
+}
+
+/* --- 5. Style for the disabled "Coming Soon" buttons --- */
+.disabled-btn {
+    background-color: #bdc3c7 !important; /* Grey background */
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.disabled-btn:hover {
+    transform: none; /* Disable the hover lift effect */
+}
+
+.disabled-btn:hover .btn-text,
+.disabled-btn:hover .btn-icon {
+    transform: none; /* Disable the text and icon animation */
+    opacity: 0;
+}
+.disabled-btn:hover .btn-text {
+    opacity: 1; /* Keep text visible on hover for disabled button */
+}
+
+/* ========================================================== */
+/*           CUSTOM BUTTON COLORS FOR MAIN MENU             */
+/* ========================================================== */
+
+/* --- Flyers Button (Orange) --- */
+.nav-btn.flyers-btn { /* <-- Notice there is NO space between the classes */
+    background-color: #F1900D; 
+}
+.nav-btn.flyers-btn:hover {
+    background-color: #d97e0b;
+}
+
+/* --- Movers Button (Purple) --- */
+.nav-btn.movers-btn {
+    background-color: #AC74B1;
+}
+.nav-btn.movers-btn:hover {
+    background-color: #935f98;
+}
+
+/* --- Starters Button (Green) --- */
+.nav-btn.starters-btn {
+    background-color: #5DB94C;
+}
+.nav-btn.starters-btn:hover {
+    background-color: #4aa23c;
+}
+
+/* ========================================================== */
+/*           TEST SELECTION GRID (e.g., Flyers Hub)         */
+/* ========================================================== */
+
+.test-grid-container {
+    display: grid;
+    /* This creates a responsive grid. It will fit as many columns as possible
+       with a minimum width of 150px each, perfect for different screen sizes. */
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px; /* Sets the space between the buttons */
+    padding-top: 20px; /* Adds some space below the header */
+}
+
+/* We can use the existing .nav-btn class for our buttons.
+   This rule just adjusts the padding to make them look more uniform in the grid. */
+.test-grid-container .nav-btn {
+    padding: 20px;
+    font-size: 1.2em;
+    /* The primary purple color and hover effects will be inherited automatically! */
+}
+
+.test-list-item h3 {
+    margin-top: 0;
+    color: #1a237e;
+}
+
+.test-list-item.disabled {
+    background-color: #fdfdfd;
+    opacity: 0.6;
+}
+
+/* ========================================================== */
+/*           UPGRADED CUSTOM AUDIO PLAYER STYLES              */
+/* ========================================================== */
+
+.custom-audio-player {
+    background-color: #111;
+    width: 110%;
+    max-width: 560px;
+    margin: 30px auto;
+    padding: 10px 30px; /* Increased padding */
+    border-radius: 20px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    box-sizing: border-box;
+    color: #ccc; /* Set default text color for the player */
+}
+
+/* --- Wrapper for Progress Bar and Time --- */
+.progress-and-time-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 12px;
+}
+
+.time-display {
+    font-family: 'Mulish', sans-serif;
+    font-size: 0.8em;
+    font-weight: 600;
+}
+
+/* --- Progress Bar --- */
+.progress-bar-wrapper {
+    background-color: #444;
+    height: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+    flex-grow: 1; /* Allows it to fill the available space */
+}
+
+.progress-bar {
+    background-color: #fff;
+    width: 0%;
+    height: 100%;
+    border-radius: 3px;
+    position: relative;
+    transition: width 0.1s linear; /* Smoother progress updates */
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    right: -8px;
+    top: -5px;
+    width: 16px;
+    height: 16px;
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+/* --- Main Controls --- */
+.controls {
+    display: flex;
+    justify-content: center; /* Center the main buttons */
+    align-items: center;
+    gap: 25px; /* Space between buttons */
+    position: relative; /* For positioning the volume control */
+}
+
+.control-btn {
+    background: none;
+    border: none;
+    color: #ccc;
+    font-size: 1.2em; /* Slightly larger icons */
+    cursor: pointer;
+    padding: 10px;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.control-btn:hover {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+.play-pause-btn {
+    background-color: #fff;
+    color: #111;
+    width: 42px; /* Bigger main button */
+    height: 42px;
+    border-radius: 50%;
+    font-size: 1.2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.play-pause-btn:hover {
+    background-color: #f0f0f0;
+    color: #111;
+}
+
+/* --- Volume Control (with Hover Effect) --- */
+.volume-control {
+    position: absolute; 
+    right: 0;
+    display: flex;
+    align-items: center;
+    gap: 0; /* The initial gap is 0, it will be added on hover */
+    
+    /* This makes sure the slider doesn't suddenly appear and push things around */
+    /* It will smoothly transition its own container width if needed */
+    transition: gap 0.4s ease-out; 
+}
+
+.volume-slider {
+    -webkit-appearance: none; 
+    appearance: none;
+    height: 5px;
+    background: #555;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+
+    /* --- 1. HIDE THE SLIDER BY DEFAULT --- */
+    width: 0; /* Start with zero width */
+    opacity: 0; /* Make it fully transparent */
+    
+    /* This is the key to the smooth animation */
+    transition: all 0.4s ease-out;
+}
+
+/* --- 2. SHOW THE SLIDER ON HOVER --- */
+/* When the user hovers over the PARENT container... */
+.volume-control:hover {
+    gap: 8px; /* Create space between the icon and the slider */
+}
+
+/* ...the SLIDER itself will transition to these  properties */
+.volume-control:hover .volume-slider {
+    width: 80px; /* Expand to its full width */
+    opacity: 1; /* Fade it in to be fully visible */
+}
+
+/* Style for the slider thumb (the circle) */
+.volume-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+}
+.volume-slider::-moz-range-thumb {
+    width: 15px;
+    height: 15px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+/* Hide the original audio player completely */
+.custom-audio-player audio {
+    display: none;
+}
+
+/* ========================================================== */
+/*           READING & WRITING PART 2 (HTML TEXT METHOD)    */
+/* ========================================================== */
+
+/* --- This is the new, definitive rule for the top image in Part 2 --- */
+#rw-part2 .question-image {
+    display: block; /* Ensures centering works */
+    
+    /* <<< You can now control the size here >>> */
+    max-width: 650px; 
+    
+    /* This rule correctly centers the image and adds space below it */
+    margin: 0 auto 30px; 
+    
+    /* These add the polished look */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Container for the Conversation --- */
+.rw-part2-conversation-text {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 20px 30px;
+    border-radius: 10px;
+    max-width: 750px;
+    margin: 0 auto;
+}
+
+.convo-turn {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    margin-bottom: 1.3em; /* Spacing between lines */
+    font-size: 1.3em;
+}
+
+.speaker {
+    position: relative; /* CRITICAL: Creates the positioning context for the number */
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    width: 140px;
+    font-weight: 600;
+    padding-left: 25px; 
+}
+.speaker img {
+    width: 35px;
+    height: 35px;
+}
+.speaker .q-number {
+    position: absolute; /* Takes the number out of the normal layout flow */
+    left: 0; /* Positions it at the very start of the .speaker container */
+    top: 50%; /* Aligns its top to the vertical middle of the container */
+    transform: translateY(-50%); /* Shifts it up by half its own height for perfect centering */
+
+    font-weight: bold;
+    color: #555;
+}
+
+.line {
+    padding-top: 1px;
+}
+
+/* Make the letter-box inline with the text */
+.line .letter-box {
+    position: static; /* Removes absolute positioning */
+    display: inline-block;
+    vertical-align: middle;
+    width: 42px;
+    height: 42px;
+    margin-top: -2px;
+    /* The other styles from .letter-box will apply automatically */
+}
+
+.convo-header {
+    font-weight: bold;
+    font-size: 1.2em;
+    margin: 25px 0 15px 45px;
+}
+
+/* --- Container for the Responses --- */
+.rw-part2-responses-text {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 25px 30px;
+    border-radius: 10px;
+    max-width: 750px;
+    margin: 30px auto 0;
+}
+.rw-part2-responses-text ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.rw-part2-responses-text li {
+    display: flex;
+    gap: 20px;
+    font-size: 1.2em;
+    margin-bottom: 1em;
+}
+.rw-part2-responses-text li span {
+    font-weight: bold;
+}
+
+/* ========================================================== */
+/*           READING & WRITING PART 3 STYLES                */
+/* ========================================================== */
+
+#rw-part3 .question-image {
+    display: block;
+    margin: 0 auto 28px;
+    max-width: 700px; /* <<< You can change this value to make it bigger or smaller */
+    margin-bottom: 30px; /* Adjust the space below the image */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- 1. The Word Box --- */
+.rw-part3-word-box {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 18px;
+    margin-bottom: 30px;
+    
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+.rw-part3-word-box span {
+    background-color: #ecf0f1;
+    color: #34495e;
+    padding: 8px 15px;
+    border-radius: 25px;
+    font-size: 1.3em;
+    font-weight: 600;
+}
+
+/* --- 2. The Story Container --- */
+.rw-part3-story-container {
+    position: relative; /* Essential for positioning the inputs */
+}
+
+#rw-part3 .question-image {
+    max-width: 580px; /* <<< You can change this value to make it bigger or smaller */
+ }
+
+.rw-part3-story-container img {
+    width: 100%;
+    height: auto;
+}
+
+/* The input fields that go on the dotted lines */
+#rw-part3 .story-input {
+    position: absolute;
+    background: transparent;
+    border: none;
+    color: #0056b3;
+    font-size: 1.4em;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+}
+.story-input[readonly] {
+    color: #333;
+    font-weight: 600;
+}
+
+/* --- Positioning for EACH individual input field --- */
+/* You will need to fine-tune these values! */
+#rw3-example { top: 1.5%; left: 15.9%; width: 17%; }
+#rw3-q1 { top: 16.4%; left: 65.1%; width: 17%; }
+#rw3-q2 { top: 36.5%; left: 18.6%; width: 17%; }
+#rw3-q3 { top: 41.6%; left: 35%; width: 17%; }
+#rw3-q4 { top: 51.6%; left: 30%; width: 17%; }
+#rw3-q5 { top: 86.7%; left: 77.8%; width: 17%; }
+
+
+/* --- 3. The "Best Title" Question --- */
+.rw-part3-title-question {
+    margin-top: 40px;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
+}
+.rw-part3-title-question h4 {
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    font-weight: 600;
+}
+
+/* Custom Checkbox/Radio Button Styles */
+.radio-options-list {
+    list-style: none;
+    padding: 0;
+    padding-left: 8px;
+}
+.radio-options-list li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 1.4em;
+}
+.radio-options-list input[type="radio"] {
+    appearance: none; /* Hide default radio button */
+    -webkit-appearance: none;
+    margin: 0;
+}
+.radio-options-list label {
+    cursor: pointer;
+    padding-left: 35px; /* Space for our custom box */
+    position: relative;
+}
+
+/* Create the custom box */
+.radio-options-list label::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    
+    width: 22px;
+    height: 22px;
+    border: 2px solid #777;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+/* Create the checkmark */
+.radio-options-list label::after {
+    content: '✔';
+    position: absolute;
+    left: 4px;
+    top: 50%;
+    transform: translateY(-50%) scale(0); /* Hide by default */
+    font-size: 18px;
+    color: white;
+    transition: all 0.2s ease;
+}
+
+/* Style the box when the hidden radio is checked */
+.radio-options-list input[type="radio"]:checked + label::before {
+    background-color: #8723ff; /* Use your main purple color */
+    border-color: #8723ff;
+}
+
+/* Show the checkmark when the hidden radio is checked */
+.radio-options-list input[type="radio"]:checked + label::after {
+    transform: translateY(-50%) scale(1);
+}
+
+/* ========================================================== */
+/*           UTILITY CLASSES (e.g., for text selection)     */
+/* ========================================================== */
+.non-selectable {
+  -webkit-user-select: none; /* For Safari and older Chrome */
+  -moz-user-select: none;    /* For Firefox */
+  -ms-user-select: none;     /* For older IE/Edge */
+  user-select: none;         /* The standard property */
+}
+
+/* ========================================================== */
+/*           READING & WRITING PART 4 STYLES                */
+/* ========================================================== */
+
+#rw-part4 .question-image {
+    display: block; /* Ensures centering works */
+    
+    /* <<< You can now control the size here >>> */
+    max-width: 700px; 
+    
+    /* This rule correctly centers the image and adds space below it */
+    margin: 0 auto 30px; 
+    
+    /* These add the polished look */
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* The container for the story text */
+.rw-part4-story-text {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 30px;
+    border-radius: 10px;
+    font-size: 1.2em; /* Makes the story text a bit bigger */
+    line-height: 2.2; /* Increases space between lines to fit dropdowns */
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+/* Style for the inline dropdowns */
+.inline-select {
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9em;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 4px 8px;
+    background-color: #f9f9f9;
+    color: #0056b3;
+    margin: 0 5px; /* Adds a little space around the dropdown */
+}
+
+/* Style for the disabled example dropdown to make it look like text */
+.inline-select:disabled {
+    appearance: none;
+    -webkit-appearance: none;
+    border: none;
+    background: transparent;
+    color: #333; /* Dark text color */
+    font-weight: 600;
+    padding: 0 5px;
+}
+
+/* ========================================================== */
+/*           READING & WRITING PART 5 STYLES                */
+/* ========================================================== */
+
+/* --- Story Text Container --- */
+.rw-part5-story-text {
+    background-color: #fdfdfd;
+    padding: 25px 30px;
+    border-radius: 10px;
+    border: 1px solid #e9e9e9;
+    font-size: 1.1em;
+    line-height: 1.7;
+    margin-top: 30px;
+}
+.rw-part5-story-text h4 {
+    text-align: center;
+    font-size: 1.3em;
+    margin-top: 0;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* --- Questions Block Container --- */
+.rw-part5-questions-block {
+    margin-top: 30px;
+    background-color: #fff;
+    padding: 25px 30px;
+    border-radius: 10px;
+    border: 1px solid #e0e0e0;
+}
+.rw-part5-questions-block h4 {
+    font-size: 1.2em;
+    color: #1a237e;
+    margin-top: 0;
+    margin-bottom: 20px;
+}
+.rw-part5-questions-block h4:not(:first-of-type) {
+    margin-top: 30px;
+    padding-top: 25px;
+    border-top: 1px solid #eee;
+}
+
+.question-item {
+    font-size: 1.1em;
+    line-height: 2.8; /* Increased line height for more vertical space */
+    margin-bottom: 8px;
+}
+
+/* --- This is the key fix for the inline inputs --- */
+#rw-part5 .story-input {
+    /* Reset all old positioning and flex properties */
+    position: static;
+    flex-shrink: 1;
+
+    /* Styling for the blank line */
+    background: transparent;
+    border: none;
+    border-bottom: 2px dotted #999; /* The dotted line */
+    
+    /* Font and text styles */
+    font-family: 'Poppins', sans-serif;
+    font-size: 1em; /* Inherits font size from the parent <p> */
+    text-align: center;
+    color: #0056b3;
+
+    /* Sizing for the blank */
+    width: 220px; /* Give it a good base width */
+    margin: 0 5px; /* A little space around it */
+    padding-bottom: 1px;
+}
+
+/* ========================================================== */
+/*           READING & WRITING PART 6 STYLES (CORRECTED)    */
+/* ========================================================== */
+
+/* Control the size of the top image specifically for Part 6 */
+#rw-part6 .question-image {
+    max-width: 700px; /* You can adjust this value */
+}
+
+/* The container for the story text */
+.rw-part6-story-text {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    padding: 30px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 30px auto 0;
+}
+.rw-part6-story-text h4 {
+    text-align: center;
+    font-size: 1.3em;
+    font-weight: 600;
+    margin-top: 0;
+    margin-bottom: 25px;
+    text-decoration: underline;
+}
+.rw-part6-story-text p {
+    font-size: 1.15em;
+    line-height: 2.8; /* Increased space for inputs */
+    text-align: justify;
+}
+
+/* We reuse the .story-input class, but override its width here */
+#rw-part6 .story-input {
+    width: 150px; /* A smaller, consistent width for single words */
+}
+#rw-part6 .story-input[readonly] {
+    width: auto; /* Allow readonly example to size to its content */
+}
+
+/* ============================================= */
+/*          REVIEW MODE LOCKDOWN STYLES          */
+/* ============================================= */
+
+/*
+ This is the key property. It makes elements ignore mouse clicks,
+ drags, and hover events, effectively "freezing" them.
+*/
+.in-review-mode .draggable-name,
+.in-review-mode .option-card,
+.in-review-mode #part5-interactive-container,
+.in-review-mode .color-palette,
+.in-review-mode .write-tool,
+.in-review-mode .eraser-tool {
+    pointer-events: none;
+}
+
+/* 
+ For drag and drop, also remove the "grab" cursor to show
+ that the items are no longer interactive.
+*/
+.in-review-mode .draggable-name {
+    cursor: default;
+}
+
+/* 
+ When inputs are disabled, they often get a default faded look.
+ You can style them to match your feedback colors if needed,
+ but disabling them is the most important part.
+*/
+.in-review-mode input:disabled {
+    /* Optional: Add custom styling for disabled inputs if you want */
+    background-color: #f0f0f0; /* Example: a light grey background */
+}
+
+/* ========================================================== */
+/*           STAGGERED BUTTON FADE-IN ANIMATION             */
+/* ========================================================== */
+
+/* 1. Define the keyframe animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px); /* Start 20px lower */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);   /* End at its final position */
+    }
+}
+
+/* 2. Prepare the buttons for animation */
+.test-grid-container .nav-btn {
+    /* Hide the buttons by default so they can be faded in */
+    opacity: 0; 
+    
+    /* Apply the animation */
+    animation-name: fadeInUp;
+    animation-duration: 0.5s;       /* How long the animation runs */
+    animation-timing-function: ease-out; /* Makes it feel natural */
+    
+    /* CRITICAL: This keeps the button visible after the animation ends */
+    animation-fill-mode: forwards;  
+}
+
+/* 3. Set a different delay for each button to create the stagger effect */
+.test-grid-container .nav-btn:nth-child(1) { animation-delay: 0.1s; }
+.test-grid-container .nav-btn:nth-child(2) { animation-delay: 0.2s; }
+.test-grid-container .nav-btn:nth-child(3) { animation-delay: 0.3s; }
+.test-grid-container .nav-btn:nth-child(4) { animation-delay: 0.4s; }
+.test-grid-container .nav-btn:nth-child(5) { animation-delay: 0.5s; }
+.test-grid-container .nav-btn:nth-child(6) { animation-delay: 0.6s; }
+.test-grid-container .nav-btn:nth-child(7) { animation-delay: 0.7s; }
+.test-grid-container .nav-btn:nth-child(8) { animation-delay: 0.8s; }
+/* Add more lines here if you add more buttons */
+
+/* ========================================================== */
+/*           CUSTOM MOUSE CURSORS (Corrected)                 */
+/* ========================================================== */
+
+/* --- 1. The Default (Arrow) Cursor --- */
+body {
+    cursor: url('images/cursor.svg') 0 0, auto;
+}
+
+/* --- 2. The Pointer (Hand) Cursor --- */
+a,
+button,
+.nav-btn,
+.animated-btn,
+.option-card,
+.palette-color,
+.write-tool,
+.eraser-tool,
+.control-btn,
+.back-to-menu-link,
+.progress-bar-wrapper {
+    cursor: url('images/pointer.svg') 4 4, pointer;
+}
+
+/* --- 3. The Text (I-Beam) Cursor --- */
+input[type="text"],
+input[type="number"],
+textarea {
+    cursor: url('images/text.svg') 16 16, text;
+}
+
+/* --- 4. The Grabbing Cursor (Definitive Fix) --- */
+/*
+  This is the new, more powerful rule.
+  It says: "When the body has the 'is-dragging' class,
+  force EVERY SINGLE ELEMENT (*) on the page to use the grabbing cursor."
+  This overrides the browser's default on all elements.
+*/
+body.is-dragging * {
+    cursor: url('images/grabbing.svg') 16 16, grabbing !important;
+}
+
+/* --- 5. The Not-Allowed Cursor --- */
+[disabled],
+.disabled-btn {
+    cursor: url('images/not-allowed.svg'), not-allowed;
+}
+
+/* --- 6. The Wait/Loading Cursor --- */
+.is-loading {
+    cursor: url('images/wait.svg') 16 16, wait;
+}
+
+/* ========================================================== */
+/*           MAIN MENU BUTTON ENTRANCE ANIMATION              */
+/* ========================================================== */
+
+/* 1. Target the buttons specifically on the main menu page */
+/* This won't interfere with any other buttons on other pages. */
+.page-menu .animated-btn {
+    /* Make the buttons transparent by default so they can be faded in */
+    opacity: 0;
+
+    /* Apply the animation we already created */
+    animation-name: fadeInUp;
+    animation-duration: 0.6s; /* A slightly longer duration feels better for big buttons */
+    animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1); /* A smooth easing curve */
+    
+    /* This makes sure the buttons stay visible after the animation is done */
+    animation-fill-mode: forwards;
+}
+
+/* 2. Set a different animation delay for each button */
+/* This creates the cool, staggered entrance effect. */
+.page-menu .animated-btn:nth-child(1) { animation-delay: 0.2s; } /* Starters button */
+.page-menu .animated-btn:nth-child(2) { animation-delay: 0.4s; } /* Movers button */
+.page-menu .animated-btn:nth-child(3) { animation-delay: 0.6s; } /* Flyers button */
+
+/* ========================================================== */
+/*           READING & WRITING PART 7 STYLES                */
+/* ========================================================== */
+
+/* --- The container for the three pictures --- */
+.rw-part7-pictures-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap; /* This is the key to the layout! */
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.story-picture-wrapper {
+    flex-basis: 45%; /* Two pictures will fit side-by-side */
+    max-width: 350px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    overflow: hidden; /* Ensures the image respects the border-radius */
+}
+
+.story-picture-wrapper img {
+    width: 100%;
+    height: auto;
+    display: block; /* Removes extra space below the image */
+}
+
+/* --- The student's writing area --- */
+.writing-area {
+    width: 100%;
+    max-width: 800px; /* Or your preferred width */
+    margin: 0 auto;
+}
+
+#rw-part7-story-input {
+    width: 100%;
+    box-sizing: border-box; /* Ensures padding doesn't break layout */
+    padding: 15px;
+    font-family: 'Poppins', sans-serif;
+    font-size: 1.1em;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: vertical; /* Allows user to make the box taller */
+    line-height: 1.6;
+}
+
+#word-count-display {
+    text-align: right;
+    margin-top: 8px;
+    font-size: 0.9em;
+    color: #c0392b; /* Start with a red color */
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+#word-count-display.word-count-met {
+    color: #27ae60; /* Change to green when the goal is met */
+}
+
+/* --- Make the AI button look nice --- */
+#check-story-btn {
+    /* The .nav-btn class already styles this, but you could add more here */
+    background-color: #16a085; /* A different color to distinguish it */
+}
+#check-story-btn:hover {
+    background-color: #117a65;
+}
