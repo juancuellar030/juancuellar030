@@ -74,7 +74,7 @@ document.addEventListener('DOMContentLoaded', () => {
     //        GOOGLE FORMS SUBMISSION
     // ==========================================================
     function submitResultsToGoogle(name, score, timeSpent, story) {
-        const googleFormURL = 'https://script.google.com/macros/s/AKfycbyP5Y0Sh5JJ-gDjP0X_-kKj_V0y0TcIqeL0Ku2VGKXFp7rk64RyZKwKeeX_BJSihUPU/exec'; 
+        const googleFormURL = 'https://script.google.com/macros/s/AKfycbyRvvt3eJmEHSD37fFRRlFVZuIPIT3scmx93ReAGz-JiD7Ayp1sMr-NVkXK_wavIn1B/exec'; 
     
         const formData = new FormData();
         formData.append('name', name);
