@@ -222,6 +222,28 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('#rw-part6 .story-input').forEach(input => {
         input.addEventListener('input', e => { userAnswers[e.target.id] = e.target.value.trim().toLowerCase(); });
     });
+
+    // Part 7 (Word Counter for Story Writing)
+    const storyInput = document.getElementById('rw-part7-story-input');
+    const wordCountDisplay = document.getElementById('word-count-display');
+    const wordGoal = 20;
+
+    if (storyInput && wordCountDisplay) {
+        storyInput.addEventListener('input', () => {
+            // A reliable way to count words, handling multiple spaces and empty input
+            const words = storyInput.value.trim().split(/\s+/).filter(word => word.length > 0);
+            const currentWordCount = (storyInput.value.trim() === '') ? 0 : words.length;
+
+            wordCountDisplay.textContent = `Words: ${currentWordCount} / ${wordGoal}`;
+
+            // Add or remove the green-color class based on the count
+            if (currentWordCount >= wordGoal) {
+                wordCountDisplay.classList.add('word-count-met');
+            } else {
+                wordCountDisplay.classList.remove('word-count-met');
+            }
+        });
+    }
     
     // Check answers on "Check My Answers" button click
     document.getElementById('check-all-rw-answers-btn').addEventListener('click', checkAndSubmitAnswers);
