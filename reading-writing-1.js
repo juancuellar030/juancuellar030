@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================
     //        GOOGLE FORMS SUBMISSION
     // ==========================================================
-    function submitResultsToGoogle(name, score, timeSpent) {
+    function submitResultsToGoogle(name, score, timeSpent, story) {
         const googleFormURL = 'https://script.google.com/macros/s/AKfycbyP5Y0Sh5JJ-gDjP0X_-kKj_V0y0TcIqeL0Ku2VGKXFp7rk64RyZKwKeeX_BJSihUPU/exec'; 
     
         const formData = new FormData();
