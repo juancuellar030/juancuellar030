@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', () => {
         // Part 6 (Shopping)
         'rw6-q1': 'on', 'rw6-q2': 'pair', 'rw6-q3': 'on', 'rw6-q4': 'walk', 'rw6-q5': 'after'
     };
-    const totalQuestions = Object.keys(correctAnswers).length;
+    const totalQuestions = 48;
 
     // ==========================================================
     //                 COUNTDOWN TIMER LOGIC
@@ -73,15 +73,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // ==========================================================
     //        GOOGLE FORMS SUBMISSION
     // ==========================================================
-    function submitResultsToGoogle(name, score, timeSpent, story) {
-        const googleFormURL = 'https://script.google.com/macros/s/AKfycbyRvvt3eJmEHSD37fFRRlFVZuIPIT3scmx93ReAGz-JiD7Ayp1sMr-NVkXK_wavIn1B/exec'; 
-    
+    function submitResultsToGoogle(name, score, timeSpent, story, aiFeedback) {
+        const googleFormURL = 'https://script.google.com/macros/s/AKfycbyRvvt3eJmEHSD37fFRRlFVZuIPIT3scmx93ReAGz-JiD7Ayp1sMr-NVkXK_wavIn1B/exec';
         const formData = new FormData();
         formData.append('name', name);
         formData.append('score', score);
         formData.append('timeSpent', timeSpent);
         formData.append('testType', 'Reading & Writing');
-        formData.append('story', story); // <<< This line will now work correctly
+        formData.append('story', story);
+        formData.append('aiFeedback', aiFeedback); // Also send the AI's feedback
     
         fetch(googleFormURL, {
             method: 'POST',
@@ -90,88 +90,97 @@ document.addEventListener('DOMContentLoaded', () => {
         .then(response => response.json())
         .then(data => {
             if (data.result === 'success') {
-                console.log('Submission to Google Sheet was successful.');
+                console.log('Google Forms submission success.');
             } else {
                 console.error('Submission failed:', data);
             }
         })
         .catch(error => {
-            console.error('Error submitting results:', error);
+            console.error('Google Forms submission error:', error);
         });
     }
 
     // ==========================================================
-    //                 GRADING LOGIC (FINAL, DEFINITIVE VERSION)
+    //       NEW ALL-IN-ONE GRADING AND AI CHECKING LOGIC
     // ==========================================================
-    function checkAndSubmitAnswers() {
+    async function checkAndSubmitAnswers() {
         stopTimer();
+        const checkBtn = document.getElementById('check-all-rw-answers-btn');
+        checkBtn.disabled = true;
+        checkBtn.textContent = 'Grading...';
     
-        // --- 1. Calculate Time ---
+        // --- 1. Grade the standard questions (Parts 1-6) ---
+        let correctCount = 0;
+        Object.keys(correctAnswers).forEach(qId => {
+            const userAnswer = (userAnswers[qId] || '').trim().toLowerCase();
+            const correctAnswer = correctAnswers[qId];
+            let isCorrect = Array.isArray(correctAnswer) ? correctAnswer.includes(userAnswer) : (userAnswer === correctAnswer);
+            if (isCorrect) correctCount++;
+    
+            let inputElement = (qId === 'rw3-q6') ? document.querySelector(`input[name="${qId}"][value="${userAnswers[qId]}"]`) : document.getElementById(qId);
+            if (inputElement) inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
+            if (qId === 'rw3-q6') document.querySelector(`input[name="${qId}"][value="${correctAnswer}"]`)?.classList.add('correct-answer');
+        });
+    
+        // --- 2. Handle the AI Story Check ---
+        const storyText = document.getElementById('rw-part7-story-input').value.trim();
+        const aiFeedbackDisplay = document.getElementById('ai-story-feedback-display');
+        aiFeedbackDisplay.style.display = 'block';
+        aiFeedbackDisplay.innerHTML = `<h4>Story Feedback</h4><em>Checking your story with the AI...</em>`;
+    
+        let aiScore = 0;
+        let aiFeedback = "Could not get feedback from the AI.";
+    
+        if (storyText.length >= 20) {
+            try {
+                const response = await fetch('/.netlify/functions/check-story', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ storyText: storyText }),
+                });
+    
+                if (!response.ok) throw new Error('AI service returned an error.');
+                
+                const data = await response.json();
+                // We now get the score and feedback from the same response
+                aiScore = data.score || 0; 
+                aiFeedback = data.feedback || "The AI returned a response, but it was empty.";
+    
+            } catch (error) {
+                console.error("AI check error:", error);
+                aiFeedback = `Sorry, an error occurred while checking your story: ${error.message}`;
+            }
+        } else {
+            aiFeedback = "The story was too short to be scored by the AI (minimum 20 words).";
+        }
+        
+        // Display the AI feedback and score
+        aiFeedbackDisplay.innerHTML = `<h4>AI Story Feedback</h4><p><strong>Score: ${aiScore} / 5</strong></p><p>${aiFeedback}</p>`;
+    
+        // --- 3. Calculate Final Score & Time ---
+        const finalScore = correctCount + aiScore;
         const timeSpentInSeconds = (startingMinutes * 60) - (totalSeconds < 0 ? 0 : totalSeconds) - 1;
         const minutesSpent = Math.floor(timeSpentInSeconds / 60);
         const secondsSpent = timeSpentInSeconds % 60;
         const formattedTimeSpent = `${String(minutesSpent).padStart(2, '0')}:${String(secondsSpent).padStart(2, '0')}`;
     
-        // --- 2. Grade and Apply Visual Feedback ---
-        let correctCount = 0;
-        Object.keys(correctAnswers).forEach(qId => {
-            const userAnswer = (userAnswers[qId] || '').trim(); // Get user's answer
-            const correctAnswer = correctAnswers[qId];
-            let isCorrect = false;
-    
-            // Step A: Check if the answer is correct (case-insensitive for strings)
-            if (Array.isArray(correctAnswer)) {
-                isCorrect = correctAnswer.includes(userAnswer.toLowerCase());
-            } else {
-                isCorrect = (userAnswer.toLowerCase() === correctAnswer.toLowerCase());
-            }
-            
-            if (isCorrect) {
-                correctCount++;
-            }
-    
-            // Step B: Find the corresponding input element and apply feedback class
-            let inputElement;
-    
-            // Special handling for Part 3 radio buttons
-            if (qId === 'rw3-q6') {
-                const selectedRadio = document.querySelector(`input[name="${qId}"][value="${userAnswer}"]`);
-                if (selectedRadio) {
-                    selectedRadio.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
-                }
-                const correctRadio = document.querySelector(`input[name="${qId}"][value="${correctAnswer}"]`);
-                if (correctRadio) {
-                    correctRadio.classList.add('correct-answer');
-                }
-            } 
-            // Handles ALL other inputs (text, select, etc.) by their ID
-            else {
-                inputElement = document.getElementById(qId);
-                if (inputElement) {
-                    inputElement.classList.add(isCorrect ? 'correct-answer' : 'incorrect-answer');
-                }
-            }
-        });
-    
-        // --- 3. Display Final Score ---
+        // --- 4. Display Final Results ---
         const finalResultsDisplay = document.getElementById('final-rw-results-display');
-        finalResultsDisplay.innerHTML = `<h3>Results for: ${userName}</h3><p>You scored ${correctCount} out of ${totalQuestions}.</p><p>Time Taken: ${formattedTimeSpent}</p>`;
+        finalResultsDisplay.innerHTML = `<h3>Results for: ${userName}</h3><p>You scored ${finalScore} out of ${totalQuestions}.</p><p>Time Taken: ${formattedTimeSpent}</p>`;
     
-        // --- 4. Enter Review Mode ---
-        document.querySelectorAll('.navigation-buttons').forEach(nav => { nav.style.display = 'none'; });
-        document.getElementById('check-all-rw-answers-btn').style.display = 'none';
+        // --- 5. Enter Review Mode ---
+        checkBtn.style.display = 'none';
         document.getElementById('restart-btn-container').style.display = 'flex';
+        // This line below is slightly improved to add the review mode class
         document.querySelectorAll('.test-section').forEach(section => {
             if (section.id.startsWith('rw-part')) {
-                section.classList.remove('hidden');
-                section.classList.add('active');
+                section.classList.add('active', 'in-review-mode');
             }
         });
         document.querySelector('.test-container')?.scrollTo({ top: 0, behavior: 'smooth' });
     
-         // --- 5. Submit to Google (UPDATED) ---
-        const storyText = document.getElementById('rw-part7-story-input').value.trim(); // <<< Get the story text
-        submitResultsToGoogle(userName, `${correctCount}/${totalQuestions}`, formattedTimeSpent, storyText); // <<< Pass it here
+        // --- 6. Submit to Google ---
+        submitResultsToGoogle(userName, `${finalScore}/${totalQuestions}`, formattedTimeSpent, storyText, `Score: ${aiScore}/5. Feedback: ${aiFeedback}`);
     }
 
     // ==========================================================
@@ -195,51 +204,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ==========================================================
-    //          AI STORY CHECKER LOGIC (UPGRADED FOR SCORING)
-    // ==========================================================
-    const checkStoryBtn = document.getElementById('check-story-btn');
-    const storyInputForAI = document.getElementById('rw-part7-story-input');
-    const aiFeedbackDisplay = document.getElementById('ai-feedback-display');
-    
-    if (checkStoryBtn && storyInputForAI && aiFeedbackDisplay) {
-        checkStoryBtn.addEventListener('click', async () => {
-            const storyText = storyInputForAI.value.trim();
-    
-            if (storyText.length < 10) {
-                aiFeedbackDisplay.innerHTML = "Please write a little more before checking the story.";
-                return;
-            }
-    
-            checkStoryBtn.disabled = true;
-            checkStoryBtn.textContent = 'The AI is thinking...';
-            aiFeedbackDisplay.innerHTML = '<em>Getting feedback and score...</em>';
-    
-            try {
-                const response = await fetch('/.netlify/functions/check-story', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ storyText: storyText }),
-                });
-    
-                if (!response.ok) throw new Error('The AI checker returned an error.');
-    
-                const data = await response.json();
-                const aiFeedback = data.feedback;
-                const aiScore = data.score; // <<< We now get the score!
-    
-                // Display both the score and the feedback
-                aiFeedbackDisplay.innerHTML = `<strong>Score: ${aiScore} / 5</strong><br>${aiFeedback}`;
-    
-            } catch (error) {
-                aiFeedbackDisplay.textContent = `Sorry, an error occurred: ${error.message}`;
-            } finally {
-                checkStoryBtn.disabled = false;
-                checkStoryBtn.textContent = 'Check My Story (AI)';
-            }
-        });
-    }
-    
     // --- Answer Saving ---
     // Part 1
     document.querySelectorAll('.rw-part1-container input').forEach(input => {
