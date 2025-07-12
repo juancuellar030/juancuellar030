@@ -2226,33 +2226,6 @@ body.is-dragging * {
 }
 
 /* ========================================================== */
-/*           MAIN MENU BUTTON ENTRANCE ANIMATION (CORRECTED)  */
-/* ========================================================== */
-
-/* 1. Prepare the buttons for animation by hiding them initially */
-/*    We use a more specific selector to ensure this rule wins. */
-body.page-menu .test-links > .animated-btn {
-    opacity: 0;
-}
-
-/* 2. Apply the animation to the buttons */
-.page-menu .animated-btn {
-    /* Apply the animation we already created */
-    animation-name: fadeInUp;
-    animation-duration: 0.6s;
-    animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1);
-    
-    /* This makes sure the buttons stay visible after the animation is done */
-    animation-fill-mode: forwards;
-}
-
-/* 3. Set a different animation delay for each button */
-/*    This remains the same. */
-.page-menu .animated-btn:nth-child(1) { animation-delay: 0.2s; }
-.page-menu .animated-btn:nth-child(2) { animation-delay: 0.4s; }
-.page-menu .animated-btn:nth-child(3) { animation-delay: 0.6s; }
-
-/* ========================================================== */
 /*           READING & WRITING PART 7 STYLES                */
 /* ========================================================== */
 
@@ -2320,3 +2293,28 @@ body.page-menu .test-links > .animated-btn {
 #check-story-btn:hover {
     background-color: #117a65;
 }
+
+/* ========================================================== */
+/*           MAIN MENU BUTTON ENTRANCE ANIMATION (FINAL)      */
+/* ========================================================== */
+
+/* 1. Prepare the buttons for animation by hiding them */
+.page-menu .animated-btn {
+    opacity: 0;
+}
+
+/* 2. Define the animation that will be applied */
+.page-menu .animated-btn {
+    /* Apply the fadeInUp animation we already have */
+    animation-name: fadeInUp;
+    animation-duration: 0.6s;
+    animation-timing-function: cubic-bezier(0.2, 0.8, 0.2, 1); /* A smooth curve */
+    
+    /* This is critical: it keeps the buttons visible after animating */
+    animation-fill-mode: forwards;
+}
+
+/* 3. Set a different delay for each button to create the stagger effect */
+.page-menu .animated-btn:nth-child(1) { animation-delay: 0.2s; } /* Starters button */
+.page-menu .animated-btn:nth-child(2) { animation-delay: 0.4s; } /* Movers button */
+.page-menu .animated-btn:nth-child(3) { animation-delay: 0.6s; } /* Flyers button */
