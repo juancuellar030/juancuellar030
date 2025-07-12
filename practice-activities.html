@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grammar & Vocabulary Practice</title>
+    <link rel="stylesheet" href="style.css?v=9"> <!-- Updated version number -->
+</head>
+<!-- I recommend a new body class for potential future styling -->
+<body class="page-practice-hub">
+
+    <div class="content-wrapper">
+        <div class="test-container">
+            <header>
+                <h1>Practice Activities</h1>
+                <!-- This link takes the user back to the main menu -->
+                <a href="index.html" class="back-to-menu-link">← Back to Main Menu</a>
+            </header>
+
+            <!-- 1. The Search Bar -->
+            <div class="search-bar-container">
+                <input type="text" id="activity-search-input" placeholder="Search for a topic (e.g., past simple, animals)...">
+            </div>
+
+            <!-- 2. The Grid for all Wordwall Activities -->
+            <div class="activity-grid">
+
+                <!-- EXAMPLE ACTIVITY CARD 1 -->
+                <a href="YOUR_WORDWALL_LINK_1" target="_blank" class="activity-card" data-keywords="grammar verbs past-simple flyers">
+                    <img src="images/activity-past-tense.jpg" alt="Past Tense Verbs">
+                    <h3>Past Tense Verbs</h3>
+                </a>
+
+                <!-- EXAMPLE ACTIVITY CARD 2 -->
+                <a href="YOUR_WORDWALL_LINK_2" target="_blank" class="activity-card" data-keywords="vocabulary animals pets starters">
+                    <img src="images/activity-animals.jpg" alt="Animal Vocabulary">
+                    <h3>Animal Vocabulary</h3>
+                </a>
+
+                <!-- EXAMPLE ACTIVITY CARD 3 -->
+                <a href="YOUR_WORDWALL_LINK_3" target="_blank" class="activity-card" data-keywords="grammar prepositions movers">
+                    <img src="images/activity-prepositions.jpg" alt="Prepositions of Place">
+                    <h3>Prepositions of Place</h3>
+                </a>
+
+                <!-- ADD AS MANY MORE ACTIVITY CARDS AS YOU LIKE! -->
+                <!-- Just update the href, data-keywords, image src, and title -->
+
+            </div>
+        </div>
+    </div>
+
+    <!-- 3. The JavaScript to power the search bar -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.getElementById('activity-search-input');
+            const activityCards = document.querySelectorAll('.activity-card');
+
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase().trim();
+
+                activityCards.forEach(card => {
+                    const keywords = card.dataset.keywords.toLowerCase();
+                    
+                    // If the card's keywords include the search term, or if the search bar is empty, show the card
+                    if (keywords.includes(searchTerm) || searchTerm === '') {
+                        card.style.display = 'flex';
+                    } else {
+                        // Otherwise, hide the card
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
