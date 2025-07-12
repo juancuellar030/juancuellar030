@@ -2109,6 +2109,7 @@ body.page-starters::before {
 .in-review-mode .color-palette,
 .in-review-mode .write-tool,
 .in-review-mode .eraser-tool {
+.in-review-mode #rw-part7-story-input {
     pointer-events: none;
 }
 
