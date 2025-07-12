@@ -424,27 +424,25 @@
                 </div>
             </section>
             <!-- ========================================================== -->
-            <!--           START OF READING & WRITING PART 7 (SIMPLIFIED) -->
+            <!--           START OF READING & WRITING PART 7 (CLEANED UP) -->
             <!-- ========================================================== -->
-            
             <section class="test-section hidden" id="rw-part7">
                 <h3>Part 7</h3>
                 <p class="part-instructions">
                     Look at the three pictures. Write about this story. Write 20 or more words.
                 </p>
             
-                <!-- The container for the three story pictures -->
                 <div class="rw-part7-pictures-container">
-                    <!-- ... your images remain here ... -->
+                    <div class="story-picture-wrapper"><img src="images/part7_pic1.jpg" alt="Two children looking up at a cat stuck in a tree."></div>
+                    <div class="story-picture-wrapper"><img src="images/part7_pic2.jpg" alt="The children see a fire engine arriving."></div>
+                    <div class="story-picture-wrapper"><img src="images/part7_pic3.jpg" alt="A firefighter on a ladder rescues the cat from the tree."></div>
                 </div>
             
-                <!-- The main writing area for the student -->
                 <div class="writing-area">
                     <textarea id="rw-part7-story-input" rows="8" placeholder="Write your story here..."></textarea>
                     <div id="word-count-display">Words: 0 / 20</div>
                 </div>
                 
-                <!-- The navigation buttons are the only thing left at the bottom -->
                 <div class="navigation-buttons">
                     <button class="nav-btn prev-btn" data-target="rw-part6">Back</button>
                     <button class="nav-btn next-btn" data-target="rw-final-submission">Finish Test</button>
@@ -463,6 +461,10 @@
                 </div>
                 
                 <div id="final-rw-results-display"></div>
+                <!-- ADD THIS NEW DIV FOR THE AI FEEDBACK -->
+                <div id="ai-story-feedback-display" style="margin-top: 25px; padding: 15px; border-radius: 8px; background-color: #f0f8ff; border: 1px solid #d1e7fd; min-height: 50px; display: none;">
+                    <!-- The AI's feedback will appear here -->
+                </div>
             
                 <div class="navigation-buttons" style="justify-content: center; display: none;" id="restart-btn-container">
                     <a href="flyers-test-1-menu.html" class="nav-btn">Back to Test Menu</a>
