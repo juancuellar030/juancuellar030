@@ -2108,8 +2108,8 @@ body.page-starters::before {
 .in-review-mode #part5-interactive-container,
 .in-review-mode .color-palette,
 .in-review-mode .write-tool,
-.in-review-mode .eraser-tool {
-.in-review-mode #rw-part7-story-input {
+.in-review-mode .eraser-tool,
+.in-review-mode #rw-part7-story-input { /* Corrected: All selectors are here */
     pointer-events: none;
 }
 
