@@ -1473,6 +1473,14 @@ body.page-starters::before {
     background-color: #4aa23c;
 }
 
+/* --- NEW: Practice Button (Blue) --- */
+.nav-btn.practice-btn {
+    background-color: #3498db; /* A distinct blue */
+}
+.nav-btn.practice-btn:hover {
+    background-color: #2980b9;
+}
+
 /* ========================================================== */
 /*           TEST SELECTION GRID (e.g., Flyers Hub)         */
 /* ========================================================== */
@@ -2318,3 +2326,5 @@ body.is-dragging * {
 .page-menu .animated-btn:nth-child(1) { animation-delay: 0.2s; } /* Starters button */
 .page-menu .animated-btn:nth-child(2) { animation-delay: 0.4s; } /* Movers button */
 .page-menu .animated-btn:nth-child(3) { animation-delay: 0.6s; } /* Flyers button */
+.page-menu .animated-btn:nth-child(4) { animation-delay: 0.8s; }
+
