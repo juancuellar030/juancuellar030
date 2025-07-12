@@ -2328,3 +2328,60 @@ body.is-dragging * {
 .page-menu .animated-btn:nth-child(3) { animation-delay: 0.6s; } /* Flyers button */
 .page-menu .animated-btn:nth-child(4) { animation-delay: 0.8s; }
 
+/* ========================================================== */
+/*           PRACTICE ACTIVITIES HUB STYLES                   */
+/* ========================================================== */
+
+/* --- Search Bar Styling --- */
+.search-bar-container {
+    margin-bottom: 30px;
+}
+
+#activity-search-input {
+    width: 100%;
+    padding: 15px;
+    font-size: 1.1em;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-sizing: border-box;
+}
+
+/* --- Activity Grid Layout --- */
+.activity-grid {
+    display: grid;
+    /* This creates a responsive grid of cards */
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 25px;
+}
+
+/* --- Individual Activity Card Styling --- */
+.activity-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #333;
+    overflow: hidden; /* Ensures the image corners are rounded */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    display: flex;
+    flex-direction: column;
+}
+
+.activity-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+}
+
+.activity-card img {
+    width: 100%;
+    /* Create a nice 16:9 aspect ratio for the thumbnails */
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+}
+
+.activity-card h3 {
+    margin: 0;
+    padding: 15px;
+    font-size: 1.2em;
+}
